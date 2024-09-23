@@ -62,6 +62,6 @@ Compatibility included with:
 This mod is **NOT** compatible with Aquaculture.
 
 
-Help me out by letting me know about any issues with the mod or things that you would like to see added by leaving a comment or issue on the mod's [curseforge page](https://www.curseforge.com/minecraft/mc-mods/tide)
+Help me out by letting me know about any issues with the mod or things that you would like to see added by leaving a comment on the mod's [curseforge page](https://www.curseforge.com/minecraft/mc-mods/tide) or an issue on this repository.
 
 ![Bass](https://cdn.modrinth.com/data/die1AF7i/images/b75b7e1b9fb5b739f4d1b0e353e4eb009edf11ca.png)
