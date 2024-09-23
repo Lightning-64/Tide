@@ -1,32 +1,67 @@
-# MultiLoader Template
+Tide is a mod that aims to expand the vanilla fishing system by adding many mechanics as well as 60+ new fish to find in your worlds!
 
-This project provides a Gradle project template that can compile Minecraft mods for multiple modloaders using a common project for the sources. This project does not require any third party libraries or dependencies. If you have any questions or want to discuss the project, please join our [Discord](https://discord.myceliummod.network).
+- Download on [curseforge](https://www.curseforge.com/minecraft/mc-mods/tide)
+- Download on [modrinth](https://modrinth.com/mod/tide)
 
-## Getting Started
+![Fishing](https://cdn.modrinth.com/data/die1AF7i/images/a9fbe45347cb3830bf19e67807f4a24629cbbef9.png)
+_(See gallery for more images)_
 
-### IntelliJ IDEA
-This guide will show how to import the MultiLoader Template into IntelliJ IDEA. The setup process is roughly equivalent to setting up the modloaders independently and should be very familiar to anyone who has worked with their MDKs.
+_Note: This mod requires Cloth Config_
 
-1. Clone or download this repository to your computer.
-2. Configure the project by setting the properties in the `gradle.properties` file. You will also need to change the `rootProject.name`  property in `settings.gradle`, this should match the folder name of your project, or else IDEA may complain.
-3. Open the template's root folder as a new project in IDEA. This is the folder that contains this README.md file and the gradlew executable.
-4. If your default JVM/JDK is not Java 21 you will encounter an error when opening the project. This error is fixed by going to `File > Settings > Build, Execution, Deployment > Build Tools > Gradle > Gradle JVM` and changing the value to a valid Java 21 JVM. You will also need to set the Project SDK to Java 21. This can be done by going to `File > Project Structure > Project SDK`. Once both have been set open the Gradle tab in IDEA and click the refresh button to reload the project.
-5. Open your Run/Debug Configurations. Under the `Application` category there should now be options to run Fabric and NeoForge projects. Select one of the player options and try to run it.
-6. Assuming you were able to run the game in step 6 your workspace should now be set up.
 
-### Eclipse
-While it is possible to use this template in Eclipse it is not recommended. During the development of this template multiple critical bugs and quirks related to Eclipse were found at nearly every level of the required build tools. While we continue to work with these tools to report and resolve issues support for projects like these are not there yet. For now Eclipse is considered unsupported by this project. The development cycle for build tools is notoriously slow so there are no ETAs available.
+Specific fish can be found in specific areas. Some fish live in freshwater rivers and lakes while some prefer the oceans. You can either find them swimming around in water, or you can catch them with a fishing rod. In addition to this, fish can be found underground, with more unique fish for different levels. These fish can be eaten, cooked, crafted into useful items, or sold to fishermen villagers.
 
-## Development Guide
-When using this template the majority of your mod should be developed in the `common` project. The `common` project is compiled against the vanilla game and is used to hold code that is shared between the different loader-specific versions of your mod. The `common` project has no knowledge or access to ModLoader specific code, apis, or concepts. Code that requires something from a specific loader must be done through the project that is specific to that loader, such as the `fabric` or `neoforge` projects.
+To catch fish faster, different types of bait can be crafted, allowing you to hold them in your offhand while fishing to gain unique bonuses.
 
-Loader specific projects such as the `fabric` and `neoforge` project are used to load the `common` project into the game. These projects also define code that is specific to that loader. Loader specific projects can access all the code in the `common` project. It is important to remember that the `common` project can not access code from loader specific projects.
+![Bait types](https://i.imgur.com/sA8o7CE.png)
 
-## Removing Platforms and Loaders
-While this template has support for many modloaders, new loaders may appear in the future, and existing loaders may become less relevant.
+You can craft special fishing rods using the resources you find in your world by using a smithing table, a piece of string, and either a cobblestone block, iron ingot, gold ingot, diamond, or netherite ingot. These rods have much more durability and can be made early on, so remember to craft these.
 
-Removing loader specific projects is as easy as deleting the folder, and removing the `include("projectname")` line from the `settings.gradle` file.
-For example if you wanted to remove support for `forge` you would follow the following steps:
+![Fishing rod crafting](https://i.imgur.com/Grss5mc.png)
+![Fishing rods](https://i.imgur.com/XPml35Q.png)
 
-1. Delete the subproject folder. For example, delete `MultiLoader-Template/forge`.
-2. Remove the project from `settings.gradle`. For example, remove `include("forge")`. 
+To reel in a fish, you will have to right click to time the marker with the center of the bar. If you get close enough, and the fish doesn't escape, you will catch it. If you miss, the fish will be lost.
+
+The stronger the fish, the harder it is to catch it. Be careful!
+
+![Minigame 1](https://i.imgur.com/3guonOm.png)
+
+![Minigame 2](https://i.imgur.com/sZtqFgX.png)
+
+Fishing rods can now be customized to add special perks and looks to any rod. This can be done by crafting an Angler's Workshop, which will allow you to add special hooks, lines, and bobbers to fishing rods. Each upgrade has a different effect that can be added.
+
+![Angler's Workshop](https://i.imgur.com/AKgYVEq.png)
+
+A multitude of other mechanics have been introduced, one of these being lava fishing. By using the Angler's Workshop to add a Lavaproof Fishing Hook to your rod, fishing rods can be used in all kinds of lava pools to reel in various fish and other items.
+
+![Lava Fishing](https://i.imgur.com/8bjAbXK.png)
+
+A new item that you get from the start of the game can help keep track of the fish you have collected: the Fishing Journal. Any new fish that you catch will be added to this book where you can view their category and some information about them. The book contains many pages that help sort the fish you find into unique categories and track your progress through the mod. This book can be re-crafted with a normal book and any fish if you lose it.
+
+![Fishing Journal](https://i.imgur.com/FkYXjYa.png)
+
+If you're up for a challenge, try getting every entry in the fishing journal. This isn't a task for the faint of heart, however, and is a huge long-term goal, requiring you to visit different biomes and dimensions and become a master of fishing.
+
+![Journal Page](https://i.imgur.com/2vUJGN7.png)
+
+If you're lucky, you might reel in some large crates. They can be fished up pretty much anywhere, and can be hooked more commonly with magnetic bait. They can contain fish, random resources, and sometimes treasure. Just make sure you don't lose them if they happen to sink back into the ocean.
+
+![Wooden Crate](https://i.imgur.com/IpIHnfA.png)
+
+
+Compatibility included with:
+
+- **Fish of Thieves Mod**: Fish added to journal + Worms are useable as bait
+- **Nether Depths Upgrade**: Fish added to journal + lava fish can be caught with tide rods
+- **Unusual Fish Mod**: Fish added to journal
+- **Rainbow Reef**: Fish added to journal
+- **Blue Skies**: Fish added to journal
+- **Fishing Real**: Live fish variants can be pulled in
+- **Stardew Fishing**: Tide minigame is replaced with stardew fishing minigame
+
+This mod is **NOT** compatible with Aquaculture.
+
+
+Help me out by letting me know about any issues with the mod or things that you would like to see added by leaving a comment or issue on the mod's [curseforge page](https://www.curseforge.com/minecraft/mc-mods/tide)
+
+![Bass](https://cdn.modrinth.com/data/die1AF7i/images/b75b7e1b9fb5b739f4d1b0e353e4eb009edf11ca.png)
