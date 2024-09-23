@@ -1,14 +1,15 @@
 package com.li64.tide.compat.jei.recipe;
 
+import com.google.gson.JsonObject;
 import com.li64.tide.Tide;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.data.rods.CustomRodManager;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
+import com.li64.tide.data.rods.ModifierType;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
@@ -19,22 +20,24 @@ import java.util.Random;
  * The only reason I have this class is so I can get JEI to display the
  * rod upgrading stuff. This isn't actually used for any recipes.
  */
-public class RodUpgradingRecipe implements Recipe<RecipeInput> {
+public class RodUpgradingRecipe implements Recipe<Container> {
     private final ItemStack input;
     private final ItemStack output;
+    private final ResourceLocation id;
 
-    public RodUpgradingRecipe(ItemStack input, ItemStack output) {
+    public RodUpgradingRecipe(ItemStack input, ItemStack output, ResourceLocation id) {
         this.input = input;
         this.output = output;
+        this.id = id;
     }
 
     @Override
-    public boolean matches(RecipeInput input, Level level) {
+    public boolean matches(Container input, Level level) {
         return !level.isClientSide;
     }
 
     @Override
-    public ItemStack assemble(RecipeInput input, HolderLookup.Provider provider) {
+    public ItemStack assemble(Container input, RegistryAccess registryAccess) {
         return output.copy();
     }
 
@@ -44,17 +47,22 @@ public class RodUpgradingRecipe implements Recipe<RecipeInput> {
     }
 
     @Override
-    public ItemStack getResultItem(HolderLookup.Provider p_331967_) {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         ItemStack newRod = output.copy();
-        CustomRodManager.setBobber(newRod, new Random().nextInt(0, 16));
-        CustomRodManager.setHook(newRod, new Random().nextInt(0, 3));
-        CustomRodManager.setLine(newRod, new Random().nextInt(0, 4));
+        CustomRodManager.setModifier(newRod, ModifierType.BOBBER, new Random().nextInt(0, 16));
+        CustomRodManager.setModifier(newRod, ModifierType.HOOK, new Random().nextInt(0, 3));
+        CustomRodManager.setModifier(newRod, ModifierType.LINE, new Random().nextInt(0, 4));
         return newRod;
     }
 
     @Override
     public RecipeSerializer<RodUpgradingRecipe> getSerializer() {
         return Serializer.INSTANCE;
+    }
+
+    @Override
+    public ResourceLocation getId() {
+        return id;
     }
 
     @Override
@@ -81,35 +89,26 @@ public class RodUpgradingRecipe implements Recipe<RecipeInput> {
 
     public static class Serializer implements RecipeSerializer<RodUpgradingRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final MapCodec<RodUpgradingRecipe> CODEC = RecordCodecBuilder.mapCodec(
-            builder -> builder.group(
-                ItemStack.STRICT_CODEC.fieldOf("input").forGetter(recipe -> recipe.input),
-                ItemStack.STRICT_CODEC.fieldOf("output").forGetter(recipe -> recipe.output)
-            ).apply(builder, RodUpgradingRecipe::new)
-        );
-        public static final StreamCodec<RegistryFriendlyByteBuf, RodUpgradingRecipe> STREAM_CODEC = StreamCodec.of(
-                Serializer::toNetwork, Serializer::fromNetwork
-        );
+        public static final ResourceLocation ID = Tide.resource("rod_upgrading");
 
-        public static RodUpgradingRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
-            ItemStack input = ItemStack.STREAM_CODEC.decode(buffer);
-            ItemStack output = ItemStack.STREAM_CODEC.decode(buffer);
-            return new RodUpgradingRecipe(input, output);
-        }
-
-        public static void toNetwork(RegistryFriendlyByteBuf buffer, RodUpgradingRecipe recipe) {
-            ItemStack.STREAM_CODEC.encode(buffer, recipe.input);
-            ItemStack.STREAM_CODEC.encode(buffer, recipe.getResultItem(null));
+        @Override
+        public RodUpgradingRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
+            ItemStack input = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(serializedRecipe, "input"));
+            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(serializedRecipe, "output"));
+            return new RodUpgradingRecipe(input, output, recipeId);
         }
 
         @Override
-        public MapCodec<RodUpgradingRecipe> codec() {
-            return CODEC;
+        public RodUpgradingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+            ItemStack input = buffer.readItem();
+            ItemStack output = buffer.readItem();
+            return new RodUpgradingRecipe(input, output, recipeId);
         }
 
         @Override
-        public StreamCodec<RegistryFriendlyByteBuf, RodUpgradingRecipe> streamCodec() {
-            return STREAM_CODEC;
+        public void toNetwork(FriendlyByteBuf buffer, RodUpgradingRecipe recipe) {
+            buffer.writeItem(recipe.input);
+            buffer.writeItem(recipe.getResultItem(null));
         }
     }
 }

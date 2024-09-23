@@ -1,23 +1,22 @@
 package com.li64.tide.loot.modifiers;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.Codec;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.network.Filterable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.WrittenBookContent;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.loot.LootModifier;
 
-import java.util.List;
 import java.util.Random;
 
 public class NoteInCratesModifier extends LootModifier {
-    public static final MapCodec<NoteInCratesModifier> CODEC = newCodec();
+    public static final Codec<NoteInCratesModifier> CODEC = newCodec();
 
     public NoteInCratesModifier() {
         super(new LootItemCondition[0]);
@@ -40,26 +39,27 @@ public class NoteInCratesModifier extends LootModifier {
         };
 
         ItemStack note = Items.WRITTEN_BOOK.getDefaultInstance();
-        note.set(DataComponents.WRITTEN_BOOK_CONTENT,
-            new WrittenBookContent(
-                Filterable.passThrough(Component.translatable("note.tide.title").getString()),
-                Component.translatable("note.tide.author").getString(),
-                0,
-                List.of(Filterable.passThrough(Component.translatable(contents))),
-                true
-            )
-        );
-        generatedLoot.add(note);
+        CompoundTag tag = note.getOrCreateTag();
 
+        ListTag pages = new ListTag();
+        pages.add(StringTag.valueOf(Component.Serializer.toJson(Component.translatable(contents))));
+
+        tag.put("pages", pages);
+        tag.putString("title", Component.translatable("note.tide.title").getString());
+        tag.putString("author", Component.translatable("note.tide.author").getString());
+
+        note.setTag(tag);
+
+        generatedLoot.add(note);
         return generatedLoot;
     }
 
-    public static MapCodec<NoteInCratesModifier> newCodec() {
-        return MapCodec.unit(NoteInCratesModifier::new);
+    public static Codec<NoteInCratesModifier> newCodec() {
+        return Codec.unit(NoteInCratesModifier::new);
     }
 
     @Override
-    public MapCodec<? extends IGlobalLootModifier> codec() {
+    public Codec<? extends IGlobalLootModifier> codec() {
         return CODEC;
     }
 }

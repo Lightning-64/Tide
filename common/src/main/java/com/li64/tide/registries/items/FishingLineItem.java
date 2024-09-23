@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class FishingLineItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> components, TooltipFlag flag) {
-        super.appendHoverText(stack, context, components, flag);
+    public void appendHoverText(ItemStack stack, Level level, List<Component> components, TooltipFlag flag) {
+        super.appendHoverText(stack, level, components, flag);
         Style style = Component.empty().getStyle().withColor(ChatFormatting.GRAY).withItalic(true);
         components.add(Component.translatable(description).setStyle(style));
     }

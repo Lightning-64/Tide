@@ -78,7 +78,8 @@ public class TideUtils {
     }
 
     public static boolean shouldGrabTideLootTable(List<ItemStack> items, FluidState fluid) {
-        if (items.getFirst().is(TideTags.Items.VANILLA_FISH) || new Random().nextInt(0, 4) == 0) return true;
+        // If a vanilla fish is caught on the surface, replace it with a tide loot table fish
+        if (items.get(0).is(TideTags.Items.VANILLA_FISH) || new Random().nextInt(0, 4) == 0) return true;
         return fluid.is(TideTags.Fluids.LAVA_FISHING);
     }
 
@@ -86,7 +87,7 @@ public class TideUtils {
         return level.dimension().location().toString().matches(name);
     }
 
-    public static ResourceKey<LootTable> getTideLootTable(double x, double y, double z, FluidState fluid, Level level, RandomSource random) {
+    public static ResourceLocation getTideLootTable(double x, double y, double z, FluidState fluid, Level level, RandomSource random) {
         LootLayer layer = TideUtils.getLayerAt(y);
         Holder<Biome> biomeHolder = level.getBiome(new BlockPos((int) x, (int) y, (int) z));
         if (moddedDimension(level.dimension())) {
@@ -95,8 +96,13 @@ public class TideUtils {
             if (fluid.is(TideTags.Fluids.LAVA_FISHING)) return TideLootTables.Fishing.LAVA_SURFACE;
             else return BuiltInLootTables.FISHING;
 
-        } if (level.dimension() == Level.NETHER) return TideLootTables.Fishing.NETHER;
-        else if (level.dimension() == Level.END) {
+        } if (level.dimension() == Level.NETHER){
+
+            if (Tide.PLATFORM.isModLoaded("netherdepthsupgrade") && new Random().nextFloat() > 0.65f)
+                return new ResourceLocation("netherdepthsupgrade", "gameplay/nether_fishing");
+            return TideLootTables.Fishing.NETHER;
+
+        }  else if (level.dimension() == Level.END) {
 
             if (fluid.is(TideTags.Fluids.LAVA_FISHING)) return TideLootTables.Fishing.END_LAVA;
             else return TideLootTables.Fishing.END_WATER;
@@ -104,21 +110,21 @@ public class TideUtils {
         } else if (layer == LootLayer.UNDERGROUND && level.dimension() == Level.OVERWORLD) {
 
             if (fluid.is(TideTags.Fluids.LAVA_FISHING)) return TideLootTables.Fishing.LAVA_UNDERGROUND;
-            ResourceKey<LootTable> biomeLoot = TideUtils.getBiomeLootTable(biomeHolder);
+            ResourceLocation biomeLoot = TideUtils.getBiomeLootTable(biomeHolder);
             if (biomeLoot != null && random.nextInt(0, 21) == 1) return biomeLoot;
             return TideLootTables.Fishing.UNDERGROUND;
 
         } else if (layer == LootLayer.DEPTHS && level.dimension() == Level.OVERWORLD) {
 
             if (fluid.is(TideTags.Fluids.LAVA_FISHING)) return TideLootTables.Fishing.LAVA_DEPTHS;
-            ResourceKey<LootTable> biomeLoot = TideUtils.getBiomeLootTable(biomeHolder);
+            ResourceLocation biomeLoot = TideUtils.getBiomeLootTable(biomeHolder);
             if (biomeLoot != null && random.nextInt(0, 21) == 1) return biomeLoot;
             return TideLootTables.Fishing.DEPTHS;
 
         } else {
 
             if (fluid.is(TideTags.Fluids.LAVA_FISHING)) return TideLootTables.Fishing.LAVA_SURFACE;
-            ResourceKey<LootTable> biomeLoot = TideUtils.getBiomeLootTable(biomeHolder);
+            ResourceLocation biomeLoot = TideUtils.getBiomeLootTable(biomeHolder);
             if (biomeLoot != null && random.nextInt(0, 21) == 1) return biomeLoot;
 
             if (biomeHolder.is(TideTags.Climate.IS_COLD)) {
@@ -140,17 +146,16 @@ public class TideUtils {
         }
     }
 
-    public static ResourceKey<LootTable> getBiomeLootTable(Holder<Biome> biomeHolder) {
+    public static ResourceLocation getBiomeLootTable(Holder<Biome> biomeHolder) {
         for (TagKey<Biome> tag : TideTags.Biomes.fishingBiomes) {
             if (biomeHolder.is(tag)) {
-                return TideLootTables.getByLocation(
-                        Tide.resource("gameplay/fishing/biomes/" + tag.location().getPath()));
+                return Tide.resource("gameplay/fishing/biomes/" + tag.location().getPath());
             }
         }
         return null;
     }
 
-    public static ResourceKey<LootTable> getCrateLoot(double x, double y, double z, FluidState fluid, Level level) {
+    public static ResourceLocation getCrateLoot(double x, double y, double z, FluidState fluid, Level level) {
         Holder<Biome> biomeHolder = level.getBiome(new BlockPos((int)x, (int)y, (int)z));
         LootLayer layer = TideUtils.getLayerAt(y);
 
@@ -192,7 +197,7 @@ public class TideUtils {
     }
 
     public static Item getItemFromName(String name) {
-        return BuiltInRegistries.ITEM.get(ResourceLocation.read(name).getOrThrow());
+        return BuiltInRegistries.ITEM.get(new ResourceLocation(name));
     }
 
     public static void checkPageCompletion(TidePlayerData data, JournalPage page, ServerPlayer player) {
@@ -286,7 +291,7 @@ public class TideUtils {
 
     public static List<Item> getFishFromProfileList(List<JournalLayout.Profile> profiles) {
         return profiles.stream().map(profile -> BuiltInRegistries.ITEM
-                .get(ResourceLocation.parse(profile.fishItem()))).toList();
+                .get(new ResourceLocation(profile.fishItem()))).toList();
     }
 
     public static List<Item> getFishFromPageName(String name) {
@@ -310,7 +315,7 @@ public class TideUtils {
 
     public static JournalLayout.Profile getProfileFromItem(ItemStack item) {
         return Tide.JOURNAL.getProfileConfigs().stream().filter(config ->
-                        item.is(BuiltInRegistries.ITEM.get(ResourceLocation.parse(config.fishItem()))))
+                        item.is(BuiltInRegistries.ITEM.get(new ResourceLocation(config.fishItem()))))
                 .findFirst().orElse(null);
     }
 

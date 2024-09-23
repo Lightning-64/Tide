@@ -18,46 +18,36 @@ public class ChorusFishItem extends TideFishItem {
         super(properties, strength);
     }
 
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-        ItemStack itemstack = super.finishUsingItem(stack, level, entity);
-        if (!level.isClientSide) {
-            for (int i = 0; i < 16; i++) {
-                double d0 = entity.getX() + (entity.getRandom().nextDouble() - 0.5) * 16.0;
-                double d1 = Mth.clamp(
-                        entity.getY() + (double)(entity.getRandom().nextInt(16) - 8),
-                        (double)level.getMinBuildHeight(),
-                        (double)(level.getMinBuildHeight() + ((ServerLevel)level).getLogicalHeight() - 1)
-                );
-                double d2 = entity.getZ() + (entity.getRandom().nextDouble() - 0.5) * 16.0;
-                if (entity.isPassenger()) {
-                    entity.stopRiding();
+    public ItemStack finishUsingItem(ItemStack $$0, Level $$1, LivingEntity $$2) {
+        ItemStack $$3 = super.finishUsingItem($$0, $$1, $$2);
+        if (!$$1.isClientSide) {
+            double $$4 = $$2.getX();
+            double $$5 = $$2.getY();
+            double $$6 = $$2.getZ();
+
+            for(int $$7 = 0; $$7 < 16; ++$$7) {
+                double $$8 = $$2.getX() + ($$2.getRandom().nextDouble() - 0.5) * 16.0;
+                double $$9 = Mth.clamp($$2.getY() + (double)($$2.getRandom().nextInt(16) - 8), (double)$$1.getMinBuildHeight(), (double)($$1.getMinBuildHeight() + ((ServerLevel)$$1).getLogicalHeight() - 1));
+                double $$10 = $$2.getZ() + ($$2.getRandom().nextDouble() - 0.5) * 16.0;
+                if ($$2.isPassenger()) {
+                    $$2.stopRiding();
                 }
 
-                Vec3 vec3 = entity.position();
-                if (entity.randomTeleport(d0, d1, d2, true)) {
-                    level.gameEvent(GameEvent.TELEPORT, vec3, GameEvent.Context.of(entity));
-                    SoundSource soundsource;
-                    SoundEvent soundevent;
-                    if (entity instanceof Fox) {
-                        soundevent = SoundEvents.FOX_TELEPORT;
-                        soundsource = SoundSource.NEUTRAL;
-                    } else {
-                        soundevent = SoundEvents.CHORUS_FRUIT_TELEPORT;
-                        soundsource = SoundSource.PLAYERS;
-                    }
-
-                    level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), soundevent, soundsource);
-                    entity.resetFallDistance();
+                Vec3 $$11 = $$2.position();
+                if ($$2.randomTeleport($$8, $$9, $$10, true)) {
+                    $$1.gameEvent(GameEvent.TELEPORT, $$11, GameEvent.Context.of($$2));
+                    SoundEvent $$12 = $$2 instanceof Fox ? SoundEvents.FOX_TELEPORT : SoundEvents.CHORUS_FRUIT_TELEPORT;
+                    $$1.playSound(null, $$4, $$5, $$6, $$12, SoundSource.PLAYERS, 1.0F, 1.0F);
+                    $$2.playSound($$12, 1.0F, 1.0F);
                     break;
                 }
             }
 
-            if (entity instanceof Player player) {
-                player.resetCurrentImpulseContext();
-                player.getCooldowns().addCooldown(this, 20);
+            if ($$2 instanceof Player) {
+                ((Player)$$2).getCooldowns().addCooldown(this, 20);
             }
         }
 
-        return itemstack;
+        return $$3;
     }
 }

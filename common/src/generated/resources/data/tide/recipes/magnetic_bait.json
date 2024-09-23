@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "tide:bait"
+    },
+    "I": {
+      "item": "minecraft:iron_nugget"
+    },
+    "L": {
+      "tag": "c:gems/lapis"
+    },
+    "P": {
+      "tag": "c:gems/prismarine"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "L#R",
+    "I#I",
+    " P "
+  ],
+  "result": {
+    "count": 4,
+    "item": "tide:magnetic_bait"
+  },
+  "show_notification": true
+}

@@ -27,6 +27,6 @@ public class TideFishingBobberLayer extends RenderLayer<TideFishingHook, TideFis
         this.model.setupAnim(hookEntity, p_117236_, p_117237_, p_117239_, p_117240_, p_117241_);
 
         VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(hookEntity.getBobberModifier().getTextureLocation()));
-        this.model.renderToBuffer(poseStack, vertexconsumer, p_117234_, OverlayTexture.NO_OVERLAY, FastColor.ARGB32.color(255, 255, 255 ,255));
+        this.model.renderToBuffer(poseStack, vertexconsumer, p_117234_, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f);
     }
 }

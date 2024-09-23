@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "c:slime_balls"
+    },
+    "L": {
+      "item": "tide:fishing_line"
+    }
+  },
+  "pattern": [
+    "#",
+    "L",
+    "#"
+  ],
+  "result": {
+    "item": "tide:braided_line"
+  },
+  "show_notification": true
+}

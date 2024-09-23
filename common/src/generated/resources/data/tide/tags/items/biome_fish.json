@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "tide:prarie_pike",
+    "tide:sandskipper",
+    "tide:blossom_bass",
+    "tide:oakfish",
+    "tide:frostbite_flounder",
+    "tide:mirage_catfish",
+    "tide:echofin_snapper",
+    "tide:sunspike_goby",
+    "tide:birch_trout",
+    "tide:stonefish",
+    "tide:dripstone_darter",
+    "tide:slimefin_snapper",
+    "tide:sporestalker",
+    "tide:leafback",
+    "tide:fluttergill",
+    "tide:pine_perch"
+  ]
+}

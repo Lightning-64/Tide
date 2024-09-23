@@ -26,8 +26,8 @@ public class BarracudaRenderer<T extends Barracuda> extends MobRenderer<T, Barra
     }
 
     @Override
-    protected void setupRotations(T fish, PoseStack poseStack, float bob, float yBodyRot, float partialTick, float idk) {
-        super.setupRotations(fish, poseStack, bob, yBodyRot, partialTick, idk);
+    protected void setupRotations(T fish, PoseStack poseStack, float bob, float yBodyRot, float partialTick) {
+        super.setupRotations(fish, poseStack, bob, yBodyRot, partialTick);
         float f = 1.0F;
         float f1 = 1.0F;
         if (!fish.isInWater()) {

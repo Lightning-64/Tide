@@ -1,57 +1,76 @@
 package com.li64.tide.data.rods;
 
-import com.li64.tide.data.TideDataComponents;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Arrays;
 
 public class CustomRodManager {
-    public static void setBobber(ItemStack stack, Item bobber) {
-        stack.set(TideDataComponents.FISHING_BOBBER, Arrays.stream(BobberModifier.values())
-                .filter(modifier -> bobber == modifier.item)
-                .findFirst().orElse(BobberModifier.DEFAULT).ordinal());
+
+    private static final BobberModifier DEFAULT_BOBBER = BobberModifier.RED;
+    private static final HookModifier DEFAULT_HOOK = HookModifier.NORMAL;
+    private static final LineModifier DEFAULT_LINE = LineModifier.NORMAL;
+
+    private static void createModifierTag(ItemStack stack) {
+        CompoundTag modifierTag = new CompoundTag();
+
+        modifierTag.putInt("bobber", DEFAULT_BOBBER.ordinal());
+        modifierTag.putInt("hook", DEFAULT_HOOK.ordinal());
+        modifierTag.putInt("line", DEFAULT_LINE.ordinal());
+
+        if (!stack.hasTag()) stack.setTag(new CompoundTag());
+        stack.getTag().put("modifier", modifierTag);
     }
 
-    public static void setBobber(ItemStack stack, int bobber) {
-        stack.set(TideDataComponents.FISHING_BOBBER, bobber);
+    private static void updateModifiers(ItemStack stack) {
+        if (!hasModifierTag(stack)) createModifierTag(stack);
+    }
+
+    public static void setBobber(ItemStack stack, Item bobber) {
+        setModifier(stack, ModifierType.BOBBER, Arrays.stream(BobberModifier.values())
+                .filter(modifier -> bobber == modifier.getItem())
+                .findFirst().orElse(DEFAULT_BOBBER).ordinal());
     }
 
     public static void setHook(ItemStack stack, Item hook) {
-        stack.set(TideDataComponents.FISHING_HOOK, Arrays.stream(HookModifier.values())
-                .filter(modifier -> hook == modifier.item)
-                .findFirst().orElse(HookModifier.DEFAULT).ordinal());
-    }
-
-    public static void setHook(ItemStack stack, int hook) {
-        stack.set(TideDataComponents.FISHING_HOOK, hook);
+        setModifier(stack, ModifierType.HOOK, Arrays.stream(HookModifier.values())
+                .filter(modifier -> hook == modifier.getItem())
+                .findFirst().orElse(DEFAULT_HOOK).ordinal());
     }
 
     public static void setLine(ItemStack stack, Item line) {
-        stack.set(TideDataComponents.FISHING_LINE, Arrays.stream(LineModifier.values())
-                .filter(modifier -> line == modifier.item)
-                .findFirst().orElse(LineModifier.DEFAULT).ordinal());
+        setModifier(stack, ModifierType.LINE, Arrays.stream(LineModifier.values())
+                .filter(modifier -> line == modifier.getItem())
+                .findFirst().orElse(DEFAULT_LINE).ordinal());
     }
 
-    public static void setLine(ItemStack stack, int line) {
-        stack.set(TideDataComponents.FISHING_LINE, line);
+    public static void setModifier(ItemStack stack, ModifierType modifier, int value) {
+        updateModifiers(stack);
+        getModifierTag(stack).putInt(modifier.getID(), value);
+    }
+
+    public static boolean hasModifierTag(ItemStack stack) {
+        return stack.hasTag() && stack.getTag().contains("modifier");
+    }
+
+    public static CompoundTag getModifierTag(ItemStack stack) {
+        updateModifiers(stack);
+        return (CompoundTag) stack.getTag().get("modifier");
     }
 
     public static BobberModifier getBobber(ItemStack stack) {
-        Integer value = stack.get(TideDataComponents.FISHING_BOBBER);
-        if (value == null) return BobberModifier.DEFAULT;
-        return BobberModifier.values()[value];
+        updateModifiers(stack);
+        return BobberModifier.values()[getModifierTag(stack).getInt("bobber")];
     }
 
     public static HookModifier getHook(ItemStack stack) {
-        Integer value = stack.get(TideDataComponents.FISHING_HOOK);
-        if (value == null) return HookModifier.DEFAULT;
-        return HookModifier.values()[value];
+        updateModifiers(stack);
+        return HookModifier.values()[getModifierTag(stack).getInt("hook")];
     }
 
     public static LineModifier getLine(ItemStack stack) {
-        Integer value = stack.get(TideDataComponents.FISHING_LINE);
-        if (value == null) return LineModifier.DEFAULT;
-        return LineModifier.values()[value];
+        updateModifiers(stack);
+        return LineModifier.values()[getModifierTag(stack).getInt("line")];
     }
 }

@@ -20,7 +20,7 @@ import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -161,13 +161,14 @@ public class TideFishingHook extends Projectile {
         ITEM, NOTHING
     }
 
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        builder.define(DATA_HOOKED_ENTITY, 0);
-        builder.define(DATA_BITING, false);
-        builder.define(DATA_ROD_ITEM, Items.FISHING_ROD.getDefaultInstance());
-        builder.define(DATA_CATCH_TYPE, CatchType.NOTHING.ordinal());
-        builder.define(DATA_MINIGAME_ACTIVE, false);
-        builder.define(DATA_INITIAL_YAW, 0f);
+    @Override
+    protected void defineSynchedData() {
+        entityData.define(DATA_HOOKED_ENTITY, 0);
+        entityData.define(DATA_BITING, false);
+        entityData.define(DATA_ROD_ITEM, Items.FISHING_ROD.getDefaultInstance());
+        entityData.define(DATA_CATCH_TYPE, CatchType.NOTHING.ordinal());
+        entityData.define(DATA_MINIGAME_ACTIVE, false);
+        entityData.define(DATA_INITIAL_YAW, 0f);
     }
 
     public void onSyncedDataUpdated(EntityDataAccessor<?> data) {
@@ -325,7 +326,7 @@ public class TideFishingHook extends Projectile {
 
     private void checkCollision() {
         HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
-        this.hitTargetOrDeflectSelf(hitresult);
+        this.onHit(hitresult);
     }
 
     protected boolean canHitEntity(Entity entity) {
@@ -582,7 +583,7 @@ public class TideFishingHook extends Projectile {
                     case CRATE:
                         BlockState lootCrate;
 
-                        ResourceKey<LootTable> lootTable = TideUtils.getCrateLoot(this.getX(), this.getY(), this.getZ(), fluid, level());
+                        ResourceLocation lootTable = TideUtils.getCrateLoot(this.getX(), this.getY(), this.getZ(), fluid, level());
                         lootCrate = getCrateBlock(fluid);
 
                         LootParams lootParams = (new LootParams.Builder((ServerLevel) this.level()))
@@ -599,10 +600,11 @@ public class TideFishingHook extends Projectile {
                         double dz = player.getZ() - this.blockPosition().getZ();
 
                         LootCrateEntity.fall(level, this.blockPosition(), lootCrate,
+                                lootTable, lootParams,
                                 dx * 0.0666d,
                                 dy * 0.0666d + Math.sqrt(Math.sqrt(dx * dx + dy * dy + dz * dz)) * 0.082d + 0.27d,
-                                dz * 0.0666d,
-                                lootTable, lootParams);
+                                dz * 0.0666d
+                        );
 
                         if (fluid.is(TideTags.Fluids.LAVA_FISHING) && fluid.is(Fluids.LAVA)) level.setBlockAndUpdate(this.blockPosition(), Blocks.LAVA.defaultBlockState());
                         if (fluid.is(TideTags.Fluids.WATER_FISHING) && fluid.is(Fluids.WATER)) level.setBlockAndUpdate(this.blockPosition(), Blocks.WATER.defaultBlockState());
@@ -653,9 +655,9 @@ public class TideFishingHook extends Projectile {
                     .withLuck(luck + player.getLuck())
                     .create(LootContextParamSets.FISHING);
 
-            ResourceKey<LootTable> lootKey = BuiltInLootTables.FISHING;
+            ResourceLocation lootKey = BuiltInLootTables.FISHING;
 
-            LootTable table = level().getServer().reloadableRegistries().getLootTable(lootKey);
+            LootTable table = level().getServer().getLootData().getLootTable(lootKey);
             ServerLevel overworld = level().getServer().overworld();
 
             list = table.getRandomItems(lootparams);
@@ -665,19 +667,18 @@ public class TideFishingHook extends Projectile {
 
             if (TideUtils.shouldGrabTideLootTable(list, fluid)) {
                 lootKey = TideUtils.getTideLootTable(this.getX(), this.getY(), this.getZ(), fluid, level(), random);
-                table = level().getServer().reloadableRegistries().getLootTable(lootKey);
+                table = level().getServer().getLootData().getLootTable(lootKey);
                 list = table.getRandomItems(lootparams);
             }
 
-            Tide.LOG.info("Loot table used: {}", lootKey.location());
+            Tide.LOG.info("Loot table used: {}", lootKey);
 
-            hookedItem = list.size() == 1 ? list.getFirst() : list.get(new Random().nextInt(0, list.size()));
+            hookedItem = list.size() == 1 ? list.get(0) : list.get(new Random().nextInt(0, list.size()));
             catchType = (hookedItem.is(ItemTags.FISHES) || TideUtils.isJournalFish(hookedItem)) ? CatchType.FISH : CatchType.ITEM;
         }
 
         if (TideUtils.isHoldingBait(player)) {
             if (!player.isCreative()) player.getOffhandItem().shrink(1);
-            Tide.LOG.info("Using bait");
         }
 
         getEntityData().set(DATA_CATCH_TYPE, catchType.ordinal());

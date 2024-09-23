@@ -24,8 +24,8 @@ public class SimpleFishRenderer<T extends AbstractTideFish> extends MobRenderer<
     }
 
     @Override
-    protected void setupRotations(T fish, PoseStack poseStack, float rx, float ry, float rz, float idk) {
-        super.setupRotations(fish, poseStack, rx, ry, rz, idk);
+    protected void setupRotations(T fish, PoseStack poseStack, float rx, float ry, float rz) {
+        super.setupRotations(fish, poseStack, rx, ry, rz);
         float f = 4.3F * Mth.sin(0.6F * rx);
         poseStack.mulPose(Axis.YP.rotationDegrees(f));
         if (!fish.isInWater()) {

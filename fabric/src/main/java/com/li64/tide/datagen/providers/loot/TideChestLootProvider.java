@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -25,15 +26,12 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class TideChestLootProvider extends SimpleFabricLootTableProvider {
-    private final HolderLookup.Provider registries;
-
-    public TideChestLootProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
-        super(output, registryLookup, LootContextParamSets.CHEST);
-        registries = registryLookup.join();
+    public TideChestLootProvider(FabricDataOutput output) {
+        super(output, LootContextParamSets.CHEST);
     }
 
     @Override
-    public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output) {
+    public void generate(BiConsumer<ResourceLocation, LootTable.Builder> output) {
         output.accept(
                 TideLootTables.Chests.FISHING_BOAT,
                 LootTable.lootTable().withPool(LootPool.lootPool()
@@ -46,7 +44,7 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                         .add(LootItem.lootTableItem(Items.FISHING_ROD).setWeight(12).setQuality(1)
                                 .apply(SetItemDamageFunction.setDamage(
                                         UniformGenerator.between(0.4f, 1.0f)))
-                                .apply(EnchantRandomlyFunction.randomApplicableEnchantment(registries)
+                                .apply(EnchantRandomlyFunction.randomApplicableEnchantment()
                                         .when(LootItemRandomChanceCondition.randomChance(0.7f))))
                 )
         );
@@ -111,7 +109,7 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                         .add(LootItem.lootTableItem(Items.STONE_PICKAXE).setWeight(9).setQuality(1)
                                 .apply(SetItemDamageFunction.setDamage(
                                         UniformGenerator.between(0.1f, 1.0f)))
-                                .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, UniformGenerator.between(8, 10))))
+                                .apply(EnchantWithLevelsFunction.enchantWithLevels(UniformGenerator.between(8, 10))))
                 )
         );
 
@@ -133,7 +131,7 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                                 .apply(SetItemDamageFunction.setDamage(
                                                 UniformGenerator.between(0.2f, 0.8f))
                                         .when(LootItemRandomChanceCondition.randomChance(0.8f)))
-                                .apply(EnchantWithLevelsFunction.enchantWithLevels(registries,
+                                .apply(EnchantWithLevelsFunction.enchantWithLevels(
                                                 UniformGenerator.between(20, 30))
                                         .when(LootItemRandomChanceCondition.randomChance(0.8f))))
                 )
@@ -209,7 +207,7 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                         .add(LootItem.lootTableItem(Items.POPPED_CHORUS_FRUIT).setWeight(55))
                         .add(LootItem.lootTableItem(Items.SHULKER_SHELL).setWeight(35).setQuality(1))
                         .add(LootItem.lootTableItem(Items.ELYTRA).setWeight(5).setQuality(4)
-                                .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(15))
+                                .apply(EnchantWithLevelsFunction.enchantWithLevels(ConstantValue.exactly(15))
                                         .when(LootItemRandomChanceCondition.randomChance(0.5f)))
                         )
                 )
@@ -224,7 +222,7 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                         .add(LootItem.lootTableItem(Items.POPPED_CHORUS_FRUIT).setWeight(55))
                         .add(LootItem.lootTableItem(Items.SHULKER_SHELL).setWeight(40).setQuality(1))
                         .add(LootItem.lootTableItem(Items.ELYTRA).setWeight(5).setQuality(4)
-                                .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(30))))
+                                .apply(EnchantWithLevelsFunction.enchantWithLevels(ConstantValue.exactly(30))))
                 )
         );
     }

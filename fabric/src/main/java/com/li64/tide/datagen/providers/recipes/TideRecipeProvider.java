@@ -5,11 +5,8 @@ import com.li64.tide.data.rods.BobberModifier;
 import com.li64.tide.registries.TideItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
-import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.critereon.ImpossibleTrigger;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -18,27 +15,30 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public class TideRecipeProvider extends FabricRecipeProvider {
-    public TideRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
-        super(output, registriesFuture);
+    public TideRecipeProvider(FabricDataOutput output) {
+        super(output);
     }
 
     @Override
-    public void buildRecipes(@NotNull RecipeOutput output) {
+    public void buildRecipes(Consumer<FinishedRecipe> output) {
         // -- Shapeless --
 
-        TagKey<Item> carrot = neoForgeConventionTag("crops/carrot");
-        TagKey<Item> potato = neoForgeConventionTag("crops/potato");
-        TagKey<Item> seeds = neoForgeConventionTag("seeds");
-        TagKey<Item> mushrooms = neoForgeConventionTag("mushrooms");
-        TagKey<Item> slimeBalls = neoForgeConventionTag("slime_balls");
-        TagKey<Item> obsidians = neoForgeConventionTag("obsidians");
-        TagKey<Item> ironNuggets = neoForgeConventionTag("nuggets/iron");
+        TagKey<Item> carrot = conventionTag("crops/carrot");
+        TagKey<Item> potato = conventionTag("crops/potato");
+        TagKey<Item> seeds = conventionTag("seeds");
+        TagKey<Item> mushrooms = conventionTag("mushrooms");
+        TagKey<Item> slimeBalls = conventionTag("slime_balls");
+        TagKey<Item> obsidians = conventionTag("obsidians");
+        TagKey<Item> ironNuggets = conventionTag("nuggets/iron");
+        TagKey<Item> goldIngots = conventionTag("ingots/gold");
+        TagKey<Item> ironIngots = conventionTag("ingots/iron");
+        TagKey<Item> strings = conventionTag("strings");
+        TagKey<Item> cobblestones = conventionTag("cobblestones");
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, TideItems.FISH_STEW, 1)
                 .requires(carrot)
@@ -156,9 +156,9 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                 .pattern("#S#")
                 .pattern("ICI")
                 .pattern("#I#")
-                .define('C', ConventionalItemTags.PLAYER_WORKSTATIONS_CRAFTING_TABLES)
-                .define('S', ConventionalItemTags.STRINGS)
-                .define('I', Items.IRON_NUGGET)
+                .define('C', conventionTag("player_workstations/crafting_tables"))
+                .define('S', strings)
+                .define('I', ironNuggets)
                 .define('#', ItemTags.PLANKS)
                 .unlockedBy("impossible", impossible())
                 .save(output);
@@ -185,9 +185,9 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                 .pattern("L#R")
                 .pattern("I#I")
                 .pattern(" P ")
-                .define('L', ConventionalItemTags.LAPIS_GEMS)
-                .define('R', ConventionalItemTags.REDSTONE_DUSTS)
-                .define('P', ConventionalItemTags.PRISMARINE_GEMS)
+                .define('L', conventionTag("gems/lapis"))
+                .define('R', conventionTag("dusts/redstone"))
+                .define('P', conventionTag("gems/prismarine"))
                 .define('I', Items.IRON_NUGGET)
                 .define('#', TideItems.BAIT)
                 .unlockedBy("impossible", impossible())
@@ -197,8 +197,8 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                 .pattern("  #")
                 .pattern(" #S")
                 .pattern("# S")
-                .define('S', ConventionalItemTags.STRINGS)
-                .define('#', ConventionalItemTags.COBBLESTONES)
+                .define('S', strings)
+                .define('#', cobblestones)
                 .unlockedBy("impossible", impossible())
                 .save(output);
 
@@ -206,7 +206,7 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                 .pattern("S")
                 .pattern("S")
                 .pattern("S")
-                .define('S', ConventionalItemTags.STRINGS)
+                .define('S', strings)
                 .unlockedBy("impossible", impossible())
                 .save(output);
 
@@ -224,7 +224,7 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                 .pattern("L")
                 .pattern("#")
                 .define('L', TideItems.FISHING_LINE)
-                .define('#', ConventionalItemTags.IRON_INGOTS)
+                .define('#', ironIngots)
                 .unlockedBy("impossible", impossible())
                 .save(output);
 
@@ -233,7 +233,7 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                 .pattern("L")
                 .pattern("#")
                 .define('L', TideItems.FISHING_LINE)
-                .define('#', ConventionalItemTags.GOLD_INGOTS)
+                .define('#', goldIngots)
                 .unlockedBy("impossible", impossible())
                 .save(output);
 
@@ -241,8 +241,8 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                 .pattern("#")
                 .pattern("C")
                 .pattern("#")
-                .define('C', ConventionalItemTags.COBBLESTONES)
-                .define('#', Items.IRON_NUGGET)
+                .define('C', cobblestones)
+                .define('#', ironNuggets)
                 .unlockedBy("impossible", impossible())
                 .save(output);
 
@@ -250,7 +250,7 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                 .pattern("  #")
                 .pattern("I I")
                 .pattern(" I ")
-                .define('I', ConventionalItemTags.IRON_INGOTS)
+                .define('I', ironIngots)
                 .define('#', ironNuggets)
                 .unlockedBy("impossible", impossible())
                 .save(output);
@@ -260,56 +260,56 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                 .pattern("O O")
                 .pattern(" O ")
                 .define('O', obsidians)
-                .define('#', ConventionalItemTags.COPPER_INGOTS)
+                .define('#', conventionTag("ingots/copper"))
                 .unlockedBy("impossible", impossible())
                 .save(output);
 
         // -- Smithing --
 
         SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ConventionalItemTags.STRINGS),
+                        Ingredient.of(strings),
                         Ingredient.of(Items.FISHING_ROD, TideItems.STONE_FISHING_ROD),
-                        Ingredient.of(ConventionalItemTags.IRON_INGOTS),
+                        Ingredient.of(ironIngots),
                         RecipeCategory.TOOLS,
                         TideItems.IRON_FISHING_ROD)
                 .unlocks("impossible", impossible())
                 .save(output, "tide:iron_rod_smithing");
 
         SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ConventionalItemTags.STRINGS),
+                        Ingredient.of(strings),
                         Ingredient.of(Items.FISHING_ROD, TideItems.STONE_FISHING_ROD,
                                 TideItems.IRON_FISHING_ROD),
-                        Ingredient.of(ConventionalItemTags.GOLD_INGOTS),
+                        Ingredient.of(goldIngots),
                         RecipeCategory.TOOLS,
                         TideItems.GOLDEN_FISHING_ROD)
                 .unlocks("impossible", impossible())
                 .save(output, "tide:gold_rod_smithing");
 
         SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ConventionalItemTags.STRINGS),
+                        Ingredient.of(strings),
                         Ingredient.of(Items.FISHING_ROD, TideItems.STONE_FISHING_ROD,
                                 TideItems.IRON_FISHING_ROD, TideItems.GOLDEN_FISHING_ROD),
-                        Ingredient.of(ConventionalItemTags.AMETHYST_GEMS),
+                        Ingredient.of(conventionTag("gems/amethyst")),
                         RecipeCategory.TOOLS,
                         TideItems.CRYSTAL_FISHING_ROD)
                 .unlocks("impossible", impossible())
                 .save(output, "tide:crystal_rod_smithing");
 
         SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ConventionalItemTags.STRINGS),
+                        Ingredient.of(strings),
                         Ingredient.of(Items.FISHING_ROD, TideItems.STONE_FISHING_ROD,
                                 TideItems.IRON_FISHING_ROD, TideItems.GOLDEN_FISHING_ROD,
                                 TideItems.CRYSTAL_FISHING_ROD),
-                        Ingredient.of(ConventionalItemTags.DIAMOND_GEMS),
+                        Ingredient.of(conventionTag("gems/diamond")),
                         RecipeCategory.TOOLS,
                         TideItems.DIAMOND_FISHING_ROD)
                 .unlocks("impossible", impossible())
                 .save(output, "tide:diamond_rod_smithing");
 
         SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(ConventionalItemTags.STRINGS),
+                        Ingredient.of(strings),
                         Ingredient.of(TideItems.DIAMOND_FISHING_ROD),
-                        Ingredient.of(ConventionalItemTags.NETHERITE_INGOTS),
+                        Ingredient.of(conventionTag("ingots/netherite")),
                         RecipeCategory.TOOLS,
                         TideItems.NETHERITE_FISHING_ROD)
                 .unlocks("impossible", impossible())
@@ -319,29 +319,25 @@ public class TideRecipeProvider extends FabricRecipeProvider {
 
         SimpleCookingRecipeBuilder.generic(Ingredient.of(TideTags.Items.COOKABLE_FISH),
                         RecipeCategory.FOOD, TideItems.COOKED_FISH,
-                        0.35f, 600, RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
-                        CampfireCookingRecipe::new)
+                        0.35f, 600, RecipeSerializer.CAMPFIRE_COOKING_RECIPE)
                 .unlockedBy("impossible", impossible())
                 .save(output, "tide:cooked_fish_campfire_cooking");
 
         SimpleCookingRecipeBuilder.generic(Ingredient.of(TideTags.Items.COOKABLE_FISH),
                         RecipeCategory.FOOD, TideItems.COOKED_FISH,
-                        0.1f, 200, RecipeSerializer.SMELTING_RECIPE,
-                        SmeltingRecipe::new)
+                        0.1f, 200, RecipeSerializer.SMELTING_RECIPE)
                 .unlockedBy("impossible", impossible())
                 .save(output, "tide:cooked_fish_smelting");
 
         SimpleCookingRecipeBuilder.generic(Ingredient.of(TideTags.Items.COOKABLE_FISH),
                         RecipeCategory.FOOD, TideItems.COOKED_FISH,
-                        0.1f, 100, RecipeSerializer.SMOKING_RECIPE,
-                        SmokingRecipe::new)
+                        0.1f, 100, RecipeSerializer.SMOKING_RECIPE)
                 .unlockedBy("impossible", impossible())
                 .save(output, "tide:cooked_fish_smoking");
 
         SimpleCookingRecipeBuilder.generic(Ingredient.of(TideItems.CLAYFISH),
                         RecipeCategory.FOOD, TideItems.HARDENED_CLAYFISH,
-                        1.0f, 150, RecipeSerializer.SMELTING_RECIPE,
-                        SmeltingRecipe::new)
+                        1.0f, 150, RecipeSerializer.SMELTING_RECIPE)
                 .unlockedBy("impossible", impossible())
                 .save(output, "tide:clayfish_smelting");
 
@@ -376,25 +372,25 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                 .save(output, "tide:rod_upgrading/netherite");
     }
 
-    private void createBobberRecipes(RecipeOutput output) {
+    private void createBobberRecipes(Consumer<FinishedRecipe> output) {
         Arrays.stream(BobberModifier.values()).toList().forEach(modifier -> {
             String dyeId = modifier.name().toLowerCase();
 
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, modifier.getItem())
-                    .requires(neoForgeConventionTag("slime_balls"))
+                    .requires(conventionTag("slime_balls"))
                     .requires(ItemTags.PLANKS)
-                    .requires(TagKey.create(Registries.ITEM, ResourceLocation
-                            .fromNamespaceAndPath("c", "dyes/" + dyeId)))
+                    .requires(TagKey.create(Registries.ITEM, new ResourceLocation(
+                            "c", "dyes/" + dyeId)))
                     .unlockedBy("impossible", impossible())
                     .save(output, "tide:bobbers/" + dyeId);
         });
     }
 
-    private static Criterion<ImpossibleTrigger.TriggerInstance> impossible() {
-        return CriteriaTriggers.IMPOSSIBLE.createCriterion(new ImpossibleTrigger.TriggerInstance());
+    private static CriterionTriggerInstance impossible() {
+        return new ImpossibleTrigger.TriggerInstance();
     }
 
-    public TagKey<Item> neoForgeConventionTag(String name) {
-        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", name));
+    public TagKey<Item> conventionTag(String name) {
+        return TagKey.create(Registries.ITEM, new ResourceLocation("c", name));
     }
 }

@@ -31,7 +31,7 @@ import java.util.Random;
 public class FishingJournalScreen extends Screen {
     private static final int SLOT_SIZE = 22;
     private static final int SLOT_MARGIN = 4;
-    private static final ResourceLocation PROFILE_BG = Tide.resource("journal_profile");
+    private static final ResourceLocation PROFILE_BG = Tide.resource("textures/gui/journal/journal_profile.png");
     private int numRows;
     private int numCols;
     private int totalSlots;
@@ -170,8 +170,8 @@ public class FishingJournalScreen extends Screen {
 
     @Override
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-//        this.renderBackground(graphics, mouseX, mouseY, partialTick);
         graphics.setColor(1f, 1f, 1f, 1f);
+        this.renderBackground(graphics);
         super.render(graphics, mouseX, mouseY, partialTick);
 
         if (profileFish == null) {
@@ -197,7 +197,7 @@ public class FishingJournalScreen extends Screen {
 
     public void openProfile(JournalLayout.Profile profile) {
         profileConfig = profile;
-        profileFish = BuiltInRegistries.ITEM.get(ResourceLocation.read(profile.fishItem()).getOrThrow()).getDefaultInstance();
+        profileFish = BuiltInRegistries.ITEM.get(new ResourceLocation(profile.fishItem())).getDefaultInstance();
         player.playSound(TideSoundEvents.PAGE_FLIP, 1.0f, 1.0f + new Random().nextFloat() * 0.2f);
         Tide.NETWORK.sendToServer(new ReadProfileMsg(profileFish));
         init();
@@ -256,7 +256,7 @@ public class FishingJournalScreen extends Screen {
         int bgHeight = 202;
         int offsetY = 20;
 
-        graphics.blitSprite(PROFILE_BG, (this.width - bgWidth) / 2, (this.height - bgHeight) / 2 - offsetY, bgWidth, bgHeight);
+        graphics.blit(PROFILE_BG, (this.width - bgWidth) / 2, (this.height - bgHeight) / 2 - offsetY, 0, 0, bgWidth, bgHeight, bgWidth, bgHeight);
 
         Style underlined = Component.empty().getStyle().withUnderlined(true);
 

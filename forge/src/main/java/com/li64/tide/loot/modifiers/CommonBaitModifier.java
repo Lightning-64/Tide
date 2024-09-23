@@ -1,6 +1,6 @@
 package com.li64.tide.loot.modifiers;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.Codec;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -11,7 +11,7 @@ import net.minecraftforge.common.loot.LootModifier;
 import com.li64.tide.registries.TideItems;
 
 public class CommonBaitModifier extends LootModifier {
-    public static final MapCodec<CommonBaitModifier> CODEC = newCodec();
+    public static final Codec<CommonBaitModifier> CODEC = newCodec();
 
     public CommonBaitModifier() {
         super(new LootItemCondition[0]);
@@ -25,8 +25,8 @@ public class CommonBaitModifier extends LootModifier {
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         if (generatedLoot.isEmpty()) return generatedLoot;
 
-        if (!(context.getQueriedLootTableId().toString().matches(BuiltInLootTables.UNDERWATER_RUIN_BIG.location().toString())
-            && !(context.getQueriedLootTableId().toString().matches(BuiltInLootTables.UNDERWATER_RUIN_SMALL.location().toString())))) return generatedLoot;
+        if (!(context.getQueriedLootTableId().toString().matches(BuiltInLootTables.UNDERWATER_RUIN_BIG.toString())
+            && !(context.getQueriedLootTableId().toString().matches(BuiltInLootTables.UNDERWATER_RUIN_SMALL.toString())))) return generatedLoot;
 
         for (int i = 0; i < context.getRandom().nextInt(0, 3); i++) {
             ItemStack stack = TideItems.BAIT.getDefaultInstance();
@@ -36,12 +36,12 @@ public class CommonBaitModifier extends LootModifier {
         return generatedLoot;
     }
 
-    public static MapCodec<CommonBaitModifier> newCodec() {
-        return MapCodec.unit(CommonBaitModifier::new);
+    public static Codec<CommonBaitModifier> newCodec() {
+        return Codec.unit(CommonBaitModifier::new);
     }
 
     @Override
-    public MapCodec<? extends IGlobalLootModifier> codec() {
+    public Codec<? extends IGlobalLootModifier> codec() {
         return CODEC;
     }
 }

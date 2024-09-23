@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "c:nuggets/iron"
+    },
+    "C": {
+      "tag": "c:cobblestones"
+    }
+  },
+  "pattern": [
+    "#",
+    "C",
+    "#"
+  ],
+  "result": {
+    "item": "tide:fishing_hook"
+  },
+  "show_notification": true
+}

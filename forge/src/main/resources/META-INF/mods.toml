@@ -3,6 +3,7 @@ loaderVersion = "${forge_loader_version_range}" #mandatory This is typically bum
 license = "${license}" # Review your options at https://choosealicense.com/.
 #issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
 #clientSideOnly=true #optional
+
 [[mods]] #mandatory
     modId = "${mod_id}" #mandatory
     version = "${version}" #mandatory

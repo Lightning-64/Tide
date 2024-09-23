@@ -1,22 +1,22 @@
 package com.li64.tide.registries;
 
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.Block;
 
 public enum TideTiers implements Tier {
 
-    BLAZING_FISH(250, 6.0F, 2.0F, 10, Ingredient.of(Items.BLAZE_ROD));
+    BLAZING_FISH(2, 250, 6.0F, 2.0F, 10, Ingredient.of(Items.BLAZE_ROD));
 
+    private final int level;
     private final int uses;
     private final float speed;
     private final float damage;
     private final int enchantmentValue;
     private final Ingredient repairIngredient;
 
-    TideTiers(int uses, float speed, float damage, int enchantmentValue, Ingredient repairIngredient) {
+    TideTiers(int level, int uses, float speed, float damage, int enchantmentValue, Ingredient repairIngredient) {
+        this.level = level;
         this.uses = uses;
         this.speed = speed;
         this.damage = damage;
@@ -40,8 +40,8 @@ public enum TideTiers implements Tier {
     }
 
     @Override
-    public TagKey<Block> getIncorrectBlocksForDrops() {
-        return null;
+    public int getLevel() {
+        return level;
     }
 
     @Override

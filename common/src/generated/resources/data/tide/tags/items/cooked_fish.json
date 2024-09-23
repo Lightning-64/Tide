@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "tide:cooked_fish",
+    "minecraft:cooked_cod",
+    "minecraft:cooked_salmon"
+  ]
+}

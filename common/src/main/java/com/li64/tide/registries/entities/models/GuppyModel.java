@@ -46,7 +46,7 @@ public class GuppyModel<T extends Guppy> extends EntityModel<T> {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float r, float g, float b, float a) {
+		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, r, g, b, a);
 	}
 }

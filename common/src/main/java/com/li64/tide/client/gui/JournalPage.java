@@ -23,7 +23,7 @@ public class JournalPage {
         this.title = title;
         this.content = content;
         this.unlockedByDefault = unlockedByDefault;
-        this.icon = BuiltInRegistries.ITEM.get(ResourceLocation.read(icon).getOrThrow()).getDefaultInstance();
+        this.icon = BuiltInRegistries.ITEM.get(new ResourceLocation(icon)).getDefaultInstance();
     }
 
     public JournalPage(JournalLayout.Page pageConfig) {

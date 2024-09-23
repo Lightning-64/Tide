@@ -1,0 +1,29 @@
+{
+  "parent": "tide:root",
+  "criteria": {
+    "finish_page": {
+      "trigger": "tide:finish_page"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.tide.finish_journal_page.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:filled_map"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.tide.finish_journal_page.title"
+    }
+  },
+  "requirements": [
+    [
+      "finish_page"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

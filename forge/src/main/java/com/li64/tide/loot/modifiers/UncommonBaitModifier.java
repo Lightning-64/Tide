@@ -1,6 +1,6 @@
 package com.li64.tide.loot.modifiers;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.Codec;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -11,7 +11,7 @@ import net.minecraftforge.common.loot.LootModifier;
 import com.li64.tide.registries.TideItems;
 
 public class UncommonBaitModifier extends LootModifier {
-    public static final MapCodec<UncommonBaitModifier> CODEC = newCodec();
+    public static final Codec<UncommonBaitModifier> CODEC = newCodec();
 
     public UncommonBaitModifier() {
         super(new LootItemCondition[0]);
@@ -24,7 +24,7 @@ public class UncommonBaitModifier extends LootModifier {
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         if (generatedLoot.isEmpty()) return generatedLoot;
-        if (!(context.getQueriedLootTableId().toString().matches(BuiltInLootTables.SHIPWRECK_SUPPLY.location().toString()))) return generatedLoot;
+        if (!(context.getQueriedLootTableId().toString().matches(BuiltInLootTables.SHIPWRECK_SUPPLY.toString()))) return generatedLoot;
 
         for (int i = 0; i < context.getRandom().nextInt(1, 3); i++) {
             if (context.getRandom().nextInt(0, 3) == 0) {
@@ -42,12 +42,12 @@ public class UncommonBaitModifier extends LootModifier {
         return generatedLoot;
     }
 
-    public static MapCodec<UncommonBaitModifier> newCodec() {
-        return MapCodec.unit(UncommonBaitModifier::new);
+    public static Codec<UncommonBaitModifier> newCodec() {
+        return Codec.unit(UncommonBaitModifier::new);
     }
 
     @Override
-    public MapCodec<? extends IGlobalLootModifier> codec() {
+    public Codec<? extends IGlobalLootModifier> codec() {
         return CODEC;
     }
 }

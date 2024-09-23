@@ -1,7 +1,8 @@
 {
+  "replace": false,
   "values": [
-    "#c:is_ocean",
-    "#c:is_beach",
+    "#minecraft:is_ocean",
+    "#minecraft:is_beach",
     "minecraft:mushroom_fields"
   ]
 }

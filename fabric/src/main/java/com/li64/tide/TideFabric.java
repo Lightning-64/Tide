@@ -3,10 +3,8 @@ package com.li64.tide;
 import com.li64.tide.client.gui.TideMenuTypes;
 import com.li64.tide.compat.jei.recipe.RodUpgradingRecipe;
 import com.li64.tide.data.TideCriteriaTriggers;
-import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.events.FabricEventHandler;
-import com.li64.tide.network.TideMessages;
 import com.li64.tide.registries.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -19,13 +17,14 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -36,7 +35,6 @@ public class TideFabric implements ModInitializer {
     public void onInitialize() {
         Tide.init();
 
-        TideMessages.init(Tide.NETWORK);
         FabricEventHandler.init();
 
         TideItems.init();
@@ -45,7 +43,6 @@ public class TideFabric implements ModInitializer {
         TideEntityTypes.init();
         TideMenuTypes.init();
         TideSoundEvents.init();
-        TideDataComponents.init();
         TideCriteriaTriggers.init();
 
         Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, Tide.resource(RodUpgradingRecipe.Type.ID),
@@ -159,34 +156,34 @@ public class TideFabric implements ModInitializer {
 
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FISHERMAN, 1, (trades) -> {
             trades.add((trader, random) -> new MerchantOffer(
-                    new ItemCost(TideItems.TROUT, 8),
+                    new ItemStack(TideItems.TROUT, 8),
                     new ItemStack(Items.EMERALD, 1),
                     4, 4, 0.02F));
             trades.add((trader, random) -> new MerchantOffer(
-                    new ItemCost(TideItems.TUNA, 8),
+                    new ItemStack(TideItems.TUNA, 8),
                     new ItemStack(Items.EMERALD, 1),
                     4, 4, 0.02F));
             trades.add((trader, random) -> new MerchantOffer(
-                    new ItemCost(TideItems.BASS, 7),
+                    new ItemStack(TideItems.BASS, 7),
                     new ItemStack(Items.EMERALD, 1),
                     4, 4, 0.02F));
             trades.add((trader, random) -> new MerchantOffer(
-                    new ItemCost(TideItems.MINT_CARP, 8),
+                    new ItemStack(TideItems.MINT_CARP, 8),
                     new ItemStack(Items.EMERALD, 1),
                     4, 4, 0.02F));
         });
         
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FISHERMAN, 2, (trades) -> {
             trades.add((trader, random) -> new MerchantOffer(
-                    new ItemCost(TideItems.BARRACUDA, 3),
+                    new ItemStack(TideItems.BARRACUDA, 3),
                     new ItemStack(Items.EMERALD, 1),
                     4,4,0.02F));
             trades.add((trader, random) -> new MerchantOffer(
-                    new ItemCost(TideItems.SAILFISH, 3),
+                    new ItemStack(TideItems.SAILFISH, 3),
                     new ItemStack(Items.EMERALD, 1),
                     4,4,0.02F));
             trades.add((trader, random) -> new MerchantOffer(
-                    new ItemCost(Items.TROPICAL_FISH, 9),
+                    new ItemStack(Items.TROPICAL_FISH, 9),
                     new ItemStack(Items.EMERALD, 1),
                     4,4, 0.02F));
         });
@@ -197,7 +194,7 @@ public class TideFabric implements ModInitializer {
     }
 
     public static <T extends WaterAnimal> void tideFishSpawnRules(EntityType<T> entityType) {
-        SpawnPlacements.register(entityType, SpawnPlacementTypes.IN_WATER,
+        SpawnPlacements.register(entityType, SpawnPlacements.Type.IN_WATER,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, WaterAnimal::checkSurfaceWaterAnimalSpawnRules);
     }
 }

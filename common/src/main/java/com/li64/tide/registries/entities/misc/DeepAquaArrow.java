@@ -25,8 +25,8 @@ public class DeepAquaArrow extends AbstractArrow {
         super(entityType, level);
     }
 
-    public DeepAquaArrow(Level level, LivingEntity entity, ItemStack itemStack, ItemStack itemStack1) {
-        super(TideEntityTypes.DEEP_AQUA_ARROW, entity, level, itemStack, itemStack1);
+    public DeepAquaArrow(Level level, LivingEntity entity, ItemStack itemStack) {
+        super(TideEntityTypes.DEEP_AQUA_ARROW, entity, level);
     }
 
     @Override
@@ -48,6 +48,11 @@ public class DeepAquaArrow extends AbstractArrow {
                 }
             }
         }
+    }
+
+    @Override
+    protected ItemStack getPickupItem() {
+        return DEFAULT_ARROW_STACK;
     }
 
     @Override

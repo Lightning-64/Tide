@@ -3,12 +3,11 @@ package com.li64.tide.network.messages;
 import com.li64.tide.Tide;
 import com.li64.tide.data.player.TidePlayerData;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import org.jetbrains.annotations.NotNull;
 
-public class SyncDataMsg implements CustomPacketPayload {
-    public static final Type<SyncDataMsg> TYPE = new Type<>(Tide.resource("sync_data"));
+public class SyncDataMsg {
+    public static final ResourceLocation ID = Tide.resource("sync_data");
 
     public final int[] pagesUnlocked;
     public final int[] fishUnlocked;
@@ -52,7 +51,4 @@ public class SyncDataMsg implements CustomPacketPayload {
         TidePlayerData.CLIENT_DATA.gotJournal = message.gotJournal;
         TidePlayerData.CLIENT_DATA.finishedJournal = message.finishedJournal;
     }
-
-    @Override
-    public @NotNull Type<? extends CustomPacketPayload> type() { return TYPE; }
 }

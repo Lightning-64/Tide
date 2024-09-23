@@ -2,7 +2,6 @@ package com.li64.tide.platform.services;
 
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import net.minecraft.advancements.CriterionTrigger;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -48,8 +47,6 @@ public interface TideMainPlatform {
     void registerEntityType(String key, EntityType<?> entityType);
 
     void registerCriteriaTrigger(String key, CriterionTrigger<?> trigger);
-
-    void registerComponentType(String key, DataComponentType<?> componentType);
 
     void registerMenuType(String key, MenuType<?> menuType);
 

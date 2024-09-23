@@ -17,7 +17,7 @@ public class JellyWallTorchBlock extends WallTorchBlock implements SimpleWaterlo
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public JellyWallTorchBlock(SimpleParticleType particleType, Properties properties) {
-        super(particleType, properties);
+        super(properties, particleType);
     }
 
     protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> stateBuilder) {

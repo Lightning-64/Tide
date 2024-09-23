@@ -4,12 +4,12 @@ import com.li64.tide.Tide;
 import com.li64.tide.data.TideEntity;
 import com.li64.tide.platform.services.TideMainPlatform;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.Registry;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -73,12 +73,7 @@ public class FabricMainPlatform implements TideMainPlatform {
 
     @Override
     public void registerCriteriaTrigger(String key, CriterionTrigger<?> trigger) {
-        Registry.register(BuiltInRegistries.TRIGGER_TYPES, Tide.resource(key), trigger);
-    }
-
-    @Override
-    public void registerComponentType(String key, DataComponentType<?> componentType) {
-        Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, Tide.resource(key), componentType);
+        CriteriaTriggers.register(trigger);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class TideFabricClient implements ClientModInitializer {
 
         MenuScreens.register(TideMenuTypes.ANGLER_WORKSHOP, AnglerWorkshopScreen::new);
 
-        ItemTooltipCallback.EVENT.register((stack, context, type, lines) -> {
+        ItemTooltipCallback.EVENT.register((stack, context, lines) -> {
             if (TideUtils.isBait(stack) && !(stack.getItem() instanceof BaitItem)) {
                 Style style = Component.empty().getStyle().withColor(ChatFormatting.GRAY).withItalic(true);
                 lines.add(Component.translatable("item.tide.bait.desc").setStyle(style));

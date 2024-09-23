@@ -12,15 +12,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class EndLootCrateBlock extends AbstractLootCrateBlock<LootCrateBlockEntity> {
-    public static final MapCodec<EndLootCrateBlock> CODEC = simpleCodec(EndLootCrateBlock::new);
-
     public EndLootCrateBlock(Properties properties) {
         super(properties, () -> TideBlockEntities.END_LOOT_CRATE);
-    }
-
-    @Override
-    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
     }
 
     @Nullable

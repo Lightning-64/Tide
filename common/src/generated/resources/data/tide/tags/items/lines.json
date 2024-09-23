@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "tide:fishing_line",
+    "tide:braided_line",
+    "tide:reinforced_line",
+    "tide:fortune_line"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "C": {
+      "tag": "c:player_workstations/crafting_tables"
+    },
+    "I": {
+      "tag": "c:nuggets/iron"
+    },
+    "S": {
+      "tag": "c:strings"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "ICI",
+    "#I#"
+  ],
+  "result": {
+    "item": "tide:angler_workshop"
+  },
+  "show_notification": true
+}

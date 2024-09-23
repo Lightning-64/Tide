@@ -14,7 +14,7 @@ public class DeepAquaArrowItem extends ArrowItem {
     }
 
     @Override
-    public AbstractArrow createArrow(Level level, ItemStack itemStack, LivingEntity entity, @Nullable ItemStack itemStack1) {
-        return new DeepAquaArrow(level, entity, itemStack.copyWithCount(1), itemStack1);
+    public AbstractArrow createArrow(Level level, ItemStack itemStack, LivingEntity entity) {
+        return new DeepAquaArrow(level, entity, itemStack);
     }
 }

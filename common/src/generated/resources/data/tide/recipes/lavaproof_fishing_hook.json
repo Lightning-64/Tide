@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "c:ingots/copper"
+    },
+    "O": {
+      "tag": "c:obsidians"
+    }
+  },
+  "pattern": [
+    "  #",
+    "O O",
+    " O "
+  ],
+  "result": {
+    "item": "tide:lavaproof_fishing_hook"
+  },
+  "show_notification": true
+}

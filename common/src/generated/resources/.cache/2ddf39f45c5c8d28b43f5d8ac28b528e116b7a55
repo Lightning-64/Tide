@@ -1,10 +1,10 @@
-// 1.21	2024-09-15T13:52:55.4438558	Tide/Advancements
-1798535e7d8808ebfbe142ab29b876a2b3218160 data\tide\advancement\fish_crate.json
-2489421c1a5817b68c3b2b3c26364914503943de data\tide\advancement\get_bait.json
-a736d5874fd11cc7a08717f73167f19473477885 data\tide\advancement\catch_legendary.json
-fbc7c96dbc2c7f6b7d27612f23309630e52f8ee3 data\tide\advancement\journal_completed.json
-71bec31422d2e944616a42c288828e500c9b3242 data\tide\advancement\all_fishing_rods.json
-417b82e3aafbc0a2685977388b6a7f75567b57a2 data\tide\advancement\root.json
-7569d719f1267aede3c494e31a1c6646c363a918 data\tide\advancement\fish_in_lava.json
-ebda547c5b7053e41340e5df916df90880e023ff data\tide\advancement\finish_journal_page.json
-46b848f163ae0c76ed64054117792477b2b53b11 data\tide\advancement\all_biome_fish.json
+// 1.20.1	2024-09-15T13:43:16.5817158	Tide/Advancements
+cd0be867f6d7fa4b69aaaf08b67eddd32cf37fe9 data\tide\advancements\get_bait.json
+45fcd0d46761199fb6e8bf73ef36deb1c2423e82 data\tide\advancements\fish_in_lava.json
+4ee96a557f11a83eb1a3e4735d8507336e80a017 data\tide\advancements\fish_crate.json
+b414a8462b8c09f3b9e0125b8b17888711f3c801 data\tide\advancements\all_biome_fish.json
+0ca8c2f2aafbc66b7a92147a7ad3dd01eac10a1f data\tide\advancements\catch_legendary.json
+74d7864d13128b897adc99dbdfd6255e6ac291d0 data\tide\advancements\journal_completed.json
+86b61efbfad1610ef7d051ba81d5b613878d5058 data\tide\advancements\root.json
+488a12540195e52ed1ebd2f4826a3e7b50596827 data\tide\advancements\finish_journal_page.json
+5f1bf8b7395458329bbcd9cba4c2ca37dac28fec data\tide\advancements\all_fishing_rods.json

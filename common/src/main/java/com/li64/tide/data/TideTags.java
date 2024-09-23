@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 @SuppressWarnings("unused")
 public class TideTags {
-
     public static class Items {
         public static final TagKey<Item> VANILLA_FISH = TagKey.create(Registries.ITEM, Tide.resource("vanilla_fish"));
         public static final TagKey<Item> BIOME_FISH = TagKey.create(Registries.ITEM, Tide.resource("biome_fish"));
@@ -66,22 +65,22 @@ public class TideTags {
                 Registries.BIOME, Tide.resource("can_catch_starfish"));
 
         public static ArrayList<TagKey<Biome>> fishingBiomes;
+        public static final TagKey<Biome> BADLANDS = biomeFishTag("badlands");
+        public static final TagKey<Biome> BIRCH = biomeFishTag("birch");
+        public static final TagKey<Biome> CHERRY = biomeFishTag("cherry");
+        public static final TagKey<Biome> DESERT = biomeFishTag("desert");
+        public static final TagKey<Biome> FOREST = biomeFishTag("forest");
+        public static final TagKey<Biome> FROZEN = biomeFishTag("frozen");
+        public static final TagKey<Biome> JUNGLE = biomeFishTag("jungle");
+        public static final TagKey<Biome> MOUNTAIN = biomeFishTag("mountain");
         public static final TagKey<Biome> MUSHROOM = biomeFishTag("mushroom");
+        public static final TagKey<Biome> PLAINS = biomeFishTag("plains");
+        public static final TagKey<Biome> SAVANNA = biomeFishTag("savanna");
+        public static final TagKey<Biome> SWAMP = biomeFishTag("swamp");
+        public static final TagKey<Biome> TAIGA = biomeFishTag("taiga");
         public static final TagKey<Biome> DEEP_DARK = biomeFishTag("deep_dark");
         public static final TagKey<Biome> LUSH_CAVES = biomeFishTag("lush_caves");
         public static final TagKey<Biome> DRIPSTONE = biomeFishTag("dripstone");
-        public static final TagKey<Biome> BADLANDS = biomeFishTag("badlands");
-        public static final TagKey<Biome> BIRCH = biomeFishTag("birch");
-        public static final TagKey<Biome> TAIGA = biomeFishTag("taiga");
-        public static final TagKey<Biome> SAVANNA = biomeFishTag("savanna");
-        public static final TagKey<Biome> CHERRY = biomeFishTag("cherry");
-        public static final TagKey<Biome> SWAMP = biomeFishTag("swamp");
-        public static final TagKey<Biome> JUNGLE = biomeFishTag("jungle");
-        public static final TagKey<Biome> DESERT = biomeFishTag("desert");
-        public static final TagKey<Biome> FROZEN = biomeFishTag("frozen");
-        public static final TagKey<Biome> MOUNTAIN = biomeFishTag("mountain");
-        public static final TagKey<Biome> PLAINS = biomeFishTag("plains");
-        public static final TagKey<Biome> FOREST = biomeFishTag("forest");
 
         public static TagKey<Biome> biomeFishTag(String path) {
             if (fishingBiomes == null) fishingBiomes = new ArrayList<>();

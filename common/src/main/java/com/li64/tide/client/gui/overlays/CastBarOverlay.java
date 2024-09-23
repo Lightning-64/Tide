@@ -2,7 +2,7 @@ package com.li64.tide.client.gui.overlays;
 
 import com.li64.tide.Tide;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -14,9 +14,9 @@ public class CastBarOverlay {
     private static float rodChargePercent = 0f;
     private static float timer = 20f;
 
-    public static void render(GuiGraphics graphics, DeltaTracker tracker) {
+    public static void render(GuiGraphics graphics, float partialTick) {
         if (timer >= 20f) return;
-        timer += tracker.getRealtimeDeltaTicks();
+        timer += Minecraft.getInstance().getDeltaFrameTime();
 
         float alpha = -Mth.clamp((timer - 10f) / 10f, 0f, 1f) + 1f;
 
@@ -28,11 +28,10 @@ public class CastBarOverlay {
 
         int fillWidth = (int) Math.ceil(rodChargePercent * texWidth);
 
-        RenderSystem.enableBlend();
         graphics.setColor(1f, 1f, 1f, alpha);
         graphics.blit(BAR_EMPTY_TEX, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
         graphics.blit(BAR_FILLED_TEX, x, y, 0, 0, fillWidth, texHeight, texWidth, texHeight);
-        RenderSystem.disableBlend();
+
         graphics.setColor(1f, 1f, 1f, 1f);
     }
 

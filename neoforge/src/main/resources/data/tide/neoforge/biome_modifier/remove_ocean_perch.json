@@ -1,5 +1,0 @@
-{
-   "type": "neoforge:remove_spawns",
-   "biomes": "#tide:is_warm",
-   "entity_types": "tide:ocean_perch"
-}

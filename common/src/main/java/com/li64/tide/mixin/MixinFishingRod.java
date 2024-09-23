@@ -18,11 +18,13 @@ public class MixinFishingRod {
         cancellable=true
     )
     private static void registerItemMixin(String pKey, Item pItem, CallbackInfoReturnable<Item> cir) {
-        if (!pKey.equals("fishing_rod")) return;
-        Items.registerItem(Tide.resource("vanilla_fishing_rod"), pItem);
+        if (pKey.equals("fishing_rod")) {
+            Items.registerItem(Tide.resource("vanilla_fishing_rod"), pItem);
 
-        Item fishingRod = new TideFishingRodItem(32, (new Item.Properties()).durability(20));
-        Items.registerItem(ResourceLocation.withDefaultNamespace(pKey), fishingRod);
-        cir.setReturnValue(fishingRod);
+            Item fishingRod = new TideFishingRodItem(32, new Item.Properties());
+            Items.registerItem(new ResourceLocation(ResourceLocation.DEFAULT_NAMESPACE, pKey), fishingRod);
+
+            cir.setReturnValue(fishingRod);
+        }
     }
 }

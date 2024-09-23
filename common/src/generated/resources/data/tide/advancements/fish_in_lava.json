@@ -1,0 +1,29 @@
+{
+  "parent": "tide:root",
+  "criteria": {
+    "lava_fish": {
+      "trigger": "tide:fish_in_lava"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.tide.fish_in_lava.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "tide:ember_koi"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.tide.fish_in_lava.title"
+    }
+  },
+  "requirements": [
+    [
+      "lava_fish"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

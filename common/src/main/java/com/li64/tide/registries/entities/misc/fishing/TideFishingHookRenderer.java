@@ -52,7 +52,7 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
         model.setupAnim(hookEntity, partialTick, 0.0F, -0.1F, 0.0F, 0.0F);
         VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(getTextureLocation(hookEntity)));
 
-        model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, FastColor.ARGB32.color(255, 255, 255, 255));
+        model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f);
         bobberLayer.render(poseStack, bufferSource, packedLight, hookEntity, 0, 0, 0, 0, 0, 0);
 
         poseStack.popPose();
@@ -151,9 +151,10 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
         int g = (int) (color.getGreen() * colorBrightness);
         int b = (int) (color.getBlue() * colorBrightness);
 
-        vertexConsumer.addVertex(pose.pose(), f, f1, f2)
-                .setColor(FastColor.ARGB32.color(255, r, g, b))
-                .setNormal(pose, f3, f4, f5);
+        vertexConsumer.vertex(pose.pose(), f, f1, f2)
+                .color(r, g, b, 255)
+                .normal(pose.normal(), f3, f4, f5)
+                .endVertex();
     }
 
     @Override

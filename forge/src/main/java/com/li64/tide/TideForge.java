@@ -1,17 +1,14 @@
 package com.li64.tide;
 
+import com.bonker.stardewfishing.StardewFishing;
 import com.li64.tide.client.gui.TideMenuTypes;
 import com.li64.tide.compat.jei.TideRecipeSerializers;
 import com.li64.tide.config.TideConfig;
 import com.li64.tide.data.TideCriteriaTriggers;
-import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.loot.TideLootModifiers;
-import com.li64.tide.network.TideMessages;
 import com.li64.tide.registries.*;
 import me.shedaniel.autoconfig.AutoConfig;
-import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.Registry;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
@@ -37,8 +34,6 @@ public class TideForge {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Tide.MOD_ID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Tide.MOD_ID);
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Tide.MOD_ID);
-    public static final DeferredRegister<CriterionTrigger<?>> TRIGGER_TYPES = DeferredRegister.create(Registries.TRIGGER_TYPE, Tide.MOD_ID);
-    public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES = DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, Tide.MOD_ID);
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.MENU_TYPES, Tide.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Tide.MOD_ID);
 
@@ -46,22 +41,19 @@ public class TideForge {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::onRegister);
 
-        Tide.init();
-
         TideForgeNetworking.init();
-        TideMessages.init(Tide.NETWORK);
+        Tide.init();
 
         BLOCKS.register(eventBus);
         BLOCK_ENTITIES.register(eventBus);
         ITEMS.register(eventBus);
         ENTITY_TYPES.register(eventBus);
-        TRIGGER_TYPES.register(eventBus);
-        DATA_COMPONENT_TYPES.register(eventBus);
         MENU_TYPES.register(eventBus);
         SOUND_EVENTS.register(eventBus);
 
         TideLootModifiers.register(eventBus);
         TideRecipeSerializers.register(eventBus);
+        TideCriteriaTriggers.init();
 
         ModLoadingContext.get().registerExtensionPoint(
                 ConfigScreenHandler.ConfigScreenFactory.class,
@@ -78,11 +70,10 @@ public class TideForge {
         event.register(ForgeRegistries.Keys.ENTITY_TYPES, helper -> TideEntityTypes.init());
         event.register(ForgeRegistries.Keys.MENU_TYPES, helper -> TideMenuTypes.init());
         event.register(ForgeRegistries.Keys.SOUND_EVENTS, helper -> TideSoundEvents.init());
-        event.register(Registries.TRIGGER_TYPE, helper -> TideCriteriaTriggers.init());
-        event.register(Registries.DATA_COMPONENT_TYPE, helper -> TideDataComponents.init());
 
         event.register(Registries.CREATIVE_MODE_TAB, helper -> Registry.register(
                 BuiltInRegistries.CREATIVE_MODE_TAB, Tide.MOD_ID,
                 Tide.getCreativeTab(CreativeModeTab.builder()).build()));
     }
+
 }

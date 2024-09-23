@@ -8,8 +8,8 @@ import net.minecraft.core.HolderLookup;
 import java.util.concurrent.CompletableFuture;
 
 public class TideBlockLootProvider extends FabricBlockLootTableProvider {
-    public TideBlockLootProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
-        super(dataOutput, registryLookup);
+    public TideBlockLootProvider(FabricDataOutput dataOutput) {
+        super(dataOutput);
     }
 
     @Override

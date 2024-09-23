@@ -68,8 +68,8 @@ public class TideItemTagsProvider extends FabricTagProvider<Item> {
                 .add(TideItems.LAVAPROOF_FISHING_HOOK);
 
         getOrCreateTagBuilder(TideTags.Items.BAIT_PLANTS)
-                .forceAddTag(neoForgeConventionTag("crops"))
-                .forceAddTag(neoForgeConventionTag("mushrooms"))
+                .forceAddTag(conventionTag("crops"))
+                .forceAddTag(conventionTag("mushrooms"))
                 .forceAddTag(ItemTags.FLOWERS);
 
         getOrCreateTagBuilder(TideTags.Items.VANILLA_FISH)
@@ -101,12 +101,12 @@ public class TideItemTagsProvider extends FabricTagProvider<Item> {
                 .add(TideItems.VOIDSEEKER)
                 .add(TideItems.SHOOTING_STARFISH);
 
-        getOrCreateTagBuilder(TideTags.Items.JOURNAL_FISH)
-                .forceAddTag(TideTags.Items.VANILLA_FISH)
-                .addAll(TideItems.JOURNAL_FISH_LIST);
+        FabricTagBuilder journalFish = getOrCreateTagBuilder(TideTags.Items.JOURNAL_FISH)
+                .forceAddTag(TideTags.Items.VANILLA_FISH);
+        TideItems.JOURNAL_FISH_LIST.forEach(journalFish::add);
 
-        getOrCreateTagBuilder(TideTags.Items.COOKABLE_FISH)
-                .addAll(TideItems.COOKABLE_FISH_LIST);
+        FabricTagBuilder cookableFish = getOrCreateTagBuilder(TideTags.Items.COOKABLE_FISH);
+        TideItems.COOKABLE_FISH_LIST.forEach(cookableFish::add);
 
         getOrCreateTagBuilder(TideTags.Items.COOKED_FISH)
                 .add(TideItems.COOKED_FISH)
@@ -118,21 +118,18 @@ public class TideItemTagsProvider extends FabricTagProvider<Item> {
 
         /* Common tags */
 
-        getOrCreateTagBuilder(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("forge", "tools/fishing_rods")))
+        getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("forge", "tools/fishing_rods")))
                 .forceAddTag(TideTags.Items.CUSTOMIZABLE_RODS);
 
         getOrCreateTagBuilder(ItemTags.ARROWS).add(TideItems.DEEP_AQUA_ARROW);
-        getOrCreateTagBuilder(ItemTags.CAT_FOOD).forceAddTag(TideTags.Items.COOKABLE_FISH);
         getOrCreateTagBuilder(ItemTags.FISHES).forceAddTag(TideTags.Items.JOURNAL_FISH);
-        getOrCreateTagBuilder(ItemTags.FISHING_ENCHANTABLE).forceAddTag(TideTags.Items.CUSTOMIZABLE_RODS);
-        getOrCreateTagBuilder(ItemTags.SWORD_ENCHANTABLE).add(TideItems.BLAZING_SWORDFISH);
         getOrCreateTagBuilder(ItemTags.SWORDS).add(TideItems.BLAZING_SWORDFISH);
 
-        getOrCreateTagBuilder(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("stardew_fishing", "starts_minigame")))
+        getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("stardew_fishing", "starts_minigame")))
                 .addTag(TideTags.Items.JOURNAL_FISH);
     }
 
-    public TagKey<Item> neoForgeConventionTag(String name) {
-        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", name));
+    public TagKey<Item> conventionTag(String name) {
+        return TagKey.create(Registries.ITEM, new ResourceLocation("c", name));
     }
 }

@@ -56,20 +56,19 @@ public abstract class LootCrateBlockEntity extends RandomizableContainerBlockEnt
         super(type, pos, state);
     }
 
-    @Override
-    protected void saveAdditional(CompoundTag p_187459_, HolderLookup.Provider p_330809_) {
-        super.saveAdditional(p_187459_, p_330809_);
-        if (!this.trySaveLootTable(p_187459_)) {
-            ContainerHelper.saveAllItems(p_187459_, this.items, p_330809_);
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        if (!this.trySaveLootTable(tag)) {
+            ContainerHelper.saveAllItems(tag, this.items);
         }
+
     }
 
-    @Override
-    protected void loadAdditional(CompoundTag p_332191_, HolderLookup.Provider p_334663_) {
-        super.loadAdditional(p_332191_, p_334663_);
+    public void load(CompoundTag tag) {
+        super.load(tag);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        if (!this.tryLoadLootTable(p_332191_)) {
-            ContainerHelper.loadAllItems(p_332191_, this.items, p_334663_);
+        if (!this.tryLoadLootTable(tag)) {
+            ContainerHelper.loadAllItems(tag, this.items);
         }
     }
 

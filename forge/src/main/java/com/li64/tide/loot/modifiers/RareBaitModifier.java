@@ -1,7 +1,7 @@
 package com.li64.tide.loot.modifiers;
 
 import com.li64.tide.Tide;
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.Codec;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -12,7 +12,7 @@ import net.minecraftforge.common.loot.LootModifier;
 import com.li64.tide.registries.TideItems;
 
 public class RareBaitModifier extends LootModifier {
-    public static final MapCodec<RareBaitModifier> CODEC = newCodec();
+    public static final Codec<RareBaitModifier> CODEC = newCodec();
 
     public RareBaitModifier() {
         super(new LootItemCondition[0]);
@@ -21,7 +21,7 @@ public class RareBaitModifier extends LootModifier {
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         if (generatedLoot.isEmpty()) return generatedLoot;
-        if (!(context.getQueriedLootTableId().toString().matches(BuiltInLootTables.BURIED_TREASURE.location().toString()))) return generatedLoot;
+        if (!(context.getQueriedLootTableId().toString().matches(BuiltInLootTables.BURIED_TREASURE.toString()))) return generatedLoot;
 
         for (int i = 0; i < context.getRandom().nextInt(1, 3); i++) {
             if (context.getRandom().nextInt(0, 4) == 0) {
@@ -39,12 +39,12 @@ public class RareBaitModifier extends LootModifier {
         return generatedLoot;
     }
 
-    public static MapCodec<RareBaitModifier> newCodec() {
-        return MapCodec.unit(RareBaitModifier::new);
+    public static Codec<RareBaitModifier> newCodec() {
+        return Codec.unit(RareBaitModifier::new);
     }
 
     @Override
-    public MapCodec<? extends IGlobalLootModifier> codec() {
+    public Codec<? extends IGlobalLootModifier> codec() {
         return CODEC;
     }
 }

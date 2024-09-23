@@ -3,12 +3,12 @@ package com.li64.tide.network.messages;
 import com.li64.tide.Tide;
 import com.li64.tide.client.gui.overlays.CatchMinigameOverlay;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class MinigameClientMsg implements CustomPacketPayload {
-    public static final Type<MinigameClientMsg> TYPE = new Type<>(Tide.resource("minigame_client"));
+public class MinigameClientMsg {
+    public static final ResourceLocation ID = Tide.resource("minigame_client");
 
     public final byte event;
     public final float data;
@@ -37,9 +37,7 @@ public class MinigameClientMsg implements CustomPacketPayload {
             case 0 -> CatchMinigameOverlay.start(message.data);
             case 1 -> CatchMinigameOverlay.interact();
             case 2 -> CatchMinigameOverlay.close();
+            default -> Tide.LOG.info("Unknown packet data received for fishing minigame!");
         }
     }
-
-    @Override
-    public @NotNull Type<? extends CustomPacketPayload> type() { return TYPE; }
 }

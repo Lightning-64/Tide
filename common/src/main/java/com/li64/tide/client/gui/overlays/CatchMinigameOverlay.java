@@ -5,7 +5,6 @@ import com.li64.tide.network.messages.MinigameServerMsg;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -106,8 +105,8 @@ public class CatchMinigameOverlay {
         return (fishStrength * 0.048f + DEFAULT_SPEED) * (float) Tide.CONFIG.general.minigameDifficulty;
     }
 
-    public static void render(GuiGraphics graphics, DeltaTracker deltaTracker) {
-        float delta = deltaTracker.getRealtimeDeltaTicks();
+    public static void render(GuiGraphics graphics, float partialTick) {
+        float delta = Minecraft.getInstance().getDeltaFrameTime();
 
         if (timer >= 20f) return;
         if (!active) timer += delta;
@@ -117,7 +116,6 @@ public class CatchMinigameOverlay {
 
             if (timeLeft >= 80f || HookAccessor.bobberRemoved(Minecraft.getInstance().player)) {
                 // Timeout
-                Tide.LOG.debug("Timeout!");
                 close();
                 Tide.NETWORK.sendToServer(new MinigameServerMsg(0));
             }
@@ -133,7 +131,6 @@ public class CatchMinigameOverlay {
 
         int markerX = (int) (x + Mth.sin(animProgress * getSpeed()) * (texWidth / 2f - 2));
 
-        RenderSystem.enableBlend();
         graphics.setColor(1f, 1f, 1f, alpha);
         graphics.blit(BAR_BG_TEX, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
         graphics.blit(MARKER_TEX, markerX, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
@@ -145,7 +142,7 @@ public class CatchMinigameOverlay {
                 accuracyText.getStyle().withColor(textColor)),
                 (graphics.guiWidth() - font.width(accuracyText)) / 2, y - 10,
                 0, false);
-        RenderSystem.disableBlend();
+
         graphics.setColor(1f, 1f, 1f, 1f);
     }
 }

@@ -1,0 +1,36 @@
+{
+  "criteria": {
+    "rod": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "c:tools/fishing_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "tide:textures/gui/advancements/backgrounds/prismarine.png",
+    "description": {
+      "translate": "advancements.tide.root.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "tide:angelfish"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.tide.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "rod"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

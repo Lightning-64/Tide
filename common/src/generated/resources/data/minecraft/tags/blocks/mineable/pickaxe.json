@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "tide:end_loot_crate",
+    "tide:obsidian_loot_crate"
+  ]
+}

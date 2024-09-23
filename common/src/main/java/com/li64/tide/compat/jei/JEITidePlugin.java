@@ -10,7 +10,6 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 
 import java.util.List;
@@ -31,10 +30,7 @@ public class JEITidePlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
 
-        List<RodUpgradingRecipe> recipes = recipeManager
-                .getAllRecipesFor(RodUpgradingRecipe.Type.INSTANCE)
-                .stream().map(RecipeHolder::value).toList();
-
+        List<RodUpgradingRecipe> recipes = recipeManager.getAllRecipesFor(RodUpgradingRecipe.Type.INSTANCE);
         registration.addRecipes(RodUpgradingCategory.RECIPE_TYPE, recipes);
     }
 

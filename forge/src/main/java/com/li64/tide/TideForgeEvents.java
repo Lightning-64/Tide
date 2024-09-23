@@ -4,6 +4,7 @@ import com.li64.tide.data.commands.JournalCommand;
 import com.li64.tide.data.player.TidePlayerData;
 import com.li64.tide.events.TideEventHandler;
 import com.li64.tide.registries.*;
+import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.li64.tide.registries.entities.util.AbstractTideFish;
 import com.li64.tide.registries.items.BaitItem;
 import com.li64.tide.util.TideUtils;
@@ -13,28 +14,32 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
+import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -62,7 +67,7 @@ public class TideForgeEvents {
         }
 
         public static <T extends AbstractTideFish> void tideFishSpawnRules(EntityType<T> entityType, SpawnPlacementRegisterEvent event) {
-            event.register(entityType, SpawnPlacementTypes.IN_WATER,
+            event.register(entityType, SpawnPlacements.Type.IN_WATER,
                     Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AbstractTideFish::canSpawn,
                     SpawnPlacementRegisterEvent.Operation.REPLACE);
         }
@@ -100,6 +105,11 @@ public class TideForgeEvents {
 
     @EventBusSubscriber(modid = Tide.MOD_ID, bus = EventBusSubscriber.Bus.FORGE)
     public static class Forge {
+        @SubscribeEvent
+        public static void onItemFished(ItemFishedEvent event) {
+            Tide.LOG.info("Received item fished event for ({})", event.getDrops().get(0));
+        }
+
         @SubscribeEvent
         public static void onDimensionChange(PlayerEvent.PlayerChangedDimensionEvent event) {
             if (event.getTo() == Level.NETHER) {
@@ -140,31 +150,31 @@ public class TideForgeEvents {
             if (event.getType() == VillagerProfession.FISHERMAN) {
                 Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
                 trades.get(1).add((trader, random) -> new MerchantOffer(
-                        new ItemCost(TideItems.TROUT, 8),
+                        new ItemStack(TideItems.TROUT, 8),
                         new ItemStack(Items.EMERALD, 1),
                         4,4,0.02F));
                 trades.get(1).add((trader, random) -> new MerchantOffer(
-                        new ItemCost(TideItems.TUNA, 8),
+                        new ItemStack(TideItems.TUNA, 8),
                         new ItemStack(Items.EMERALD, 1),
                         4,4,0.02F));
                 trades.get(1).add((trader, random) -> new MerchantOffer(
-                        new ItemCost(TideItems.BASS, 7),
+                        new ItemStack(TideItems.BASS, 7),
                         new ItemStack(Items.EMERALD, 1),
                         4,4,0.02F));
                 trades.get(1).add((trader, random) -> new MerchantOffer(
-                        new ItemCost(TideItems.MINT_CARP, 8),
+                        new ItemStack(TideItems.MINT_CARP, 8),
                         new ItemStack(Items.EMERALD, 1),
                         4,4,0.02F));
                 trades.get(2).add((trader, random) -> new MerchantOffer(
-                        new ItemCost(TideItems.BARRACUDA, 3),
+                        new ItemStack(TideItems.BARRACUDA, 3),
                         new ItemStack(Items.EMERALD, 1),
                         4,4,0.02F));
                 trades.get(2).add((trader, random) -> new MerchantOffer(
-                        new ItemCost(TideItems.SAILFISH, 3),
+                        new ItemStack(TideItems.SAILFISH, 3),
                         new ItemStack(Items.EMERALD, 1),
                         4,4,0.02F));
                 trades.get(2).add((trader, random) -> new MerchantOffer(
-                        new ItemCost(Items.TROPICAL_FISH, 9),
+                        new ItemStack(Items.TROPICAL_FISH, 9),
                         new ItemStack(Items.EMERALD, 1),
                         4,4, 0.02F));
             }

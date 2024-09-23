@@ -1,6 +1,8 @@
 package com.li64.tide;
 
 import com.li64.tide.client.gui.TideMenuTypes;
+import com.li64.tide.client.gui.overlays.CastBarOverlay;
+import com.li64.tide.client.gui.overlays.CatchMinigameOverlay;
 import com.li64.tide.client.gui.screens.AnglerWorkshopScreen;
 import com.li64.tide.registries.TideItems;
 import com.li64.tide.registries.items.TideFishingRodItem;
@@ -11,7 +13,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.FishingRodItem;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -45,5 +48,14 @@ public class TideForgeClient {
 
             MenuScreens.register(TideMenuTypes.ANGLER_WORKSHOP, AnglerWorkshopScreen::new);
         });
+    }
+
+    @SubscribeEvent
+    public static void registerOverlays(RegisterGuiOverlaysEvent event) {
+        Tide.LOG.info("Registering tide gui overlays");
+        event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "cast_overlay",
+                (forgeGui, gui, partialTick, width, height) -> CastBarOverlay.render(gui, partialTick));
+        event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "minigame_overlay",
+                (forgeGui, gui, partialTick, width, height) -> CatchMinigameOverlay.render(gui, partialTick));
     }
 }

@@ -1,0 +1,29 @@
+{
+  "parent": "tide:root",
+  "criteria": {
+    "pull_crate": {
+      "trigger": "tide:fish_crate"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.tide.fish_crate.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "tide:surface_loot_crate"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.tide.fish_crate.title"
+    }
+  },
+  "requirements": [
+    [
+      "pull_crate"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

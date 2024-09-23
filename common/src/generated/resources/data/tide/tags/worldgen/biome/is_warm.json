@@ -1,6 +1,7 @@
 {
+  "replace": false,
   "values": [
-    "#c:is_hot",
+    "#c:is_hot/overworld",
     "minecraft:deep_lukewarm_ocean",
     "minecraft:lukewarm_ocean"
   ]

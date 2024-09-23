@@ -19,16 +19,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 public class AlgaeBlock extends BushBlock {
-    public static final MapCodec<AlgaeBlock> CODEC = simpleCodec(AlgaeBlock::new);
     protected static final VoxelShape AABB = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 1.5D, 15.0D);
 
     public AlgaeBlock(Properties p_58162_) {
         super(p_58162_);
-    }
-
-    @Override
-    protected MapCodec<? extends BushBlock> codec() {
-        return CODEC;
     }
 
     public void entityInside(BlockState blockState, Level level, BlockPos pos, Entity entity) {

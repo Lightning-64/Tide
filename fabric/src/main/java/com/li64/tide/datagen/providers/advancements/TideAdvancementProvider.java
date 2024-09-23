@@ -3,55 +3,54 @@ package com.li64.tide.datagen.providers.advancements;
 import com.li64.tide.Tide;
 import com.li64.tide.data.TideCriteriaTriggers;
 import com.li64.tide.data.TideTags;
-import com.li64.tide.data.triggers.SupernaturalCatchTrigger;
 import com.li64.tide.data.triggers.TideSimpleTrigger;
 import com.li64.tide.registries.TideItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementHolder;
-import net.minecraft.advancements.AdvancementType;
+import net.minecraft.advancements.FrameType;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class TideAdvancementProvider extends FabricAdvancementProvider {
-    public TideAdvancementProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
-        super(output, registryLookup);
+    public TideAdvancementProvider(FabricDataOutput output) {
+        super(output);
     }
 
     @Override
-    public void generateAdvancement(HolderLookup.Provider registries, Consumer<AdvancementHolder> output) {
-        AdvancementHolder root = Advancement.Builder.advancement()
+    public void generateAdvancement(Consumer<Advancement> output) {
+        Advancement root = Advancement.Builder.advancement()
                 .display(
                         TideItems.ANGELFISH,
                         Component.translatable("advancements.tide.root.title"),
                         Component.translatable("advancements.tide.root.description"),
                         Tide.resource("textures/gui/advancements/backgrounds/prismarine.png"),
-                        AdvancementType.TASK,
+                        FrameType.TASK,
                         false,
                         false,
                         false
                 )
                 .addCriterion("rod", InventoryChangeTrigger.TriggerInstance.hasItems(
-                        ItemPredicate.Builder.item().of(ConventionalItemTags.FISHING_ROD_TOOLS).build()))
+                        ItemPredicate.Builder.item().of(conventionTag("tools/fishing_rod")).build()))
                 .save(output, Tide.resource("root").toString());
 
-        AdvancementHolder bait = Advancement.Builder.advancement()
+        Advancement bait = Advancement.Builder.advancement()
                 .parent(root)
                 .display(
                         TideItems.BAIT,
                         Component.translatable("advancements.tide.get_bait.title"),
                         Component.translatable("advancements.tide.get_bait.description"),
                         null,
-                        AdvancementType.TASK,
+                        FrameType.TASK,
                         true,
                         true,
                         false
@@ -59,24 +58,24 @@ public class TideAdvancementProvider extends FabricAdvancementProvider {
                 .addCriterion("bait_items", InventoryChangeTrigger.TriggerInstance.hasItems(
                         ItemPredicate.Builder.item().of(
                                 TideItems.BAIT, TideItems.MAGNETIC_BAIT, TideItems.LUCKY_BAIT
-                        )
+                        ).build()
                 ))
                 .save(output, Tide.resource("get_bait").toString());
 
-        AdvancementHolder page = Advancement.Builder.advancement()
+        Advancement page = Advancement.Builder.advancement()
                 .parent(root)
                 .display(
                         Items.FILLED_MAP,
                         Component.translatable("advancements.tide.finish_journal_page.title"),
                         Component.translatable("advancements.tide.finish_journal_page.description"),
                         null,
-                        AdvancementType.TASK,
+                        FrameType.TASK,
                         true,
                         true,
                         false
                 )
-                .addCriterion("finish_page", TideCriteriaTriggers.FINISH_PAGE.createCriterion(
-                        new TideSimpleTrigger.TriggerInstance(Optional.empty())))
+                .addCriterion("finish_page", new TideSimpleTrigger.TriggerInstance(
+                        TideCriteriaTriggers.FINISH_PAGE.getId(), ContextAwarePredicate.ANY))
                 .save(output, Tide.resource("finish_journal_page").toString());
 
         Advancement.Builder.advancement()
@@ -86,13 +85,13 @@ public class TideAdvancementProvider extends FabricAdvancementProvider {
                         Component.translatable("advancements.tide.fish_in_lava.title"),
                         Component.translatable("advancements.tide.fish_in_lava.description"),
                         null,
-                        AdvancementType.TASK,
+                        FrameType.TASK,
                         true,
                         true,
                         false
                 )
-                .addCriterion("lava_fish", TideCriteriaTriggers.FISHED_IN_LAVA.createCriterion(
-                        new TideSimpleTrigger.TriggerInstance(Optional.empty())))
+                .addCriterion("lava_fish", new TideSimpleTrigger.TriggerInstance(
+                        TideCriteriaTriggers.FISHED_IN_LAVA.getId(), ContextAwarePredicate.ANY))
                 .save(output, Tide.resource("fish_in_lava").toString());
 
         Advancement.Builder.advancement()
@@ -102,13 +101,13 @@ public class TideAdvancementProvider extends FabricAdvancementProvider {
                         Component.translatable("advancements.tide.fish_crate.title"),
                         Component.translatable("advancements.tide.fish_crate.description"),
                         null,
-                        AdvancementType.TASK,
+                        FrameType.TASK,
                         true,
                         true,
                         false
                 )
-                .addCriterion("pull_crate", TideCriteriaTriggers.FISHED_CRATE.createCriterion(
-                        new TideSimpleTrigger.TriggerInstance(Optional.empty())))
+                .addCriterion("pull_crate", new TideSimpleTrigger.TriggerInstance(
+                        TideCriteriaTriggers.FISHED_CRATE.getId(), ContextAwarePredicate.ANY))
                 .save(output, Tide.resource("fish_crate").toString());
 
         Advancement.Builder.advancement()
@@ -118,7 +117,7 @@ public class TideAdvancementProvider extends FabricAdvancementProvider {
                         Component.translatable("advancements.tide.all_fishing_rods.title"),
                         Component.translatable("advancements.tide.all_fishing_rods.description"),
                         null,
-                        AdvancementType.GOAL,
+                        FrameType.GOAL,
                         true,
                         true,
                         false
@@ -139,7 +138,7 @@ public class TideAdvancementProvider extends FabricAdvancementProvider {
                         Component.translatable("advancements.tide.all_biome_fish.title"),
                         Component.translatable("advancements.tide.all_biome_fish.description"),
                         null,
-                        AdvancementType.CHALLENGE,
+                        FrameType.CHALLENGE,
                         true,
                         true,
                         false
@@ -169,7 +168,7 @@ public class TideAdvancementProvider extends FabricAdvancementProvider {
                         Component.translatable("advancements.tide.catch_legendary.title"),
                         Component.translatable("advancements.tide.catch_legendary.description"),
                         null,
-                        AdvancementType.CHALLENGE,
+                        FrameType.CHALLENGE,
                         true,
                         true,
                         true
@@ -185,13 +184,17 @@ public class TideAdvancementProvider extends FabricAdvancementProvider {
                         Component.translatable("advancements.tide.journal_completed.title"),
                         Component.translatable("advancements.tide.journal_completed.description"),
                         null,
-                        AdvancementType.CHALLENGE,
+                        FrameType.CHALLENGE,
                         true,
                         true,
                         false
                 )
-                .addCriterion("completed", TideCriteriaTriggers.FINISH_JOURNAL.createCriterion(
-                        new TideSimpleTrigger.TriggerInstance(Optional.empty())))
+                .addCriterion("completed", new TideSimpleTrigger.TriggerInstance(
+                        TideCriteriaTriggers.FINISH_JOURNAL.getId(), ContextAwarePredicate.ANY))
                 .save(output, Tide.resource("journal_completed").toString());
+    }
+
+    public TagKey<Item> conventionTag(String name) {
+        return TagKey.create(Registries.ITEM, new ResourceLocation("c", name));
     }
 }

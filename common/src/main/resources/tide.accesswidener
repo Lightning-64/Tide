@@ -1,0 +1,7 @@
+accessWidener v1 named
+accessible class net/minecraft/world/inventory/MenuType$MenuSupplier
+accessible class net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier
+accessible method net/minecraft/world/entity/projectile/Projectile <init> (Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+extendable method net/minecraft/world/entity/Entity getX ()D
+extendable method net/minecraft/world/entity/Entity getY ()D
+extendable method net/minecraft/world/entity/Entity getZ ()D

@@ -290,8 +290,8 @@ public class TideItems {
     public static final Item SOULSCALER = register("soulscaler",
             new TideFishItem(new Item.Properties().food(TideFoods.AVERAGE_RAW_FISH).fireResistant(), 3.8f));
     public static final Item BLAZING_SWORDFISH = register("blazing_swordfish",
-            new BlazingSwordfishItem(TideTiers.BLAZING_FISH, new Item.Properties().fireResistant()
-                    .attributes(SwordItem.createAttributes(TideTiers.BLAZING_FISH, 3, -2.4F))));
+            new BlazingSwordfishItem(TideTiers.BLAZING_FISH, 3, -2.4F,
+                    new Item.Properties().fireResistant()));
 
     public static final Item MIDAS_FISH = register("midas_fish",
             new TideFishItem(new Item.Properties().fireResistant().rarity(Rarity.EPIC), 8.0f));
@@ -303,7 +303,7 @@ public class TideItems {
     public static final Item COOKED_FISH = register("cooked_fish",
             new TideFishItem(new Item.Properties().food(TideFoods.COOKED_FISH), 0));
     public static final Item FISH_STEW = register("fish_stew",
-            new Item(new Item.Properties().food(TideFoods.FISH_STEW).stacksTo(1)));
+            new BowlFoodItem(new Item.Properties().food(TideFoods.FISH_STEW).stacksTo(1)));
 
     public static final Item TROUT_SPAWN_EGG = register("trout_spawn_egg",
             new SpawnEggItem(TideEntityTypes.TROUT, 2580837, 7197881, new Item.Properties()));
@@ -347,6 +347,7 @@ public class TideItems {
         ITEMS.forEach(Tide.PLATFORM::registerItem);
     }
 
+
     public static void assignTags() {
         JOURNAL_FISH_LIST = ORDERED_ITEMS.stream().filter(item -> item instanceof TideFishItem)
                 .map((item) -> BuiltInRegistries.ITEM.getResourceKey(item).orElse(null)).toList();
@@ -359,7 +360,7 @@ public class TideItems {
     }
 
     public static ArrayList<Item> getItems() {
-        if (!ORDERED_ITEMS.contains(Items.FISHING_ROD)) ORDERED_ITEMS.addFirst(Items.FISHING_ROD);
+        if (!ORDERED_ITEMS.contains(Items.FISHING_ROD)) ORDERED_ITEMS.add(0, Items.FISHING_ROD);
         return ORDERED_ITEMS;
     }
 }

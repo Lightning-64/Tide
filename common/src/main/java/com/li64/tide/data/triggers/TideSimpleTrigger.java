@@ -1,27 +1,45 @@
 package com.li64.tide.data.triggers;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.advancements.critereon.ContextAwarePredicate;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import com.google.gson.JsonObject;
+import com.li64.tide.Tide;
+import net.minecraft.advancements.critereon.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Optional;
 
 public class TideSimpleTrigger extends SimpleCriterionTrigger<TideSimpleTrigger.TriggerInstance> {
-    public @NotNull Codec<TriggerInstance> codec() {
-        return TriggerInstance.CODEC;
+    final ResourceLocation id;
+
+    public TideSimpleTrigger(String idName) {
+        id = Tide.resource(idName);
+    }
+
+    public ResourceLocation getId() {
+        return id;
     }
 
     public void trigger(ServerPlayer player) {
-        this.trigger(player, trigger -> true);
+        this.trigger(player, instance -> true);
     }
 
-    public record TriggerInstance(Optional<ContextAwarePredicate> player) implements SimpleInstance {
-        public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(
-                builder -> builder.group(EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player")
-                        .forGetter(TriggerInstance::player)).apply(builder, TriggerInstance::new));
+    @Override
+    protected TriggerInstance createInstance(JsonObject json, ContextAwarePredicate predicate, DeserializationContext context) {
+        return new TriggerInstance(id, predicate);
+    }
+
+    public static class TriggerInstance extends AbstractCriterionTriggerInstance {
+        final ResourceLocation id;
+
+        public TriggerInstance(ResourceLocation id, ContextAwarePredicate context) {
+            super(id, context);
+            this.id = id;
+        }
+
+        public ResourceLocation getCriterion() {
+            return id;
+        }
+
+        public JsonObject serializeToJson(SerializationContext context) {
+            return new JsonObject();
+        }
     }
 }

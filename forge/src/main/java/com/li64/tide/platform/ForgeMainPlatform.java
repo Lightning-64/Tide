@@ -3,9 +3,9 @@ package com.li64.tide.platform;
 import com.li64.tide.TideForge;
 import com.li64.tide.compat.stardewfishing.StardewFishingCompat;
 import com.li64.tide.platform.services.TideMainPlatform;
-import net.minecraft.advancements.CriterionTrigger;
-import net.minecraft.core.component.DataComponentType;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -60,12 +60,7 @@ public class ForgeMainPlatform implements TideMainPlatform {
 
     @Override
     public void registerCriteriaTrigger(String key, CriterionTrigger<?> trigger) {
-        TideForge.TRIGGER_TYPES.register(key, () -> trigger);
-    }
-
-    @Override
-    public void registerComponentType(String key, DataComponentType<?> componentType) {
-        TideForge.DATA_COMPONENT_TYPES.register(key, () -> componentType);
+        CriteriaTriggers.register(trigger);
     }
 
     @Override

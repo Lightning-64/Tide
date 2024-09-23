@@ -113,7 +113,7 @@ public class TideFishingRodItem extends FishingRodItem {
     public void releaseUsing(ItemStack rod, Level level, LivingEntity user, int charge) {
         if (user instanceof Player player) {
 
-            int chargeDifference = this.getUseDuration(rod, user) - charge;
+            int chargeDifference = this.getUseDuration(rod) - charge;
 
             // Actually cast the hook
             if (chargeDifference > getChargeDuration(rod)) chargeDifference = getChargeDuration(rod);
@@ -137,8 +137,8 @@ public class TideFishingRodItem extends FishingRodItem {
             level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.FISHING_BOBBER_THROW,
                     SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
             if (!level.isClientSide) {
-                int speed = (int)(EnchantmentHelper.getFishingTimeReduction((ServerLevel) level, rod, player) / 5f);
-                int luck = EnchantmentHelper.getFishingLuckBonus((ServerLevel) level, rod, player);
+                int speed = EnchantmentHelper.getFishingSpeedBonus(rod);
+                int luck = EnchantmentHelper.getFishingLuckBonus(rod);
 
                 if (TideUtils.isHoldingBait(player)) {
                     speed += TideUtils.getBaitSpeed(TideUtils.getHeldBaitItem(player));
@@ -159,7 +159,7 @@ public class TideFishingRodItem extends FishingRodItem {
         if (activeHook != null) {
             if (!level.isClientSide) {
                 int durabilityLoss = activeHook.retrieve(rod, (ServerLevel) level, player);
-                rod.hurtAndBreak(durabilityLoss, player, LivingEntity.getSlotForHand(player.getUsedItemHand()));
+                rod.hurtAndBreak(durabilityLoss, player, (playerTemp) -> playerTemp.broadcastBreakEvent(player.getUsedItemHand()));
             }
 
             level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.FISHING_BOBBER_RETRIEVE,
@@ -173,7 +173,7 @@ public class TideFishingRodItem extends FishingRodItem {
         super.onUseTick(level, user, rod, charge);
 
         if (level.isClientSide() && user == Minecraft.getInstance().player) {
-            int chargeDifference = this.getUseDuration(rod, user) - charge;
+            int chargeDifference = this.getUseDuration(rod) - charge;
             if (chargeDifference > getChargeDuration(rod)) chargeDifference = getChargeDuration(rod);
 
             CastBarOverlay.rodChargeTick((float) chargeDifference / (float) getChargeDuration(rod));
@@ -181,7 +181,7 @@ public class TideFishingRodItem extends FishingRodItem {
     }
 
     @Override
-    public int getUseDuration(ItemStack stack, LivingEntity entity) {
+    public int getUseDuration(ItemStack stack) {
         return 60000;
     }
 
@@ -194,8 +194,8 @@ public class TideFishingRodItem extends FishingRodItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltip, flag);
+    public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, level, tooltip, flag);
 
         BobberModifier bobber = CustomRodManager.getBobber(stack);
         HookModifier hook = CustomRodManager.getHook(stack);

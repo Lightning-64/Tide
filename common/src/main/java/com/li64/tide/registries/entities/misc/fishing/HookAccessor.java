@@ -1,5 +1,6 @@
 package com.li64.tide.registries.entities.misc.fishing;
 
+import com.li64.tide.Tide;
 import com.li64.tide.registries.TideEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;

@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#tide:types/water_fishing",
+    "#tide:types/lava_fishing"
+  ]
+}

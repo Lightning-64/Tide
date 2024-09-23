@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class TideToasts {
-    private static final ResourceLocation TEXTURE = ResourceLocation.withDefaultNamespace("toast/recipe");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(ResourceLocation.DEFAULT_NAMESPACE, "toast/recipe");
 
     public static void display(Toast toast) {
         Minecraft.getInstance().getToasts().addToast(toast);
@@ -30,12 +30,12 @@ public class TideToasts {
         }
 
         @Override
-        public @NotNull Visibility render(GuiGraphics graphics, ToastComponent component, long time) {
-            graphics.blitSprite(TEXTURE, 0, 0, this.width(), this.height());
+        public Toast.@NotNull Visibility render(GuiGraphics graphics, ToastComponent component, long time) {
+            graphics.blit(TEXTURE, 0, 0, 0, 32, this.width(), this.height());
             graphics.drawString(component.getMinecraft().font, title, 30, 7, -11534256, false);
             graphics.drawString(component.getMinecraft().font, description, 30, 18, -16777216, false);
             graphics.renderFakeItem(displayedItem, 8, 8);
-            return (double)(time) >= 5000.0D * component.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
+            return (double)(time) >= 5000.0D * component.getNotificationDisplayTimeMultiplier() ? Toast.Visibility.HIDE : Toast.Visibility.SHOW;
         }
     }
 }

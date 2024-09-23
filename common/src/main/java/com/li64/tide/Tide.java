@@ -2,9 +2,13 @@ package com.li64.tide;
 
 import com.li64.tide.data.journal.JournalLayout;
 import com.li64.tide.config.TideConfig;
+import com.li64.tide.network.TideMessages;
 import com.li64.tide.platform.Services;
 import com.li64.tide.platform.services.TideMainPlatform;
 import com.li64.tide.platform.services.TideNetworkPlatform;
+import com.li64.tide.registries.TideEntityAttributes;
+import com.li64.tide.registries.TideLayerDefinitions;
+import com.li64.tide.registries.TideEntityRenderers;
 import com.li64.tide.registries.TideItems;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
@@ -30,11 +34,13 @@ public class Tide {
         CONFIG = AutoConfig.register(TideConfig.class, Toml4jConfigSerializer::new).getConfig();
         JOURNAL = new JournalLayout();
 
+        TideMessages.init(NETWORK);
+
         LOG.info("Initialized Tide mod on {}", PLATFORM.getPlatformName());
     }
 
     public static ResourceLocation resource(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+        return new ResourceLocation(MOD_ID, path);
     }
 
     public static CreativeModeTab.Builder getCreativeTab(CreativeModeTab.Builder builder) {

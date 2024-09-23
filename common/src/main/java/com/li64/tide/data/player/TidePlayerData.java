@@ -64,9 +64,7 @@ public class TidePlayerData {
     public void syncTo(ServerPlayer player) {
         CompoundTag playerData = Tide.PLATFORM.getPlayerData(player);
         playerData.put(NBT_TAG, serializeNBT());
-        if (player instanceof ServerPlayer serverPlayer) {
-            Tide.NETWORK.sendToPlayer(new SyncDataMsg(this), serverPlayer);
-        }
+        Tide.NETWORK.sendToPlayer(new SyncDataMsg(this), player);
     }
 
     public static ArrayList<Integer> fromIntArray(int[] array) {

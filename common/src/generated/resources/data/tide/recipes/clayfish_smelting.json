@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 150,
+  "experience": 1.0,
+  "ingredient": {
+    "item": "tide:clayfish"
+  },
+  "result": "tide:hardened_clayfish"
+}
