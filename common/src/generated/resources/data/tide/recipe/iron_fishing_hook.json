@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "c:nuggets/iron"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    }
+  },
+  "pattern": [
+    "  #",
+    "I I",
+    " I "
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:iron_fishing_hook"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "tide:rod_upgrading",
+  "input": {
+    "count": 1,
+    "id": "minecraft:fishing_rod"
+  },
+  "output": {
+    "count": 1,
+    "id": "minecraft:fishing_rod"
+  }
+}

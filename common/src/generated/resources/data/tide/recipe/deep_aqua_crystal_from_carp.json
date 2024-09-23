@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "tide:crystalline_carp"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:deep_aqua_crystal"
+  }
+}

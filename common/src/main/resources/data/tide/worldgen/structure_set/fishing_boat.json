@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "tide:fishing_boat",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 18264829386,
+    "spacing": 36,
+    "separation": 26,
+    "type": "minecraft:random_spread"
+  }
+}

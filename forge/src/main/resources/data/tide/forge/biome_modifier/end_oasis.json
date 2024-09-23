@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#tide:has_end_oasis",
+  "features": "tide:end_oasis",
+  "step": "lakes"
+}

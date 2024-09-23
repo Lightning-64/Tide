@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#c:is_birch_forest",
+    {
+      "id": "biomesoplenty:aspen_glade",
+      "required": false
+    }
+  ]
+}

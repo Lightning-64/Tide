@@ -1,0 +1,10 @@
+{
+   "type": "neoforge:add_spawns",
+   "biomes": "#tide:is_saltwater",
+   "spawners": {
+      "type": "tide:tuna",
+      "weight": 10,
+      "minCount": 2,
+      "maxCount": 3
+   }
+}

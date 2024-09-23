@@ -1,0 +1,14 @@
+{
+  "values": [
+    "minecraft:fishing_rod",
+    "#tide:customizable_rods",
+    {
+      "id": "#forge:tools/fishing_rods",
+      "required": false
+    },
+    {
+      "id": "#c:tools/fishing_rods",
+      "required": false
+    }
+  ]
+}

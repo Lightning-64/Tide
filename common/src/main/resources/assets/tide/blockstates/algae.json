@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "tide:block/algae"
+      },
+      {
+        "model": "tide:block/algae",
+        "y": 90
+      },
+      {
+        "model": "tide:block/algae",
+        "y": 180
+      },
+      {
+        "model": "tide:block/algae",
+        "y": 270
+      }
+    ]
+  }
+}

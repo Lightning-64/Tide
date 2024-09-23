@@ -1,0 +1,10 @@
+{
+   "type": "neoforge:add_spawns",
+   "biomes": "#tide:is_warm",
+   "spawners": {
+      "type": "tide:guppy",
+      "weight": 12,
+      "minCount": 3,
+      "maxCount": 5
+   }
+}

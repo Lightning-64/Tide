@@ -1,0 +1,124 @@
+{
+  "behaviors": {
+    "tide:trout": {
+      "idle_time": 12,
+      "top_speed": 1.8,
+      "up_acceleration": 0.7,
+      "down_acceleration": 0.7,
+      "avg_distance": 55,
+      "move_variation": 12
+    },
+    "tide:bass": {
+      "idle_time": 12,
+      "top_speed": 1.8,
+      "up_acceleration": 0.7,
+      "down_acceleration": 0.7,
+      "avg_distance": 55,
+      "move_variation": 12
+    },
+    "tide:yellow_perch": {
+      "idle_time": 12,
+      "top_speed": 1.8,
+      "up_acceleration": 0.7,
+      "down_acceleration": 0.7,
+      "avg_distance": 55,
+      "move_variation": 12
+    },
+    "tide:bluegill": {
+      "idle_time": 12,
+      "top_speed": 1.8,
+      "up_acceleration": 0.7,
+      "down_acceleration": 0.7,
+      "avg_distance": 55,
+      "move_variation": 12
+    },
+    "tide:mint_carp": {
+      "idle_time": 12,
+      "top_speed": 1.8,
+      "up_acceleration": 0.7,
+      "down_acceleration": 0.7,
+      "avg_distance": 55,
+      "move_variation": 12
+    },
+    "tide:pike": {
+      "idle_time": 12,
+      "top_speed": 1.8,
+      "up_acceleration": 0.7,
+      "down_acceleration": 0.7,
+      "avg_distance": 55,
+      "move_variation": 12
+    },
+    "tide:guppy": {
+      "idle_time": 12,
+      "top_speed": 1.8,
+      "up_acceleration": 0.7,
+      "down_acceleration": 0.7,
+      "avg_distance": 55,
+      "move_variation": 12
+    },
+    "tide:catfish": {
+      "idle_time": 12,
+      "top_speed": 1.8,
+      "up_acceleration": 0.7,
+      "down_acceleration": 0.7,
+      "avg_distance": 55,
+      "move_variation": 12
+    },
+    "tide:clayfish": {
+      "idle_time": 12,
+      "top_speed": 3.0,
+      "up_acceleration": 0.5,
+      "down_acceleration": 0.5,
+      "avg_distance": 55,
+      "move_variation": 15
+    },
+    "tide:tuna": {
+      "idle_time": 12,
+      "top_speed": 2.5,
+      "up_acceleration": 0.7,
+      "down_acceleration": 0.7,
+      "avg_distance": 55,
+      "move_variation": 12
+    },
+    "tide:ocean_perch": {
+      "idle_time": 12,
+      "top_speed": 2.5,
+      "up_acceleration": 0.7,
+      "down_acceleration": 0.7,
+      "avg_distance": 55,
+      "move_variation": 12
+    },
+    "tide:mackerel": {
+      "idle_time": 12,
+      "top_speed": 3.0,
+      "up_acceleration": 0.7,
+      "down_acceleration": 0.7,
+      "avg_distance": 55,
+      "move_variation": 12
+    },
+    "tide:angelfish": {
+      "idle_time": 12,
+      "top_speed": 4.0,
+      "up_acceleration": 0.7,
+      "down_acceleration": 0.7,
+      "avg_distance": 55,
+      "move_variation": 12
+    },
+    "tide:barracuda": {
+      "idle_time": 12,
+      "top_speed": 4.0,
+      "up_acceleration": 0.9,
+      "down_acceleration": 0.9,
+      "avg_distance": 55,
+      "move_variation": 12
+    },
+    "tide:sailfish": {
+      "idle_time": 12,
+      "top_speed": 4.0,
+      "up_acceleration": 0.9,
+      "down_acceleration": 0.9,
+      "avg_distance": 55,
+      "move_variation": 12
+    }
+  }
+}

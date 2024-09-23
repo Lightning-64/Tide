@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "tag": "c:ingots/gold"
+  },
+  "base": [
+    {
+      "item": "minecraft:fishing_rod"
+    },
+    {
+      "item": "tide:stone_fishing_rod"
+    },
+    {
+      "item": "tide:iron_fishing_rod"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:golden_fishing_rod"
+  },
+  "template": {
+    "tag": "c:strings"
+  }
+}

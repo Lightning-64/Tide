@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "open=false": {
+      "model": "tide:block/obsidian_loot_crate"
+    },
+    "open=true": {
+      "model": "tide:block/obsidian_loot_crate_open"
+    }
+  }
+}

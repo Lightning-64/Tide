@@ -1,0 +1,12 @@
+// 1.21	2024-09-15T13:52:55.4376115	Tide/minecraft:chest Loot Table
+7aa5bfe3d8c4ec4d806743d891a1fb9a9e4ce232 data\tide\loot_table\gameplay\fishing\crates\end\lava.json
+afa2a24a9138191f03402cef37a2c871c5f06f47 data\tide\loot_table\gameplay\fishing\crates\overworld\water_underground.json
+0581fde30b6dfeeefd116735c1fe6c052339e203 data\tide\loot_table\gameplay\fishing\crates\nether\lava.json
+f5ae89824fafd63f5bfedb80893e9ee646bdd2cb data\tide\loot_table\gameplay\fishing\crates\overworld\lava_surface.json
+6813bfcd6324427372ba7868f723afe2d8f789d6 data\tide\loot_table\gameplay\fishing\crates\overworld\water_river.json
+17e517490053c3e5557ee375300811267d45b261 data\tide\loot_table\chests\fishing_boat.json
+5d993a211b98c44a3d47307455de91e4efeced65 data\tide\loot_table\gameplay\fishing\crates\overworld\water_deep.json
+e64f92c6c1caac322271e6042c9f47ff86483559 data\tide\loot_table\gameplay\fishing\crates\overworld\water_ocean.json
+86960f0e0c73ce76cfbd2d62c06ac1bee52cbaad data\tide\loot_table\gameplay\fishing\crates\overworld\lava_underground.json
+ddb6a09278e87847471e384c0ebf7be52ebae622 data\tide\loot_table\gameplay\fishing\crates\end\water.json
+f401717e8611b2ef7b860a89927f9cf26a431ce8 data\tide\loot_table\gameplay\fishing\crates\overworld\lava_deep.json

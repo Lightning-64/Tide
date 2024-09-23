@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "tide:obsidian_fragment"
+    },
+    {
+      "item": "tide:obsidian_fragment"
+    },
+    {
+      "item": "tide:obsidian_fragment"
+    },
+    {
+      "item": "tide:obsidian_fragment"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:obsidian"
+  }
+}

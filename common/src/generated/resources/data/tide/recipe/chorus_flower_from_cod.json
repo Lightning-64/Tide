@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "tide:chorus_cod"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:chorus_flower"
+  }
+}

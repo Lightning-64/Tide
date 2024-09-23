@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "c:cobblestones"
+    },
+    "S": {
+      "tag": "c:strings"
+    }
+  },
+  "pattern": [
+    "  #",
+    " #S",
+    "# S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:stone_fishing_rod"
+  }
+}

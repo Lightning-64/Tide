@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "entries": [
+    "tide:fishing_junk",
+    "tide:bait_common",
+    "tide:bait_uncommon",
+    "tide:bait_rare",
+    "tide:note_in_crates"
+  ]
+}

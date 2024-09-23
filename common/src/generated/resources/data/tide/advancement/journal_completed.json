@@ -1,0 +1,27 @@
+{
+  "parent": "tide:finish_journal_page",
+  "criteria": {
+    "completed": {
+      "trigger": "tide:finish_journal"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.tide.journal_completed.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "tide:fishing_journal"
+    },
+    "title": {
+      "translate": "advancements.tide.journal_completed.title"
+    }
+  },
+  "requirements": [
+    [
+      "completed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

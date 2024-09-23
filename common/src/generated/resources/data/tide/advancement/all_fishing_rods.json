@@ -1,0 +1,112 @@
+{
+  "parent": "tide:root",
+  "criteria": {
+    "crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tide:crystal_fishing_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "diamond": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tide:diamond_fishing_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "golden": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tide:golden_fishing_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "iron": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tide:iron_fishing_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "netherite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tide:netherite_fishing_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tide:stone_fishing_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:fishing_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.tide.all_fishing_rods.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "tide:crystal_fishing_rod"
+    },
+    "title": {
+      "translate": "advancements.tide.all_fishing_rods.title"
+    }
+  },
+  "requirements": [
+    [
+      "wood"
+    ],
+    [
+      "stone"
+    ],
+    [
+      "iron"
+    ],
+    [
+      "golden"
+    ],
+    [
+      "crystal"
+    ],
+    [
+      "diamond"
+    ],
+    [
+      "netherite"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

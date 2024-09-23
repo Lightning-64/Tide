@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_torch_wall",
+  "textures": {
+    "torch": "tide:block/jelly_torch"
+  },
+  "render_type": "cutout"
+}

@@ -1,0 +1,20 @@
+{
+   "journal_open": {
+      "subtitle": "sounds.tide.journal_open",
+      "sounds": [
+         "tide:journal_open"
+      ]
+   },
+   "journal_close": {
+      "subtitle": "sounds.tide.journal_close",
+      "sounds": [
+         "tide:journal_close"
+      ]
+   },
+   "page_flip": {
+      "subtitle": "sounds.tide.page_flip",
+      "sounds": [
+         "tide:page_flip"
+      ]
+   }
+}

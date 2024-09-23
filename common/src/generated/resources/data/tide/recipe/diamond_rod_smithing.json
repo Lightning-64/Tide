@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "tag": "c:gems/diamond"
+  },
+  "base": [
+    {
+      "item": "minecraft:fishing_rod"
+    },
+    {
+      "item": "tide:stone_fishing_rod"
+    },
+    {
+      "item": "tide:iron_fishing_rod"
+    },
+    {
+      "item": "tide:golden_fishing_rod"
+    },
+    {
+      "item": "tide:crystal_fishing_rod"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:diamond_fishing_rod"
+  },
+  "template": {
+    "tag": "c:strings"
+  }
+}

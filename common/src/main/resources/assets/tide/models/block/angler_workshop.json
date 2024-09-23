@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "tide:block/surface_loot_crate_bottom",
+    "side": "tide:block/angler_workshop_side",
+    "top": "tide:block/angler_workshop_top"
+  }
+}

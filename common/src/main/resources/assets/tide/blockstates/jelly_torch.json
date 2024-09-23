@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tide:block/jelly_torch"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "parent": "tide:root",
+  "criteria": {
+    "bait_items": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tide:bait",
+              "tide:magnetic_bait",
+              "tide:lucky_bait"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.tide.get_bait.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "tide:bait"
+    },
+    "title": {
+      "translate": "advancements.tide.get_bait.title"
+    }
+  },
+  "requirements": [
+    [
+      "bait_items"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

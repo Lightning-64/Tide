@@ -1,0 +1,31 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "fish": {
+      "conditions": {
+        "item": {
+          "tag": "minecraft:fishes"
+        }
+      },
+      "trigger": "minecraft:fishing_rod_hooked"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.husbandry.fishy_business.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:fishing_rod"
+    },
+    "title": {
+      "translate": "advancements.husbandry.fishy_business.title"
+    }
+  },
+  "requirements": [
+    [
+      "fish"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

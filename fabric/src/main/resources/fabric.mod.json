@@ -1,0 +1,49 @@
+{
+    "schemaVersion": 1,
+    "id": "${mod_id}",
+    "version": "${version}",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
+    ],
+    "contact": {
+        "homepage": "https://www.curseforge.com/minecraft/mc-mods/tide",
+        "sources": "https://www.curseforge.com/minecraft/mc-mods/tide/files"
+    },
+    "license": "${license}",
+    "icon": "${mod_id}.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "com.li64.tide.TideFabric"
+        ],
+        "client": [
+            "com.li64.tide.TideFabricClient"
+        ],
+        "modmenu": [
+            "com.li64.tide.compat.modmenu.ModMenuCompat"
+        ],
+        "fabric-datagen": [
+            "com.li64.tide.datagen.TideDataGenerator"
+        ],
+        "jei_mod_plugin": [
+            "com.li64.tide.compat.jei.JEITidePlugin"
+        ]
+    },
+    "mixins": [
+        "${mod_id}.mixins.json",
+        "${mod_id}.fabric.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=${fabric_loader_version}",
+        "fabric-api": "*",
+        "minecraft": ">=${minecraft_version}",
+        "java": ">=${java_version}"
+    },
+    "suggests": {
+        "another-mod": "*"
+    },
+    "accessWidener": "${mod_id}.accesswidener"
+}
+  

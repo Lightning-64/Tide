@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "tide:purpur_pike"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "id": "minecraft:popped_chorus_fruit"
+  }
+}

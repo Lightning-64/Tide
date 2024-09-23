@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#c:is_savanna",
+    {
+      "id": "biomesoplenty:lush_savanna",
+      "required": false
+    }
+  ]
+}

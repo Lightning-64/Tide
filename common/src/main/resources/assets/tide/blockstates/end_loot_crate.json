@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "open=false": {
+      "model": "tide:block/end_loot_crate"
+    },
+    "open=true": {
+      "model": "tide:block/end_loot_crate"
+    }
+  }
+}

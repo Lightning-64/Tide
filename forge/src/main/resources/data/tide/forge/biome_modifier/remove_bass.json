@@ -1,0 +1,5 @@
+{
+   "type": "forge:remove_spawns",
+   "biomes": "#tide:is_cold",
+   "entity_types": "tide:bass"
+}

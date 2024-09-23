@@ -1,0 +1,35 @@
+{
+  "parent": "tide:get_bait",
+  "criteria": {
+    "catch": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#tide:legendary_fish"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.tide.catch_legendary.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "tide:midas_fish"
+    },
+    "title": {
+      "translate": "advancements.tide.catch_legendary.title"
+    }
+  },
+  "requirements": [
+    [
+      "catch"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

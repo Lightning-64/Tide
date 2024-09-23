@@ -1,0 +1,16 @@
+// 1.21	2024-09-15T13:52:55.4416358	Tide/minecraft:entity Loot Table
+2c0d1178c7588c7a8cba86b31e6025b304593a61 data\tide\loot_table\entities\mackerel.json
+15c4b458b7dbc0fce1e84636a654220709292cc4 data\tide\loot_table\entities\barracuda.json
+311a80c7bb729f9942a67e1087621ad81c6631a2 data\tide\loot_table\entities\guppy.json
+69f694d5f20af405de8f1afbfde3d909af9d98cf data\tide\loot_table\entities\mint_carp.json
+dccd10ef756b36312ee1a761abd69754b6701ac7 data\tide\loot_table\entities\yellow_perch.json
+faad0210e48e508cca519947e401aa247aeccf61 data\tide\loot_table\entities\clayfish.json
+1979727fe07c8182d294b35367af22619954fde0 data\tide\loot_table\entities\bluegill.json
+b4b1ca71e1c1c2badf8ec5fecd2994c369fd8fcd data\tide\loot_table\entities\bass.json
+9f0438c882ebde18ef635fd9beb86c8ce8bf49c8 data\tide\loot_table\entities\pike.json
+703e08fd31e5004089d96792e2675b8214684c5b data\tide\loot_table\entities\sailfish.json
+d6a32fa79c804d5ece7db93bf5441b56d38ce5d2 data\tide\loot_table\entities\trout.json
+937c4c69c757ff988a80631719c9e80f06d2989f data\tide\loot_table\entities\angelfish.json
+8302d3d855ad7590543d706045968aa0c89003b2 data\tide\loot_table\entities\tuna.json
+6802fb7f2aebab8ed227e1ed931c90d0bf417afa data\tide\loot_table\entities\catfish.json
+6d2c40c3395439b32af98d13bba3851284073ccb data\tide\loot_table\entities\ocean_perch.json

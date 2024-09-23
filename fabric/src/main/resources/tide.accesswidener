@@ -1,0 +1,4 @@
+accessWidener v1 named
+extendable method net/minecraft/world/entity/Entity getX ()D
+extendable method net/minecraft/world/entity/Entity getY ()D
+extendable method net/minecraft/world/entity/Entity getZ ()D

@@ -1,0 +1,5 @@
+{
+   "type": "neoforge:remove_spawns",
+   "biomes": "#tide:is_saltwater",
+   "entity_types": "#tide:freshwater_fish"
+}
