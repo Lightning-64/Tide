@@ -33,6 +33,30 @@
           "type": "minecraft:item",
           "name": "minecraft:magma_block",
           "weight": 35
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "chance": 0.5,
+              "condition": "minecraft:random_chance"
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 20.0,
+              "treasure": false
+            }
+          ],
+          "name": "minecraft:book",
+          "quality": 5,
+          "weight": 6
         }
       ],
       "rolls": {

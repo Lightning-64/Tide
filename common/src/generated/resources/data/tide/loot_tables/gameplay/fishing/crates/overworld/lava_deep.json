@@ -40,6 +40,24 @@
           "name": "minecraft:diamond",
           "quality": 2,
           "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 30.0,
+              "treasure": false
+            }
+          ],
+          "name": "minecraft:book",
+          "quality": 5,
+          "weight": 6
         }
       ],
       "rolls": {

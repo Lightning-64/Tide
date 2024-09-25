@@ -156,6 +156,10 @@ public class TideFishingHook extends Projectile {
         return level().getBiome(blockPosition());
     }
 
+    public boolean isOpenWaterFishing() {
+        return this.openWater;
+    }
+
     public enum CatchType {
         FISH, CRATE,
         ITEM, NOTHING
@@ -589,7 +593,8 @@ public class TideFishingHook extends Projectile {
                         LootParams lootParams = (new LootParams.Builder((ServerLevel) this.level()))
                                 .withParameter(LootContextParams.ORIGIN, this.position())
                                 .withParameter(LootContextParams.TOOL, stack)
-                                .withParameter(LootContextParams.THIS_ENTITY, this.getPlayerOwner())
+                                .withParameter(LootContextParams.THIS_ENTITY, this)
+                                .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, this.getPlayerOwner())
                                 .withLuck(luck + player.getLuck())
                                 .create(LootContextParamSets.FISHING);
 
@@ -651,7 +656,8 @@ public class TideFishingHook extends Projectile {
             LootParams lootparams = (new LootParams.Builder((ServerLevel) this.level()))
                     .withParameter(LootContextParams.ORIGIN, this.position())
                     .withParameter(LootContextParams.TOOL, rod)
-                    .withParameter(LootContextParams.THIS_ENTITY, this.getPlayerOwner())
+                    .withParameter(LootContextParams.THIS_ENTITY, this)
+                    .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, this.getPlayerOwner())
                     .withLuck(luck + player.getLuck())
                     .create(LootContextParamSets.FISHING);
 

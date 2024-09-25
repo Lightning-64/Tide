@@ -1,16 +1,16 @@
-// 1.20.1	2024-09-15T13:43:16.5780697	Tide/minecraft:entity Loot Table
-1e4028adfc92036e776b11052f1f47302ff461f3 data\tide\loot_tables\entities\sailfish.json
-cbc44a51477c1b22eedbe6f307f5ca6ace212f57 data\tide\loot_tables\entities\angelfish.json
-f5c5a245eddddf0a7e066536d9040d930d6a09f3 data\tide\loot_tables\entities\guppy.json
-e8bec37d46875d4ad1dfcae13399291a62a8dc72 data\tide\loot_tables\entities\bluegill.json
-66eb09824b838a3ffe3542b77ade7de1fc891c8c data\tide\loot_tables\entities\mackerel.json
-b88af585f8593fc33cfeea4cc59ad2823a5add55 data\tide\loot_tables\entities\barracuda.json
-3c97473e526f37bf552457c5c2e0514a808edc5d data\tide\loot_tables\entities\ocean_perch.json
-4fece0c39c120c62e1d01acea028ae8a7160903b data\tide\loot_tables\entities\tuna.json
+// 1.20.1	2024-09-25T08:43:55.9956174	Tide/minecraft:entity Loot Table
 c9ac706b4d2b667b6e1afb3ad5ba10da4342557a data\tide\loot_tables\entities\trout.json
+b88af585f8593fc33cfeea4cc59ad2823a5add55 data\tide\loot_tables\entities\barracuda.json
 766eecb4e3c4b33d4872e0955e391afa2ea6847a data\tide\loot_tables\entities\pike.json
-af66d2081c3ecdebed905d8eba35f8e5080a7fb1 data\tide\loot_tables\entities\catfish.json
-6b582c0c14f490dab7609af6cf8532280eac7e6a data\tide\loot_tables\entities\bass.json
 e8a2e6698ccf0d63dc4cdcba61aa24eb05b5d05c data\tide\loot_tables\entities\clayfish.json
+66eb09824b838a3ffe3542b77ade7de1fc891c8c data\tide\loot_tables\entities\mackerel.json
+1e4028adfc92036e776b11052f1f47302ff461f3 data\tide\loot_tables\entities\sailfish.json
+4fece0c39c120c62e1d01acea028ae8a7160903b data\tide\loot_tables\entities\tuna.json
+cbc44a51477c1b22eedbe6f307f5ca6ace212f57 data\tide\loot_tables\entities\angelfish.json
+e8bec37d46875d4ad1dfcae13399291a62a8dc72 data\tide\loot_tables\entities\bluegill.json
+3c97473e526f37bf552457c5c2e0514a808edc5d data\tide\loot_tables\entities\ocean_perch.json
+6b582c0c14f490dab7609af6cf8532280eac7e6a data\tide\loot_tables\entities\bass.json
+f5c5a245eddddf0a7e066536d9040d930d6a09f3 data\tide\loot_tables\entities\guppy.json
 b5f2fa86be481f59e903e55b04a6cbfbbe4a4657 data\tide\loot_tables\entities\mint_carp.json
+af66d2081c3ecdebed905d8eba35f8e5080a7fb1 data\tide\loot_tables\entities\catfish.json
 05fd095d715b80b44cc8b8c1b63d5fd1cebeacff data\tide\loot_tables\entities\yellow_perch.json

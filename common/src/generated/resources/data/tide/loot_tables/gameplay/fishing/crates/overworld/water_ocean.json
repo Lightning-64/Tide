@@ -65,6 +65,30 @@
           "name": "minecraft:fishing_rod",
           "quality": 3,
           "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "chance": 0.5,
+              "condition": "minecraft:random_chance"
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 24.0,
+              "treasure": false
+            }
+          ],
+          "name": "minecraft:book",
+          "quality": 5,
+          "weight": 6
         }
       ],
       "rolls": {

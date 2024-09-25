@@ -34,6 +34,9 @@ public final class TideConfig implements ConfigData {
         public boolean showUnread = true;
 
         @ConfigEntry.Gui.Tooltip
+        public boolean showToasts = true;
+
+        @ConfigEntry.Gui.Tooltip
         public double minigameDifficulty = 1.0;
 
         @ConfigEntry.Gui.Tooltip

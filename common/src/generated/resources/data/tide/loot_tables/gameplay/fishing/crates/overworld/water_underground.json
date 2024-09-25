@@ -93,6 +93,30 @@
           "name": "minecraft:stone_pickaxe",
           "quality": 1,
           "weight": 9
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "chance": 0.8,
+              "condition": "minecraft:random_chance"
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 28.0,
+              "treasure": false
+            }
+          ],
+          "name": "minecraft:book",
+          "quality": 5,
+          "weight": 6
         }
       ],
       "rolls": {
