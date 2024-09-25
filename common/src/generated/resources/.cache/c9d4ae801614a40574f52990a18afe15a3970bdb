@@ -1,4 +1,4 @@
-// 1.21	2024-09-15T13:52:55.4428441	Tide/Tide Block Tags
-38225b28fba3a5e866c8e5a82f09178cef720a66 data\minecraft\tags\block\mineable\pickaxe.json
-e03211d6e4f5cc94bfb480130cf9773936c13136 data\minecraft\tags\block\mineable\axe.json
+// 1.21	2024-09-25T21:15:47.8746526	Tide/Tide Block Tags
 ce75b8abd2b410505d94ba517b6388be40cd5fcb data\minecraft\tags\block\needs_diamond_tool.json
+e03211d6e4f5cc94bfb480130cf9773936c13136 data\minecraft\tags\block\mineable\axe.json
+38225b28fba3a5e866c8e5a82f09178cef720a66 data\minecraft\tags\block\mineable\pickaxe.json

@@ -49,8 +49,32 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:netherite_scrap",
-          "quality": 2,
+          "quality": 3,
           "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "chance": 0.5,
+              "condition": "minecraft:random_chance"
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 30.0,
+              "options": "#minecraft:on_random_loot"
+            }
+          ],
+          "name": "minecraft:book",
+          "quality": 2,
+          "weight": 4
         }
       ],
       "rolls": {

@@ -72,6 +72,10 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                         .add(LootItem.lootTableItem(Items.SAND).setWeight(12)
                                 .apply(SetItemCountFunction.setCount(
                                         UniformGenerator.between(5, 20))))
+                        .add(LootItem.lootTableItem(Items.BOOK).setWeight(6).setQuality(5)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                                    .when(LootItemRandomChanceCondition.randomChance(0.5f))
+                                .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(15))))
                 )
         );
 
@@ -90,6 +94,10 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                         .add(LootItem.lootTableItem(Items.FISHING_ROD).setWeight(4).setQuality(3)
                                 .apply(SetItemDamageFunction.setDamage(
                                         UniformGenerator.between(0.4f, 1.0f))))
+                        .add(LootItem.lootTableItem(Items.BOOK).setWeight(6).setQuality(5)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                                    .when(LootItemRandomChanceCondition.randomChance(0.5f))
+                                .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(24))))
                 )
         );
 
@@ -112,6 +120,10 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                                 .apply(SetItemDamageFunction.setDamage(
                                         UniformGenerator.between(0.1f, 1.0f)))
                                 .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, UniformGenerator.between(8, 10))))
+                        .add(LootItem.lootTableItem(Items.BOOK).setWeight(6).setQuality(5)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                                    .when(LootItemRandomChanceCondition.randomChance(0.8f))
+                                .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(28))))
                 )
         );
 
@@ -136,6 +148,9 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                                 .apply(EnchantWithLevelsFunction.enchantWithLevels(registries,
                                                 UniformGenerator.between(20, 30))
                                         .when(LootItemRandomChanceCondition.randomChance(0.8f))))
+                        .add(LootItem.lootTableItem(Items.BOOK).setWeight(6).setQuality(5)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                                .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(30))))
                 )
         );
 
@@ -149,7 +164,10 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                         .add(LootItem.lootTableItem(Items.OBSIDIAN).setWeight(50))
                         .add(LootItem.lootTableItem(TideItems.OBSIDIAN_FRAGMENT).setWeight(50))
                         .add(LootItem.lootTableItem(Items.MAGMA_BLOCK).setWeight(35))
-
+                        .add(LootItem.lootTableItem(Items.BOOK).setWeight(6).setQuality(5)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                                    .when(LootItemRandomChanceCondition.randomChance(0.5f))
+                                .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(20))))
                 )
         );
 
@@ -165,7 +183,10 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                         .add(LootItem.lootTableItem(Items.MAGMA_BLOCK).setWeight(20))
                         .add(LootItem.lootTableItem(Items.GOLD_INGOT).setWeight(10).setQuality(1))
                         .add(LootItem.lootTableItem(Items.DIAMOND).setWeight(8).setQuality(2))
-
+                        .add(LootItem.lootTableItem(Items.BOOK).setWeight(6).setQuality(5)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                                    .when(LootItemRandomChanceCondition.randomChance(0.6f))
+                                .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(30))))
                 )
         );
 
@@ -180,7 +201,9 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                         .add(LootItem.lootTableItem(Items.COPPER_INGOT).setWeight(35))
                         .add(LootItem.lootTableItem(Items.GOLD_INGOT).setWeight(20).setQuality(1))
                         .add(LootItem.lootTableItem(Items.DIAMOND).setWeight(20).setQuality(2))
-
+                        .add(LootItem.lootTableItem(Items.BOOK).setWeight(6).setQuality(5)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                                .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(30))))
                 )
         );
 
@@ -196,7 +219,11 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                         .add(LootItem.lootTableItem(Items.MAGMA_CREAM).setWeight(35))
                         .add(LootItem.lootTableItem(Items.GOLD_INGOT).setWeight(20).setQuality(1))
                         .add(LootItem.lootTableItem(Items.GOLD_BLOCK).setWeight(8).setQuality(2))
-                        .add(LootItem.lootTableItem(Items.NETHERITE_SCRAP).setWeight(6).setQuality(2))
+                        .add(LootItem.lootTableItem(Items.NETHERITE_SCRAP).setWeight(6).setQuality(3))
+                        .add(LootItem.lootTableItem(Items.BOOK).setWeight(4).setQuality(2)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                                    .when(LootItemRandomChanceCondition.randomChance(0.5f))
+                                .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(30))))
                 )
         );
 
