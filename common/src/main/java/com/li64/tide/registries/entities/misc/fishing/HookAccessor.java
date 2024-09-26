@@ -42,6 +42,11 @@ public class HookAccessor extends FishingHook {
     }
 
     @Override
+    public boolean isOpenWaterFishing() {
+        return hook.isOpenWaterFishing();
+    }
+
+    @Override
     public double getX() {
         return hook.getX();
     }

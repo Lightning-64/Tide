@@ -10,6 +10,8 @@
   "text.autoconfig.tide.option.general.doMinigame.@Tooltip": "Turn this setting off to disable the fishing mingame.",
   "text.autoconfig.tide.option.general.showUnread": "Alert Unread Profiles",
   "text.autoconfig.tide.option.general.showUnread.@Tooltip": "Turn this off to disable the alerts for when a profile is unread in the journal",
+  "text.autoconfig.tide.option.general.showToasts": "Show New Fish Toasts",
+  "text.autoconfig.tide.option.general.showToasts.@Tooltip": "Turn this off to disable the notifications (toasts) that appear when a new fish is obtained",
   "text.autoconfig.tide.option.general.minigameDifficulty": "Minigame Difficulty",
   "text.autoconfig.tide.option.general.minigameDifficulty.@Tooltip": "A multiplier that increases or decreases the speed of the minigame.\nFor example, 0.5 would be twice as easy, while 2.0 would be twice as difficult",
   "text.autoconfig.tide.option.general.rodDurabilityMultiplier": "Rod Durability Multiplier",
