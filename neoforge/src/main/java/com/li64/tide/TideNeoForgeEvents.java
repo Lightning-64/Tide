@@ -32,6 +32,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
@@ -110,6 +111,11 @@ public class TideNeoForgeEvents {
 
     @EventBusSubscriber(modid = Tide.MOD_ID)
     public static class Game {
+        @SubscribeEvent
+        public static void onServerReloadListeners(AddReloadListenerEvent event) {
+            Tide.onRegisterReloadListeners((id, listener) -> event.addListener(listener));
+        }
+
         @SubscribeEvent
         public static void onDimensionChange(PlayerEvent.PlayerChangedDimensionEvent event) {
             if (event.getTo() == Level.NETHER) {

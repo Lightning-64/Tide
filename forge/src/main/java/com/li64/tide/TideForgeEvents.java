@@ -26,6 +26,7 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -100,6 +101,11 @@ public class TideForgeEvents {
 
     @EventBusSubscriber(modid = Tide.MOD_ID, bus = EventBusSubscriber.Bus.FORGE)
     public static class Forge {
+        @SubscribeEvent
+        public static void onServerReloadListeners(AddReloadListenerEvent event) {
+            Tide.onRegisterReloadListeners((id, listener) -> event.addListener(listener));
+        }
+
         @SubscribeEvent
         public static void onDimensionChange(PlayerEvent.PlayerChangedDimensionEvent event) {
             if (event.getTo() == Level.NETHER) {

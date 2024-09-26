@@ -2,7 +2,8 @@ package com.li64.tide.data.journal;
 
 import com.li64.tide.Tide;
 import com.li64.tide.util.TideUtils;
-import net.minecraft.world.item.Item;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -217,7 +218,7 @@ public class JournalLayout {
     }
 
     private void addProfile(String fish, String desc, String page, String location, String climate) {
-        profiles.add(new Profile(fish, desc, page, "profile.info.location." + location, "profile.info.climate." + climate));
+        profiles.add(new Profile(fish, desc, page, location, climate));
     }
 
     public List<Page> getPageConfigs() {
@@ -228,9 +229,33 @@ public class JournalLayout {
         return profiles;
     }
 
-    public record Page(String id, String name, String content, String icon, boolean unlockedByDefault) {}
+    public void addPageConfigs(List<Page> newPages) {
+        pages.addAll(newPages);
+    }
+
+    public void addProfileConfigs(List<Profile> newProfiles) {
+        profiles.addAll(newProfiles);
+    }
+
+    public record Page(String id, String name, String content, String icon, boolean unlockedByDefault) {
+        public static final Codec<Page> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                Codec.STRING.fieldOf("id").forGetter(JournalLayout.Page::id),
+                Codec.STRING.fieldOf("name").forGetter(JournalLayout.Page::name),
+                Codec.STRING.fieldOf("content").forGetter(JournalLayout.Page::content),
+                Codec.STRING.fieldOf("icon").forGetter(JournalLayout.Page::icon),
+                Codec.BOOL.fieldOf("unlocked_by_default").forGetter(JournalLayout.Page::unlockedByDefault)
+        ).apply(instance, JournalLayout.Page::new));
+    }
 
     public record Profile(String fishItem, String description, String journalPage, String location, String climate) {
+        public static final Codec<Profile> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                Codec.STRING.fieldOf("item").forGetter(JournalLayout.Profile::fishItem),
+                Codec.STRING.fieldOf("description").forGetter(JournalLayout.Profile::description),
+                Codec.STRING.fieldOf("page").forGetter(JournalLayout.Profile::journalPage),
+                Codec.STRING.fieldOf("location").forGetter(JournalLayout.Profile::location),
+                Codec.STRING.fieldOf("climate").forGetter(JournalLayout.Profile::climate)
+        ).apply(instance, JournalLayout.Profile::new));
+
         public ItemStack getFish() {
             return TideUtils.getItemFromName(fishItem).getDefaultInstance();
         }

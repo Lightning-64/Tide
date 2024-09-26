@@ -110,12 +110,12 @@ public class TidePlayerData {
     }
 
     public boolean hasPageUnlocked(JournalPage page) {
-        return pagesUnlocked.contains(page.getID()) || page.isUnlockedByDefault();
+        return pagesUnlocked.contains(page.id()) || page.unlockedByDefault();
     }
 
     public boolean unlockPage(JournalPage page) {
         if (!hasPageUnlocked(page)) {
-            pagesUnlocked.add(page.getID());
+            pagesUnlocked.add(page.id());
             return true;
         } else return false;
     }
@@ -149,7 +149,7 @@ public class TidePlayerData {
     }
 
     public boolean hasPageCompleted(JournalPage page) {
-        return pagesCompleted.contains(page.getID());
+        return pagesCompleted.contains(page.id());
     }
 
     public boolean isUnread(JournalLayout.Profile profile) {

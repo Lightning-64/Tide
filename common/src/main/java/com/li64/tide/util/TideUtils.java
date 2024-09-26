@@ -198,7 +198,7 @@ public class TideUtils {
     public static void checkPageCompletion(TidePlayerData data, JournalPage page, ServerPlayer player) {
         if (isCategoryCompleted(data, page)) {
             if (!data.hasPageCompleted(page)) {
-                data.pagesCompleted.add(page.getID());
+                data.pagesCompleted.add(page.id());
                 if (data.pagesCompleted.size() <= 1) {
                     TideCriteriaTriggers.FINISH_PAGE.trigger((ServerPlayer) player);
                 }
@@ -207,7 +207,7 @@ public class TideUtils {
                     TideCriteriaTriggers.FINISH_JOURNAL.trigger((ServerPlayer) player);
                 }
                 data.syncTo(player);
-                Tide.LOG.debug("Player completed category: {}", page.getIDName());
+                Tide.LOG.debug("Player completed category: {}", page.idName());
                 Tide.LOG.debug("Completed {}/{} categories", data.pagesCompleted.size(), Tide.JOURNAL.getPageConfigs().size());
             }
         }
@@ -277,11 +277,11 @@ public class TideUtils {
     }
 
     public static ItemStack getPageToastIcon(JournalPage page) {
-        return page.getIcon();
+        return page.icon();
     }
 
     public static Component getPageToastDesc(JournalPage page) {
-        return Component.translatable(page.getTitle());
+        return Component.translatable(page.title());
     }
 
     public static List<Item> getFishFromProfileList(List<JournalLayout.Profile> profiles) {

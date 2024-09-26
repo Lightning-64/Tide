@@ -175,8 +175,8 @@ public class FishingJournalScreen extends Screen {
         super.render(graphics, mouseX, mouseY, partialTick);
 
         if (profileFish == null) {
-            Component title = Component.translatable(getPage().getTitle());
-            Component content = Component.translatable(getPage().getContent());
+            Component title = Component.translatable(getPage().title());
+            Component content = Component.translatable(getPage().content());
             List<FormattedCharSequence> formattedContent = font.split(content, 300);
 
             int titleX = (this.width - font.width(title)) / 2;
@@ -263,10 +263,10 @@ public class FishingJournalScreen extends Screen {
         Component descriptionRaw = Component.translatable(profileConfig.description());
 
         Component locationTitleRaw = Component.translatable("profile.info.location").withStyle(underlined);
-        Component locationRaw = Component.translatable(profileConfig.location());
+        Component locationRaw = Component.translatable("profile.info.location." + profileConfig.location());
 
         Component climateTitleRaw = Component.translatable("profile.info.climate").withStyle(underlined);
-        Component climateRaw = Component.translatable(profileConfig.climate());
+        Component climateRaw = Component.translatable("profile.info.climate." + profileConfig.climate());
 
         List<FormattedCharSequence> description = font.split(descriptionRaw, 114);
 
