@@ -101,6 +101,7 @@ public class TideForgeEvents {
 
     @EventBusSubscriber(modid = Tide.MOD_ID, bus = EventBusSubscriber.Bus.FORGE)
     public static class Forge {
+        @SubscribeEvent
         public static void onServerReloadListeners(AddReloadListenerEvent event) {
             Tide.onRegisterReloadListeners((id, listener) -> event.addListener(listener));
         }
