@@ -66,7 +66,7 @@ public class TideEventHandler {
                 pages.forEach(pageConfig -> {
                     // Go through each page and check for matching fish
                     JournalPage page = new JournalPage(pageConfig);
-                    if (TideUtils.isInPage(page.getIDName(), stack)) {
+                    if (TideUtils.isInPage(page.idName(), stack)) {
                         TideUtils.unlockPage(player, page);
                         TideUtils.checkPageCompletion(data, page, player);
                     }

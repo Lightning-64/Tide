@@ -12,14 +12,20 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
+import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -29,6 +35,10 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 public class TideFabric implements ModInitializer {
     @Override
@@ -187,6 +197,19 @@ public class TideFabric implements ModInitializer {
                     new ItemStack(Items.EMERALD, 1),
                     4,4, 0.02F));
         });
+
+        Tide.onRegisterReloadListeners((id, listener) -> ResourceManagerHelper.get(PackType.SERVER_DATA)
+                .registerReloadListener(new IdentifiableResourceReloadListener() {
+            @Override
+            public ResourceLocation getFabricId() {
+                return id;
+            }
+
+            @Override
+            public @NotNull CompletableFuture<Void> reload(PreparationBarrier synchronizer, ResourceManager manager, ProfilerFiller prepareProfiler, ProfilerFiller applyProfiler, Executor prepareExecutor, Executor applyExecutor) {
+                return listener.reload(synchronizer, manager, prepareProfiler, applyProfiler, prepareExecutor, applyExecutor);
+            }
+        }));
     }
 
     public static <T extends LivingEntity> void registerAttributes(TideEntityAttributes.Registration<T> reg) {

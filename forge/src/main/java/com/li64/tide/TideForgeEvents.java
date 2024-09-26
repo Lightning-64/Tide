@@ -4,7 +4,6 @@ import com.li64.tide.data.commands.JournalCommand;
 import com.li64.tide.data.player.TidePlayerData;
 import com.li64.tide.events.TideEventHandler;
 import com.li64.tide.registries.*;
-import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.li64.tide.registries.entities.util.AbstractTideFish;
 import com.li64.tide.registries.items.BaitItem;
 import com.li64.tide.util.TideUtils;
@@ -26,14 +25,11 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
-import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -105,9 +101,8 @@ public class TideForgeEvents {
 
     @EventBusSubscriber(modid = Tide.MOD_ID, bus = EventBusSubscriber.Bus.FORGE)
     public static class Forge {
-        @SubscribeEvent
-        public static void onItemFished(ItemFishedEvent event) {
-            Tide.LOG.info("Received item fished event for ({})", event.getDrops().get(0));
+        public static void onServerReloadListeners(AddReloadListenerEvent event) {
+            Tide.onRegisterReloadListeners((id, listener) -> event.addListener(listener));
         }
 
         @SubscribeEvent

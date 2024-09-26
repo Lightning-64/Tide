@@ -16,6 +16,8 @@
   "text.autoconfig.tide.option.general.minigameDifficulty.@Tooltip": "A multiplier that increases or decreases the speed of the minigame.\nFor example, 0.5 would be twice as easy, while 2.0 would be twice as difficult",
   "text.autoconfig.tide.option.general.rodDurabilityMultiplier": "Rod Durability Multiplier",
   "text.autoconfig.tide.option.general.rodDurabilityMultiplier.@Tooltip": "A multiplier that increases or decreases the durability of fishing rods.",
+  "text.autoconfig.tide.option.general.defaultLineColor": "Use Vanilla Line Color",
+  "text.autoconfig.tide.option.general.defaultLineColor.@Tooltip": "Enable this to use the default black fishing string color, which generally looks better with shaders.",
   "text.autoconfig.tide.option.worldgen.disableFishingBoat": "Disable Fishing Boats",
   "text.autoconfig.tide.option.worldgen.disableFishingBoat.@Tooltip": "Turn this on to disable the generation of fishing boat structures",
   "text.autoconfig.tide.option.worldgen.disableFishingHut": "Disable Fishing Huts",

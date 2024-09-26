@@ -145,7 +145,7 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
 //                level.getRawBrightness(vertexPos, level.getSkyDarken()), 15f);
 //        float colorBrightness = Mth.clamp(vertexBrightness / 15f, 0.05f, 1f);
 
-        float colorBrightness = 1.0f;
+        float colorBrightness = Tide.CONFIG.general.defaultLineColor ? 0.0f : 1.0f;
 
         int r = (int) (color.getRed() * colorBrightness);
         int g = (int) (color.getGreen() * colorBrightness);

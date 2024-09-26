@@ -42,6 +42,9 @@ public final class TideConfig implements ConfigData {
         @ConfigEntry.Gui.Tooltip
         @ConfigEntry.Gui.RequiresRestart
         public double rodDurabilityMultiplier = 1.0;
+
+        @ConfigEntry.Gui.Tooltip
+        public boolean defaultLineColor = false;
     }
 
     public static class Worldgen {
