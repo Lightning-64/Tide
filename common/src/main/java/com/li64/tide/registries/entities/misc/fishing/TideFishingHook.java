@@ -593,7 +593,6 @@ public class TideFishingHook extends Projectile {
                                 .withParameter(LootContextParams.ORIGIN, this.position())
                                 .withParameter(LootContextParams.TOOL, stack)
                                 .withParameter(LootContextParams.THIS_ENTITY, this)
-                                .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, this.getPlayerOwner())
                                 .withLuck(luck + player.getLuck())
                                 .create(LootContextParamSets.FISHING);
 
@@ -655,7 +654,6 @@ public class TideFishingHook extends Projectile {
                     .withParameter(LootContextParams.ORIGIN, this.position())
                     .withParameter(LootContextParams.TOOL, rod)
                     .withParameter(LootContextParams.THIS_ENTITY, this)
-                    .withParameter(LootContextParams.LAST_DAMAGE_PLAYER, this.getPlayerOwner())
                     .withLuck(luck + player.getLuck())
                     .create(LootContextParamSets.FISHING);
 
