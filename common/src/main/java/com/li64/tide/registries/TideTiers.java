@@ -1,5 +1,6 @@
 package com.li64.tide.registries;
 
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
@@ -41,7 +42,7 @@ public enum TideTiers implements Tier {
 
     @Override
     public TagKey<Block> getIncorrectBlocksForDrops() {
-        return null;
+        return BlockTags.INCORRECT_FOR_IRON_TOOL;
     }
 
     @Override
