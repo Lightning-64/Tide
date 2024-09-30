@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tide:fish_stew"
+        "recipe": "tide:cooked_fish_slice_smoking"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -19,7 +19,7 @@
   ],
   "rewards": {
     "recipes": [
-      "tide:fish_stew"
+      "tide:cooked_fish_slice_smoking"
     ]
   },
   "sends_telemetry_event": false

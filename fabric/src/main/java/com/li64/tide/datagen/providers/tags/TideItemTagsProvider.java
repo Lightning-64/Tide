@@ -125,8 +125,14 @@ public class TideItemTagsProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(ItemTags.FISHES).forceAddTag(TideTags.Items.JOURNAL_FISH);
         getOrCreateTagBuilder(ItemTags.SWORDS).add(TideItems.BLAZING_SWORDFISH);
 
+        /* Compat tags */
+
         getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("stardew_fishing", "starts_minigame")))
                 .addTag(TideTags.Items.JOURNAL_FISH);
+
+        getOrCreateTagBuilder(conventionTag("safe_raw_fish"))
+                .addTag(TideTags.Items.COOKABLE_FISH)
+                .add(TideItems.FISH_SLICE);
     }
 
     public TagKey<Item> conventionTag(String name) {

@@ -1,8 +1,9 @@
-// 1.20.1	2024-09-25T08:43:55.9992487	Tide/Tide Item Tags
+// 1.20.1	2024-09-30T18:48:54.9816005	Tide/Tide Item Tags
 c347a74f95ceca9c52198a36b61ca7daf7393e2d data\tide\tags\items\hooks.json
 0983800561fdf064433c06aa92c2c8144263c91b data\forge\tags\items\tools\fishing_rods.json
 7c6369b297ab98c486f787bfa2b8a085d74d7f06 data\tide\tags\items\cookable_fish.json
 5aaf00716e2d8e4f06731b308aef0c9ee56d64c1 data\minecraft\tags\items\swords.json
+ecd594e19b47c76fc5097074f8b83e03ed2514eb data\c\tags\items\safe_raw_fish.json
 75368041d31b432ef48b365b42674a14613d6e43 data\tide\tags\items\bobbers.json
 1f0ea29cdbaa68c5c213fe34b148ca701bb3027e data\tide\tags\items\legendary_fish.json
 80e56f6effead78902dc0cc2c37c79e264d399c5 data\tide\tags\items\vanilla_fish.json
@@ -13,6 +14,6 @@ fb2ac1641b313311495eb1e4abf2bc53d4e3ed28 data\stardew_fishing\tags\items\starts_
 a02841cf85f929e342e382514b9367261ac5c352 data\tide\tags\items\lines.json
 e2c4af9a3b317d337d8bab367ed7395cc165a135 data\tide\tags\items\customizable_rods.json
 3683d34a54689374f565db87c0e00eba44cbdd16 data\tide\tags\items\bait_plants.json
-3c2af71c13958b6a0a79fe3685c225fdefbfa3c0 data\tide\tags\items\journal_fish.json
+1b45b9b1d3073e9a6691b3d5cb8ebda04b2c5d5f data\tide\tags\items\journal_fish.json
 fb2ac1641b313311495eb1e4abf2bc53d4e3ed28 data\minecraft\tags\items\fishes.json
 f3a5e00506fd2b692070436a72abdb91b8890640 data\tide\tags\items\twilight_angler_eatable.json

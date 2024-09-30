@@ -1,11 +1,14 @@
 package com.li64.tide.datagen.providers.tags;
 
 import com.li64.tide.registries.TideBlocks;
+import com.li64.tide.registries.TideItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,5 +36,9 @@ public class TideBlockTagsProvider extends FabricTagProvider<Block> {
 
         getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(TideBlocks.OBSIDIAN_LOOT_CRATE);
+
+        getOrCreateTagBuilder(TagKey.create(Registries.BLOCK, new ResourceLocation(
+                "visualworkbench", "unaltered_workbenches")))
+                .add(TideBlocks.ANGLER_WORKSHOP);
     }
 }

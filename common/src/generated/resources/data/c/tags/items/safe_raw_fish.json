@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#tide:cookable_fish",
+    "tide:fish_slice"
+  ]
+}

@@ -1,3 +1,18 @@
+## Version 1.3.3 - 9/30/2024
+
+### 🎣 New features 🎣
+- Added the ability to remove existing fish profiles through the use of datapacks (see the [wiki](https://github.com/Lightning-64/Tide/wiki) for info) _([#9](https://github.com/Lightning-64/Tide/issues/9))_
+- Some simple compatibility for the farmer's delight mod:
+  - Added a fish slice/cooked fish slice item
+  - Edible tide fish can be used in some recipes
+
+### ⚙️ Bug fixes ⚙️
+- Fixed a bug where the angler's workshop would act like a crafting table when [Visual Workbench](https://www.curseforge.com/minecraft/mc-mods/visual-workbench) was installed _([#6](https://github.com/Lightning-64/Tide/issues/6))_
+- Fixed a bug where tags on mod-generated blocks didn't load properly when tide was installed _([#10](https://github.com/Lightning-64/Tide/issues/10))_
+- Fixed a bug where fishing loot parameters weren't properly set on forge and neoforge _([#12](https://github.com/Lightning-64/Tide/issues/12))_
+
+---
+
 **[1.3.2 - 9/26/24]**
 
 ⚙️ Technical features ⚙️
