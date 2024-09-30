@@ -32,24 +32,24 @@ public class TideRecipeProvider extends FabricRecipeProvider {
     public void buildRecipes(@NotNull RecipeOutput output) {
         // -- Shapeless --
 
-        TagKey<Item> carrot = neoForgeConventionTag("crops/carrot");
-        TagKey<Item> potato = neoForgeConventionTag("crops/potato");
+//        TagKey<Item> carrot = neoForgeConventionTag("crops/carrot");
+//        TagKey<Item> potato = neoForgeConventionTag("crops/potato");
         TagKey<Item> seeds = neoForgeConventionTag("seeds");
-        TagKey<Item> mushrooms = neoForgeConventionTag("mushrooms");
+//        TagKey<Item> mushrooms = neoForgeConventionTag("mushrooms");
         TagKey<Item> slimeBalls = neoForgeConventionTag("slime_balls");
         TagKey<Item> obsidians = neoForgeConventionTag("obsidians");
         TagKey<Item> ironNuggets = neoForgeConventionTag("nuggets/iron");
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, TideItems.FISH_STEW, 1)
-                .requires(carrot)
-                .requires(carrot)
-                .requires(potato)
-                .requires(potato)
-                .requires(TideItems.COOKED_FISH)
-                .requires(TideItems.COOKED_FISH)
-                .requires(Items.BOWL)
-                .unlockedBy("impossible", impossible())
-                .save(output);
+//        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, TideItems.FISH_STEW, 1)
+//                .requires(carrot)
+//                .requires(carrot)
+//                .requires(potato)
+//                .requires(potato)
+//                .requires(TideItems.COOKED_FISH)
+//                .requires(TideItems.COOKED_FISH)
+//                .requires(Items.BOWL)
+//                .unlockedBy("impossible", impossible())
+//                .save(output);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, Items.OBSIDIAN, 1)
                 .requires(TideItems.OBSIDIAN_FRAGMENT)
@@ -337,6 +337,27 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                         SmokingRecipe::new)
                 .unlockedBy("impossible", impossible())
                 .save(output, "tide:cooked_fish_smoking");
+
+        SimpleCookingRecipeBuilder.generic(Ingredient.of(TideItems.FISH_SLICE),
+                        RecipeCategory.FOOD, TideItems.COOKED_FISH_SLICE,
+                        0.35f, 600, RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
+                        CampfireCookingRecipe::new)
+                .unlockedBy("impossible", impossible())
+                .save(output, "tide:cooked_fish_slice_campfire_cooking");
+
+        SimpleCookingRecipeBuilder.generic(Ingredient.of(TideItems.FISH_SLICE),
+                        RecipeCategory.FOOD, TideItems.COOKED_FISH_SLICE,
+                        0.35f, 200, RecipeSerializer.SMELTING_RECIPE,
+                        SmeltingRecipe::new)
+                .unlockedBy("impossible", impossible())
+                .save(output, "tide:cooked_fish_slice_smelting");
+
+        SimpleCookingRecipeBuilder.generic(Ingredient.of(TideItems.FISH_SLICE),
+                        RecipeCategory.FOOD, TideItems.COOKED_FISH_SLICE,
+                        0.35f, 100, RecipeSerializer.SMOKING_RECIPE,
+                        SmokingRecipe::new)
+                .unlockedBy("impossible", impossible())
+                .save(output, "tide:cooked_fish_slice_smoking");
 
         SimpleCookingRecipeBuilder.generic(Ingredient.of(TideItems.CLAYFISH),
                         RecipeCategory.FOOD, TideItems.HARDENED_CLAYFISH,

@@ -1,6 +1,5 @@
 package com.li64.tide.platform;
 
-import com.li64.tide.Tide;
 import com.li64.tide.TideNeoForge;
 import com.li64.tide.platform.services.TideMainPlatform;
 import net.minecraft.advancements.CriterionTrigger;
@@ -9,7 +8,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;

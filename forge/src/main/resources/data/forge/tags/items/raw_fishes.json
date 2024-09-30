@@ -1,6 +1,9 @@
 {
    "replace": false,
    "values": [
-      "#tide:cookable_fish"
+      {
+         "id": "#c:foods/raw_fish",
+         "required": false
+      }
    ]
 }

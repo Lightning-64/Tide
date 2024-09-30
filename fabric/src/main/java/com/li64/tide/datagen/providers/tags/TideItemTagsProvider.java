@@ -4,6 +4,7 @@ import com.li64.tide.data.TideTags;
 import com.li64.tide.registries.TideItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -128,8 +129,14 @@ public class TideItemTagsProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(ItemTags.SWORD_ENCHANTABLE).add(TideItems.BLAZING_SWORDFISH);
         getOrCreateTagBuilder(ItemTags.SWORDS).add(TideItems.BLAZING_SWORDFISH);
 
+        /* Compat tags */
+
         getOrCreateTagBuilder(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("stardew_fishing", "starts_minigame")))
                 .addTag(TideTags.Items.JOURNAL_FISH);
+
+        getOrCreateTagBuilder(neoForgeConventionTag("safe_raw_fish"))
+                .addTag(TideTags.Items.COOKABLE_FISH)
+                .add(TideItems.FISH_SLICE);
     }
 
     public TagKey<Item> neoForgeConventionTag(String name) {

@@ -1,0 +1,25 @@
+{
+   "type": "farmersdelight:cutting",
+   "ingredients": [
+      {
+         "tag": "tide:cookable_fish"
+      }
+   ],
+   "result": [
+      {
+         "item": {
+            "count": 2,
+            "id": "tide:fish_slice"
+         }
+      },
+      {
+         "item": {
+            "count": 1,
+            "id": "minecraft:bone_meal"
+         }
+      }
+   ],
+   "tool": {
+      "tag": "c:tools/knife"
+   }
+}

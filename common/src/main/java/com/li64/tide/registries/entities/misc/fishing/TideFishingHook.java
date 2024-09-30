@@ -57,10 +57,7 @@ import com.li64.tide.util.TideUtils;
 import com.li64.tide.registries.TideItems;
 import org.slf4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class TideFishingHook extends Projectile {
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -589,11 +586,17 @@ public class TideFishingHook extends Projectile {
                         ResourceKey<LootTable> lootTable = TideUtils.getCrateLoot(this.getX(), this.getY(), this.getZ(), fluid, level());
                         lootCrate = getCrateBlock(fluid);
 
-                        LootParams lootParams = (new LootParams.Builder((ServerLevel) this.level()))
+                        LootParams.Builder lootParamsBuilder = new LootParams.Builder((ServerLevel) this.level())
                                 .withParameter(LootContextParams.ORIGIN, this.position())
                                 .withParameter(LootContextParams.TOOL, stack)
-                                .withParameter(LootContextParams.THIS_ENTITY, this)
-                                .withLuck(luck + player.getLuck())
+                                .withParameter(LootContextParams.THIS_ENTITY, this);
+
+                        // Only forge and neoforge can use this parameter here
+                        if (!Tide.PLATFORM.isFabric()) lootParamsBuilder = lootParamsBuilder
+                                .withParameter(LootContextParams.ATTACKING_ENTITY, Objects.requireNonNull(this.getOwner()));
+
+                        LootParams lootParams = lootParamsBuilder
+                                .withLuck((float)luck + player.getLuck())
                                 .create(LootContextParamSets.FISHING);
 
                         level.setBlockAndUpdate(this.blockPosition(), lootCrate);
@@ -650,19 +653,25 @@ public class TideFishingHook extends Projectile {
         if (pullCrate) {
             catchType = CatchType.CRATE;
         } else {
-            LootParams lootparams = (new LootParams.Builder((ServerLevel) this.level()))
+            LootParams.Builder lootParamsBuilder = new LootParams.Builder((ServerLevel) this.level())
                     .withParameter(LootContextParams.ORIGIN, this.position())
                     .withParameter(LootContextParams.TOOL, rod)
-                    .withParameter(LootContextParams.THIS_ENTITY, this)
-                    .withLuck(luck + player.getLuck())
-                    .create(LootContextParamSets.FISHING);
+                    .withParameter(LootContextParams.THIS_ENTITY, this);
+
+            // Only forge and neoforge can use this parameter here
+            if (!Tide.PLATFORM.isFabric()) lootParamsBuilder = lootParamsBuilder
+                    .withParameter(LootContextParams.ATTACKING_ENTITY, Objects.requireNonNull(this.getOwner()));
+
+            LootParams lootParams = lootParamsBuilder
+                    .withLuck((float)luck + player.getLuck())
+                    .create(LootContextParamSets.CHEST);
 
             ResourceKey<LootTable> lootKey = BuiltInLootTables.FISHING;
 
             LootTable table = level().getServer().reloadableRegistries().getLootTable(lootKey);
             ServerLevel overworld = level().getServer().overworld();
 
-            list = table.getRandomItems(lootparams);
+            list = table.getRandomItems(lootParams);
             if (list.isEmpty()) list = ObjectArrayList.of(Items.SALMON.getDefaultInstance());
 
             list = TideUtils.checkForOverrides(list, this, overworld);
@@ -670,7 +679,7 @@ public class TideFishingHook extends Projectile {
             if (TideUtils.shouldGrabTideLootTable(list, fluid)) {
                 lootKey = TideUtils.getTideLootTable(this.getX(), this.getY(), this.getZ(), fluid, level(), random);
                 table = level().getServer().reloadableRegistries().getLootTable(lootKey);
-                list = table.getRandomItems(lootparams);
+                list = table.getRandomItems(lootParams);
             }
 
             Tide.LOG.info("Loot table used: {}", lootKey.location());

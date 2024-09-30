@@ -1,4 +1,4 @@
-// 1.21	2024-09-25T21:15:47.8716543	Tide/minecraft:fishing Loot Table
+// 1.21	2024-09-30T17:57:52.2290377	Tide/minecraft:fishing Loot Table
 9435cc38dcf801d501a4df5e722820513f75f06b data\tide\loot_table\gameplay\fishing\climates\lava_underground.json
 573b98f5077917112d401850d08cbdd80da4b966 data\tide\loot_table\gameplay\fishing\climates\lava_surface.json
 197878711ad595cb3468db61b8855ca5f366f829 data\tide\loot_table\gameplay\fishing\biomes\mountain.json
@@ -13,14 +13,14 @@ e924877d495b95b8ea2f510624b734f6d8bc36c4 data\tide\loot_table\gameplay\fishing\c
 8c7aa2b109cb3acebc3c96b81faa2ff26afb920d data\tide\loot_table\gameplay\fishing\biomes\badlands.json
 b0726af0538a2644d763348e5aff933e3334e3c0 data\tide\loot_table\gameplay\fishing\biomes\forest.json
 49b4341202322f7067b175bc08fbf9e23fcaacba data\tide\loot_table\gameplay\fishing\biomes\desert.json
-05243d1d2d021ec5a38ea86e3e60af963cd92157 data\tide\loot_table\gameplay\fishing\biomes\taiga.json
 4bfef1bcb6bbeba0b3496ba31b68e5a78f88e5cd data\tide\loot_table\gameplay\fishing\climates\freshwater_warm.json
+05243d1d2d021ec5a38ea86e3e60af963cd92157 data\tide\loot_table\gameplay\fishing\biomes\taiga.json
 2698fca9929a246b876eae3ac6ae84a576551e45 data\tide\loot_table\gameplay\fishing\biomes\lush_caves.json
 f08d26eba2a0535e5bacf4ab893ba77bbf21eff8 data\tide\loot_table\gameplay\fishing\climates\freshwater_normal.json
 c13254fa3f49747d14d2428bf49661240d3a1e78 data\tide\loot_table\gameplay\fishing\biomes\deep_dark.json
 f604bcf3a8b99ff20ac40927e4cde1459a149960 data\tide\loot_table\gameplay\fishing\biomes\plains.json
-cfc2d5b265fa338ceed9662b1a9cb4cc2b7941b2 data\tide\loot_table\gameplay\fishing\biomes\cherry.json
 6e270f2379f272ff6c43d5fb3e76affcdbbdf468 data\tide\loot_table\gameplay\fishing\climates\end_water.json
+cfc2d5b265fa338ceed9662b1a9cb4cc2b7941b2 data\tide\loot_table\gameplay\fishing\biomes\cherry.json
 0af199184fec7383a1622579a64b38a207f42fc9 data\tide\loot_table\gameplay\fishing\biomes\swamp.json
 dcd35a7d130db3a1abff93eaf6cc29e0ad29e82a data\tide\loot_table\gameplay\fishing\climates\saltwater_warm.json
 4001d1d0e2d960f3665b6b18a3f0e67477078b84 data\tide\loot_table\gameplay\fishing\biomes\frozen.json

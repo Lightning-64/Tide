@@ -60,4 +60,8 @@ public interface TideMainPlatform {
     default boolean stardewStart(ServerPlayer player, HookAccessor hook, ItemStack item, List<ItemStack> items) {
         return false;
     }
+
+    default boolean isFabric() {
+        return false;
+    }
 }

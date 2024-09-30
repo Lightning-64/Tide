@@ -49,6 +49,12 @@ repositories {
             includeGroup "mezz.jei"
         }
     }
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
     maven { url "https://maven.shedaniel.me/" }
 }
 

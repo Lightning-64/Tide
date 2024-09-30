@@ -90,7 +90,7 @@ dependencies {
     runtimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
     implementation("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
-//    implementation("curse.maven:stardewfishing-1066037:5565142")
+    // implementation("curse.maven:stardewfishing-1066037:5565142")
 
     // Forge's hack fix
     implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }

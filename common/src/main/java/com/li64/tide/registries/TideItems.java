@@ -7,7 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.Fluids;
@@ -300,11 +300,6 @@ public class TideItems {
     public static final Item SHOOTING_STARFISH = register("shooting_starfish",
             new TideFishItem(new Item.Properties().fireResistant().rarity(Rarity.EPIC), 8.0f));
 
-    public static final Item COOKED_FISH = register("cooked_fish",
-            new TideFishItem(new Item.Properties().food(TideFoods.COOKED_FISH), 0));
-    public static final Item FISH_STEW = register("fish_stew",
-            new Item(new Item.Properties().food(TideFoods.FISH_STEW).stacksTo(1)));
-
     public static final Item TROUT_SPAWN_EGG = register("trout_spawn_egg",
             new SpawnEggItem(TideEntityTypes.TROUT, 2580837, 7197881, new Item.Properties()));
     public static final Item BASS_SPAWN_EGG = register("bass_spawn_egg",
@@ -336,6 +331,26 @@ public class TideItems {
             new SpawnEggItem(TideEntityTypes.BARRACUDA, 0x5c5943, 0x16313d, new Item.Properties()));
     public static final Item SAILFISH_SPAWN_EGG = register("sailfish_spawn_egg",
             new SpawnEggItem(TideEntityTypes.SAILFISH, 0x698c8f, 0x466c82, new Item.Properties()));
+
+    public static final Item COOKED_FISH = register("cooked_fish",
+            new Item(new Item.Properties().food(TideFoods.COOKED_FISH)));
+
+    // Farmer's delight compat
+
+    public static final Item FISH_SLICE = register("fish_slice", new Item(new Item.Properties()
+            .food(new FoodProperties.Builder()
+                    .nutrition(1)
+                    .saturationModifier(0.1f)
+                    .fast().build()
+            )
+    ));
+    public static final Item COOKED_FISH_SLICE = register("cooked_fish_slice", new Item(new Item.Properties()
+            .food(new FoodProperties.Builder()
+                    .nutrition(3)
+                    .saturationModifier(0.5f)
+                    .fast().build()
+            )
+    ));
 
     public static Item register(String key, Item item) {
         ITEMS.put(key, item);
