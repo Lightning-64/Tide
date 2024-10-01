@@ -1,6 +1,5 @@
 package com.li64.tide.registries.entities.misc.fishing;
 
-import com.li64.tide.Tide;
 import com.li64.tide.registries.TideEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
@@ -36,7 +35,7 @@ public class HookAccessor extends FishingHook {
     }
 
     public static TideFishingHook getHook(Player player) {
-        HookAccessor placeholder = ((HookAccessor)player.fishing);
+        HookAccessor placeholder = ((HookAccessor) player.fishing);
         if (placeholder != null) return placeholder.hook;
         else return null;
     }

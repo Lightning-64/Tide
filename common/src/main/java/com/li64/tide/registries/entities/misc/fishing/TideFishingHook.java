@@ -666,7 +666,7 @@ public class TideFishingHook extends Projectile {
 
             LootParams lootParams = lootParamsBuilder
                     .withLuck((float)luck + player.getLuck())
-                    .create(LootContextParamSets.CHEST);
+                    .create(LootContextParamSets.FISHING);
 
             ResourceLocation lootKey = BuiltInLootTables.FISHING;
 
