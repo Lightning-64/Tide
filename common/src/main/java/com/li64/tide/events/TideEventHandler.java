@@ -5,9 +5,11 @@ import com.li64.tide.client.gui.JournalPage;
 import com.li64.tide.data.journal.JournalLayout;
 import com.li64.tide.data.player.TidePlayerData;
 import com.li64.tide.network.messages.ShowToastMsg;
+import com.li64.tide.network.messages.UpdateJournalMsg;
 import com.li64.tide.registries.TideItems;
 import com.li64.tide.util.TideUtils;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -32,8 +34,10 @@ public class TideEventHandler {
         }
     }
 
-    public static void onJoinWorld(ServerPlayer player) {
+    public static void onPlayerJoinWorld(ServerPlayer player) {
         if (!Tide.CONFIG.general.giveJournal) return;
+
+        Tide.NETWORK.sendToPlayer(new UpdateJournalMsg(), player);
 
         TidePlayerData playerData = TidePlayerData.getOrCreate(player);
         playerData.syncTo(player);
@@ -58,7 +62,7 @@ public class TideEventHandler {
                     Tide.NETWORK.sendToPlayer(new ShowToastMsg(
                             Component.translatable("newfish.toast.title"),
                             TideUtils.removeRawTextInName(stack.getHoverName()),
-                            stack.getItem().getDefaultInstance()), (ServerPlayer) player);
+                            stack.getItem().getDefaultInstance()), player);
                     data.syncTo(player);
                 }
 

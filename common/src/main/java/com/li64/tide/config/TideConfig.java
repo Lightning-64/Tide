@@ -45,13 +45,17 @@ public final class TideConfig implements ConfigData {
 
         @ConfigEntry.Gui.Tooltip
         public boolean defaultLineColor = false;
+
+        @ConfigEntry.Gui.Tooltip
+        public boolean hideUnknownFishNames = true;
+
+        @ConfigEntry.Gui.Tooltip
+        @ConfigEntry.BoundedDiscrete(max = 40, min = 1)
+        public int baseCrateRarity = 20;
     }
 
     public static class Worldgen {
         @ConfigEntry.Gui.Tooltip
         public boolean disableFishingBoat = false;
-
-        @ConfigEntry.Gui.Tooltip
-        public boolean disableFishingHut = false;
     }
 }

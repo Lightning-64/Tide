@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.li64.tide.Tide;
 import com.li64.tide.data.journal.JournalLayout;
+import com.li64.tide.util.TideUtils;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -20,6 +21,8 @@ import java.util.Map;
 public class JournalProfileCustomData extends SimpleJsonResourceReloadListener {
     public static final String DATA_PATH = "journal/profiles";
     private static final Gson GSON = new Gson();
+
+    private List<JournalLayout.Profile> profiles;
 
     public JournalProfileCustomData() {
         super(GSON, DATA_PATH);
@@ -45,9 +48,14 @@ public class JournalProfileCustomData extends SimpleJsonResourceReloadListener {
             }
         }
 
-        List<JournalLayout.Profile> profiles = ImmutableList.copyOf(output);
+        profiles = ImmutableList.copyOf(output);
         Tide.LOG.info("Loaded {} custom journal profiles", profiles.size());
 
         Tide.JOURNAL.addProfileConfigs(profiles);
+        TideUtils.PROFILE_ITEMS = null;
+    }
+
+    public List<JournalLayout.Profile> getProfileConfigs() {
+        return profiles;
     }
 }

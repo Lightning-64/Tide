@@ -2,10 +2,7 @@ package com.li64.tide.registries.entities.misc.fishing;
 
 import com.li64.tide.data.TideCriteriaTriggers;
 import com.li64.tide.data.TideTags;
-import com.li64.tide.data.rods.BobberModifier;
 import com.li64.tide.data.rods.CustomRodManager;
-import com.li64.tide.data.rods.HookModifier;
-import com.li64.tide.data.rods.LineModifier;
 import com.li64.tide.registries.TideBlocks;
 import com.li64.tide.registries.entities.misc.LootCrateEntity;
 import com.li64.tide.registries.items.TideFishingRodItem;
@@ -91,7 +88,7 @@ public class TideFishingHook extends Projectile {
         this.noCulling = true;
         this.rod = rod;
         this.entityData.set(DATA_ROD_ITEM, rod);
-        this.luck = Math.max(0, luck + (getLineModifier() == LineModifier.FORTUNE ? 1 : 0));
+        this.luck = Math.max(0, luck + (getLine().is(TideItems.FORTUNE_LINE) ? 1 : 0));
         this.lureSpeed = Math.max(0, lureSpeed);
     }
 
@@ -627,7 +624,7 @@ public class TideFishingHook extends Projectile {
             }
             this.startRetrieving();
 
-            if (getLineModifier() == LineModifier.REINFORCED)
+            if (getLine().is(TideItems.FISHING_LINE))
                 i -= (new Random().nextFloat() > 0.7f ? 1 : 0);
 
             return i;
@@ -645,8 +642,8 @@ public class TideFishingHook extends Projectile {
         boolean pullCrate = false;
 
         if (player.getOffhandItem().is(TideItems.MAGNETIC_BAIT)) {
-            if (random.nextInt(0, 4) == 0) pullCrate = true;
-        } else if (random.nextInt(0, 20) == 0) pullCrate = true;
+            if (random.nextInt(0, (int) Math.ceil(Tide.CONFIG.general.baseCrateRarity / 5.0)) == 0) pullCrate = true;
+        } else if (random.nextInt(0, Tide.CONFIG.general.baseCrateRarity) == 0) pullCrate = true;
 
         if (TideUtils.moddedDimension(level().dimension())) pullCrate = false;
 
@@ -664,7 +661,7 @@ public class TideFishingHook extends Projectile {
 
             LootParams lootParams = lootParamsBuilder
                     .withLuck((float)luck + player.getLuck())
-                    .create(LootContextParamSets.CHEST);
+                    .create(LootContextParamSets.FISHING);
 
             ResourceKey<LootTable> lootKey = BuiltInLootTables.FISHING;
 
@@ -806,13 +803,13 @@ public class TideFishingHook extends Projectile {
         return ((TideFishingRodItem) rod.getItem());
     }
 
-    public BobberModifier getBobberModifier() {
+    public ItemStack getBobber() {
         return CustomRodManager.getBobber(rod);
     }
-    public HookModifier getHookModifier() {
+    public ItemStack getHook() {
         return CustomRodManager.getHook(rod);
     }
-    public LineModifier getLineModifier() {
+    public ItemStack getLine() {
         return CustomRodManager.getLine(rod);
     }
 

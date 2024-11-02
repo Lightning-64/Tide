@@ -33,6 +33,7 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -120,7 +121,7 @@ public class TideForgeEvents {
 
         @SubscribeEvent
         public static void onEntityJoinWorld(PlayerEvent.PlayerLoggedInEvent event) {
-            TideEventHandler.onJoinWorld((ServerPlayer) event.getEntity());
+            TideEventHandler.onPlayerJoinWorld((ServerPlayer) event.getEntity());
         }
 
         @SubscribeEvent

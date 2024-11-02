@@ -21,6 +21,8 @@ public class JournalPageCustomData extends SimpleJsonResourceReloadListener {
     public static final String DATA_PATH = "journal/pages";
     private static final Gson GSON = new Gson();
 
+    private List<JournalLayout.Page> pages;
+
     public JournalPageCustomData() {
         super(GSON, DATA_PATH);
     }
@@ -28,6 +30,12 @@ public class JournalPageCustomData extends SimpleJsonResourceReloadListener {
     @Override
     public @NotNull String getName() {
         return "Tide Journal Page Data Loader";
+    }
+
+    @Override
+    protected Map<ResourceLocation, JsonElement> prepare(ResourceManager pResourceManager, ProfilerFiller pProfiler) {
+        return super.prepare(pResourceManager, pProfiler);
+
     }
 
     @Override
@@ -45,9 +53,14 @@ public class JournalPageCustomData extends SimpleJsonResourceReloadListener {
             }
         }
 
-        List<JournalLayout.Page> pages = ImmutableList.copyOf(output);
+        pages = ImmutableList.copyOf(output);
         Tide.LOG.info("Loaded {} custom journal pages", pages.size());
 
+        Tide.JOURNAL = new JournalLayout();
         Tide.JOURNAL.addPageConfigs(pages);
+    }
+
+    public List<JournalLayout.Page> getPageConfigs() {
+        return pages;
     }
 }

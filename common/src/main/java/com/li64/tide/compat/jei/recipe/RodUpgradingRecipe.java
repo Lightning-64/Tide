@@ -3,6 +3,7 @@ package com.li64.tide.compat.jei.recipe;
 import com.li64.tide.Tide;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.data.rods.CustomRodManager;
+import com.li64.tide.registries.TideItems;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
@@ -44,11 +45,11 @@ public class RodUpgradingRecipe implements Recipe<RecipeInput> {
     }
 
     @Override
-    public ItemStack getResultItem(HolderLookup.Provider p_331967_) {
+    public ItemStack getResultItem(HolderLookup.Provider provider) {
         ItemStack newRod = output.copy();
-        CustomRodManager.setBobber(newRod, new Random().nextInt(0, 16));
-        CustomRodManager.setHook(newRod, new Random().nextInt(0, 3));
-        CustomRodManager.setLine(newRod, new Random().nextInt(0, 4));
+        CustomRodManager.setBobber(newRod, TideItems.RED_FISHING_BOBBER.getDefaultInstance());
+        CustomRodManager.setHook(newRod, TideItems.FISHING_HOOK.getDefaultInstance());
+        CustomRodManager.setLine(newRod, TideItems.FISHING_LINE.getDefaultInstance());
         return newRod;
     }
 

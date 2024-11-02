@@ -1,8 +1,8 @@
 package com.li64.tide.data.minigame;
 
 import com.li64.tide.Tide;
-import com.li64.tide.data.rods.HookModifier;
 import com.li64.tide.network.messages.MinigameClientMsg;
+import com.li64.tide.registries.TideItems;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import com.li64.tide.registries.items.StrengthFish;
@@ -51,7 +51,7 @@ public class FishCatchMinigame {
         if (hook.getHookedItem() instanceof StrengthFish strengthFish)
             strength = strengthFish.getStrength();
 
-        if (hook.getHookModifier() == HookModifier.IRON) strength *= 0.89f;
+        if (hook.getHook().is(TideItems.IRON_FISHING_HOOK)) strength *= 0.89f;
 
         // Start client minigame gui
         Tide.NETWORK.sendToPlayer(new MinigameClientMsg(0, strength), player);

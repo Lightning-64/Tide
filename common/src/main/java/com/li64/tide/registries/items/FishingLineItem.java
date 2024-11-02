@@ -1,5 +1,7 @@
 package com.li64.tide.registries.items;
 
+import com.li64.tide.data.TideDataComponents;
+import com.li64.tide.data.rods.TideAccessoryData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -10,14 +12,15 @@ import net.minecraft.world.item.TooltipFlag;
 import java.util.List;
 
 public class FishingLineItem extends Item {
-    private String description = "";
+    private final String description;
 
-    public FishingLineItem(Properties properties) {
-        super(properties);
+    public FishingLineItem(String color, Component translation, Properties properties) {
+        this(color, translation, properties, "");
     }
 
-    public FishingLineItem(Properties properties, String description) {
-        super(properties);
+    public FishingLineItem(String color, Component translation, Properties properties, String description) {
+        super(properties.component(TideDataComponents.TIDE_ACCESSORY_DATA,
+                new TideAccessoryData(translation, color)));
         this.description = description;
     }
 

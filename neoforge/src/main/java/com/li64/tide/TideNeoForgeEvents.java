@@ -18,7 +18,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SpawnPlacementTypes;
-import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
@@ -130,7 +129,7 @@ public class TideNeoForgeEvents {
 
         @SubscribeEvent
         public static void onEntityJoinWorld(PlayerEvent.PlayerLoggedInEvent event) {
-            TideEventHandler.onJoinWorld((ServerPlayer) event.getEntity());
+            TideEventHandler.onPlayerJoinWorld((ServerPlayer) event.getEntity());
         }
 
         @SubscribeEvent

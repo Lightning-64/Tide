@@ -1,3 +1,23 @@
+## Version 1.3.4 - 11/2/2024
+
+### 🎣 New features 🎣
+- Fishing rod modifier items are no longer consumed when using the Angler's Workshop _([#24](https://github.com/Lightning-64/Tide/issues/24))_
+- Multiple locations/climates can now be displayed for a single fish _([#18](https://github.com/Lightning-64/Tide/issues/18))_
+- Fishing rod accessories are no longer consumed upon being applied _([#24](https://github.com/Lightning-64/Tide/issues/24))_
+- Fishing rod accessory data is now stored in item NBT (1.20 and below) or data components (1.21+) so custom accessories can be created by modders _([#26](https://github.com/Lightning-64/Tide/issues/26))_
+- Added a config setting for modifying the rarity of a crate catch _([#30](https://github.com/Lightning-64/Tide/issues/30))_
+- Added a config setting for enabling/disabling the '???' text on fish that haven't been logged in the journal
+- Added ru_ru translation (thanks to Waffylka) _([#28](https://github.com/Lightning-64/Tide/issues/28))_
+- Updated zh_cn translation (thanks to junshengxie)
+
+### ⚙️ Bug fixes ⚙️
+- Fixed a bug where farmer's delight fish slices were unobtainable (sorry!) _([#25](https://github.com/Lightning-64/Tide/issues/25))_
+- Fixed a bug where custom journal entries would persist between worlds _([#17](https://github.com/Lightning-64/Tide/issues/17))_
+- Fixed a bug where custom journal entries would duplicate upon using /reload _([#31](https://github.com/Lightning-64/Tide/issues/31))_
+- Fixed a minor tag issue _([#29](https://github.com/Lightning-64/Tide/issues/29))_
+
+---
+
 ## Version 1.3.3 - 9/30/2024
 
 ### 🎣 New features 🎣

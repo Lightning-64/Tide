@@ -1,25 +1,24 @@
-// 1.21	2024-09-30T17:57:52.2340472	Tide/Tide Biome Tags
-bd3a337fd5984aa06820eea84a2aade8e70e8b08 data\tide\tags\worldgen\biome\cherry.json
-4129a0be72fe8157144f62db1ff03232da7a3fb1 data\tide\tags\worldgen\biome\is_saltwater.json
-41f0ae9d0895c8bdd4431252d5a4667e7afbe206 data\tide\tags\worldgen\biome\plains.json
-910a2e9ec59dcceb6f9abb3b3b0e360426700208 data\tide\tags\worldgen\biome\frozen.json
-ff13fafcc6c847d2ce8a4262842bf1316dc580ea data\tide\tags\worldgen\biome\has_structure\fishing_hut.json
-0f241c94b10e4b16b4304f66ad949bb089955b1e data\tide\tags\worldgen\biome\lush_caves.json
-c1f2e50eb4df0d915107548102ee17d66b96a6d1 data\tide\tags\worldgen\biome\desert.json
-f1a74fe90a87d6f1c1662fde138a1fcab94fbfe1 data\tide\tags\worldgen\biome\savanna.json
-eb0d0369f4bbb235c8a12046eaea266e8ee84d82 data\tide\tags\worldgen\biome\birch.json
-c782b9e9919e6c5261aafe5b694fd163a8c2c1d9 data\tide\tags\worldgen\biome\badlands.json
-45e2314b6fbf2e847bd70c163e678e0e756a1640 data\tide\tags\worldgen\biome\deep_dark.json
+// 1.21	2024-11-02T16:52:55.8211328	Tide/Tide Biome Tags
 ec7bbb0c9b5fc5378f8716f54862806404f04360 data\tide\tags\worldgen\biome\can_catch_starfish.json
 f57a77c025311702a1ad1bb92baf65649a2a9999 data\tide\tags\worldgen\biome\has_end_oasis.json
 6828d707e9094d5cd801bc30072506ab9beef078 data\tide\tags\worldgen\biome\forest.json
+bd3a337fd5984aa06820eea84a2aade8e70e8b08 data\tide\tags\worldgen\biome\cherry.json
+4129a0be72fe8157144f62db1ff03232da7a3fb1 data\tide\tags\worldgen\biome\is_saltwater.json
+41f0ae9d0895c8bdd4431252d5a4667e7afbe206 data\tide\tags\worldgen\biome\plains.json
 2071d40e745664f1509f599c4c610747016a7c68 data\tide\tags\worldgen\biome\taiga.json
 c9ddf09ae1da1b8f55e971d4c439cf2a1a411765 data\tide\tags\worldgen\biome\jungle.json
+910a2e9ec59dcceb6f9abb3b3b0e360426700208 data\tide\tags\worldgen\biome\frozen.json
+0f241c94b10e4b16b4304f66ad949bb089955b1e data\tide\tags\worldgen\biome\lush_caves.json
 6cb8fda9758cb5101287d8d9588b32d70087d717 data\tide\tags\worldgen\biome\is_warm.json
 dd44a61ce8693e1a4e7456e7e88b36bc9548b881 data\tide\tags\worldgen\biome\dripstone.json
+c1f2e50eb4df0d915107548102ee17d66b96a6d1 data\tide\tags\worldgen\biome\desert.json
+f1a74fe90a87d6f1c1662fde138a1fcab94fbfe1 data\tide\tags\worldgen\biome\savanna.json
 0ea59501f58b97507c63269e17b2ac1870a1824d data\tide\tags\worldgen\biome\grows_algae.json
 d940e922c5324b4beba427087c6b3fe4b6984cc1 data\tide\tags\worldgen\biome\mountain.json
 10fdd9f46d9653a2d7c72a4991727503e8ea64d8 data\tide\tags\worldgen\biome\is_cold.json
+eb0d0369f4bbb235c8a12046eaea266e8ee84d82 data\tide\tags\worldgen\biome\birch.json
 b73d9e411ea7d88da688aaa74dd639369391dac1 data\tide\tags\worldgen\biome\swamp.json
+c782b9e9919e6c5261aafe5b694fd163a8c2c1d9 data\tide\tags\worldgen\biome\badlands.json
 afd9da16b8e57511d3b12c69ccd4555d71ebb29f data\tide\tags\worldgen\biome\has_structure\fishing_boat.json
 95608987ad9d89016378b518c359483fc3c459b4 data\tide\tags\worldgen\biome\mushroom.json
+45e2314b6fbf2e847bd70c163e678e0e756a1640 data\tide\tags\worldgen\biome\deep_dark.json

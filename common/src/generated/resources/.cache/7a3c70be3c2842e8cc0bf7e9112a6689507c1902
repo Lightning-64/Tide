@@ -1,7 +1,7 @@
-// 1.21	2024-09-30T17:57:52.2252008	Tide/minecraft:chest Loot Table
+// 1.21	2024-11-02T16:52:55.80404	Tide/minecraft:chest Loot Table
 da89a5a3f13de064944a7b3d3aacc72d22b40769 data\tide\loot_table\gameplay\fishing\crates\overworld\water_deep.json
-c1255fa66fa84d6472c8fd29d1bdb57347d2b873 data\tide\loot_table\gameplay\fishing\crates\overworld\water_underground.json
 7aa5bfe3d8c4ec4d806743d891a1fb9a9e4ce232 data\tide\loot_table\gameplay\fishing\crates\end\lava.json
+c1255fa66fa84d6472c8fd29d1bdb57347d2b873 data\tide\loot_table\gameplay\fishing\crates\overworld\water_underground.json
 8e99e9c15fb39e1181b3cc5cbe6094b0c14d957b data\tide\loot_table\gameplay\fishing\crates\overworld\water_ocean.json
 ddb6a09278e87847471e384c0ebf7be52ebae622 data\tide\loot_table\gameplay\fishing\crates\end\water.json
 91a267c26308ebc9613666afa106dce58acd3056 data\tide\loot_table\gameplay\fishing\crates\overworld\water_river.json

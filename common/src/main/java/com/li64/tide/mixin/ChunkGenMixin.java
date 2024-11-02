@@ -28,7 +28,6 @@ public class ChunkGenMixin {
         if (!structure.getNamespace().equals(Tide.MOD_ID)) return;
 
         if (structure.getPath().matches("fishing_boat") && Tide.CONFIG.worldgen.disableFishingBoat) cir.setReturnValue(false);
-        if (structure.getPath().matches("fishing_hut") && Tide.CONFIG.worldgen.disableFishingHut) cir.setReturnValue(false);
     }
 
     @Inject(method = "findNearestMapStructure", at = @At("HEAD"), cancellable = true)
@@ -39,7 +38,6 @@ public class ChunkGenMixin {
             if (!structure.getNamespace().equals(Tide.MOD_ID)) return;
 
             if (structure.getPath().matches("fishing_boat") && Tide.CONFIG.worldgen.disableFishingBoat) cir.setReturnValue(null);
-            if (structure.getPath().matches("fishing_hut") && Tide.CONFIG.worldgen.disableFishingHut) cir.setReturnValue(null);
         });
     }
 }

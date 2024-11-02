@@ -1,4 +1,4 @@
-// 1.21	2024-09-30T17:57:52.2290377	Tide/minecraft:fishing Loot Table
+// 1.21	2024-11-02T16:52:55.8120341	Tide/minecraft:fishing Loot Table
 9435cc38dcf801d501a4df5e722820513f75f06b data\tide\loot_table\gameplay\fishing\climates\lava_underground.json
 573b98f5077917112d401850d08cbdd80da4b966 data\tide\loot_table\gameplay\fishing\climates\lava_surface.json
 197878711ad595cb3468db61b8855ca5f366f829 data\tide\loot_table\gameplay\fishing\biomes\mountain.json
@@ -21,8 +21,8 @@ c13254fa3f49747d14d2428bf49661240d3a1e78 data\tide\loot_table\gameplay\fishing\b
 f604bcf3a8b99ff20ac40927e4cde1459a149960 data\tide\loot_table\gameplay\fishing\biomes\plains.json
 6e270f2379f272ff6c43d5fb3e76affcdbbdf468 data\tide\loot_table\gameplay\fishing\climates\end_water.json
 cfc2d5b265fa338ceed9662b1a9cb4cc2b7941b2 data\tide\loot_table\gameplay\fishing\biomes\cherry.json
-0af199184fec7383a1622579a64b38a207f42fc9 data\tide\loot_table\gameplay\fishing\biomes\swamp.json
 dcd35a7d130db3a1abff93eaf6cc29e0ad29e82a data\tide\loot_table\gameplay\fishing\climates\saltwater_warm.json
+0af199184fec7383a1622579a64b38a207f42fc9 data\tide\loot_table\gameplay\fishing\biomes\swamp.json
 4001d1d0e2d960f3665b6b18a3f0e67477078b84 data\tide\loot_table\gameplay\fishing\biomes\frozen.json
 b4e2d59cd113e9f97de3a96e14057bd83ab0630a data\tide\loot_table\gameplay\fishing\climates\nether.json
 3383dd7ee2879f2647a21fbd292e91e9c5fa348f data\tide\loot_table\gameplay\fishing\biomes\savanna.json
