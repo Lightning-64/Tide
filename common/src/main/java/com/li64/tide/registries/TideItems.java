@@ -327,7 +327,7 @@ public class TideItems {
     public static final Item MACKEREL_SPAWN_EGG = register("mackerel_spawn_egg",
             new SpawnEggItem(TideEntityTypes.MACKEREL, 0x8e9480, 0x003d4d, new Item.Properties()));
     public static final Item ANGELFISH_SPAWN_EGG = register("angelfish_spawn_egg",
-            new SpawnEggItem(TideEntityTypes.ANGELFISH, 1207235, 15955968, new Item.Properties()));
+            new SpawnEggItem(TideEntityTypes.ANGELFISH, 0x2e5c6b, 0x0e1f2e, new Item.Properties()));
     public static final Item BARRACUDA_SPAWN_EGG = register("barracuda_spawn_egg",
             new SpawnEggItem(TideEntityTypes.BARRACUDA, 0x5c5943, 0x16313d, new Item.Properties()));
     public static final Item SAILFISH_SPAWN_EGG = register("sailfish_spawn_egg",

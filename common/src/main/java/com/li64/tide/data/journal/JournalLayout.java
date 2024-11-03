@@ -183,6 +183,8 @@ public class JournalLayout {
             addProfile("netherdepthsupgrade:magmacubefish", "", "nether", "nether", "very_hot");
             addProfile("netherdepthsupgrade:glowdine", "", "nether", "nether", "very_hot");
             addProfile("netherdepthsupgrade:soulsucker", "", "nether", "nether", "very_hot");
+            addProfile("netherdepthsupgrade:fortress_grouper", "", "nether", "nether", "very_hot");
+            addProfile("netherdepthsupgrade:eyeball_fish", "", "nether", "nether", "very_hot");
         }
 
         if (Tide.PLATFORM.isModLoaded("aquamirae")) {

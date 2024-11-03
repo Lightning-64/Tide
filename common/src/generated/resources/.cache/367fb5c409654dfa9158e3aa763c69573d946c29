@@ -1,4 +1,4 @@
-// 1.21	2024-11-02T16:52:55.8060357	Tide/Recipes
+// 1.21	2024-11-03T11:16:25.8619908	Tide/Recipes
 fd28e2397c5700ad230f0d8122a494632b8a9b4d data\tide\recipe\fishing_line.json
 37e295419c1859a07f5aaf2e2fcbb22be36e4ce1 data\tide\advancement\recipes\food\cooked_fish_slice_smelting.json
 70dae69ec08f2055efaede95ca07edcda1b62b58 data\tide\advancement\recipes\misc\bobbers\black.json
@@ -82,8 +82,8 @@ a61d585ebba412d6f448a9f2b1527d90930ccded data\tide\advancement\recipes\tools\for
 2ed5fec6f2639a1a0962dcd5cb1de9589eff4e6b data\tide\advancement\recipes\tools\rod_upgrading\normal.json
 a0c0aeb332a5526bd8dc6e26a3a0822bb67aaa0b data\tide\advancement\recipes\building_blocks\obsidian_from_fragments.json
 910f957ec37c00fc75e5a8812737adf1151ab146 data\tide\advancement\recipes\misc\bait.json
-975b776a81544755293c7557afb511834a9fee55 data\tide\advancement\recipes\misc\magnetic_bait.json
 2428439ac28ae37916f3026a5a2a2a2f69fca601 data\tide\recipe\magnetic_bait.json
+975b776a81544755293c7557afb511834a9fee55 data\tide\advancement\recipes\misc\magnetic_bait.json
 bc4dd585d688834c52509ba926f9472bf4975f0c data\tide\advancement\recipes\food\cooked_fish_slice_smoking.json
 ca3fd78b6a6138f95b57e7434b37f80980c748fe data\tide\recipe\cooked_fish_smelting.json
 14cf9e7f8423ecea19ca83ab54c5c61199a92965 data\tide\recipe\rod_upgrading\crystal.json

@@ -12,6 +12,7 @@
 
 ### ⚙️ Bug fixes ⚙️
 - Fixed a bug where farmer's delight fish slices were unobtainable (sorry!) _([#25](https://github.com/Lightning-64/Tide/issues/25))_
+- Fixed a bug where nether depths upgrade fish couldn't be caught in minecraft 1.21+ _([#20](https://github.com/Lightning-64/Tide/issues/20))
 - Fixed a bug where custom journal entries would persist between worlds _([#17](https://github.com/Lightning-64/Tide/issues/17))_
 - Fixed a bug where custom journal entries would duplicate upon using /reload _([#31](https://github.com/Lightning-64/Tide/issues/31))_
 - Fixed a minor tag issue _([#29](https://github.com/Lightning-64/Tide/issues/29))_

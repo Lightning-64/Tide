@@ -14,6 +14,7 @@ import com.li64.tide.registries.items.BaitItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -95,8 +96,14 @@ public class TideUtils {
             if (fluid.is(TideTags.Fluids.LAVA_FISHING)) return TideLootTables.Fishing.LAVA_SURFACE;
             else return BuiltInLootTables.FISHING;
 
-        } if (level.dimension() == Level.NETHER) return TideLootTables.Fishing.NETHER;
-        else if (level.dimension() == Level.END) {
+        } if (level.dimension() == Level.NETHER){
+
+            if (Tide.PLATFORM.isModLoaded("netherdepthsupgrade") && new Random().nextFloat() > 0.65f)
+                return ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath(
+                        "netherdepthsupgrade", "gameplay/nether_fishing"));
+            return TideLootTables.Fishing.NETHER;
+
+        } else if (level.dimension() == Level.END) {
 
             if (fluid.is(TideTags.Fluids.LAVA_FISHING)) return TideLootTables.Fishing.END_LAVA;
             else return TideLootTables.Fishing.END_WATER;
