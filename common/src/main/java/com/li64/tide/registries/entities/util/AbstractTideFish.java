@@ -56,9 +56,13 @@ public abstract class AbstractTideFish extends AbstractSchoolingFish {
         return SoundEvents.COD_DEATH;
     }
 
+    public boolean isUnknown() {
+        return !TidePlayerData.CLIENT_DATA.hasFishUnlocked(getFishItem()) && Tide.CONFIG.general.hideUnknownFishNames;
+    }
+
     @Override
     public boolean hasCustomName() {
-        return !TidePlayerData.CLIENT_DATA.hasFishUnlocked(getFishItem());
+        return isUnknown();
     }
 
     @Override
@@ -72,7 +76,7 @@ public abstract class AbstractTideFish extends AbstractSchoolingFish {
     @Nullable
     @Override
     public Component getCustomName() {
-        if (TidePlayerData.CLIENT_DATA.hasFishUnlocked(getFishItem())) return super.getCustomName();
+        if (!isUnknown()) return super.getCustomName();
         else return getName();
     }
 
@@ -83,7 +87,7 @@ public abstract class AbstractTideFish extends AbstractSchoolingFish {
 
     @Override
     public Component getName() {
-        if (!TidePlayerData.CLIENT_DATA.hasFishUnlocked(getFishItem())) return Component.literal("???");
+        if (isUnknown()) return Component.literal("???");
         else return super.getName();
     }
 

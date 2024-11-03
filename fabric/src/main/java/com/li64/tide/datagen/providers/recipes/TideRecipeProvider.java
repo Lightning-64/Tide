@@ -1,7 +1,6 @@
 package com.li64.tide.datagen.providers.recipes;
 
 import com.li64.tide.data.TideTags;
-import com.li64.tide.data.rods.BobberModifier;
 import com.li64.tide.registries.TideItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -16,10 +15,29 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class TideRecipeProvider extends FabricRecipeProvider {
+    static final List<Item> BOBBERS = List.of(
+            TideItems.WHITE_FISHING_BOBBER,
+            TideItems.ORANGE_FISHING_BOBBER,
+            TideItems.MAGENTA_FISHING_BOBBER,
+            TideItems.LIGHT_BLUE_FISHING_BOBBER,
+            TideItems.YELLOW_FISHING_BOBBER,
+            TideItems.LIME_FISHING_BOBBER,
+            TideItems.PINK_FISHING_BOBBER,
+            TideItems.GRAY_FISHING_BOBBER,
+            TideItems.LIGHT_GRAY_FISHING_BOBBER,
+            TideItems.CYAN_FISHING_BOBBER,
+            TideItems.PURPLE_FISHING_BOBBER,
+            TideItems.BLUE_FISHING_BOBBER,
+            TideItems.BROWN_FISHING_BOBBER,
+            TideItems.GREEN_FISHING_BOBBER,
+            TideItems.RED_FISHING_BOBBER,
+            TideItems.BLACK_FISHING_BOBBER
+    );
+
     public TideRecipeProvider(FabricDataOutput output) {
         super(output);
     }
@@ -391,10 +409,10 @@ public class TideRecipeProvider extends FabricRecipeProvider {
     }
 
     private void createBobberRecipes(Consumer<FinishedRecipe> output) {
-        Arrays.stream(BobberModifier.values()).toList().forEach(modifier -> {
-            String dyeId = modifier.name().toLowerCase();
+        BOBBERS.forEach(bobber -> {
+            String dyeId = bobber.toString().split("_fishing_bobber")[0].split("tide:")[1];
 
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, modifier.getItem())
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, bobber)
                     .requires(conventionTag("slime_balls"))
                     .requires(ItemTags.PLANKS)
                     .requires(TagKey.create(Registries.ITEM, new ResourceLocation(

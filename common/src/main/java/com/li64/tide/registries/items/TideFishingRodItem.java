@@ -3,11 +3,10 @@ package com.li64.tide.registries.items;
 import com.li64.tide.Tide;
 import com.li64.tide.client.gui.overlays.CastBarOverlay;
 import com.li64.tide.data.minigame.FishCatchMinigame;
-import com.li64.tide.data.rods.BobberModifier;
 import com.li64.tide.data.rods.CustomRodManager;
-import com.li64.tide.data.rods.HookModifier;
-import com.li64.tide.data.rods.LineModifier;
+import com.li64.tide.data.rods.TideAccessoryData;
 import com.li64.tide.registries.TideEntityTypes;
+import com.li64.tide.registries.TideItems;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import com.li64.tide.util.TideUtils;
@@ -31,7 +30,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 
 import java.util.List;
-import java.util.Random;
 
 public class TideFishingRodItem extends FishingRodItem {
     public static final ResourceLocation CAST_PROPERTY = Tide.resource("cast");
@@ -42,7 +40,7 @@ public class TideFishingRodItem extends FishingRodItem {
     }
 
     public boolean isLavaproof(ItemStack stack) {
-        return CustomRodManager.getHook(stack).isLavaproof();
+        return CustomRodManager.getHook(stack).is(TideItems.LAVAPROOF_FISHING_HOOK);
     }
 
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
@@ -186,7 +184,7 @@ public class TideFishingRodItem extends FishingRodItem {
     }
 
     public int getChargeDuration(ItemStack rod) {
-        return CustomRodManager.getLine(rod) == LineModifier.BRAIDED ? 15 : 25;
+        return CustomRodManager.getLine(rod).is(TideItems.BRAIDED_LINE) ? 15 : 25;
     }
 
     public UseAnim getUseAnimation(ItemStack stack) {
@@ -197,21 +195,21 @@ public class TideFishingRodItem extends FishingRodItem {
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
 
-        BobberModifier bobber = CustomRodManager.getBobber(stack);
-        HookModifier hook = CustomRodManager.getHook(stack);
-        LineModifier line = CustomRodManager.getLine(stack);
+        TideAccessoryData bobberData = TideAccessoryData.get(CustomRodManager.getBobber(stack));
+        TideAccessoryData hookData = TideAccessoryData.get(CustomRodManager.getHook(stack));
+        TideAccessoryData lineData = TideAccessoryData.get(CustomRodManager.getLine(stack));
 
-        MutableComponent bobberComponent = Component.translatable(bobber.getTranslationKey());
+        MutableComponent bobberComponent = Component.translatable(bobberData.translationKey());
         tooltip.add(bobberComponent.withStyle(bobberComponent.getStyle()
                 .withItalic(true)
                 .withColor(ChatFormatting.YELLOW)));
 
-        MutableComponent hookComponent = Component.translatable(hook.getTranslationKey());
+        MutableComponent hookComponent = Component.translatable(hookData.translationKey());
         tooltip.add(hookComponent.withStyle(hookComponent.getStyle()
                 .withItalic(true)
                 .withColor(ChatFormatting.YELLOW)));
 
-        MutableComponent lineComponent = Component.translatable(line.getTranslationKey());
+        MutableComponent lineComponent = Component.translatable(lineData.translationKey());
         tooltip.add(lineComponent.withStyle(lineComponent.getStyle()
                 .withItalic(true)
                 .withColor(ChatFormatting.YELLOW)));

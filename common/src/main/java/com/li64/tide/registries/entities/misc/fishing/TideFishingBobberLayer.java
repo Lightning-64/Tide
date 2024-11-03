@@ -1,5 +1,6 @@
 package com.li64.tide.registries.entities.misc.fishing;
 
+import com.li64.tide.data.rods.TideAccessoryData;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -9,7 +10,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.util.FastColor;
 import com.li64.tide.Tide;
 
 public class TideFishingBobberLayer extends RenderLayer<TideFishingHook, TideFishingHookModel<TideFishingHook>> {
@@ -26,7 +26,7 @@ public class TideFishingBobberLayer extends RenderLayer<TideFishingHook, TideFis
         this.getParentModel().copyPropertiesTo(this.model);
         this.model.setupAnim(hookEntity, p_117236_, p_117237_, p_117239_, p_117240_, p_117241_);
 
-        VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(hookEntity.getBobberModifier().getTextureLocation()));
+        VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(TideAccessoryData.get(hookEntity.getBobber()).getTextureLocation()));
         this.model.renderToBuffer(poseStack, vertexconsumer, p_117234_, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f);
     }
 }

@@ -4,17 +4,15 @@ import com.google.gson.JsonObject;
 import com.li64.tide.Tide;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.data.rods.CustomRodManager;
-import com.li64.tide.data.rods.ModifierType;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
+import com.li64.tide.registries.TideItems;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-
-import java.util.Random;
 
 /**
  * The only reason I have this class is so I can get JEI to display the
@@ -49,9 +47,9 @@ public class RodUpgradingRecipe implements Recipe<Container> {
     @Override
     public ItemStack getResultItem(RegistryAccess registryAccess) {
         ItemStack newRod = output.copy();
-        CustomRodManager.setModifier(newRod, ModifierType.BOBBER, new Random().nextInt(0, 16));
-        CustomRodManager.setModifier(newRod, ModifierType.HOOK, new Random().nextInt(0, 3));
-        CustomRodManager.setModifier(newRod, ModifierType.LINE, new Random().nextInt(0, 4));
+        CustomRodManager.setBobber(newRod, TideItems.RED_FISHING_BOBBER.getDefaultInstance());
+        CustomRodManager.setHook(newRod, TideItems.FISHING_HOOK.getDefaultInstance());
+        CustomRodManager.setLine(newRod, TideItems.FISHING_LINE.getDefaultInstance());
         return newRod;
     }
 

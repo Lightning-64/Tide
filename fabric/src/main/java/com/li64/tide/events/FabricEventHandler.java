@@ -49,7 +49,7 @@ public class FabricEventHandler {
         });
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) ->
-                TideEventHandler.onJoinWorld(handler.getPlayer()));
+                TideEventHandler.onPlayerJoinWorld(handler.getPlayer()));
 
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
             if (id.toString().matches(BuiltInLootTables.FISHING_JUNK.toString())) {

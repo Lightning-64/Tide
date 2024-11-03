@@ -238,9 +238,9 @@ public class JournalLayout {
         profiles.addAll(newProfiles);
     }
 
-    public void removeProfileConfigs(List<JournalRemovalCustomData.JournalRemoval> removals) {
+    public void removeProfileConfigs(List<JournalRemovalCustomData.Removal> removals) {
         profiles.removeIf(profile -> removals.stream()
-                .map(JournalRemovalCustomData.JournalRemoval::item)
+                .map(JournalRemovalCustomData.Removal::item)
                 .toList().contains(profile.fishItem));
     }
 

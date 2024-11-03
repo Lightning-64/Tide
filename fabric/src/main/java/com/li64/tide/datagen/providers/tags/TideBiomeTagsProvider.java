@@ -29,9 +29,6 @@ public class TideBiomeTagsProvider extends FabricTagProvider<Biome> {
         getOrCreateTagBuilder(TideTags.Biomes.HAS_FISHING_BOAT)
                 .forceAddTag(BiomeTags.IS_OCEAN);
 
-        getOrCreateTagBuilder(TideTags.Biomes.HAS_FISHING_HUT)
-                .forceAddTag(BiomeTags.IS_BEACH);
-
         getOrCreateTagBuilder(TideTags.Biomes.HAS_END_OASIS)
                 .add(Biomes.END_MIDLANDS)
                 .add(Biomes.END_HIGHLANDS);

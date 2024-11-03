@@ -5,11 +5,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.li64.tide.Tide;
-import com.li64.tide.data.journal.JournalLayout;
+import com.li64.tide.network.messages.UpdateJournalMsg;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -22,6 +24,7 @@ import java.util.Map;
 public class JournalRemovalCustomData extends SimpleJsonResourceReloadListener {
     public static final String DATA_PATH = "journal/removals";
     private static final Gson GSON = new Gson();
+    private List<Removal> removals;
 
     public JournalRemovalCustomData() {
         super(GSON, DATA_PATH);
@@ -34,28 +37,32 @@ public class JournalRemovalCustomData extends SimpleJsonResourceReloadListener {
 
     @Override
     protected void apply(@NotNull Map<ResourceLocation, JsonElement> map, @NotNull ResourceManager manager, @NotNull ProfilerFiller profiler) {
-        List<JournalRemoval> output = new ArrayList<>();
+        List<Removal> output = new ArrayList<>();
 
         for (Map.Entry<ResourceLocation, JsonElement> entry : map.entrySet()) {
             ResourceLocation entryKey = entry.getKey();
 
             try {
-                JournalRemoval.CODEC.parse(JsonOps.INSTANCE, entry.getValue()).result()
+                Removal.CODEC.parse(JsonOps.INSTANCE, entry.getValue()).result()
                         .ifPresentOrElse(output::add, () -> Tide.LOG.warn("Did not load invalid removal entry {}", entryKey));
             } catch (IllegalArgumentException | JsonParseException parseException) {
                 Tide.LOG.error("Parsing error loading journal removal {}", entryKey, parseException);
             }
         }
 
-        List<JournalRemoval> removals = ImmutableList.copyOf(output);
+        removals = ImmutableList.copyOf(output);
         Tide.LOG.info("Loaded {} journal removals", removals.size());
 
         Tide.JOURNAL.removeProfileConfigs(removals);
     }
 
-    public record JournalRemoval(String item) {
-        public static final Codec<JournalRemoval> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Codec.STRING.fieldOf("item").forGetter(JournalRemoval::item)
-        ).apply(instance, JournalRemoval::new));
+    public List<Removal> getRemovalConfigs() {
+        return removals;
+    }
+
+    public record Removal(String item) {
+        public static final Codec<Removal> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                Codec.STRING.fieldOf("item").forGetter(Removal::item)
+        ).apply(instance, Removal::new));
     }
 }

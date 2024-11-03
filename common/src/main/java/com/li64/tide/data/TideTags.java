@@ -54,8 +54,6 @@ public class TideTags {
     public static class Biomes {
         public static final TagKey<Biome> HAS_FISHING_BOAT = TagKey.create(
                 Registries.BIOME, Tide.resource("has_structure/fishing_boat"));
-        public static final TagKey<Biome> HAS_FISHING_HUT = TagKey.create(
-                Registries.BIOME, Tide.resource("has_structure/fishing_hut"));
         public static final TagKey<Biome> HAS_END_OASIS = TagKey.create(
                 Registries.BIOME, Tide.resource("has_end_oasis"));
         public static final TagKey<Biome> GROWS_ALGAE = TagKey.create(

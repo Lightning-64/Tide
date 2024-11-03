@@ -181,15 +181,15 @@ public class TideUtils {
         }
     }
 
-    private static HashMap<String, Item> profileItems;
+    public static HashMap<String, Item> PROFILE_ITEMS;
 
     public static boolean isJournalFish(ItemStack stack) {
-        if (profileItems == null || profileItems.size() < Tide.JOURNAL.getProfileConfigs().size()) {
-            profileItems = new HashMap<>();
+        if (PROFILE_ITEMS == null || PROFILE_ITEMS.size() != Tide.JOURNAL.getProfileConfigs().size()) {
+            PROFILE_ITEMS = new HashMap<>();
             Tide.JOURNAL.getProfileConfigs().forEach(config ->
-                    profileItems.put(config.fishItem(), getItemFromName(config.fishItem())));
+                    PROFILE_ITEMS.put(config.fishItem(), getItemFromName(config.fishItem())));
         }
-        return profileItems.containsKey(getNameFromItem(stack.getItem()));
+        return PROFILE_ITEMS.containsKey(getNameFromItem(stack.getItem()));
     }
 
     public static String getNameFromItem(Item item) {
