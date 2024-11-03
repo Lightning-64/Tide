@@ -410,7 +410,7 @@ public class TideRecipeProvider extends FabricRecipeProvider {
 
     private void createBobberRecipes(Consumer<FinishedRecipe> output) {
         BOBBERS.forEach(bobber -> {
-            String dyeId = bobber.toString().split("_fishing_bobber")[0].split("tide:")[1];
+            String dyeId = bobber.toString().split("_fishing_bobber")[0];
 
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, bobber)
                     .requires(conventionTag("slime_balls"))

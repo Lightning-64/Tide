@@ -1,4 +1,4 @@
-// 1.20.1	2024-09-30T18:48:54.9759236	Tide/minecraft:fishing Loot Table
+// 1.20.1	2024-11-03T09:12:23.4202716	Tide/minecraft:fishing Loot Table
 5b7d3f7346b026ee1c84d1d4c81b69f1e96d4368 data\tide\loot_tables\gameplay\fishing\biomes\dripstone.json
 25ac5cf752dba311f51a9d1455ced857d7032f9d data\tide\loot_tables\gameplay\fishing\climates\saltwater_cold.json
 f08d26eba2a0535e5bacf4ab893ba77bbf21eff8 data\tide\loot_tables\gameplay\fishing\climates\freshwater_normal.json
@@ -19,10 +19,10 @@ fa29164aa36da7210fada53433a4b897bd913a53 data\tide\loot_tables\gameplay\fishing\
 573b98f5077917112d401850d08cbdd80da4b966 data\tide\loot_tables\gameplay\fishing\climates\lava_surface.json
 679c062c481baffe929d997f71c815a3cf26440a data\tide\loot_tables\gameplay\fishing\climates\depths.json
 05243d1d2d021ec5a38ea86e3e60af963cd92157 data\tide\loot_tables\gameplay\fishing\biomes\taiga.json
-8c7aa2b109cb3acebc3c96b81faa2ff26afb920d data\tide\loot_tables\gameplay\fishing\biomes\badlands.json
 f3b0493def9a736c233c07b059dcef32ba22a5aa data\tide\loot_tables\gameplay\fishing\biomes\birch.json
-49b4341202322f7067b175bc08fbf9e23fcaacba data\tide\loot_tables\gameplay\fishing\biomes\desert.json
+8c7aa2b109cb3acebc3c96b81faa2ff26afb920d data\tide\loot_tables\gameplay\fishing\biomes\badlands.json
 0af199184fec7383a1622579a64b38a207f42fc9 data\tide\loot_tables\gameplay\fishing\biomes\swamp.json
+49b4341202322f7067b175bc08fbf9e23fcaacba data\tide\loot_tables\gameplay\fishing\biomes\desert.json
 b4e2d59cd113e9f97de3a96e14057bd83ab0630a data\tide\loot_tables\gameplay\fishing\climates\nether.json
 b0726af0538a2644d763348e5aff933e3334e3c0 data\tide\loot_tables\gameplay\fishing\biomes\forest.json
 3383dd7ee2879f2647a21fbd292e91e9c5fa348f data\tide\loot_tables\gameplay\fishing\biomes\savanna.json
