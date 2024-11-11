@@ -25,26 +25,6 @@ public class TideItems {
     public static List<ResourceKey<Item>> JOURNAL_FISH_LIST = new ArrayList<>();
     public static List<ResourceKey<Item>> COOKABLE_FISH_LIST = new ArrayList<>();
 
-    public static final Item STONE_FISHING_ROD = register("stone_fishing_rod",
-            new TideFishingRodItem(32, new Item.Properties()));
-    public static final Item IRON_FISHING_ROD = register("iron_fishing_rod",
-            new TideFishingRodItem(64, new Item.Properties()));
-    public static final Item GOLDEN_FISHING_ROD = register("golden_fishing_rod",
-            new TideFishingRodItem(32, new Item.Properties()));
-    public static final Item CRYSTAL_FISHING_ROD = register("crystal_fishing_rod",
-            new TideFishingRodItem(80, new Item.Properties()));
-    public static final Item DIAMOND_FISHING_ROD = register("diamond_fishing_rod",
-            new TideFishingRodItem(128, new Item.Properties()));
-    public static final Item NETHERITE_FISHING_ROD = register("netherite_fishing_rod",
-            new TideFishingRodItem(512, new Item.Properties().fireResistant()));
-
-    public static final Item BAIT = register("bait",
-            new BaitItem(new Item.Properties(), 0, 2, "item.tide.bait.desc"));
-    public static final Item LUCKY_BAIT = register("lucky_bait",
-            new BaitItem(new Item.Properties(), 2, 0, "item.tide.lucky_bait.desc"));
-    public static final Item MAGNETIC_BAIT = register("magnetic_bait",
-            new BaitItem(new Item.Properties(), 0, 2, "item.tide.magnetic_bait.desc"));
-
     public static final Item WHITE_FISHING_BOBBER = register("white_fishing_bobber", new FishingBobberItem(
             "textures/item/white_fishing_bobber.png", Component.translatable("bobber.tide.white"), new Item.Properties()));
     public static final Item ORANGE_FISHING_BOBBER = register("orange_fishing_bobber",new FishingBobberItem(
@@ -93,6 +73,26 @@ public class TideItems {
             "#6b6b68", Component.translatable("line.tide.reinforced"), new Item.Properties(), "item.tide.reinforced_line.desc"));
     public static final Item FORTUNE_LINE = register("fortune_line", new FishingLineItem(
             "#e9b115", Component.translatable("line.tide.fortune"),  new Item.Properties(), "item.tide.fortune_line.desc"));
+
+    public static final Item STONE_FISHING_ROD = register("stone_fishing_rod",
+            new TideFishingRodItem(32, new Item.Properties()));
+    public static final Item IRON_FISHING_ROD = register("iron_fishing_rod",
+            new TideFishingRodItem(64, new Item.Properties()));
+    public static final Item GOLDEN_FISHING_ROD = register("golden_fishing_rod",
+            new TideFishingRodItem(32, new Item.Properties()));
+    public static final Item CRYSTAL_FISHING_ROD = register("crystal_fishing_rod",
+            new TideFishingRodItem(80, new Item.Properties()));
+    public static final Item DIAMOND_FISHING_ROD = register("diamond_fishing_rod",
+            new TideFishingRodItem(128, new Item.Properties()));
+    public static final Item NETHERITE_FISHING_ROD = register("netherite_fishing_rod",
+            new TideFishingRodItem(512, new Item.Properties().fireResistant()));
+
+    public static final Item BAIT = register("bait",
+            new BaitItem(new Item.Properties(), 0, 2, "item.tide.bait.desc"));
+    public static final Item LUCKY_BAIT = register("lucky_bait",
+            new BaitItem(new Item.Properties(), 2, 0, "item.tide.lucky_bait.desc"));
+    public static final Item MAGNETIC_BAIT = register("magnetic_bait",
+            new BaitItem(new Item.Properties(), 0, 2, "item.tide.magnetic_bait.desc"));
 
     public static final Item FISHING_JOURNAL = register("fishing_journal",
             new FishingJournalItem(new Item.Properties()));

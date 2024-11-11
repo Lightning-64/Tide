@@ -11,6 +11,7 @@ import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * TideAccessoryData holds component data about a bobber, hook, or line modifier that can
@@ -36,8 +37,17 @@ public record TideAccessoryData(Component translationKey, String entityModifier)
     );
 
     public ResourceLocation getTextureLocation() {
-        if (entityModifier.isEmpty())return TideItems.RED_FISHING_BOBBER.getDefaultInstance()
-                .get(TideDataComponents.TIDE_ACCESSORY_DATA).getTextureLocation();
+        if (entityModifier.isEmpty()) return get(TideItems.RED_FISHING_BOBBER.getDefaultInstance()).getTextureLocation();
         return Tide.resource(entityModifier);
+    }
+
+    public static boolean hasData(ItemStack accessory) {
+        return accessory.get(TideDataComponents.TIDE_ACCESSORY_DATA) != null;
+    }
+
+    public static TideAccessoryData get(ItemStack accessory) {
+        if (!hasData(accessory)) accessory.set(TideDataComponents.TIDE_ACCESSORY_DATA,
+                get(TideItems.RED_FISHING_BOBBER.getDefaultInstance()));
+        return accessory.get(TideDataComponents.TIDE_ACCESSORY_DATA);
     }
 }

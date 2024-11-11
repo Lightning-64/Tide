@@ -1,61 +1,81 @@
 package com.li64.tide.data.rods;
 
-import com.li64.tide.Tide;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.registries.TideItems;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.Arrays;
+import java.util.Optional;
 
 public class CustomRodManager {
-    public static void setBobber(ItemStack stack, ItemStack bobber) {
-        if (bobber == null || bobber.isEmpty()) return;
-        stack.set(TideDataComponents.FISHING_BOBBER, BuiltInRegistries.ITEM.getKey(bobber.getItem()).toString());
+    public static final Item DEFAULT_HOOK = TideItems.FISHING_HOOK;
+    public static final Item DEFAULT_BOBBER = TideItems.RED_FISHING_BOBBER;
+    public static final Item DEFAULT_LINE = TideItems.FISHING_LINE;
+
+    public static void setBobber(ItemStack rod, ItemStack bobber, HolderLookup.Provider registries) {
+        setAccessory(TideDataComponents.FISHING_BOBBER, rod, bobber, registries);
     }
 
-    public static void setHook(ItemStack stack, ItemStack hook) {
-        if (hook == null || hook.isEmpty()) return;
-        stack.set(TideDataComponents.FISHING_HOOK, BuiltInRegistries.ITEM.getKey(hook.getItem()).toString());
+    public static void setHook(ItemStack rod, ItemStack hook, HolderLookup.Provider registries) {
+        setAccessory(TideDataComponents.FISHING_HOOK, rod, hook, registries);
     }
 
-    public static void setLine(ItemStack stack, ItemStack line) {
-        if (line == null || line.isEmpty()) return;
-        stack.set(TideDataComponents.FISHING_LINE, BuiltInRegistries.ITEM.getKey(line.getItem()).toString());
+    public static void setLine(ItemStack rod, ItemStack line, HolderLookup.Provider registries) {
+        setAccessory(TideDataComponents.FISHING_LINE, rod, line, registries);
     }
 
-    public static ItemStack getBobber(ItemStack stack) {
-        ItemStack defaultInstance = TideItems.RED_FISHING_BOBBER.getDefaultInstance();
-        String bobberKey = stack.get(TideDataComponents.FISHING_BOBBER);
-
-        if (bobberKey == null || bobberKey.isEmpty() ||
-            !BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(bobberKey))) return defaultInstance;
-
-        return BuiltInRegistries.ITEM.get(ResourceLocation.parse(bobberKey)).getDefaultInstance();
+    private static void setAccessory(DataComponentType<CompoundTag> componentType, ItemStack rod, ItemStack accessory, HolderLookup.Provider registries) {
+        if (accessory == null || accessory.isEmpty() || !TideAccessoryData.hasData(accessory)) {
+            rod.set(componentType, new CompoundTag());
+            return;
+        }
+        CompoundTag tag = (CompoundTag) accessory.save(registries, new CompoundTag());
+        rod.set(componentType, tag);
     }
 
-    public static ItemStack getHook(ItemStack stack) {
-        ItemStack defaultInstance = TideItems.FISHING_HOOK.getDefaultInstance();
-        String hookKey = stack.get(TideDataComponents.FISHING_HOOK);
-
-        if (hookKey == null || hookKey.isEmpty() ||
-                !BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(hookKey))) return defaultInstance;
-
-        return BuiltInRegistries.ITEM.get(ResourceLocation.parse(hookKey)).getDefaultInstance();
+    public static ItemStack getBobber(ItemStack rod, HolderLookup.Provider registryAccess) {
+        return getAccessory(TideDataComponents.FISHING_BOBBER, rod, registryAccess, DEFAULT_BOBBER);
     }
 
-    public static ItemStack getLine(ItemStack stack) {
-        ItemStack defaultInstance = TideItems.FISHING_LINE.getDefaultInstance();
-        String lineKey = stack.get(TideDataComponents.FISHING_LINE);
-
-        if (lineKey == null || lineKey.isEmpty() ||
-                !BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(lineKey))) return defaultInstance;
-
-        return BuiltInRegistries.ITEM.get(ResourceLocation.parse(lineKey)).getDefaultInstance();
+    public static ItemStack getHook(ItemStack rod, HolderLookup.Provider registryAccess) {
+        return getAccessory(TideDataComponents.FISHING_HOOK, rod, registryAccess, DEFAULT_HOOK);
     }
+
+    public static ItemStack getLine(ItemStack rod, HolderLookup.Provider registryAccess) {
+        return getAccessory(TideDataComponents.FISHING_LINE, rod, registryAccess, DEFAULT_LINE);
+    }
+
+    public static boolean hasBobber(ItemStack rod, HolderLookup.Provider registryAccess) {
+        return getAccessory(TideDataComponents.FISHING_BOBBER, rod, registryAccess) != null;
+    }
+
+    public static boolean hasHook(ItemStack rod, HolderLookup.Provider registryAccess) {
+        return getAccessory(TideDataComponents.FISHING_HOOK, rod, registryAccess) != null;
+    }
+
+    public static boolean hasLine(ItemStack rod, HolderLookup.Provider registryAccess) {
+        return getAccessory(TideDataComponents.FISHING_LINE, rod, registryAccess) != null;
+    }
+
+    private static ItemStack getAccessory(DataComponentType<CompoundTag> componentType, ItemStack rod, HolderLookup.Provider registryAccess, Item defaultItem) {
+        CompoundTag data = rod.get(componentType);
+        if (data == null) return defaultItem.getDefaultInstance();
+        Optional<ItemStack> hook = ItemStack.parse(registryAccess, data);
+        return hook.orElse(defaultItem.getDefaultInstance());
+    }
+
+    private static ItemStack getAccessory(DataComponentType<CompoundTag> componentType, ItemStack rod, HolderLookup.Provider registryAccess) {
+        CompoundTag data = rod.get(componentType);
+        if (data == null) return null;
+        Optional<ItemStack> hook = ItemStack.parse(registryAccess, data);
+        return hook.orElse(null);
+    }
+
+    /*-- Helper methods --*/
 
     public static String getLineColor(ItemStack line) {
         TideAccessoryData data = line.get(TideDataComponents.TIDE_ACCESSORY_DATA);

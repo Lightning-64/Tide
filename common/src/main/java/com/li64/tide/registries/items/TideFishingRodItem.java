@@ -13,6 +13,8 @@ import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import com.li64.tide.util.TideUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -40,8 +42,8 @@ public class TideFishingRodItem extends FishingRodItem {
                 (Tide.CONFIG == null ? 1.0 : Tide.CONFIG.general.rodDurabilityMultiplier))));
     }
 
-    public boolean isLavaproof(ItemStack stack) {
-        return CustomRodManager.getHook(stack).is(TideItems.LAVAPROOF_FISHING_HOOK);
+    public boolean isLavaproof(RegistryAccess registryAccess, ItemStack stack) {
+        return CustomRodManager.getHook(stack, registryAccess).is(TideItems.LAVAPROOF_FISHING_HOOK);
     }
 
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
@@ -113,10 +115,11 @@ public class TideFishingRodItem extends FishingRodItem {
         if (user instanceof Player player) {
 
             int chargeDifference = this.getUseDuration(rod, user) - charge;
+            int chargeDuration = getChargeDuration(rod, level.registryAccess());
 
             // Actually cast the hook
-            if (chargeDifference > getChargeDuration(rod)) chargeDifference = getChargeDuration(rod);
-            float chargeMultiplier = ((float) chargeDifference / (float) getChargeDuration(rod)) + 0.5f;
+            if (chargeDifference > chargeDuration) chargeDifference = chargeDuration;
+            float chargeMultiplier = ((float) chargeDifference / (float) chargeDuration) + 0.5f;
             castHook(rod, player, level, chargeMultiplier);
         }
     }
@@ -171,11 +174,13 @@ public class TideFishingRodItem extends FishingRodItem {
     public void onUseTick(Level level, LivingEntity user, ItemStack rod, int charge) {
         super.onUseTick(level, user, rod, charge);
 
+        int chargeDuration = getChargeDuration(rod, level.registryAccess());
+
         if (level.isClientSide() && user == Minecraft.getInstance().player) {
             int chargeDifference = this.getUseDuration(rod, user) - charge;
-            if (chargeDifference > getChargeDuration(rod)) chargeDifference = getChargeDuration(rod);
+            if (chargeDifference > chargeDuration) chargeDifference = chargeDuration;
 
-            CastBarOverlay.rodChargeTick((float) chargeDifference / (float) getChargeDuration(rod));
+            CastBarOverlay.rodChargeTick((float) chargeDifference / (float) chargeDuration);
         }
     }
 
@@ -184,8 +189,8 @@ public class TideFishingRodItem extends FishingRodItem {
         return 60000;
     }
 
-    public int getChargeDuration(ItemStack rod) {
-        return CustomRodManager.getLine(rod).is(TideItems.BRAIDED_LINE) ? 15 : 25;
+    public int getChargeDuration(ItemStack rod, HolderLookup.Provider registries) {
+        return CustomRodManager.getLine(rod, registries).is(TideItems.BRAIDED_LINE) ? 15 : 25;
     }
 
     public UseAnim getUseAnimation(ItemStack stack) {
@@ -196,9 +201,9 @@ public class TideFishingRodItem extends FishingRodItem {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltip, flag);
 
-        TideAccessoryData bobberData = CustomRodManager.getBobber(stack).get(TideDataComponents.TIDE_ACCESSORY_DATA);
-        TideAccessoryData hookData = CustomRodManager.getHook(stack).get(TideDataComponents.TIDE_ACCESSORY_DATA);
-        TideAccessoryData lineData = CustomRodManager.getLine(stack).get(TideDataComponents.TIDE_ACCESSORY_DATA);
+        TideAccessoryData bobberData = TideAccessoryData.get(CustomRodManager.getBobber(stack, context.registries()));
+        TideAccessoryData hookData = TideAccessoryData.get(CustomRodManager.getHook(stack, context.registries()));
+        TideAccessoryData lineData = TideAccessoryData.get(CustomRodManager.getLine(stack, context.registries()));
         if (bobberData == null || hookData == null || lineData == null) return;
 
         MutableComponent bobberComponent = (MutableComponent) bobberData.translationKey();

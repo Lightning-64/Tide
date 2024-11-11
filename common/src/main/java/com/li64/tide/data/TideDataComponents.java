@@ -1,9 +1,13 @@
 package com.li64.tide.data;
 
 import com.li64.tide.Tide;
+import com.li64.tide.data.journal.config.JournalRemovalCustomData;
+import com.li64.tide.data.rods.CustomRodManager;
 import com.li64.tide.data.rods.TideAccessoryData;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.util.ExtraCodecs;
@@ -15,20 +19,20 @@ import java.util.HashMap;
 public class TideDataComponents {
     public static final HashMap<String, DataComponentType<?>> DATA_COMPONENT_TYPES = new HashMap<>();
 
-    public static final DataComponentType<String> FISHING_LINE = register(
-            "fishing_line", DataComponentType.<String>builder()
-                    .persistent(Codec.STRING)
-                    .networkSynchronized(ByteBufCodecs.STRING_UTF8).build());
+    public static final DataComponentType<CompoundTag> FISHING_LINE = register(
+            "fishing_line", DataComponentType.<CompoundTag>builder()
+                    .persistent(CompoundTag.CODEC)
+                    .networkSynchronized(ByteBufCodecs.COMPOUND_TAG).build());
 
-    public static final DataComponentType<String> FISHING_BOBBER = register(
-            "fishing_bobber", DataComponentType.<String>builder()
-                    .persistent(Codec.STRING)
-                    .networkSynchronized(ByteBufCodecs.STRING_UTF8).build());
+    public static final DataComponentType<CompoundTag> FISHING_BOBBER = register(
+            "fishing_bobber", DataComponentType.<CompoundTag>builder()
+                    .persistent(CompoundTag.CODEC)
+                    .networkSynchronized(ByteBufCodecs.COMPOUND_TAG).build());
 
-    public static final DataComponentType<String> FISHING_HOOK = register(
-            "fishing_hook", DataComponentType.<String>builder()
-                    .persistent(Codec.STRING)
-                    .networkSynchronized(ByteBufCodecs.STRING_UTF8).build());
+    public static final DataComponentType<CompoundTag> FISHING_HOOK = register(
+            "fishing_hook", DataComponentType.<CompoundTag>builder()
+                    .persistent(CompoundTag.CODEC)
+                    .networkSynchronized(ByteBufCodecs.COMPOUND_TAG).build());
 
     public static final DataComponentType<TideAccessoryData> TIDE_ACCESSORY_DATA = register(
             "tide_accessory_data", DataComponentType.<TideAccessoryData>builder()

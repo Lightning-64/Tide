@@ -796,7 +796,7 @@ public class TideFishingHook extends Projectile {
     }
 
     public boolean canFishInLava() {
-        return getRodItem().isLavaproof(rod);
+        return getRodItem().isLavaproof(registryAccess(), rod);
     }
 
     public TideFishingRodItem getRodItem() {
@@ -804,13 +804,13 @@ public class TideFishingHook extends Projectile {
     }
 
     public ItemStack getBobber() {
-        return CustomRodManager.getBobber(rod);
+        return CustomRodManager.getBobber(rod, registryAccess());
     }
     public ItemStack getHook() {
-        return CustomRodManager.getHook(rod);
+        return CustomRodManager.getHook(rod, registryAccess());
     }
     public ItemStack getLine() {
-        return CustomRodManager.getLine(rod);
+        return CustomRodManager.getLine(rod, registryAccess());
     }
 
     public boolean hasHookedItem() {

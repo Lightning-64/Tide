@@ -46,11 +46,7 @@ public class RodUpgradingRecipe implements Recipe<RecipeInput> {
 
     @Override
     public ItemStack getResultItem(HolderLookup.Provider provider) {
-        ItemStack newRod = output.copy();
-        CustomRodManager.setBobber(newRod, TideItems.RED_FISHING_BOBBER.getDefaultInstance());
-        CustomRodManager.setHook(newRod, TideItems.FISHING_HOOK.getDefaultInstance());
-        CustomRodManager.setLine(newRod, TideItems.FISHING_LINE.getDefaultInstance());
-        return newRod;
+        return new ItemStack(output.getItem());
     }
 
     @Override
