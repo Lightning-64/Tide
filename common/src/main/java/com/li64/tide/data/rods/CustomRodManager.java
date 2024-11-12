@@ -1,23 +1,22 @@
 package com.li64.tide.data.rods;
 
+import com.li64.tide.Tide;
 import net.minecraft.nbt.CompoundTag;
 import com.li64.tide.registries.TideItems;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class CustomRodManager {
-    private static final ItemStack DEFAULT_BOBBER = TideItems.RED_FISHING_BOBBER.getDefaultInstance();
-    private static final ItemStack DEFAULT_HOOK = TideItems.FISHING_HOOK.getDefaultInstance();
-    private static final ItemStack DEFAULT_LINE = TideItems.FISHING_LINE.getDefaultInstance();
+    private static final Item DEFAULT_BOBBER = TideItems.RED_FISHING_BOBBER;
+    private static final Item DEFAULT_HOOK = TideItems.FISHING_HOOK;
+    private static final Item DEFAULT_LINE = TideItems.FISHING_LINE;
 
     private static void createModifierTag(ItemStack stack) {
         CompoundTag modifierTag = new CompoundTag();
 
-        modifierTag.putString("bobber", BuiltInRegistries.ITEM.getKey(DEFAULT_BOBBER.getItem()).toString());
-        modifierTag.putString("hook", BuiltInRegistries.ITEM.getKey(DEFAULT_HOOK.getItem()).toString());
-        modifierTag.putString("line", BuiltInRegistries.ITEM.getKey(DEFAULT_LINE.getItem()).toString());
+        modifierTag.put("bobber", new CompoundTag());
+        modifierTag.put("hook", new CompoundTag());
+        modifierTag.put("line", new CompoundTag());
 
         if (!stack.hasTag()) stack.setTag(new CompoundTag());
         stack.getTag().put("modifier", modifierTag);
@@ -28,20 +27,26 @@ public class CustomRodManager {
     }
 
     public static void setBobber(ItemStack stack, ItemStack bobber) {
-        setModifier(stack, ModifierType.BOBBER, bobber.getItem());
+        setModifier(stack, ModifierType.BOBBER, bobber);
     }
 
     public static void setHook(ItemStack stack, ItemStack hook) {
-        setModifier(stack, ModifierType.HOOK, hook.getItem());
+        setModifier(stack, ModifierType.HOOK, hook);
     }
 
     public static void setLine(ItemStack stack, ItemStack line) {
-        setModifier(stack, ModifierType.LINE, line.getItem());
+        setModifier(stack, ModifierType.LINE, line);
     }
 
-    public static void setModifier(ItemStack stack, ModifierType modifier, Item value) {
+    public static void setModifier(ItemStack stack, ModifierType modifier, ItemStack accessory) {
         updateModifiers(stack);
-        getModifierTag(stack).putString(modifier.getID(), BuiltInRegistries.ITEM.getKey(value).toString());
+        if (accessory == null) {
+            getModifierTag(stack).put(modifier.getID(), new CompoundTag());
+            return;
+        }
+        CompoundTag tag = accessory.save(new CompoundTag());
+        Tide.LOG.info("Saved accessory tag: {}", tag);
+        getModifierTag(stack).put(modifier.getID(), tag);
     }
 
     public static boolean hasModifierTag(ItemStack stack) {
@@ -53,37 +58,40 @@ public class CustomRodManager {
         return (CompoundTag) stack.getTag().get("modifier");
     }
 
-    public static ItemStack getBobber(ItemStack stack) {
-        updateModifiers(stack);
-        String bobberKey = getModifierTag(stack).getString("bobber");
-
-        if (bobberKey.isEmpty() || !BuiltInRegistries.ITEM.containsKey(new ResourceLocation(bobberKey))) return DEFAULT_BOBBER;
-        return BuiltInRegistries.ITEM.get(new ResourceLocation(bobberKey)).getDefaultInstance();
+    public static ItemStack getBobber(ItemStack rod) {
+        return getAccessory(rod, ModifierType.BOBBER, DEFAULT_BOBBER.getDefaultInstance());
     }
 
-    public static ItemStack getHook(ItemStack stack) {
-        updateModifiers(stack);
-        String hookKey = getModifierTag(stack).getString("hook");
-
-        if (hookKey.isEmpty() || !BuiltInRegistries.ITEM.containsKey(new ResourceLocation(hookKey))) return DEFAULT_HOOK;
-        return BuiltInRegistries.ITEM.get(new ResourceLocation(hookKey)).getDefaultInstance();
+    public static ItemStack getHook(ItemStack rod) {
+        return getAccessory(rod, ModifierType.HOOK, DEFAULT_HOOK.getDefaultInstance());
     }
 
-    public static ItemStack getLine(ItemStack stack) {
-        updateModifiers(stack);
-        String lineKey = getModifierTag(stack).getString("line");
-
-        if (lineKey.isEmpty() || !BuiltInRegistries.ITEM.containsKey(new ResourceLocation(lineKey))) return DEFAULT_LINE;
-        return BuiltInRegistries.ITEM.get(new ResourceLocation(lineKey)).getDefaultInstance();
+    public static ItemStack getLine(ItemStack rod) {
+        return getAccessory(rod, ModifierType.LINE, DEFAULT_LINE.getDefaultInstance());
     }
 
-    public static String getLineColor(ItemStack line) {
-        TideAccessoryData data = TideAccessoryData.get(line);
-        return data.entityModifier();
+    public static boolean hasBobber(ItemStack rod) {
+        return getAccessory(rod, ModifierType.BOBBER) != null;
     }
 
-    public static ResourceLocation getTextureLocation(ItemStack hook) {
-        TideAccessoryData data = TideAccessoryData.get(hook);
-        return data.getTextureLocation();
+    public static boolean hasHook(ItemStack rod) {
+        return getAccessory(rod, ModifierType.HOOK) != null;
+    }
+
+    public static boolean hasLine(ItemStack rod) {
+        return getAccessory(rod, ModifierType.LINE) != null;
+    }
+
+    private static ItemStack getAccessory(ItemStack rod, ModifierType type) {
+        return getAccessory(rod, type, null);
+    }
+
+    private static ItemStack getAccessory(ItemStack rod, ModifierType type, ItemStack defaultInstance) {
+        updateModifiers(rod);
+        CompoundTag accessoryTag = getModifierTag(rod).getCompound(type.getID());
+
+        if (accessoryTag.isEmpty()) return defaultInstance;
+        ItemStack accessory = ItemStack.of(accessoryTag);
+        return accessory.isEmpty() ? defaultInstance : accessory;
     }
 }

@@ -46,53 +46,53 @@ public class TideItems {
             new BaitItem(new Item.Properties(), 0, 2, "item.tide.magnetic_bait.desc"));
 
     public static final Item WHITE_FISHING_BOBBER = register("white_fishing_bobber", new FishingBobberItem(
-            "textures/item/white_fishing_bobber.png", "bobber.tide.white", new Item.Properties()));
+            Tide.resource("textures/item/white_fishing_bobber.png"), Component.translatable("bobber.tide.white"), new Item.Properties()));
     public static final Item ORANGE_FISHING_BOBBER = register("orange_fishing_bobber",new FishingBobberItem(
-            "textures/item/orange_fishing_bobber.png", "bobber.tide.orange", new Item.Properties()));
+            Tide.resource("textures/item/orange_fishing_bobber.png"), Component.translatable("bobber.tide.orange"), new Item.Properties()));
     public static final Item MAGENTA_FISHING_BOBBER = register("magenta_fishing_bobber",new FishingBobberItem(
-            "textures/item/magenta_fishing_bobber.png", "bobber.tide.magenta", new Item.Properties()));
+            Tide.resource("textures/item/magenta_fishing_bobber.png"), Component.translatable("bobber.tide.magenta"), new Item.Properties()));
     public static final Item LIGHT_BLUE_FISHING_BOBBER = register("light_blue_fishing_bobber",new FishingBobberItem(
-            "textures/item/light_blue_fishing_bobber.png", "bobber.tide.light_blue", new Item.Properties()));
+            Tide.resource("textures/item/light_blue_fishing_bobber.png"), Component.translatable("bobber.tide.light_blue"), new Item.Properties()));
     public static final Item YELLOW_FISHING_BOBBER = register("yellow_fishing_bobber",new FishingBobberItem(
-            "textures/item/yellow_fishing_bobber.png", "bobber.tide.yellow", new Item.Properties()));
+            Tide.resource("textures/item/yellow_fishing_bobber.png"), Component.translatable("bobber.tide.yellow"), new Item.Properties()));
     public static final Item LIME_FISHING_BOBBER = register("lime_fishing_bobber",new FishingBobberItem(
-            "textures/item/lime_fishing_bobber.png", "bobber.tide.lime", new Item.Properties()));
+            Tide.resource("textures/item/lime_fishing_bobber.png"), Component.translatable("bobber.tide.lime"), new Item.Properties()));
     public static final Item PINK_FISHING_BOBBER = register("pink_fishing_bobber",new FishingBobberItem(
-            "textures/item/pink_fishing_bobber.png", "bobber.tide.pink", new Item.Properties()));
+            Tide.resource("textures/item/pink_fishing_bobber.png"), Component.translatable("bobber.tide.pink"), new Item.Properties()));
     public static final Item GRAY_FISHING_BOBBER = register("gray_fishing_bobber",new FishingBobberItem(
-            "textures/item/gray_fishing_bobber.png", "bobber.tide.gray", new Item.Properties()));
+            Tide.resource("textures/item/gray_fishing_bobber.png"), Component.translatable("bobber.tide.gray"), new Item.Properties()));
     public static final Item LIGHT_GRAY_FISHING_BOBBER = register("light_gray_fishing_bobber",new FishingBobberItem(
-            "textures/item/light_gray_fishing_bobber.png", "bobber.tide.light_gray", new Item.Properties()));
+            Tide.resource("textures/item/light_gray_fishing_bobber.png"), Component.translatable("bobber.tide.light_gray"), new Item.Properties()));
     public static final Item CYAN_FISHING_BOBBER = register("cyan_fishing_bobber",new FishingBobberItem(
-            "textures/item/cyan_fishing_bobber.png", "bobber.tide.cyan", new Item.Properties()));
+            Tide.resource("textures/item/cyan_fishing_bobber.png"), Component.translatable("bobber.tide.cyan"), new Item.Properties()));
     public static final Item PURPLE_FISHING_BOBBER = register("purple_fishing_bobber",new FishingBobberItem(
-            "textures/item/purple_fishing_bobber.png", "bobber.tide.purple", new Item.Properties()));
+            Tide.resource("textures/item/purple_fishing_bobber.png"), Component.translatable("bobber.tide.purple"), new Item.Properties()));
     public static final Item BLUE_FISHING_BOBBER = register("blue_fishing_bobber",new FishingBobberItem(
-            "textures/item/blue_fishing_bobber.png", "bobber.tide.blue", new Item.Properties()));
+            Tide.resource("textures/item/blue_fishing_bobber.png"), Component.translatable("bobber.tide.blue"), new Item.Properties()));
     public static final Item BROWN_FISHING_BOBBER = register("brown_fishing_bobber",new FishingBobberItem(
-            "textures/item/brown_fishing_bobber.png", "bobber.tide.brown", new Item.Properties()));
+            Tide.resource("textures/item/brown_fishing_bobber.png"), Component.translatable("bobber.tide.brown"), new Item.Properties()));
     public static final Item GREEN_FISHING_BOBBER = register("green_fishing_bobber",new FishingBobberItem(
-            "textures/item/green_fishing_bobber.png", "bobber.tide.green", new Item.Properties()));
+            Tide.resource("textures/item/green_fishing_bobber.png"), Component.translatable("bobber.tide.green"), new Item.Properties()));
     public static final Item RED_FISHING_BOBBER = register("red_fishing_bobber",new FishingBobberItem(
-            "textures/item/red_fishing_bobber.png", "bobber.tide.red", new Item.Properties()));
+            Tide.resource("textures/item/red_fishing_bobber.png"), Component.translatable("bobber.tide.red"), new Item.Properties()));
     public static final Item BLACK_FISHING_BOBBER = register("black_fishing_bobber",new FishingBobberItem(
-            "textures/item/black_fishing_bobber.png", "bobber.tide.black", new Item.Properties()));
+            Tide.resource("textures/item/black_fishing_bobber.png"), Component.translatable("bobber.tide.black"), new Item.Properties()));
 
     public static final Item FISHING_HOOK = register("fishing_hook", new FishingHookItem(
-            "textures/entity/fishing_hook/fishing_hook.png", "hook.tide.normal", new Item.Properties()));
+            Tide.resource("textures/entity/fishing_hook/fishing_hook.png"), Component.translatable("hook.tide.normal"),new Item.Properties()));
     public static final Item IRON_FISHING_HOOK = register("iron_fishing_hook", new FishingHookItem(
-            "textures/entity/fishing_hook/iron_fishing_hook.png", "hook.tide.iron", new Item.Properties(), "item.tide.iron_hook.desc"));
+            Tide.resource("textures/entity/fishing_hook/iron_fishing_hook.png"), Component.translatable("hook.tide.iron"), new Item.Properties(), "item.tide.iron_hook.desc"));
     public static final Item LAVAPROOF_FISHING_HOOK = register("lavaproof_fishing_hook", new FishingHookItem(
-            "textures/entity/fishing_hook/lavaproof_fishing_hook.png", "hook.tide.lavaproof", new Item.Properties(), "item.tide.lavaproof_hook.desc"));
+            Tide.resource("textures/entity/fishing_hook/lavaproof_fishing_hook.png"), Component.translatable("hook.tide.lavaproof"), new Item.Properties(), "item.tide.lavaproof_hook.desc"));
 
     public static final Item FISHING_LINE = register("fishing_line", new FishingLineItem(
-            "#d6d6d6", "line.tide.normal", new Item.Properties()));
+            "#d6d6d6", Component.translatable("line.tide.normal"), new Item.Properties()));
     public static final Item BRAIDED_LINE = register("braided_line", new FishingLineItem(
-            "#362c1e", "line.tide.braided", new Item.Properties(), "item.tide.braided_line.desc"));
+            "#362c1e", Component.translatable("line.tide.braided"), new Item.Properties(), "item.tide.braided_line.desc"));
     public static final Item REINFORCED_LINE = register("reinforced_line", new FishingLineItem(
-            "#6b6b68", "line.tide.reinforced", new Item.Properties(), "item.tide.reinforced_line.desc"));
+            "#6b6b68", Component.translatable("line.tide.reinforced"), new Item.Properties(), "item.tide.reinforced_line.desc"));
     public static final Item FORTUNE_LINE = register("fortune_line", new FishingLineItem(
-            "#e9b115", "line.tide.fortune",  new Item.Properties(), "item.tide.fortune_line.desc"));
+            "#e9b115", Component.translatable("line.tide.fortune"),  new Item.Properties(), "item.tide.fortune_line.desc"));
 
     public static final Item FISHING_JOURNAL = register("fishing_journal",
             new FishingJournalItem(new Item.Properties()));

@@ -4,19 +4,14 @@ import com.li64.tide.client.gui.TideMenuTypes;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.data.rods.CustomRodManager;
 import com.li64.tide.registries.TideBlocks;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.ItemCombinerMenu;
 import net.minecraft.world.inventory.ItemCombinerMenuSlotDefinition;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -40,10 +35,11 @@ public class AnglerWorkshopMenu extends ItemCombinerMenu {
 
     @Override
     protected void onTake(Player player, ItemStack stack) {
-        stack.onCraftedBy(player.level(), player, stack.getCount());
         level.playLocalSound(player.blockPosition(), SoundEvents.FISHING_BOBBER_RETRIEVE, SoundSource.BLOCKS, 1.5F, this.level.random.nextFloat() * 0.1F + 0.9F, false);
-        inputSlots.setItem(0, ItemStack.EMPTY);
         this.access.execute((level, pos) -> level.levelEvent(1044, pos, 0));
+
+        stack.onCraftedBy(player.level(), player, stack.getCount());
+        inputSlots.clearContent();
     }
 
     @Override
@@ -58,22 +54,44 @@ public class AnglerWorkshopMenu extends ItemCombinerMenu {
 
     @Override
     public void createResult() {
+        if (!inputSlots.getItem(0).isEmpty()) {
+            ItemStack rod = inputSlots.getItem(0);
+            if (CustomRodManager.hasLine(rod)) {
+                if (!inputSlots.getItem(1).isEmpty()) player.drop(inputSlots.getItem(1), true);
+                ItemStack line = CustomRodManager.getLine(rod);
+                CustomRodManager.setLine(rod, null);
+                inputSlots.setItem(1, line);
+            }
+            if (CustomRodManager.hasBobber(rod)) {
+                if (!inputSlots.getItem(2).isEmpty()) player.drop(inputSlots.getItem(2), true);
+                ItemStack bobber = CustomRodManager.getBobber(rod);
+                CustomRodManager.setBobber(rod, null);
+                inputSlots.setItem(2, bobber);
+            }
+            if (CustomRodManager.hasHook(rod)) {
+                if (!inputSlots.getItem(3).isEmpty()) player.drop(inputSlots.getItem(3), true);
+                ItemStack hook = CustomRodManager.getHook(rod);
+                CustomRodManager.setHook(rod, null);
+                inputSlots.setItem(3, hook);
+            }
+        }
+
         if (inputSlots.getItem(0).isEmpty() ||
                 (inputSlots.getItem(1).isEmpty()
                 && inputSlots.getItem(2).isEmpty()
                 && inputSlots.getItem(3).isEmpty()))
             this.resultSlots.setItem(0, ItemStack.EMPTY);
         else {
-            ItemStack rod = slots.get(0).getItem();
-            ItemStack line = slots.get(1).getItem();
-            ItemStack bobber = slots.get(2).getItem();
-            ItemStack hook = slots.get(3).getItem();
+            ItemStack rod = inputSlots.getItem(0);
+            ItemStack line = inputSlots.getItem(1);
+            ItemStack bobber = inputSlots.getItem(2);
+            ItemStack hook = inputSlots.getItem(3);
 
             this.resultSlots.setItem(0, getOutputRodFor(rod, bobber, hook, line));
         }
     }
 
-    public static ItemStack getOutputRodFor(ItemStack input, ItemStack bobberItem, ItemStack hookItem, ItemStack lineItem) {
+    public ItemStack getOutputRodFor(ItemStack input, ItemStack bobberItem, ItemStack hookItem, ItemStack lineItem) {
         ItemStack newRod = input.copy();
         if (!lineItem.isEmpty()) CustomRodManager.setLine(newRod, lineItem);
         if (!bobberItem.isEmpty()) CustomRodManager.setBobber(newRod, bobberItem);

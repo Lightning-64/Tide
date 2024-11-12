@@ -1,6 +1,9 @@
 package com.li64.tide.registries.entities.misc.fishing;
 
 import com.li64.tide.data.rods.CustomRodManager;
+import com.li64.tide.registries.items.FishingBobberItem;
+import com.li64.tide.registries.items.FishingHookItem;
+import com.li64.tide.registries.items.FishingLineItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -116,7 +119,7 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
             BlockPos vertexPos = new BlockPos((int) d9, (int) d10, (int) d8);
 
             stringVertex(f4, f5, f6, vertexconsumer1, posestack$pose1, fraction(k, 16),
-                    fraction(k + 1, 16), vertexPos, hookEntity.level(), CustomRodManager.getLineColor(hookEntity.getLine()));
+                    fraction(k + 1, 16), vertexPos, hookEntity.level(), ((FishingLineItem) hookEntity.getLine().getItem()).getColor());
         }
     }
 
@@ -166,7 +169,7 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
     @Override
     public ResourceLocation getTextureLocation(TideFishingHook hookEntity) {
         if (!allowModifiers()) return HOOK_TEX_LOCATION;
-        return CustomRodManager.getTextureLocation(hookEntity.getHook());
+        return ((FishingHookItem) hookEntity.getHook().getItem()).getTextureLocation();
     }
 
     /** Override this to disable bobber, hook, and line modifiers */
