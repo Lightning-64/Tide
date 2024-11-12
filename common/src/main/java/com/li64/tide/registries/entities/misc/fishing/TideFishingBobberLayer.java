@@ -1,5 +1,7 @@
 package com.li64.tide.registries.entities.misc.fishing;
 
+import com.li64.tide.data.rods.CustomRodManager;
+import com.li64.tide.registries.TideItems;
 import com.li64.tide.registries.items.FishingBobberItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -11,6 +13,10 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import com.li64.tide.Tide;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+
+import java.lang.reflect.Method;
 
 public class TideFishingBobberLayer extends RenderLayer<TideFishingHook, TideFishingHookModel<TideFishingHook>> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Tide.resource("fishing_hook"), "bobber");
@@ -26,7 +32,9 @@ public class TideFishingBobberLayer extends RenderLayer<TideFishingHook, TideFis
         this.getParentModel().copyPropertiesTo(this.model);
         this.model.setupAnim(hookEntity, p_117236_, p_117237_, p_117239_, p_117240_, p_117241_);
 
-        VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(((FishingBobberItem) hookEntity.getBobber().getItem()).getTextureLocation()));
+        ResourceLocation textureLocation = CustomRodManager.getBobberTexture(hookEntity.getBobber());
+
+        VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(textureLocation));
         this.model.renderToBuffer(poseStack, vertexconsumer, p_117234_, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f);
     }
 }

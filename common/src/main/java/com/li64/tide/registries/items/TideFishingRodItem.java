@@ -194,21 +194,21 @@ public class TideFishingRodItem extends FishingRodItem {
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
 
-        FishingBobberItem bobber = (FishingBobberItem) CustomRodManager.getBobber(stack).getItem();
-        FishingHookItem hook = (FishingHookItem) CustomRodManager.getHook(stack).getItem();
-        FishingLineItem line = (FishingLineItem) CustomRodManager.getLine(stack).getItem();
+        ItemStack bobber = CustomRodManager.getBobber(stack);
+        ItemStack hook = CustomRodManager.getHook(stack);
+        ItemStack line = CustomRodManager.getLine(stack);
 
-        MutableComponent bobberComponent = bobber.getTranslation();
+        MutableComponent bobberComponent = CustomRodManager.getTranslation(bobber);
         tooltip.add(bobberComponent.withStyle(bobberComponent.getStyle()
                 .withItalic(true)
                 .withColor(ChatFormatting.YELLOW)));
 
-        MutableComponent hookComponent = hook.getTranslation();
+        MutableComponent hookComponent = CustomRodManager.getTranslation(hook);
         tooltip.add(hookComponent.withStyle(hookComponent.getStyle()
                 .withItalic(true)
                 .withColor(ChatFormatting.YELLOW)));
 
-        MutableComponent lineComponent = line.getTranslation();
+        MutableComponent lineComponent = CustomRodManager.getTranslation(line);
         tooltip.add(lineComponent.withStyle(lineComponent.getStyle()
                 .withItalic(true)
                 .withColor(ChatFormatting.YELLOW)));

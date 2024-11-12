@@ -1,6 +1,5 @@
 package com.li64.tide.registries.items;
 
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
