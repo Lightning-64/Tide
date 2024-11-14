@@ -1,13 +1,24 @@
 package com.li64.tide.registries.items;
 
-import com.li64.tide.data.TideDataComponents;
-import com.li64.tide.data.rods.TideAccessoryData;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 public class FishingBobberItem extends Item {
-    public FishingBobberItem(String textureLocation, Component translation, Properties properties) {
-        super(properties.component(TideDataComponents.TIDE_ACCESSORY_DATA,
-                new TideAccessoryData(translation, textureLocation)));
+    private final ResourceLocation texture;
+    private final MutableComponent translation;
+
+    public FishingBobberItem(ResourceLocation textureLocation, MutableComponent translation, Properties properties) {
+        super(properties);
+        this.texture = textureLocation;
+        this.translation = translation;
+    }
+
+    public ResourceLocation getTextureLocation() {
+        return texture;
+    }
+
+    public MutableComponent getTranslation() {
+        return translation;
     }
 }

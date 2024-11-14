@@ -5,7 +5,6 @@ import com.li64.tide.registries.TideItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -29,7 +28,7 @@ public class CustomRodManager {
     }
 
     private static void setAccessory(DataComponentType<CompoundTag> componentType, ItemStack rod, ItemStack accessory, HolderLookup.Provider registries) {
-        if (accessory == null || accessory.isEmpty() || !TideAccessoryData.hasData(accessory)) {
+        if (accessory == null || accessory.isEmpty()) {
             rod.set(componentType, new CompoundTag());
             return;
         }
@@ -73,19 +72,5 @@ public class CustomRodManager {
         if (data == null) return null;
         Optional<ItemStack> hook = ItemStack.parse(registryAccess, data);
         return hook.orElse(null);
-    }
-
-    /*-- Helper methods --*/
-
-    public static String getLineColor(ItemStack line) {
-        TideAccessoryData data = line.get(TideDataComponents.TIDE_ACCESSORY_DATA);
-        if (data == null) return "#d6d6d6";
-        return data.entityModifier();
-    }
-
-    public static ResourceLocation getTextureLocation(ItemStack hook) {
-        TideAccessoryData data = hook.get(TideDataComponents.TIDE_ACCESSORY_DATA);
-        if (data == null) return TideItems.RED_FISHING_BOBBER.getDefaultInstance().get(TideDataComponents.TIDE_ACCESSORY_DATA).getTextureLocation();
-        return data.getTextureLocation();
     }
 }

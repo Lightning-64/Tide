@@ -1,10 +1,10 @@
 package com.li64.tide.registries.items;
 
-import com.li64.tide.data.TideDataComponents;
-import com.li64.tide.data.rods.TideAccessoryData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -12,15 +12,18 @@ import net.minecraft.world.item.TooltipFlag;
 import java.util.List;
 
 public class FishingHookItem extends Item {
+    private final ResourceLocation texture;
+    private final MutableComponent translation;
     private final String description;
 
-    public FishingHookItem(String textureLocation, Component translation, Properties properties) {
-        this(textureLocation, translation, properties, "");
+    public FishingHookItem(ResourceLocation texture, MutableComponent translation, Properties properties) {
+        this(texture, translation, properties, "");
     }
 
-    public FishingHookItem(String textureLocation, Component translation, Properties properties, String description) {
-        super(properties.component(TideDataComponents.TIDE_ACCESSORY_DATA,
-                new TideAccessoryData(translation, textureLocation)));
+    public FishingHookItem(ResourceLocation texture, MutableComponent translation, Properties properties, String description) {
+        super(properties);
+        this.texture = texture;
+        this.translation = translation;
         this.description = description;
     }
 
@@ -29,5 +32,13 @@ public class FishingHookItem extends Item {
         super.appendHoverText(stack, context, components, flag);
         Style style = Component.empty().getStyle().withColor(ChatFormatting.GRAY).withItalic(true);
         components.add(Component.translatable(description).setStyle(style));
+    }
+
+    public ResourceLocation getTextureLocation() {
+        return texture;
+    }
+
+    public MutableComponent getTranslation() {
+        return translation;
     }
 }

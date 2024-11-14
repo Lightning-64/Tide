@@ -4,20 +4,15 @@ import com.li64.tide.client.gui.TideMenuTypes;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.data.rods.CustomRodManager;
 import com.li64.tide.registries.TideBlocks;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.ContainerListener;
 import net.minecraft.world.inventory.ItemCombinerMenu;
 import net.minecraft.world.inventory.ItemCombinerMenuSlotDefinition;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -88,10 +83,10 @@ public class AnglerWorkshopMenu extends ItemCombinerMenu {
                 && inputSlots.getItem(3).isEmpty()))
             this.resultSlots.setItem(0, ItemStack.EMPTY);
         else {
-            ItemStack rod = slots.get(0).getItem();
-            ItemStack line = slots.get(1).getItem();
-            ItemStack bobber = slots.get(2).getItem();
-            ItemStack hook = slots.get(3).getItem();
+            ItemStack rod = inputSlots.getItem(0);
+            ItemStack line = inputSlots.getItem(1);
+            ItemStack bobber = inputSlots.getItem(2);
+            ItemStack hook = inputSlots.getItem(3);
 
             this.resultSlots.setItem(0, getOutputRodFor(rod, bobber, hook, line));
         }

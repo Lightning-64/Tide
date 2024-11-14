@@ -5,7 +5,6 @@ import com.li64.tide.client.gui.overlays.CastBarOverlay;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.minigame.FishCatchMinigame;
 import com.li64.tide.data.rods.CustomRodManager;
-import com.li64.tide.data.rods.TideAccessoryData;
 import com.li64.tide.registries.TideEntityTypes;
 import com.li64.tide.registries.TideItems;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
@@ -201,22 +200,21 @@ public class TideFishingRodItem extends FishingRodItem {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltip, flag);
 
-        TideAccessoryData bobberData = TideAccessoryData.get(CustomRodManager.getBobber(stack, context.registries()));
-        TideAccessoryData hookData = TideAccessoryData.get(CustomRodManager.getHook(stack, context.registries()));
-        TideAccessoryData lineData = TideAccessoryData.get(CustomRodManager.getLine(stack, context.registries()));
-        if (bobberData == null || hookData == null || lineData == null) return;
+        FishingBobberItem bobber = (FishingBobberItem) CustomRodManager.getBobber(stack, context.registries()).getItem();
+        FishingHookItem hook = (FishingHookItem) CustomRodManager.getHook(stack, context.registries()).getItem();
+        FishingLineItem line = (FishingLineItem) CustomRodManager.getLine(stack, context.registries()).getItem();
 
-        MutableComponent bobberComponent = (MutableComponent) bobberData.translationKey();
+        MutableComponent bobberComponent = bobber.getTranslation();
         tooltip.add(bobberComponent.withStyle(bobberComponent.getStyle()
                 .withItalic(true)
                 .withColor(ChatFormatting.YELLOW)));
 
-        MutableComponent hookComponent = (MutableComponent) hookData.translationKey();
+        MutableComponent hookComponent = hook.getTranslation();
         tooltip.add(hookComponent.withStyle(hookComponent.getStyle()
                 .withItalic(true)
                 .withColor(ChatFormatting.YELLOW)));
 
-        MutableComponent lineComponent = (MutableComponent) lineData.translationKey();
+        MutableComponent lineComponent = line.getTranslation();
         tooltip.add(lineComponent.withStyle(lineComponent.getStyle()
                 .withItalic(true)
                 .withColor(ChatFormatting.YELLOW)));

@@ -1,15 +1,12 @@
 package com.li64.tide.compat.jei.recipe;
 
-import com.li64.tide.Tide;
 import com.li64.tide.data.TideTags;
-import com.li64.tide.data.rods.CustomRodManager;
-import com.li64.tide.registries.TideItems;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
