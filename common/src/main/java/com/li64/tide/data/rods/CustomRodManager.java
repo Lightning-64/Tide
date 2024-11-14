@@ -1,19 +1,27 @@
 package com.li64.tide.data.rods;
 
+import com.li64.tide.Tide;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.registries.TideItems;
+import com.li64.tide.registries.items.FishingBobberItem;
+import com.li64.tide.registries.items.FishingHookItem;
+import com.li64.tide.registries.items.FishingLineItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
+import java.lang.reflect.Method;
 import java.util.Optional;
 
 public class CustomRodManager {
-    public static final Item DEFAULT_HOOK = TideItems.FISHING_HOOK;
-    public static final Item DEFAULT_BOBBER = TideItems.RED_FISHING_BOBBER;
-    public static final Item DEFAULT_LINE = TideItems.FISHING_LINE;
+    private static final FishingBobberItem DEFAULT_BOBBER = (FishingBobberItem) TideItems.RED_FISHING_BOBBER;
+    private static final FishingHookItem DEFAULT_HOOK = (FishingHookItem) TideItems.FISHING_HOOK;
+    private static final FishingLineItem DEFAULT_LINE = (FishingLineItem) TideItems.FISHING_LINE;
 
     public static void setBobber(ItemStack rod, ItemStack bobber, HolderLookup.Provider registries) {
         setAccessory(TideDataComponents.FISHING_BOBBER, rod, bobber, registries);
@@ -72,5 +80,32 @@ public class CustomRodManager {
         if (data == null) return null;
         Optional<ItemStack> hook = ItemStack.parse(registryAccess, data);
         return hook.orElse(null);
+    }
+
+    public static ResourceLocation getBobberTexture(ItemStack bobber) {
+        return getAccessoryAttribute(bobber, "getTextureLocation", DEFAULT_BOBBER.getTextureLocation());
+    }
+
+    public static ResourceLocation getHookTexture(ItemStack hook) {
+        return getAccessoryAttribute(hook, "getTextureLocation", DEFAULT_HOOK.getTextureLocation());
+    }
+
+    public static String getLineColor(ItemStack line) {
+        return getAccessoryAttribute(line, "getColor", DEFAULT_LINE.getColor());
+    }
+
+    public static MutableComponent getTranslation(ItemStack accessory) {
+        return getAccessoryAttribute(accessory, "getTranslation", Component.literal(""));
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> T getAccessoryAttribute(ItemStack accessory, String getterName, T defaultValue) {
+        try {
+            Method method = accessory.getItem().getClass().getMethod(getterName);
+            return (T) method.invoke(accessory.getItem());
+        } catch (Exception e) {
+            Tide.LOG.error("Fishing rod accessory class \"{}\" does not have a \"{}\" method defined!", accessory.getItem().getClass(), getterName);
+            return defaultValue;
+        }
     }
 }

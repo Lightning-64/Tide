@@ -200,21 +200,21 @@ public class TideFishingRodItem extends FishingRodItem {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltip, flag);
 
-        FishingBobberItem bobber = (FishingBobberItem) CustomRodManager.getBobber(stack, context.registries()).getItem();
-        FishingHookItem hook = (FishingHookItem) CustomRodManager.getHook(stack, context.registries()).getItem();
-        FishingLineItem line = (FishingLineItem) CustomRodManager.getLine(stack, context.registries()).getItem();
+        ItemStack bobber = CustomRodManager.getBobber(stack, context.registries());
+        ItemStack hook = CustomRodManager.getHook(stack, context.registries());
+        ItemStack line = CustomRodManager.getLine(stack, context.registries());
 
-        MutableComponent bobberComponent = bobber.getTranslation();
+        MutableComponent bobberComponent = CustomRodManager.getTranslation(bobber);
         tooltip.add(bobberComponent.withStyle(bobberComponent.getStyle()
                 .withItalic(true)
                 .withColor(ChatFormatting.YELLOW)));
 
-        MutableComponent hookComponent = hook.getTranslation();
+        MutableComponent hookComponent = CustomRodManager.getTranslation(hook);
         tooltip.add(hookComponent.withStyle(hookComponent.getStyle()
                 .withItalic(true)
                 .withColor(ChatFormatting.YELLOW)));
 
-        MutableComponent lineComponent = line.getTranslation();
+        MutableComponent lineComponent = CustomRodManager.getTranslation(line);
         tooltip.add(lineComponent.withStyle(lineComponent.getStyle()
                 .withItalic(true)
                 .withColor(ChatFormatting.YELLOW)));
