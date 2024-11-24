@@ -26,6 +26,11 @@ public class TideDataComponents {
                     .persistent(CompoundTag.CODEC)
                     .networkSynchronized(ByteBufCodecs.COMPOUND_TAG).build());
 
+    public static final DataComponentType<CompoundTag> BAIT_CONTENTS = register(
+            "bait_contents", DataComponentType.<CompoundTag>builder()
+                    .persistent(CompoundTag.CODEC)
+                    .networkSynchronized(ByteBufCodecs.COMPOUND_TAG).build());
+
     public static <T> DataComponentType<T> register(String key, DataComponentType<T> component) {
         DATA_COMPONENT_TYPES.put(key, component);
         return component;

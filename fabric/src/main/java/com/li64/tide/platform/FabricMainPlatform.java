@@ -3,8 +3,10 @@ package com.li64.tide.platform;
 import com.li64.tide.Tide;
 import com.li64.tide.data.TideEntity;
 import com.li64.tide.platform.services.TideMainPlatform;
+import com.mojang.serialization.MapCodec;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -73,6 +75,11 @@ public class FabricMainPlatform implements TideMainPlatform {
     @Override
     public void registerComponentType(String key, DataComponentType<?> componentType) {
         Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, Tide.resource(key), componentType);
+    }
+
+    @Override
+    public void registerEntitySubPredicate(String key, MapCodec<? extends EntitySubPredicate> codec) {
+        Registry.register(BuiltInRegistries.ENTITY_SUB_PREDICATE_TYPE, Tide.resource(key), codec);
     }
 
     @Override

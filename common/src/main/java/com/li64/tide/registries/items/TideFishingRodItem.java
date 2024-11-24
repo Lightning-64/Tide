@@ -37,12 +37,15 @@ public class TideFishingRodItem extends FishingRodItem {
     public static final ResourceLocation CAST_PROPERTY = Tide.resource("cast");
 
     public TideFishingRodItem(double baseDurability, Properties properties) {
-        super(properties.durability((int) (baseDurability *
-                (Tide.CONFIG == null ? 1.0 : Tide.CONFIG.general.rodDurabilityMultiplier))));
+        super(properties
+                .durability((int) (baseDurability * (Tide.CONFIG == null ? 1.0 : Tide.CONFIG.general.rodDurabilityMultiplier)))
+//                .component(TideDataComponents.BAIT_CONTENTS)
+        );
     }
 
     public boolean isLavaproof(RegistryAccess registryAccess, ItemStack stack) {
-        return CustomRodManager.getHook(stack, registryAccess).is(TideItems.LAVAPROOF_FISHING_HOOK);
+        return CustomRodManager.getHook(stack, registryAccess).is(TideItems.LAVAPROOF_FISHING_HOOK)
+                || (this == TideItems.NETHERITE_FISHING_ROD);
     }
 
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {

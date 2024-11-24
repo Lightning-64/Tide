@@ -3,7 +3,9 @@ package com.li64.tide.platform;
 import com.li64.tide.TideForge;
 import com.li64.tide.compat.stardewfishing.StardewFishingCompat;
 import com.li64.tide.platform.services.TideMainPlatform;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.core.component.DataComponentType;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import net.minecraft.nbt.CompoundTag;
@@ -66,6 +68,11 @@ public class ForgeMainPlatform implements TideMainPlatform {
     @Override
     public void registerComponentType(String key, DataComponentType<?> componentType) {
         TideForge.DATA_COMPONENT_TYPES.register(key, () -> componentType);
+    }
+
+    @Override
+    public void registerEntitySubPredicate(String key, MapCodec<? extends EntitySubPredicate> codec) {
+        TideForge.ENTITY_SUB_PREDICATES.register(key, () -> codec);
     }
 
     @Override

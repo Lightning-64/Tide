@@ -1,21 +1,35 @@
 package com.li64.tide;
 
+import com.li64.tide.data.TideLootTables;
 import com.li64.tide.data.journal.JournalLayout;
 import com.li64.tide.config.TideConfig;
 import com.li64.tide.data.journal.config.JournalPageCustomData;
 import com.li64.tide.data.journal.config.JournalProfileCustomData;
 import com.li64.tide.data.journal.config.JournalRemovalCustomData;
+import com.li64.tide.data.loot.TideFishingPredicate;
 import com.li64.tide.platform.Services;
 import com.li64.tide.platform.services.TideMainPlatform;
 import com.li64.tide.platform.services.TideNetworkPlatform;
 import com.li64.tide.registries.TideItems;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.FishingHookPredicate;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntry;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,5 +75,17 @@ public class Tide {
         registry.accept(resource(JournalPageCustomData.DATA_PATH), JOURNAL_PAGE_CUSTOM_DATA);
         registry.accept(resource(JournalProfileCustomData.DATA_PATH), JOURNAL_PROFILE_CUSTOM_DATA);
         registry.accept(resource(JournalRemovalCustomData.DATA_PATH), JOURNAL_REMOVAL_CUSTOM_DATA);
+    }
+
+    public static LootPoolEntryContainer.Builder<?> getCrateFishingEntry() {
+        return NestedLootTable.lootTableReference(TideLootTables.Fishing.CRATES)
+                .setWeight(15).setQuality(2)
+                // crates can only be caught in open water (or any lava)
+                .when(LootItemEntityPropertyCondition.hasProperties(
+                        LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity()
+                                .subPredicate(FishingHookPredicate.inOpenWater(true)))
+                        .or(LootItemEntityPropertyCondition.hasProperties(
+                                LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity()
+                                        .subPredicate(TideFishingPredicate.isLavaFishing(true)))));
     }
 }

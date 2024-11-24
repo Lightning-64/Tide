@@ -1,6 +1,7 @@
 package com.li64.tide.events;
 
 
+import com.li64.tide.Tide;
 import com.li64.tide.data.commands.JournalCommand;
 import com.li64.tide.data.TideEntity;
 import com.li64.tide.registries.TideItems;
@@ -48,6 +49,10 @@ public class FabricEventHandler {
                 TideEventHandler.onPlayerJoinWorld(handler.getPlayer()));
 
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
+            if (key == BuiltInLootTables.FISHING) {
+                tableBuilder.modifyPools(builder -> builder.add(Tide.getCrateFishingEntry()));
+            }
+
             if (key == BuiltInLootTables.FISHING_JUNK) {
                 tableBuilder.modifyPools(builder -> builder
                         .add(LootItem.lootTableItem(TideItems.FISH_BONE).setWeight(8)));

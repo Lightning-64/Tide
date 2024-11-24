@@ -23,6 +23,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -52,39 +53,35 @@ public class TideUtils {
         else return LootLayer.SURFACE;
     }
 
-    public static List<ItemStack> checkForOverrides(List<ItemStack> list, TideFishingHook hook, ServerLevel level) {
-        ItemStack result = list.get(0);
+    public static ItemStack checkForOverrides(ItemStack item, TideFishingHook hook, ServerLevel level) {
         int luck = hook.getLuck();
         int moonPhase = level.getMoonPhase();
 
-        if (result.is(TideItems.VOIDSEEKER)) {
+        if (item.is(TideItems.VOIDSEEKER)) {
             // new moon and full moon are the only phases where you can get the voidseeker,
             // otherwise it will just be replaced with an end stone perch.
             if (moonPhase != 0 && moonPhase != 4)
-                result = new ItemStack(TideItems.ENDSTONE_PERCH, 1);
+                item = new ItemStack(TideItems.ENDSTONE_PERCH, 1);
         }
         if (hook.getLuck() >= 5) {
             // 1/24 chance to catch the midas fish if the player has max luck (5)
             // Technically luck can go higher through the luck effect but im not doing that
             if (new Random().nextInt(0, 24) == 1)
-                result = new ItemStack(TideItems.MIDAS_FISH, 1);
+                item = new ItemStack(TideItems.MIDAS_FISH, 1);
         }
         if (moonPhase == 0 && hook.getBiome().is(TideTags.Biomes.CAN_CATCH_STARFISH) && level.isNight()) {
             // 1/24 (with luck) chance to catch the shooting starfish at night, on a full moon,
             // when fishing in any deep ocean biome
             if (new Random().nextInt(0, 24 - luck) == 1)
-                result = new ItemStack(TideItems.SHOOTING_STARFISH, 1);
+                item = new ItemStack(TideItems.SHOOTING_STARFISH, 1);
         }
-        return List.of(result);
+        return item;
     }
 
-    public static boolean shouldGrabTideLootTable(List<ItemStack> items, FluidState fluid) {
-        if (items.getFirst().is(TideTags.Items.VANILLA_FISH) || new Random().nextInt(0, 4) == 0) return true;
+    public static boolean shouldGrabTideLootTable(ItemStack item, FluidState fluid) {
+        if (item.is(TideTags.Items.CRATES)) return false;
+        if (item.is(TideTags.Items.VANILLA_FISH) || new Random().nextInt(0, 4) == 0) return true;
         return fluid.is(TideTags.Fluids.LAVA_FISHING);
-    }
-
-    private static boolean isInDimension(String name, Level level) {
-        return level.dimension().location().toString().matches(name);
     }
 
     public static ResourceKey<LootTable> getTideLootTable(double x, double y, double z, FluidState fluid, Level level, RandomSource random) {

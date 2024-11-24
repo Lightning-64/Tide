@@ -13,18 +13,25 @@ public class TideLootTables {
     private static final Set<ResourceKey<LootTable>> LOCATIONS = new HashSet<>();
 
     public static class Fishing {
+        public static final ResourceKey<LootTable> CRATES = create("gameplay/fishing/crates");
+
         public static final ResourceKey<LootTable> FRESHWATER_NORMAL = create("gameplay/fishing/climates/freshwater_normal");
         public static final ResourceKey<LootTable> FRESHWATER_COLD = create("gameplay/fishing/climates/freshwater_cold");
         public static final ResourceKey<LootTable> FRESHWATER_WARM = create("gameplay/fishing/climates/freshwater_warm");
+
         public static final ResourceKey<LootTable> SALTWATER_NORMAL = create("gameplay/fishing/climates/saltwater_normal");
         public static final ResourceKey<LootTable> SALTWATER_COLD = create("gameplay/fishing/climates/saltwater_cold");
         public static final ResourceKey<LootTable> SALTWATER_WARM = create("gameplay/fishing/climates/saltwater_warm");
-        public static final ResourceKey<LootTable> LAVA_SURFACE = create("gameplay/fishing/climates/lava_surface");
+
         public static final ResourceKey<LootTable> UNDERGROUND = create("gameplay/fishing/climates/underground");
-        public static final ResourceKey<LootTable> LAVA_UNDERGROUND = create("gameplay/fishing/climates/lava_underground");
         public static final ResourceKey<LootTable> DEPTHS = create("gameplay/fishing/climates/depths");
+
+        public static final ResourceKey<LootTable> LAVA_SURFACE = create("gameplay/fishing/climates/lava_surface");
+        public static final ResourceKey<LootTable> LAVA_UNDERGROUND = create("gameplay/fishing/climates/lava_underground");
         public static final ResourceKey<LootTable> LAVA_DEPTHS = create("gameplay/fishing/climates/lava_depths");
+
         public static final ResourceKey<LootTable> NETHER = create("gameplay/fishing/climates/nether");
+
         public static final ResourceKey<LootTable> END_WATER = create("gameplay/fishing/climates/end_water");
         public static final ResourceKey<LootTable> END_LAVA = create("gameplay/fishing/climates/end_lava");
     }

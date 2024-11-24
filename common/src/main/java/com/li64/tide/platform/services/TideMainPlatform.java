@@ -1,7 +1,9 @@
 package com.li64.tide.platform.services;
 
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -50,6 +52,8 @@ public interface TideMainPlatform {
     void registerCriteriaTrigger(String key, CriterionTrigger<?> trigger);
 
     void registerComponentType(String key, DataComponentType<?> componentType);
+
+    void registerEntitySubPredicate(String key, MapCodec<? extends EntitySubPredicate> codec);
 
     void registerMenuType(String key, MenuType<?> menuType);
 

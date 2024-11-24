@@ -5,6 +5,7 @@ import com.li64.tide.compat.jei.recipe.RodUpgradingRecipe;
 import com.li64.tide.data.TideCriteriaTriggers;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.TideTags;
+import com.li64.tide.data.loot.TideEntitySubPredicates;
 import com.li64.tide.events.FabricEventHandler;
 import com.li64.tide.network.TideMessages;
 import com.li64.tide.registries.*;
@@ -56,6 +57,7 @@ public class TideFabric implements ModInitializer {
         TideMenuTypes.init();
         TideSoundEvents.init();
         TideDataComponents.init();
+        TideEntitySubPredicates.init();
         TideCriteriaTriggers.init();
 
         Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, Tide.resource(RodUpgradingRecipe.Type.ID),

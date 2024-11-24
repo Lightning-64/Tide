@@ -50,8 +50,8 @@ public final class TideConfig implements ConfigData {
         public boolean hideUnknownFishNames = true;
 
         @ConfigEntry.Gui.Tooltip
-        @ConfigEntry.BoundedDiscrete(max = 40, min = 1)
-        public int baseCrateRarity = 20;
+        @ConfigEntry.BoundedDiscrete(max = 100, min = 0)
+        public int baseCrateWeight = 20;
     }
 
     public static class Worldgen {
