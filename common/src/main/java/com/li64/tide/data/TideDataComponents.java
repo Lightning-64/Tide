@@ -1,6 +1,7 @@
 package com.li64.tide.data;
 
 import com.li64.tide.Tide;
+import com.li64.tide.data.rods.BaitContents;
 import com.li64.tide.data.rods.CustomRodManager;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
@@ -26,10 +27,10 @@ public class TideDataComponents {
                     .persistent(CompoundTag.CODEC)
                     .networkSynchronized(ByteBufCodecs.COMPOUND_TAG).build());
 
-    public static final DataComponentType<CompoundTag> BAIT_CONTENTS = register(
-            "bait_contents", DataComponentType.<CompoundTag>builder()
-                    .persistent(CompoundTag.CODEC)
-                    .networkSynchronized(ByteBufCodecs.COMPOUND_TAG).build());
+    public static final DataComponentType<BaitContents> BAIT_CONTENTS = register(
+            "bait_contents", DataComponentType.<BaitContents>builder()
+                    .persistent(BaitContents.CODEC).cacheEncoding()
+                    .networkSynchronized(BaitContents.STREAM_CODEC).build());
 
     public static <T> DataComponentType<T> register(String key, DataComponentType<T> component) {
         DATA_COMPONENT_TYPES.put(key, component);

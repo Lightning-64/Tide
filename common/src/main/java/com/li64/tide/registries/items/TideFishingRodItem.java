@@ -4,21 +4,30 @@ import com.li64.tide.Tide;
 import com.li64.tide.client.gui.overlays.CastBarOverlay;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.minigame.FishCatchMinigame;
+import com.li64.tide.data.rods.BaitContents;
 import com.li64.tide.data.rods.CustomRodManager;
+import com.li64.tide.data.rods.FishingRodTooltip;
 import com.li64.tide.registries.TideEntityTypes;
 import com.li64.tide.registries.TideItems;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
+import com.li64.tide.util.BaitUtils;
 import com.li64.tide.util.TideUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SlotAccess;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.tooltip.BundleTooltip;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -30,8 +39,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 public class TideFishingRodItem extends FishingRodItem {
     public static final ResourceLocation CAST_PROPERTY = Tide.resource("cast");
@@ -39,8 +51,61 @@ public class TideFishingRodItem extends FishingRodItem {
     public TideFishingRodItem(double baseDurability, Properties properties) {
         super(properties
                 .durability((int) (baseDurability * (Tide.CONFIG == null ? 1.0 : Tide.CONFIG.general.rodDurabilityMultiplier)))
-//                .component(TideDataComponents.BAIT_CONTENTS)
+                .component(TideDataComponents.BAIT_CONTENTS, BaitContents.EMPTY)
         );
+    }
+
+    @Override
+    public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
+        return !stack.has(DataComponents.HIDE_TOOLTIP) && !stack.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP)
+                ? Optional.ofNullable(stack.get(TideDataComponents.BAIT_CONTENTS)).map(FishingRodTooltip::new)
+                : Optional.empty();
+    }
+
+    @Override
+    public boolean overrideStackedOnOther(@NotNull ItemStack stack, @NotNull Slot slot, @NotNull ClickAction action, @NotNull Player player) {
+        if (action != ClickAction.SECONDARY) return false;
+        else {
+            BaitContents contents = new BaitContents(stack.get(TideDataComponents.BAIT_CONTENTS));
+            ItemStack slotStack = slot.getItem();
+            if (slotStack.isEmpty() && !contents.isEmpty()) {
+                // place next stack
+                ItemStack removedStack = contents.removeStack();
+                if (removedStack != null) slot.safeInsert(removedStack);
+
+            } else if (slotStack.getItem().canFitInsideContainerItems() && BaitUtils.isBait(slotStack)) {
+                // insert stack
+                contents.tryTransfer(slot, player);
+            }
+
+            stack.set(TideDataComponents.BAIT_CONTENTS, contents);
+            return true;
+        }
+    }
+
+    @Override
+    public boolean overrideOtherStackedOnMe(@NotNull ItemStack stack, @NotNull ItemStack other, @NotNull Slot slot, @NotNull ClickAction action, @NotNull Player player, @NotNull SlotAccess access) {
+        if (action == ClickAction.SECONDARY && slot.allowModification(player)) {
+            BaitContents contents = stack.get(TideDataComponents.BAIT_CONTENTS);
+            if (contents == null) {
+                return false;
+            } else {
+                if (other.isEmpty()) {
+                    // remove next stack
+                    ItemStack itemstack = contents.removeStack();
+                    if (itemstack != null) access.set(itemstack);
+
+                } else {
+                    // insert stack
+                    contents.tryInsert(other);
+                }
+
+                stack.set(TideDataComponents.BAIT_CONTENTS, contents);
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 
     public boolean isLavaproof(RegistryAccess registryAccess, ItemStack stack) {
@@ -48,7 +113,7 @@ public class TideFishingRodItem extends FishingRodItem {
                 || (this == TideItems.NETHERITE_FISHING_ROD);
     }
 
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
         if (isHookActive(player)) {
             TideFishingHook hook = getHook(player);
 
@@ -113,7 +178,7 @@ public class TideFishingRodItem extends FishingRodItem {
     }
 
     @Override
-    public void releaseUsing(ItemStack rod, Level level, LivingEntity user, int charge) {
+    public void releaseUsing(@NotNull ItemStack rod, @NotNull Level level, @NotNull LivingEntity user, int charge) {
         if (user instanceof Player player) {
 
             int chargeDifference = this.getUseDuration(rod, user) - charge;
@@ -144,9 +209,9 @@ public class TideFishingRodItem extends FishingRodItem {
                 int speed = (int)(EnchantmentHelper.getFishingTimeReduction((ServerLevel) level, rod, player) / 5f);
                 int luck = EnchantmentHelper.getFishingLuckBonus((ServerLevel) level, rod, player);
 
-                if (TideUtils.isHoldingBait(player)) {
-                    speed += TideUtils.getBaitSpeed(TideUtils.getHeldBaitItem(player));
-                    luck += TideUtils.getBaitLuck(TideUtils.getHeldBaitItem(player));
+                if (BaitUtils.isHoldingBait(rod)) {
+                    speed += BaitUtils.getBaitSpeed(BaitUtils.getPrimaryBait(rod));
+                    luck += BaitUtils.getBaitLuck(BaitUtils.getPrimaryBait(rod));
                 }
 
                 level.addFreshEntity(new TideFishingHook(TideEntityTypes.FISHING_BOBBER,
@@ -173,7 +238,7 @@ public class TideFishingRodItem extends FishingRodItem {
     }
 
     @Override
-    public void onUseTick(Level level, LivingEntity user, ItemStack rod, int charge) {
+    public void onUseTick(@NotNull Level level, @NotNull LivingEntity user, @NotNull ItemStack rod, int charge) {
         super.onUseTick(level, user, rod, charge);
 
         int chargeDuration = getChargeDuration(rod, level.registryAccess());
@@ -187,7 +252,7 @@ public class TideFishingRodItem extends FishingRodItem {
     }
 
     @Override
-    public int getUseDuration(ItemStack stack, LivingEntity entity) {
+    public int getUseDuration(@NotNull ItemStack stack, @NotNull LivingEntity entity) {
         return 60000;
     }
 
@@ -195,12 +260,12 @@ public class TideFishingRodItem extends FishingRodItem {
         return CustomRodManager.getLine(rod, registries).is(TideItems.BRAIDED_LINE) ? 15 : 25;
     }
 
-    public UseAnim getUseAnimation(ItemStack stack) {
+    public @NotNull UseAnim getUseAnimation(@NotNull ItemStack stack) {
         return UseAnim.BOW;
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+    public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltip, flag);
 
         ItemStack bobber = CustomRodManager.getBobber(stack, context.registries());

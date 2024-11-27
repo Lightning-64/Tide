@@ -2,11 +2,13 @@ package com.li64.tide.util;
 
 import com.li64.tide.Tide;
 import com.li64.tide.client.gui.JournalPage;
+import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.journal.JournalLayout;
 import com.li64.tide.data.TideCriteriaTriggers;
 import com.li64.tide.data.TideLootTables;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.data.player.TidePlayerData;
+import com.li64.tide.data.rods.BaitContents;
 import com.li64.tide.network.messages.ShowToastMsg;
 import com.li64.tide.registries.TideItems;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
@@ -26,6 +28,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.FluidState;
@@ -307,44 +310,9 @@ public class TideUtils {
         return new JournalPage(pageConfig);
     }
 
-    public static JournalPage getPageByNumber(int pageNumber) {
-        if (pageNumber > Tide.JOURNAL.getPageConfigs().size() - 1) return null;
-        return new JournalPage(Tide.JOURNAL.getPageConfigs().get(pageNumber));
-    }
-
     public static JournalLayout.Profile getProfileFromItem(ItemStack item) {
         return Tide.JOURNAL.getProfileConfigs().stream().filter(config ->
                         item.is(BuiltInRegistries.ITEM.get(ResourceLocation.parse(config.fishItem()))))
                 .findFirst().orElse(null);
-    }
-
-    public static boolean isHoldingBait(Player player) {
-        return isBait(player.getOffhandItem()) || isBait(player.getMainHandItem());
-    }
-
-    public static ItemStack getHeldBaitItem(Player player) {
-        if (!isHoldingBait(player)) return ItemStack.EMPTY;
-        return isBait(player.getOffhandItem())
-                ? player.getOffhandItem() : player.getMainHandItem();
-    }
-
-    public static boolean isBait(ItemStack stack) {
-        if (stack.getDescriptionId().equals("item.fishofthieves.earthworms")) return true;
-        if (stack.getDescriptionId().equals("item.fishofthieves.grubs")) return true;
-        if (stack.getDescriptionId().equals("item.fishofthieves.leeches")) return true;
-        return stack.getItem() instanceof BaitItem;
-    }
-
-    public static int getBaitSpeed(ItemStack stack) {
-        if (stack.getItem() instanceof BaitItem bait) return bait.getSpeedBonus();
-        if (stack.getDescriptionId().equals("item.fishofthieves.earthworms")) return 2;
-        if (stack.getDescriptionId().equals("item.fishofthieves.grubs")) return 2;
-        if (stack.getDescriptionId().equals("item.fishofthieves.leeches")) return 2;
-        else return 0;
-    }
-
-    public static int getBaitLuck(ItemStack stack) {
-        if (stack.getItem() instanceof BaitItem bait) return bait.getLuckBonus();
-        else return 0;
     }
 }

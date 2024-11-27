@@ -8,6 +8,7 @@ import com.li64.tide.events.TideEventHandler;
 import com.li64.tide.registries.*;
 import com.li64.tide.registries.entities.util.AbstractTideFish;
 import com.li64.tide.registries.items.BaitItem;
+import com.li64.tide.util.BaitUtils;
 import com.li64.tide.util.TideUtils;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.ChatFormatting;
@@ -134,7 +135,7 @@ public class TideNeoForgeEvents {
 
         @SubscribeEvent
         public static void itemTooltipEvent(ItemTooltipEvent event) {
-            if (TideUtils.isBait(event.getItemStack()) && !(event.getItemStack().getItem() instanceof BaitItem)) {
+            if (BaitUtils.isBait(event.getItemStack()) && !(event.getItemStack().getItem() instanceof BaitItem)) {
                 Style style = Component.empty().getStyle().withColor(ChatFormatting.GRAY).withItalic(true);
                 event.getToolTip().add(Component.translatable("item.tide.bait.desc").setStyle(style));
             }

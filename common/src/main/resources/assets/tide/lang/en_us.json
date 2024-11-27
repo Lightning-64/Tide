@@ -1,4 +1,6 @@
 {
+  "text.tide.rod_tooltip.bait_desc": "Bait slots (right click to fill)",
+
   "text.autoconfig.tide.title": "Tide Config",
   "text.autoconfig.tide.category.general": "General",
   "text.autoconfig.tide.category.worldgen": "World Generation",
