@@ -5,6 +5,7 @@ import com.li64.tide.client.gui.screens.AnglerWorkshopScreen;
 import com.li64.tide.registries.*;
 import com.li64.tide.registries.items.BaitItem;
 import com.li64.tide.registries.items.TideFishingRodItem;
+import com.li64.tide.util.BaitUtils;
 import com.li64.tide.util.TideUtils;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -31,7 +32,7 @@ public class TideFabricClient implements ClientModInitializer {
         MenuScreens.register(TideMenuTypes.ANGLER_WORKSHOP, AnglerWorkshopScreen::new);
 
         ItemTooltipCallback.EVENT.register((stack, context, lines) -> {
-            if (TideUtils.isBait(stack) && !(stack.getItem() instanceof BaitItem)) {
+            if (BaitUtils.isBait(stack) && !(stack.getItem() instanceof BaitItem)) {
                 Style style = Component.empty().getStyle().withColor(ChatFormatting.GRAY).withItalic(true);
                 lines.add(Component.translatable("item.tide.bait.desc").setStyle(style));
             }

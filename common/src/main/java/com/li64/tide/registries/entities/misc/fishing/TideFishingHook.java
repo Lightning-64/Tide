@@ -7,6 +7,7 @@ import com.li64.tide.data.rods.CustomRodManager;
 import com.li64.tide.registries.TideBlocks;
 import com.li64.tide.registries.entities.misc.LootCrateEntity;
 import com.li64.tide.registries.items.TideFishingRodItem;
+import com.li64.tide.util.BaitUtils;
 import com.mojang.logging.LogUtils;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -80,6 +81,7 @@ public class TideFishingHook extends Projectile {
     protected ItemStack rod;
     protected ItemStack hookedItem;
     protected CatchType catchType = CatchType.NOTHING;
+    private int particleTimer = 0;
 
     private TideFishingHook(EntityType<? extends TideFishingHook> entityType, Level level, int luck, int lureSpeed, ItemStack rod) {
         super(entityType, level);
@@ -153,8 +155,7 @@ public class TideFishingHook extends Projectile {
     }
 
     public boolean usingMagneticBait() {
-        return getPlayerOwner().getOffhandItem().is(TideItems.MAGNETIC_BAIT)
-                || getPlayerOwner().getMainHandItem().is(TideItems.MAGNETIC_BAIT);
+        return BaitUtils.getPrimaryBait(rod).is(TideItems.MAGNETIC_BAIT);
     }
 
     public enum CatchType {
@@ -217,6 +218,36 @@ public class TideFishingHook extends Projectile {
     public void tick() {
         this.synchronizedRandom.setSeed(this.getUUID().getLeastSignificantBits() ^ this.level().getGameTime());
         super.tick();
+
+        // Particle effects
+        if (BaitUtils.getPrimaryBait(rod).is(TideItems.LUCKY_BAIT) && this.currentState == FishHookState.BOBBING) {
+            particleTimer++;
+            if (particleTimer >= 5) {
+                this.level().addParticle(ParticleTypes.WAX_ON,
+                        this.getRandomX(0.8),
+                        this.getY((2.0 * this.random.nextDouble() - 1.0) * 0.4) + 0.2,
+                        this.getRandomZ(0.8),
+                        0.0, 0.0, 0.0);
+                particleTimer = 0;
+            }
+        }
+
+        if (BaitUtils.getPrimaryBait(rod).is(TideItems.MAGNETIC_BAIT) && this.currentState == FishHookState.BOBBING) {
+            particleTimer++;
+            if (particleTimer >= 3) {
+                Vec3 pos = this.position();
+                Vec3 randomPos = new Vec3(
+                        this.getX() + 0.5 * (this.random.nextGaussian() - this.random.nextGaussian()),
+                        this.getY() + 0.5 * (this.random.nextGaussian() - this.random.nextGaussian()),
+                        this.getZ() + 0.5 * (this.random.nextGaussian() - this.random.nextGaussian()));
+                Vec3 speed = pos.vectorTo(randomPos);
+                this.level().addParticle(ParticleTypes.UNDERWATER,
+                        pos.x(), pos.y(), pos.z(),
+                        speed.x(), speed.y(), speed.z());
+                particleTimer = 0;
+            }
+        }
+
         Player player = this.getPlayerOwner();
         if (player == null) {
             this.discard();
@@ -680,8 +711,12 @@ public class TideFishingHook extends Projectile {
         catchType = (hookedItem.is(ItemTags.FISHES) || TideUtils.isJournalFish(hookedItem)) ? CatchType.FISH : CatchType.ITEM;
         if (selection.is(TideTags.Items.CRATES)) catchType = CatchType.CRATE;
 
-        if (TideUtils.isHoldingBait(player)) {
-            if (!player.isCreative()) player.getOffhandItem().shrink(1);
+        if (BaitUtils.isHoldingBait(rod)) {
+            if (!player.isCreative()) {
+                // consume used bait if necessary
+                BaitUtils.getPrimaryBait(rod).shrink(1);
+            }
+            Tide.LOG.info("Using bait");
         }
 
         getEntityData().set(DATA_CATCH_TYPE, catchType.ordinal());
