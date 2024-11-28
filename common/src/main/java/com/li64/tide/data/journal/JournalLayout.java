@@ -1,7 +1,7 @@
 package com.li64.tide.data.journal;
 
 import com.li64.tide.Tide;
-import com.li64.tide.data.journal.config.JournalRemovalCustomData;
+import com.li64.tide.data.journal.config.CustomRemovalLoader;
 import com.li64.tide.util.TideUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -240,9 +240,9 @@ public class JournalLayout {
         profiles.addAll(newProfiles);
     }
 
-    public void removeProfileConfigs(List<JournalRemovalCustomData.Removal> removals) {
+    public void removeProfileConfigs(List<CustomRemovalLoader.Removal> removals) {
         profiles.removeIf(profile -> removals.stream()
-                .map(JournalRemovalCustomData.Removal::item)
+                .map(CustomRemovalLoader.Removal::item)
                 .toList().contains(profile.fishItem));
     }
 

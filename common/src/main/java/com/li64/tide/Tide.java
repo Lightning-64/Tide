@@ -4,10 +4,11 @@ import com.li64.tide.data.TideLootTables;
 import com.li64.tide.data.journal.JournalLayout;
 import com.li64.tide.config.TideConfig;
 import com.li64.tide.network.TideMessages;
-import com.li64.tide.data.journal.config.JournalPageCustomData;
-import com.li64.tide.data.journal.config.JournalProfileCustomData;
-import com.li64.tide.data.journal.config.JournalRemovalCustomData;
+import com.li64.tide.data.journal.config.CustomPageLoader;
+import com.li64.tide.data.journal.config.CustomProfileLoader;
+import com.li64.tide.data.journal.config.CustomRemovalLoader;
 import com.li64.tide.data.loot.TideFishingPredicate;
+import com.li64.tide.data.rods.CustomBaitLoader;
 import com.li64.tide.platform.Services;
 import com.li64.tide.platform.services.TideMainPlatform;
 import com.li64.tide.platform.services.TideNetworkPlatform;
@@ -41,9 +42,10 @@ public class Tide {
     public static TideConfig CONFIG;
     public static JournalLayout JOURNAL;
 
-    public static JournalPageCustomData JOURNAL_PAGE_CUSTOM_DATA = new JournalPageCustomData();
-    public static JournalProfileCustomData JOURNAL_PROFILE_CUSTOM_DATA = new JournalProfileCustomData();
-    public static JournalRemovalCustomData JOURNAL_REMOVAL_CUSTOM_DATA = new JournalRemovalCustomData();
+    public static CustomBaitLoader BAIT_LOADER = new CustomBaitLoader();
+    public static CustomPageLoader PAGE_LOADER = new CustomPageLoader();
+    public static CustomProfileLoader PROFILE_LOADER = new CustomProfileLoader();
+    public static CustomRemovalLoader REMOVAL_LOADER = new CustomRemovalLoader();
 
     public static void init() {
         CONFIG = AutoConfig.register(TideConfig.class, Toml4jConfigSerializer::new).getConfig();
@@ -69,9 +71,10 @@ public class Tide {
     }
 
     public static void onRegisterReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {
-        registry.accept(resource(JournalPageCustomData.DATA_PATH), JOURNAL_PAGE_CUSTOM_DATA);
-        registry.accept(resource(JournalProfileCustomData.DATA_PATH), JOURNAL_PROFILE_CUSTOM_DATA);
-        registry.accept(resource(JournalRemovalCustomData.DATA_PATH), JOURNAL_REMOVAL_CUSTOM_DATA);
+        registry.accept(resource(CustomBaitLoader.DATA_PATH), BAIT_LOADER);
+        registry.accept(resource(CustomPageLoader.DATA_PATH), PAGE_LOADER);
+        registry.accept(resource(CustomProfileLoader.DATA_PATH), PROFILE_LOADER);
+        registry.accept(resource(CustomRemovalLoader.DATA_PATH), REMOVAL_LOADER);
     }
 
     public static LootPoolEntryContainer.Builder<?> getCrateFishingEntry() {

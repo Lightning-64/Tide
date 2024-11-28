@@ -38,12 +38,9 @@ public class TideItems {
     public static final Item NETHERITE_FISHING_ROD = register("netherite_fishing_rod",
             new TideFishingRodItem(512, new Item.Properties().fireResistant()));
 
-    public static final Item BAIT = register("bait",
-            new BaitItem(new Item.Properties(), 0, 2, "item.tide.bait.desc"));
-    public static final Item LUCKY_BAIT = register("lucky_bait",
-            new BaitItem(new Item.Properties(), 2, 0, "item.tide.lucky_bait.desc"));
-    public static final Item MAGNETIC_BAIT = register("magnetic_bait",
-            new BaitItem(new Item.Properties(), 0, 2, "item.tide.magnetic_bait.desc"));
+    public static final Item BAIT = register("bait", new Item(new Item.Properties()));
+    public static final Item LUCKY_BAIT = register("lucky_bait", new Item(new Item.Properties()));
+    public static final Item MAGNETIC_BAIT = register("magnetic_bait", new Item(new Item.Properties()));
 
     public static final Item WHITE_FISHING_BOBBER = register("white_fishing_bobber", new FishingBobberItem(
             Tide.resource("textures/item/white_fishing_bobber.png"), Component.translatable("bobber.tide.white"), new Item.Properties()));

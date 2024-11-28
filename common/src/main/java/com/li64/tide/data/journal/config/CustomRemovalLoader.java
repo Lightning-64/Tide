@@ -5,13 +5,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.li64.tide.Tide;
-import com.li64.tide.network.messages.UpdateJournalMsg;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -21,12 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class JournalRemovalCustomData extends SimpleJsonResourceReloadListener {
+public class CustomRemovalLoader extends SimpleJsonResourceReloadListener {
     public static final String DATA_PATH = "journal/removals";
     private static final Gson GSON = new Gson();
     private List<Removal> removals;
 
-    public JournalRemovalCustomData() {
+    public CustomRemovalLoader() {
         super(GSON, DATA_PATH);
     }
 

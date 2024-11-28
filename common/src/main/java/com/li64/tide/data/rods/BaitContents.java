@@ -24,7 +24,7 @@ public class BaitContents implements TooltipComponent {
     }
 
     public BaitContents(List<ItemStack> items) {
-        this.items = items;
+        this.items = new ArrayList<>(items);
     }
 
     public List<ItemStack> items() {

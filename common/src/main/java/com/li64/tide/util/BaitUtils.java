@@ -1,10 +1,19 @@
 package com.li64.tide.util;
 
+import com.google.common.collect.ImmutableList;
+import com.li64.tide.Tide;
 import com.li64.tide.data.rods.BaitContents;
-import com.li64.tide.registries.items.BaitItem;
+import com.li64.tide.data.rods.BaitData;
+import com.li64.tide.registries.TideItems;
 import com.li64.tide.registries.items.TideFishingRodItem;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class BaitUtils {
     public static boolean isHoldingBait(ItemStack rod) {
@@ -21,34 +30,52 @@ public class BaitUtils {
         return Items.AIR.getDefaultInstance();
     }
 
-
-    public static void consumeBait(ItemStack rod) {
-        BaitContents contents = TideFishingRodItem.getContents(rod);
-        if (contents.items() == null) return;
-        for (int i = 0; i < contents.size(); i++) {
-            if (BaitUtils.isBait(contents.get(i))) {
-                contents.get(i).shrink(1);
-            }
-        }
+    public static boolean isBait(ItemStack stack) {
+        return Tide.BAIT_LOADER.getBaitData().stream().anyMatch(baitData -> stack.is(baitData.getItem()));
     }
 
-    public static boolean isBait(ItemStack stack) {
-        if (stack.getDescriptionId().equals("item.fishofthieves.earthworms")) return true;
-        if (stack.getDescriptionId().equals("item.fishofthieves.grubs")) return true;
-        if (stack.getDescriptionId().equals("item.fishofthieves.leeches")) return true;
-        return stack.getItem() instanceof BaitItem;
+    public static Optional<BaitData> getBaitData(ItemStack stack) {
+        return Tide.BAIT_LOADER.getBaitData().stream()
+                .filter(baitData -> stack.is(baitData.getItem()))
+                .findFirst();
     }
 
     public static int getBaitSpeed(ItemStack stack) {
-        if (stack.getItem() instanceof BaitItem bait) return bait.getSpeedBonus();
-        if (stack.getDescriptionId().equals("item.fishofthieves.earthworms")) return 2;
-        if (stack.getDescriptionId().equals("item.fishofthieves.grubs")) return 2;
-        if (stack.getDescriptionId().equals("item.fishofthieves.leeches")) return 2;
-        else return 0;
+        return getBaitData(stack).map(BaitData::speedBonus).orElse(0);
     }
 
     public static int getBaitLuck(ItemStack stack) {
-        if (stack.getItem() instanceof BaitItem bait) return bait.getLuckBonus();
-        else return 0;
+        return getBaitData(stack).map(BaitData::luckBonus).orElse(0);
+    }
+
+    public static int getCrateChance(ItemStack stack) {
+        return stack.is(TideItems.MAGNETIC_BAIT) ? 25 : 0;
+    }
+
+    public static List<Component> getDescriptionLines(ItemStack bait) {
+        ArrayList<Component> builder = new ArrayList<>();
+        if (!isBait(bait)) return ImmutableList.copyOf(builder);
+
+        int speed = getBaitSpeed(bait);
+        int luck = getBaitLuck(bait);
+        int crateChance = getCrateChance(bait);
+
+        if (speed != 0)
+            builder.add(Component.translatable("text.tide.bait_tooltip.speed",
+                    (speed < 0 ? "-" : "+") + speed).withStyle(ChatFormatting.BLUE));
+        if (luck != 0)
+            builder.add(Component.translatable("text.tide.bait_tooltip.lucky",
+                    (luck < 0 ? "-" : "+") + luck).withStyle(ChatFormatting.BLUE));
+        if (crateChance != 0)
+            builder.add(Component.translatable("text.tide.bait_tooltip.crate",
+                    (crateChance < 0 ? "-" : "+") + crateChance + "%").withStyle(ChatFormatting.BLUE));
+
+        if (!builder.isEmpty()) builder.add(0, Component.translatable("text.tide.bait_tooltip.prefix").withStyle(ChatFormatting.GRAY));
+        else builder.add(0, Component.translatable("text.tide.bait_tooltip.unknown_effects").withStyle(ChatFormatting.GRAY));
+
+        // new line should be placed before text
+        builder.add(0, Component.empty());
+
+        return ImmutableList.copyOf(builder);
     }
 }

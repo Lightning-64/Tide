@@ -3,7 +3,7 @@ package com.li64.tide.network.messages;
 import com.google.common.collect.ImmutableList;
 import com.li64.tide.Tide;
 import com.li64.tide.data.journal.JournalLayout;
-import com.li64.tide.data.journal.config.JournalRemovalCustomData;
+import com.li64.tide.data.journal.config.CustomRemovalLoader;
 import com.li64.tide.util.TideUtils;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.FriendlyByteBuf;
@@ -19,24 +19,24 @@ public class UpdateJournalMsg {
 
     private final List<JournalLayout.Page> customPages;
     private final List<JournalLayout.Profile> customProfiles;
-    private final List<JournalRemovalCustomData.Removal> removals;
+    private final List<CustomRemovalLoader.Removal> removals;
 
     public UpdateJournalMsg() {
-        customPages = Tide.JOURNAL_PAGE_CUSTOM_DATA.getPageConfigs();
-        customProfiles = Tide.JOURNAL_PROFILE_CUSTOM_DATA.getProfileConfigs();
-        removals = Tide.JOURNAL_REMOVAL_CUSTOM_DATA.getRemovalConfigs();
+        customPages = Tide.PAGE_LOADER.getPageConfigs();
+        customProfiles = Tide.PROFILE_LOADER.getProfileConfigs();
+        removals = Tide.REMOVAL_LOADER.getRemovalConfigs();
     }
 
     public UpdateJournalMsg(FriendlyByteBuf buf) {
         customPages = readEntries(JournalLayout.Page.CODEC, buf);
         customProfiles = readEntries(JournalLayout.Profile.CODEC, buf);
-        removals = readEntries(JournalRemovalCustomData.Removal.CODEC, buf);
+        removals = readEntries(CustomRemovalLoader.Removal.CODEC, buf);
     }
 
     public static void encode(UpdateJournalMsg message, FriendlyByteBuf buf) {
         writeEntries(message.customPages, JournalLayout.Page.CODEC, buf);
         writeEntries(message.customProfiles, JournalLayout.Profile.CODEC, buf);
-        writeEntries(message.removals, JournalRemovalCustomData.Removal.CODEC, buf);
+        writeEntries(message.removals, CustomRemovalLoader.Removal.CODEC, buf);
     }
 
     public static <T> ImmutableList<T> readEntries(Codec<T> codec, FriendlyByteBuf buf) {

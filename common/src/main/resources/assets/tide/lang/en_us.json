@@ -1,6 +1,12 @@
 {
   "text.tide.rod_tooltip.bait_desc": "Bait slots (right click to fill)",
 
+  "text.tide.bait_tooltip.unknown_effects": "Can be used as bait",
+  "text.tide.bait_tooltip.prefix": "When used as bait:",
+  "text.tide.bait_tooltip.speed": "%s fishing speed",
+  "text.tide.bait_tooltip.lucky": "%s fishing luck",
+  "text.tide.bait_tooltip.crate": "%s crate chance",
+
   "text.autoconfig.tide.title": "Tide Config",
   "text.autoconfig.tide.category.general": "General",
   "text.autoconfig.tide.category.worldgen": "World Generation",
@@ -205,10 +211,6 @@
   "entity.tide.deep_aqua_arrow": "Deep Aqua Arrow",
   "entity.tide.fishing_bobber": "Fishing Bobber",
 
-  "item.tide.bait.desc": "Increases fishing speed",
-  "item.tide.lucky_bait.desc": "Increases fishing luck",
-  "item.tide.magnetic_bait.desc": "Increases crate chance",
-  "item.tide.suspicious_bait.desc": "May attract strange fish",
   "item.tide.jelly_torch.desc": "Can be placed underwater",
 
   "item.tide.braided_line.desc": "Increases rod charge speed",

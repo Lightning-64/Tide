@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.li64.tide.Tide;
 import com.li64.tide.data.journal.JournalLayout;
+import com.li64.tide.util.TideUtils;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -17,50 +18,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class JournalPageCustomData extends SimpleJsonResourceReloadListener {
-    public static final String DATA_PATH = "journal/pages";
+public class CustomProfileLoader extends SimpleJsonResourceReloadListener {
+    public static final String DATA_PATH = "journal/profiles";
     private static final Gson GSON = new Gson();
 
-    private List<JournalLayout.Page> pages;
+    private List<JournalLayout.Profile> profiles;
 
-    public JournalPageCustomData() {
+    public CustomProfileLoader() {
         super(GSON, DATA_PATH);
     }
 
     @Override
     public @NotNull String getName() {
-        return "Tide Journal Page Data Loader";
-    }
-
-    @Override
-    protected Map<ResourceLocation, JsonElement> prepare(ResourceManager pResourceManager, ProfilerFiller pProfiler) {
-        return super.prepare(pResourceManager, pProfiler);
-
+        return "Tide Journal Profile Data Loader";
     }
 
     @Override
     protected void apply(@NotNull Map<ResourceLocation, JsonElement> map, @NotNull ResourceManager manager, @NotNull ProfilerFiller profiler) {
-        List<JournalLayout.Page> output = new ArrayList<>();
+        List<JournalLayout.Profile> output = new ArrayList<>();
 
         for (Map.Entry<ResourceLocation, JsonElement> entry : map.entrySet()) {
             ResourceLocation entryKey = entry.getKey();
 
             try {
-                JournalLayout.Page.CODEC.parse(JsonOps.INSTANCE, entry.getValue()).result()
+                JournalLayout.Profile.CODEC.parse(JsonOps.INSTANCE, entry.getValue()).result()
                         .ifPresentOrElse(output::add, () -> Tide.LOG.warn("Did not load invalid profile entry {}", entryKey));
             } catch (IllegalArgumentException | JsonParseException parseException) {
-                Tide.LOG.error("Parsing error loading custom journal page {}", entryKey, parseException);
+                Tide.LOG.error("Parsing error loading custom journal profile {}", entryKey, parseException);
             }
         }
 
-        pages = ImmutableList.copyOf(output);
-        Tide.LOG.info("Loaded {} custom journal pages", pages.size());
+        profiles = ImmutableList.copyOf(output);
+        Tide.LOG.info("Loaded {} custom journal profiles", profiles.size());
 
-        Tide.JOURNAL = new JournalLayout();
-        Tide.JOURNAL.addPageConfigs(pages);
+        Tide.JOURNAL.addProfileConfigs(profiles);
+        TideUtils.PROFILE_ITEMS = null;
     }
 
-    public List<JournalLayout.Page> getPageConfigs() {
-        return pages;
+    public List<JournalLayout.Profile> getProfileConfigs() {
+        return profiles;
     }
 }
