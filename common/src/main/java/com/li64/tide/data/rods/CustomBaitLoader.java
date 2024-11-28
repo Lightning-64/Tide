@@ -1,61 +1,59 @@
-package com.li64.tide.data.journal.config;
+package com.li64.tide.data.rods;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.li64.tide.Tide;
-import com.li64.tide.data.journal.JournalLayout;
-import com.li64.tide.util.TideUtils;
+import com.li64.tide.registries.TideItems;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class JournalProfileCustomData extends SimpleJsonResourceReloadListener {
-    public static final String DATA_PATH = "journal/profiles";
+public class CustomBaitLoader extends SimpleJsonResourceReloadListener {
+    public static final String DATA_PATH = "bait";
     private static final Gson GSON = new Gson();
 
-    private List<JournalLayout.Profile> profiles;
+    private List<BaitData> baits;
 
-    public JournalProfileCustomData() {
+    public CustomBaitLoader() {
         super(GSON, DATA_PATH);
     }
 
     @Override
     public @NotNull String getName() {
-        return "Tide Journal Profile Data Loader";
+        return "Tide Custom Bait Data Loader";
     }
 
     @Override
     protected void apply(@NotNull Map<ResourceLocation, JsonElement> map, @NotNull ResourceManager manager, @NotNull ProfilerFiller profiler) {
-        List<JournalLayout.Profile> output = new ArrayList<>();
+        List<BaitData> output = new ArrayList<>();
 
         for (Map.Entry<ResourceLocation, JsonElement> entry : map.entrySet()) {
             ResourceLocation entryKey = entry.getKey();
 
             try {
-                JournalLayout.Profile.CODEC.parse(JsonOps.INSTANCE, entry.getValue()).result()
-                        .ifPresentOrElse(output::add, () -> Tide.LOG.warn("Did not load invalid profile entry {}", entryKey));
+                BaitData.CODEC.parse(JsonOps.INSTANCE, entry.getValue()).result()
+                        .ifPresentOrElse(data -> { if (data.getItem() != Items.AIR) output.add(data); },
+                                () -> Tide.LOG.warn("Did not load invalid custom bait entry {}", entryKey));
             } catch (IllegalArgumentException | JsonParseException parseException) {
-                Tide.LOG.error("Parsing error loading custom journal profile {}", entryKey, parseException);
+                Tide.LOG.error("Parsing error loading custom bait item {}", entryKey, parseException);
             }
         }
 
-        profiles = ImmutableList.copyOf(output);
-        Tide.LOG.info("Loaded {} custom journal profiles", profiles.size());
-
-        Tide.JOURNAL.addProfileConfigs(profiles);
-        TideUtils.PROFILE_ITEMS = null;
+        baits = ImmutableList.copyOf(output);
+        Tide.LOG.info("Loaded {} custom bait items", baits.size());
     }
 
-    public List<JournalLayout.Profile> getProfileConfigs() {
-        return profiles;
+    public List<BaitData> getBaitData() {
+        return baits;
     }
 }

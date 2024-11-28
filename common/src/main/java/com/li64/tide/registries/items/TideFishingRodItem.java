@@ -91,11 +91,11 @@ public class TideFishingRodItem extends FishingRodItem {
                 return false;
             } else {
                 if (other.isEmpty()) {
-                    // remove next stack
+                    // pull next stack
                     ItemStack itemstack = contents.removeStack();
                     if (itemstack != null) access.set(itemstack);
 
-                } else {
+                } else if (other.getItem().canFitInsideContainerItems() && BaitUtils.isBait(other)) {
                     // insert stack
                     contents.tryInsert(other);
                 }
