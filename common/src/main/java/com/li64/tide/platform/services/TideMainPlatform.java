@@ -16,6 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,8 @@ public interface TideMainPlatform {
     void registerEntityType(String key, EntityType<?> entityType);
 
     void registerCriteriaTrigger(String key, CriterionTrigger<?> trigger);
+
+    void registerLootCondition(String key, LootItemConditionType type);
 
     void registerMenuType(String key, MenuType<?> menuType);
 

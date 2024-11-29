@@ -3,11 +3,9 @@ package com.li64.tide.platform;
 import com.li64.tide.Tide;
 import com.li64.tide.data.TideEntity;
 import com.li64.tide.platform.services.TideMainPlatform;
-import com.mojang.serialization.MapCodec;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.CriterionTrigger;
-import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -20,6 +18,7 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 public class FabricMainPlatform implements TideMainPlatform {
     @Override
@@ -70,6 +69,11 @@ public class FabricMainPlatform implements TideMainPlatform {
     @Override
     public void registerCriteriaTrigger(String key, CriterionTrigger<?> trigger) {
         CriteriaTriggers.register(trigger);
+    }
+
+    @Override
+    public void registerLootCondition(String key, LootItemConditionType type) {
+        Registry.register(BuiltInRegistries.LOOT_CONDITION_TYPE, Tide.resource(key), type);
     }
 
     @Override

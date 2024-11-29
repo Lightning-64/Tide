@@ -2,6 +2,7 @@ package com.li64.tide;
 
 import com.li64.tide.client.gui.TideMenuTypes;
 import com.li64.tide.client.gui.screens.AnglerWorkshopScreen;
+import com.li64.tide.data.TideTags;
 import com.li64.tide.registries.*;
 import com.li64.tide.registries.items.BaitItem;
 import com.li64.tide.registries.items.TideFishingRodItem;
@@ -32,9 +33,8 @@ public class TideFabricClient implements ClientModInitializer {
         MenuScreens.register(TideMenuTypes.ANGLER_WORKSHOP, AnglerWorkshopScreen::new);
 
         ItemTooltipCallback.EVENT.register((stack, context, lines) -> {
-            if (BaitUtils.isBait(stack)) {
-                lines.addAll(BaitUtils.getDescriptionLines(stack));
-            }
+            if (BaitUtils.isBait(stack)) lines.addAll(BaitUtils.getDescriptionLines(stack));
+            if (stack.is(TideTags.Items.CUSTOMIZABLE_RODS)) lines.addAll(TideFishingRodItem.getDescriptionLines(stack));
         });
 
         ClampedItemPropertyFunction rodCastFunction = (itemStack, level, player, i) -> {

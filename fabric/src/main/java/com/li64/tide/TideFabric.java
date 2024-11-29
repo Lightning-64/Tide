@@ -53,6 +53,7 @@ public class TideFabric implements ModInitializer {
         TideEntityTypes.init();
         TideMenuTypes.init();
         TideSoundEvents.init();
+        TideLootConditions.init();
         TideCriteriaTriggers.init();
 
         Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, Tide.resource(RodUpgradingRecipe.Type.ID),

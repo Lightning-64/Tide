@@ -1,5 +1,6 @@
 package com.li64.tide;
 
+import com.google.common.collect.ImmutableBiMap;
 import com.li64.tide.data.TideLootTables;
 import com.li64.tide.data.journal.JournalLayout;
 import com.li64.tide.config.TideConfig;
@@ -16,6 +17,7 @@ import com.li64.tide.registries.TideItems;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.advancements.critereon.FishingHookPredicate;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -46,6 +48,13 @@ public class Tide {
     public static CustomPageLoader PAGE_LOADER = new CustomPageLoader();
     public static CustomProfileLoader PROFILE_LOADER = new CustomProfileLoader();
     public static CustomRemovalLoader REMOVAL_LOADER = new CustomRemovalLoader();
+
+    static {
+        EntitySubPredicate.Types.TYPES = ImmutableBiMap.<String, EntitySubPredicate.Type>builder()
+                .putAll(EntitySubPredicate.Types.TYPES)
+                .put("tide_fishing", TideFishingPredicate::fromJson)
+                .build();
+    }
 
     public static void init() {
         CONFIG = AutoConfig.register(TideConfig.class, Toml4jConfigSerializer::new).getConfig();
@@ -78,8 +87,8 @@ public class Tide {
     }
 
     public static LootPoolEntryContainer.Builder<?> getCrateFishingEntry() {
-        return LootTableReference.lootTableReference(TideLootTables.Fishing.CRATES)
-                .setWeight(15).setQuality(2)
+        return LootTableReference.lootTableReference(TideLootTables.Fishing.CRATES_BLOCK)
+                .setWeight(700).setQuality(2)
                 // crates can only be caught in open water (or any lava)
                 .when(LootItemEntityPropertyCondition.hasProperties(
                         LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity()

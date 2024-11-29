@@ -16,15 +16,11 @@ public class BaitContents implements TooltipComponent {
     private final List<ItemStack> items;
 
     public BaitContents() {
-        this(new ArrayList<>());
-    }
-
-    public BaitContents(BaitContents contents) {
-        this(contents == null ? new ArrayList<>() : new ArrayList<>(contents.items));
+        this(List.of());
     }
 
     public BaitContents(List<ItemStack> items) {
-        this.items = new ArrayList<>(items);
+        this.items = items;
     }
 
     public List<ItemStack> items() {
@@ -41,55 +37,6 @@ public class BaitContents implements TooltipComponent {
 
     public boolean isEmpty() {
         return this.items.isEmpty();
-    }
-
-    private int findStackIndex(ItemStack stack) {
-        if (stack.isStackable()) {
-            for (int i = 0; i < this.items.size(); ++i) {
-                ItemStack storedItem = this.items.get(i);
-                if (ItemStack.isSameItemSameTags(storedItem, stack)
-                    && storedItem.getCount() < storedItem.getMaxStackSize()) return i;
-            }
-        }
-        return -1;
-    }
-
-    // inserts stack to the contents
-    public void tryInsert(ItemStack stack) {
-        if (!stack.isEmpty() && stack.getItem().canFitInsideContainerItems()) {
-            int index = this.findStackIndex(stack);
-            int count = stack.getCount();
-
-            if (index != -1 && stack.isStackable()) {
-                ItemStack current = this.items.get(index);
-
-                int stackSize = stack.getMaxStackSize();
-                int amountToAdd = Math.min(stackSize - current.getCount(), stack.getCount());
-
-                ItemStack added = current.copyWithCount(current.getCount() + amountToAdd);
-                stack.shrink(amountToAdd);
-
-                this.items.set(index, added);
-            } else {
-                if (size() < MAX_STACKS) this.items.add(0, stack.split(count));
-            }
-        }
-    }
-
-    // transfer items from slot to contents
-    public void tryTransfer(Slot slot, Player pPlayer) {
-        ItemStack slotStack = slot.safeTake(slot.getItem().getCount(), slot.getMaxStackSize(), pPlayer);
-        this.tryInsert(slotStack);
-        if (!slotStack.isEmpty()) slot.safeInsert(slotStack);
-    }
-
-    @Nullable
-    public ItemStack removeStack() {
-        if (this.items.isEmpty()) {
-            return null;
-        } else {
-            return this.items.remove(0).copy();
-        }
     }
 
     public String toString() {
@@ -109,5 +56,77 @@ public class BaitContents implements TooltipComponent {
         int size = tag.getInt("size");
         for (int i = 0; i < size; i++) itemsBuilder.add(ItemStack.of(tag.getCompound("item-" + i)));
         return new BaitContents(itemsBuilder.build());
+    }
+
+    public static class Mutable {
+        private final List<ItemStack> items;
+
+        public Mutable(BaitContents contents) {
+            if (contents == null) this.items = new ArrayList<>();
+            else this.items = new ArrayList<>(contents.items);
+        }
+
+        private int findStackIndex(ItemStack stack) {
+            if (stack.isStackable()) {
+                for (int i = 0; i < this.items.size(); ++i) {
+                    if (ItemStack.isSameItemSameTags(this.items.get(i), stack)) {
+                        return i;
+                    }
+                }
+            }
+            return -1;
+        }
+
+        // inserts stack to the contents
+        public void tryInsert(ItemStack stack) {
+            if (!stack.isEmpty() && stack.getItem().canFitInsideContainerItems()) {
+                int index = this.findStackIndex(stack);
+                int count = stack.getCount();
+
+                if (index != -1 && stack.isStackable()) {
+                    ItemStack current = this.items.get(index);
+
+                    int stackSize = stack.getMaxStackSize();
+                    int amountToAdd = Math.min(stackSize - current.getCount(), stack.getCount());
+
+                    ItemStack added = current.copyWithCount(current.getCount() + amountToAdd);
+                    stack.shrink(amountToAdd);
+
+                    this.items.set(index, added);
+                } else {
+                    if (items.size() < MAX_STACKS) this.items.add(0, stack.split(count));
+                }
+            }
+        }
+
+        // transfer items from slot to contents
+        public void tryTransfer(Slot slot, Player pPlayer) {
+            ItemStack slotStack = slot.safeTake(slot.getItem().getCount(), slot.getMaxStackSize(), pPlayer);
+            this.tryInsert(slotStack);
+            if (!slotStack.isEmpty()) slot.safeInsert(slotStack);
+        }
+
+        @Nullable
+        public ItemStack removeStack() {
+            if (this.items.isEmpty()) {
+                return null;
+            } else {
+                return this.items.remove(0).copy();
+            }
+        }
+
+        public void shrinkStack(ItemStack stack) {
+            int index = findStackIndex(stack);
+            this.items.get(index).shrink(1);
+            if (this.items.get(index).isEmpty()) this.items.remove(index);
+        }
+
+        public BaitContents toImmutable() {
+            return new BaitContents(List.copyOf(this.items));
+        }
+
+        public boolean isEmpty() {
+            return this.items.isEmpty();
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.li64.tide.data.rods;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientBundleTooltip;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -11,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class ClientFishingRodTooltip implements ClientTooltipComponent {
-    private static final ResourceLocation BACKGROUND_SPRITE = ResourceLocation.withDefaultNamespace("container/bundle/background");
+    public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("textures/gui/container/bundle.png");
     private static final Component MESSAGE = Component.translatable("text.tide.rod_tooltip.bait_desc");
     private static final int OFFSET_Y = 10;
     private static final int MARGIN_Y = 4;
@@ -44,7 +45,6 @@ public class ClientFishingRodTooltip implements ClientTooltipComponent {
         int gridWidth = this.gridWidth();
 
         graphics.drawString(font, MESSAGE, x, y, DyeColor.LIGHT_GRAY.getTextColor());
-        graphics.blitSprite(BACKGROUND_SPRITE, x, y + OFFSET_Y, this.backgroundWidth(), this.backgroundHeight());
 
         for (int i = 0; i < gridWidth; i++) {
             int dspX = x + i * 18 + BG_BORDER;
@@ -52,14 +52,16 @@ public class ClientFishingRodTooltip implements ClientTooltipComponent {
 
             this.renderSlot(dspX, dspY, i, graphics, font);
         }
+
+        this.drawBorder(x, y + OFFSET_Y, gridWidth, 1, graphics);
     }
 
     private void renderSlot(int x, int y, int index, GuiGraphics graphics, Font font) {
         if (index >= this.contents.size()) {
-            this.blit(graphics, x, y);
+            this.blit(graphics, x, y, Texture.SLOT);
         } else {
             ItemStack stack = this.contents.items().get(index);
-            this.blit(graphics, x, y);
+            this.blit(graphics, x, y, Texture.SLOT);
             graphics.renderItem(stack, x + BG_BORDER, y + BG_BORDER, index);
             graphics.renderItemDecorations(font, stack, x + BG_BORDER, y + BG_BORDER);
             if (index == 0) {
@@ -68,8 +70,27 @@ public class ClientFishingRodTooltip implements ClientTooltipComponent {
         }
     }
 
-    private void blit(GuiGraphics pGuiGraphics, int pX, int pY) {
-        pGuiGraphics.blitSprite(Texture.SLOT.sprite, pX, pY, 0, Texture.SLOT.w, Texture.SLOT.h);
+    private void drawBorder(int x, int y, int gw, int gh, GuiGraphics guiGraphics) {
+        this.blit(guiGraphics, x, y, Texture.BORDER_CORNER_TOP);
+        this.blit(guiGraphics, x + gw * 18 + 1, y, Texture.BORDER_CORNER_TOP);
+
+        int m;
+        for(m = 0; m < gw; ++m) {
+            this.blit(guiGraphics, x + 1 + m * 18, y, Texture.BORDER_HORIZONTAL_TOP);
+            this.blit(guiGraphics, x + 1 + m * 18, y + gh * 20, Texture.BORDER_HORIZONTAL_BOTTOM);
+        }
+
+        for(m = 0; m < gh; ++m) {
+            this.blit(guiGraphics, x, y + m * 20 + 1, Texture.BORDER_VERTICAL);
+            this.blit(guiGraphics, x + gw * 18 + 1, y + m * 20 + 1, Texture.BORDER_VERTICAL);
+        }
+
+        this.blit(guiGraphics, x, y + gh * 20, Texture.BORDER_CORNER_BOTTOM);
+        this.blit(guiGraphics, x + gw * 18 + 1, y + gh * 20, Texture.BORDER_CORNER_BOTTOM);
+    }
+
+    private void blit(GuiGraphics guiGraphics, int x, int y, ClientFishingRodTooltip.Texture texture) {
+        guiGraphics.blit(TEXTURE_LOCATION, x, y, 0, (float)texture.x, (float)texture.y, texture.w, texture.h, 128, 128);
     }
 
     private int gridWidth() {
@@ -77,16 +98,24 @@ public class ClientFishingRodTooltip implements ClientTooltipComponent {
     }
 
     enum Texture {
-        SLOT(ResourceLocation.withDefaultNamespace("container/bundle/slot"), 18, 20);
+        SLOT(0, 0, 18, 20),
+        BLOCKED_SLOT(0, 40, 18, 20),
+        BORDER_VERTICAL(0, 18, 1, 20),
+        BORDER_HORIZONTAL_TOP(0, 20, 18, 1),
+        BORDER_HORIZONTAL_BOTTOM(0, 60, 18, 1),
+        BORDER_CORNER_TOP(0, 20, 1, 1),
+        BORDER_CORNER_BOTTOM(0, 60, 1, 1);
 
-        public final ResourceLocation sprite;
+        public final int x;
+        public final int y;
         public final int w;
         public final int h;
 
-        Texture(ResourceLocation pSprite, int pW, int pH) {
-            this.sprite = pSprite;
-            this.w = pW;
-            this.h = pH;
+        private Texture(int j, int k, int l, int m) {
+            this.x = j;
+            this.y = k;
+            this.w = l;
+            this.h = m;
         }
     }
 }

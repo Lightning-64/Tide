@@ -1,5 +1,6 @@
 {
   "text.tide.rod_tooltip.bait_desc": "Bait slots (right click to fill)",
+  "text.tide.rod_tooltip.accessories_prefix": "Accessories:",
 
   "text.tide.bait_tooltip.unknown_effects": "Can be used as bait",
   "text.tide.bait_tooltip.prefix": "When used as bait:",
@@ -28,8 +29,6 @@
   "text.autoconfig.tide.option.general.defaultLineColor.@Tooltip": "Enable this to use the default black fishing string color, which generally looks better with shaders.",
   "text.autoconfig.tide.option.general.hideUnknownFishNames": "Hide Unknown Fish Names",
   "text.autoconfig.tide.option.general.hideUnknownFishNames.@Tooltip": "If set to true, fish entities' names will be displayed as '???' until unlocked in the fishing journal.",
-  "text.autoconfig.tide.option.general.baseCrateRarity": "Base Crate Rarity",
-  "text.autoconfig.tide.option.general.baseCrateRarity.@Tooltip": "The base rarity of catching a crate. For example, setting this value to 20 will give a 1/20 chance, and 5 would give only a 1/5 chance. (1-100)",
   "text.autoconfig.tide.option.worldgen.disableFishingBoat": "Disable Fishing Boats",
   "text.autoconfig.tide.option.worldgen.disableFishingBoat.@Tooltip": "Turn this on to disable the generation of fishing boat structures",
 

@@ -20,8 +20,6 @@
    "text.autoconfig.tide.option.general.defaultLineColor.@Tooltip": "启用此选项可使用默认的黑色鱼线，这种颜色与光影兼容性更好",
    "text.autoconfig.tide.option.general.hideUnknownFishNames": "Hide Unknown Fish Names",
    "text.autoconfig.tide.option.general.hideUnknownFishNames.@Tooltip": "If set to true, fish entities' names will be displayed as '???' until unlocked in the fishing journal.",
-   "text.autoconfig.tide.option.general.baseCrateRarity": "Base Crate Rarity",
-   "text.autoconfig.tide.option.general.baseCrateRarity.@Tooltip": "The base rarity of catching a crate. For example, setting this value to 20 will give a 1/20 chance, and 5 would give only a 1/5 chance. (1-100)",
    "text.autoconfig.tide.option.worldgen.disableFishingBoat": "禁用渔船",
    "text.autoconfig.tide.option.worldgen.disableFishingBoat.@Tooltip": "打开此选项可禁用渔船结构的生成",
 

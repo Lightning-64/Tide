@@ -7,6 +7,8 @@ public class TideLootTables {
 
     public static class Fishing {
         public static final ResourceLocation CRATES = create("gameplay/fishing/crates");
+        public static final ResourceLocation CRATES_BLOCK = create("gameplay/fishing/crates/block");
+        public static final ResourceLocation SPECIAL_FISH = create("gameplay/fishing/special");
 
         public static final ResourceLocation FRESHWATER_NORMAL = create("gameplay/fishing/climates/freshwater_normal");
         public static final ResourceLocation FRESHWATER_COLD = create("gameplay/fishing/climates/freshwater_cold");
@@ -46,25 +48,6 @@ public class TideLootTables {
         public static final ResourceLocation END_LAVA = create("gameplay/fishing/crates/end/lava");
     }
 
-    public static class Biomes {
-        public static final ResourceLocation BADLANDS = biome("badlands");
-        public static final ResourceLocation BIRCH = biome("birch");
-        public static final ResourceLocation CHERRY = biome("cherry");
-        public static final ResourceLocation DEEP_DARK = biome("deep_dark");
-        public static final ResourceLocation DESERT = biome("desert");
-        public static final ResourceLocation DRIPSTONE = biome("dripstone");
-        public static final ResourceLocation FOREST = biome("forest");
-        public static final ResourceLocation FROZEN = biome("frozen");
-        public static final ResourceLocation JUNGLE = biome("jungle");
-        public static final ResourceLocation LUSH_CAVES = biome("lush_caves");
-        public static final ResourceLocation MOUNTAIN = biome("mountain");
-        public static final ResourceLocation MUSHROOM = biome("mushroom");
-        public static final ResourceLocation PLAINS = biome("plains");
-        public static final ResourceLocation SAVANNA = biome("savanna");
-        public static final ResourceLocation SWAMP = biome("swamp");
-        public static final ResourceLocation TAIGA = biome("taiga");
-    }
-
     public static class Entities {
         public static final ResourceLocation TROUT = create("entities/trout");
         public static final ResourceLocation BASS = create("entities/bass");
@@ -82,10 +65,6 @@ public class TideLootTables {
         public static final ResourceLocation ANGELFISH = create("entities/angelfish");
         public static final ResourceLocation BARRACUDA = create("entities/barracuda");
         public static final ResourceLocation SAILFISH = create("entities/sailfish");
-    }
-
-    private static ResourceLocation biome(String biome) {
-        return create("gameplay/fishing/biomes/" + biome);
     }
 
     private static ResourceLocation create(String path) {
