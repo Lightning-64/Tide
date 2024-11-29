@@ -8,48 +8,149 @@
           "type": "minecraft:alternatives",
           "children": [
             {
-              "type": "minecraft:item",
-              "conditions": [
+              "type": "minecraft:alternatives",
+              "children": [
                 {
-                  "condition": "minecraft:location_check",
-                  "predicate": {
-                    "dimension": "minecraft:the_end"
-                  }
-                }
-              ],
-              "name": "tide:end_loot_crate"
-            },
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "minecraft:any_of",
-                  "terms": [
+                  "type": "minecraft:loot_table",
+                  "conditions": [
                     {
                       "condition": "minecraft:location_check",
                       "predicate": {
                         "dimension": "minecraft:the_nether"
                       }
-                    },
+                    }
+                  ],
+                  "value": "tide:gameplay/fishing/crates/nether/lava"
+                },
+                {
+                  "type": "minecraft:loot_table",
+                  "conditions": [
+                    {
+                      "condition": "minecraft:location_check",
+                      "predicate": {
+                        "dimension": "minecraft:the_end"
+                      }
+                    }
+                  ],
+                  "value": "tide:gameplay/fishing/crates/end/lava"
+                },
+                {
+                  "type": "minecraft:loot_table",
+                  "conditions": [
                     {
                       "condition": "minecraft:entity_properties",
                       "entity": "this",
                       "predicate": {
                         "type_specific": {
                           "type": "tide:tide_fishing_hook",
-                          "is_lava_fishing": true,
-                          "using_magnetic_bait": false
+                          "loot_layer": "depths"
                         }
                       }
                     }
-                  ]
+                  ],
+                  "value": "tide:gameplay/fishing/crates/overworld/lava_deep"
+                },
+                {
+                  "type": "minecraft:loot_table",
+                  "conditions": [
+                    {
+                      "condition": "minecraft:entity_properties",
+                      "entity": "this",
+                      "predicate": {
+                        "type_specific": {
+                          "type": "tide:tide_fishing_hook",
+                          "loot_layer": "underground"
+                        }
+                      }
+                    }
+                  ],
+                  "value": "tide:gameplay/fishing/crates/overworld/lava_underground"
+                },
+                {
+                  "type": "minecraft:loot_table",
+                  "value": "tide:gameplay/fishing/crates/overworld/lava_surface"
                 }
               ],
-              "name": "tide:obsidian_loot_crate"
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "tide:tide_fishing_hook",
+                      "is_lava_fishing": true
+                    }
+                  }
+                }
+              ]
             },
             {
-              "type": "minecraft:item",
-              "name": "tide:surface_loot_crate"
+              "type": "minecraft:alternatives",
+              "children": [
+                {
+                  "type": "minecraft:loot_table",
+                  "conditions": [
+                    {
+                      "condition": "minecraft:location_check",
+                      "predicate": {
+                        "dimension": "minecraft:the_end"
+                      }
+                    }
+                  ],
+                  "value": "tide:gameplay/fishing/crates/end/water"
+                },
+                {
+                  "type": "minecraft:loot_table",
+                  "conditions": [
+                    {
+                      "condition": "minecraft:entity_properties",
+                      "entity": "this",
+                      "predicate": {
+                        "type_specific": {
+                          "type": "tide:tide_fishing_hook",
+                          "loot_layer": "depths"
+                        }
+                      }
+                    }
+                  ],
+                  "value": "tide:gameplay/fishing/crates/overworld/water_deep"
+                },
+                {
+                  "type": "minecraft:loot_table",
+                  "conditions": [
+                    {
+                      "condition": "minecraft:entity_properties",
+                      "entity": "this",
+                      "predicate": {
+                        "type_specific": {
+                          "type": "tide:tide_fishing_hook",
+                          "loot_layer": "underground"
+                        }
+                      }
+                    }
+                  ],
+                  "value": "tide:gameplay/fishing/crates/overworld/water_underground"
+                },
+                {
+                  "type": "minecraft:alternatives",
+                  "children": [
+                    {
+                      "type": "minecraft:loot_table",
+                      "conditions": [
+                        {
+                          "condition": "tide:check_biome_tag",
+                          "tag": "tide:is_saltwater"
+                        }
+                      ],
+                      "value": "tide:gameplay/fishing/crates/overworld/water_ocean"
+                    },
+                    {
+                      "type": "minecraft:loot_table",
+                      "value": "tide:gameplay/fishing/crates/overworld/water_river"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

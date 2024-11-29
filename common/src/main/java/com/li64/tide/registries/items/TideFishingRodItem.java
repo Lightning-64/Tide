@@ -1,5 +1,6 @@
 package com.li64.tide.registries.items;
 
+import com.google.common.collect.ImmutableList;
 import com.li64.tide.Tide;
 import com.li64.tide.client.gui.overlays.CastBarOverlay;
 import com.li64.tide.data.TideDataComponents;
@@ -12,7 +13,6 @@ import com.li64.tide.registries.TideItems;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import com.li64.tide.util.BaitUtils;
-import com.li64.tide.util.TideUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
@@ -26,7 +26,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.inventory.tooltip.BundleTooltip;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.*;
 import net.minecraft.server.level.ServerLevel;
@@ -40,8 +39,8 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +54,37 @@ public class TideFishingRodItem extends FishingRodItem {
         );
     }
 
+    public static List<Component> getDescriptionLines(ItemStack stack, TooltipContext context) {
+        ArrayList<Component> builder = new ArrayList<>();
+
+        ItemStack bobber = CustomRodManager.getBobber(stack, context.registries());
+        ItemStack hook = CustomRodManager.getHook(stack, context.registries());
+        ItemStack line = CustomRodManager.getLine(stack, context.registries());
+
+        if (CustomRodManager.hasBobber(stack, context.registries())) {
+            MutableComponent bobberComponent = CustomRodManager.getTranslation(bobber);
+            builder.add(bobberComponent.withStyle(ChatFormatting.BLUE));
+        }
+
+        if (CustomRodManager.hasHook(stack, context.registries())) {
+            MutableComponent hookComponent = CustomRodManager.getTranslation(hook);
+            builder.add(hookComponent.withStyle(ChatFormatting.BLUE));
+        }
+
+        if (CustomRodManager.hasLine(stack, context.registries())) {
+            MutableComponent lineComponent = CustomRodManager.getTranslation(line);
+            builder.add(lineComponent.withStyle(ChatFormatting.BLUE));
+        }
+
+        if (!builder.isEmpty()) {
+            builder.addFirst(Component.translatable("text.tide.rod_tooltip.accessories_prefix")
+                    .withStyle(ChatFormatting.GRAY));
+            builder.addFirst(Component.empty());
+        }
+
+        return ImmutableList.copyOf(builder);
+    }
+
     @Override
     public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
         return !stack.has(DataComponents.HIDE_TOOLTIP) && !stack.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP)
@@ -66,8 +96,9 @@ public class TideFishingRodItem extends FishingRodItem {
     public boolean overrideStackedOnOther(@NotNull ItemStack stack, @NotNull Slot slot, @NotNull ClickAction action, @NotNull Player player) {
         if (action != ClickAction.SECONDARY) return false;
         else {
-            BaitContents contents = new BaitContents(stack.get(TideDataComponents.BAIT_CONTENTS));
+            BaitContents.Mutable contents = new BaitContents.Mutable(stack.get(TideDataComponents.BAIT_CONTENTS));
             ItemStack slotStack = slot.getItem();
+
             if (slotStack.isEmpty() && !contents.isEmpty()) {
                 // place next stack
                 ItemStack removedStack = contents.removeStack();
@@ -78,7 +109,7 @@ public class TideFishingRodItem extends FishingRodItem {
                 contents.tryTransfer(slot, player);
             }
 
-            stack.set(TideDataComponents.BAIT_CONTENTS, contents);
+            stack.set(TideDataComponents.BAIT_CONTENTS, contents.toImmutable());
             return true;
         }
     }
@@ -86,23 +117,20 @@ public class TideFishingRodItem extends FishingRodItem {
     @Override
     public boolean overrideOtherStackedOnMe(@NotNull ItemStack stack, @NotNull ItemStack other, @NotNull Slot slot, @NotNull ClickAction action, @NotNull Player player, @NotNull SlotAccess access) {
         if (action == ClickAction.SECONDARY && slot.allowModification(player)) {
-            BaitContents contents = stack.get(TideDataComponents.BAIT_CONTENTS);
-            if (contents == null) {
-                return false;
-            } else {
-                if (other.isEmpty()) {
-                    // pull next stack
-                    ItemStack itemstack = contents.removeStack();
-                    if (itemstack != null) access.set(itemstack);
+            BaitContents.Mutable contents = new BaitContents.Mutable(stack.get(TideDataComponents.BAIT_CONTENTS));
 
-                } else if (other.getItem().canFitInsideContainerItems() && BaitUtils.isBait(other)) {
-                    // insert stack
-                    contents.tryInsert(other);
-                }
+            if (other.isEmpty()) {
+                // pull next stack
+                ItemStack itemstack = contents.removeStack();
+                if (itemstack != null) access.set(itemstack);
 
-                stack.set(TideDataComponents.BAIT_CONTENTS, contents);
-                return true;
+            } else if (other.getItem().canFitInsideContainerItems() && BaitUtils.isBait(other)) {
+                // insert stack
+                contents.tryInsert(other);
             }
+
+            stack.set(TideDataComponents.BAIT_CONTENTS, contents.toImmutable());
+            return true;
         } else {
             return false;
         }
@@ -117,7 +145,7 @@ public class TideFishingRodItem extends FishingRodItem {
         if (isHookActive(player)) {
             TideFishingHook hook = getHook(player);
 
-            if (!isMinigameActive(player) && Tide.CONFIG.general.doMinigame) {
+            if (isMinigameStopped(player) && Tide.CONFIG.general.doMinigame) {
                 // No minigame active, create a new one if necessary
 
                 if (Tide.PLATFORM.isModLoaded("stardew_fishing")) {
@@ -138,7 +166,7 @@ public class TideFishingRodItem extends FishingRodItem {
                     } else retrieveHook(player.getItemInHand(hand), player, level);
 
                 } else if (hook.getCatchType() == TideFishingHook.CatchType.FISH) {
-                    if (!level.isClientSide() && !isMinigameActive(player)) {
+                    if (!level.isClientSide() && isMinigameStopped(player)) {
                         Tide.LOG.info("Starting tide fishing minigame");
                         FishCatchMinigame.create(player);
                     }
@@ -173,8 +201,8 @@ public class TideFishingRodItem extends FishingRodItem {
         }
     }
 
-    private boolean isMinigameActive(Player player) {
-        return FishCatchMinigame.minigameActive(player);
+    private boolean isMinigameStopped(Player player) {
+        return !FishCatchMinigame.minigameActive(player);
     }
 
     @Override
@@ -262,29 +290,5 @@ public class TideFishingRodItem extends FishingRodItem {
 
     public @NotNull UseAnim getUseAnimation(@NotNull ItemStack stack) {
         return UseAnim.BOW;
-    }
-
-    @Override
-    public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltip, flag);
-
-        ItemStack bobber = CustomRodManager.getBobber(stack, context.registries());
-        ItemStack hook = CustomRodManager.getHook(stack, context.registries());
-        ItemStack line = CustomRodManager.getLine(stack, context.registries());
-
-        MutableComponent bobberComponent = CustomRodManager.getTranslation(bobber);
-        tooltip.add(bobberComponent.withStyle(bobberComponent.getStyle()
-                .withItalic(true)
-                .withColor(ChatFormatting.YELLOW)));
-
-        MutableComponent hookComponent = CustomRodManager.getTranslation(hook);
-        tooltip.add(hookComponent.withStyle(hookComponent.getStyle()
-                .withItalic(true)
-                .withColor(ChatFormatting.YELLOW)));
-
-        MutableComponent lineComponent = CustomRodManager.getTranslation(line);
-        tooltip.add(lineComponent.withStyle(lineComponent.getStyle()
-                .withItalic(true)
-                .withColor(ChatFormatting.YELLOW)));
     }
 }

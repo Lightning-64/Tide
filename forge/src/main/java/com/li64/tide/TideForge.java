@@ -1,13 +1,11 @@
 package com.li64.tide;
 
-import com.google.common.collect.ImmutableList;
 import com.li64.tide.client.gui.TideMenuTypes;
 import com.li64.tide.compat.jei.TideRecipeSerializers;
 import com.li64.tide.config.TideConfig;
 import com.li64.tide.data.TideCriteriaTriggers;
 import com.li64.tide.data.TideDataComponents;
-import com.li64.tide.data.loot.TideEntitySubPredicates;
-import com.li64.tide.loot.LootTableAccessor;
+import com.li64.tide.registries.TideEntitySubPredicates;
 import com.li64.tide.loot.TideLootModifiers;
 import com.li64.tide.network.TideMessages;
 import com.li64.tide.registries.*;
@@ -26,11 +24,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraftforge.client.ConfigScreenHandler;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;

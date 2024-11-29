@@ -1,15 +1,16 @@
 package com.li64.tide.registries.entities.misc.fishing;
 
 import com.li64.tide.data.TideCriteriaTriggers;
+import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.TideLootTables;
 import com.li64.tide.data.TideTags;
+import com.li64.tide.data.rods.BaitContents;
 import com.li64.tide.data.rods.CustomRodManager;
 import com.li64.tide.registries.TideBlocks;
 import com.li64.tide.registries.entities.misc.LootCrateEntity;
 import com.li64.tide.registries.items.TideFishingRodItem;
 import com.li64.tide.util.BaitUtils;
 import com.mojang.logging.LogUtils;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -20,6 +21,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -51,6 +53,7 @@ import net.minecraft.world.phys.Vec3;
 import com.li64.tide.Tide;
 import com.li64.tide.util.TideUtils;
 import com.li64.tide.registries.TideItems;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
 import java.util.*;
@@ -134,16 +137,16 @@ public class TideFishingHook extends Projectile {
         this.getEntityData().set(DATA_CATCH_TYPE, catchType.ordinal());
     }
 
+    public int getLureSpeed() {
+        return lureSpeed;
+    }
+
     public int getLuck() {
         return luck;
     }
 
     public float getInitialYaw() {
         return this.entityData.get(DATA_INITIAL_YAW);
-    }
-
-    public int getLureSpeed() {
-        return lureSpeed;
     }
 
     public Holder<Biome> getBiome() {
@@ -172,7 +175,7 @@ public class TideFishingHook extends Projectile {
         builder.define(DATA_INITIAL_YAW, 0f);
     }
 
-    public void onSyncedDataUpdated(EntityDataAccessor<?> data) {
+    public void onSyncedDataUpdated(@NotNull EntityDataAccessor<?> data) {
         if (DATA_HOOKED_ENTITY.equals(data)) {
             int i = this.getEntityData().get(DATA_HOOKED_ENTITY);
             this.hookedIn = i > 0 ? this.level().getEntity(i - 1) : null;
@@ -203,15 +206,6 @@ public class TideFishingHook extends Projectile {
 
     public boolean shouldRenderAtSqrDistance(double dst) {
         return dst < 4096.0D;
-    }
-
-    public void lerpTo(double p_37127_, double p_37128_, double p_37129_, float p_37130_, float p_37131_, int p_37132_, boolean p_37133_) {}
-
-    public static Vec3 lerpPos(Vec3 start, Vec3 end, float t) {
-        double x = start.x + (end.x - start.x) * t;
-        double y = start.y + (end.y - start.y) * t;
-        double z = start.z + (end.z - start.z) * t;
-        return new Vec3(x, y, z);
     }
 
     public void tick() {
@@ -250,7 +244,7 @@ public class TideFishingHook extends Projectile {
         Player player = this.getPlayerOwner();
         if (player == null) {
             this.discard();
-        } else if (this.level().isClientSide || !this.shouldStopFishing(player)) {
+        } else if (this.level().isClientSide || this.shouldKeepFishing(player)) {
             if (this.onGround()) {
                 ++this.life;
                 if (this.life >= 1200) {
@@ -342,16 +336,16 @@ public class TideFishingHook extends Projectile {
         }
     }
 
-    private boolean shouldStopFishing(Player player) {
+    private boolean shouldKeepFishing(Player player) {
         ItemStack mainHand = player.getMainHandItem();
         ItemStack offHand = player.getOffhandItem();
         boolean flag = mainHand.getItem() instanceof FishingRodItem;
         boolean flag1 = offHand.getItem() instanceof FishingRodItem;
         if (!player.isRemoved() && player.isAlive() && (flag || flag1) && !(this.distanceToSqr(player) > 1224.0D)) {
-            return false;
+            return true;
         } else {
             this.discard();
-            return true;
+            return false;
         }
     }
 
@@ -360,11 +354,11 @@ public class TideFishingHook extends Projectile {
         this.hitTargetOrDeflectSelf(hitresult);
     }
 
-    protected boolean canHitEntity(Entity entity) {
+    protected boolean canHitEntity(@NotNull Entity entity) {
         return super.canHitEntity(entity) || entity.isAlive() && entity instanceof ItemEntity;
     }
 
-    protected void onHitEntity(EntityHitResult result) {
+    protected void onHitEntity(@NotNull EntityHitResult result) {
         super.onHitEntity(result);
         if (!this.level().isClientSide) {
             if (result.getEntity() == this.getOwner()) this.discard();
@@ -372,7 +366,7 @@ public class TideFishingHook extends Projectile {
         }
     }
 
-    protected void onHitBlock(BlockHitResult result) {
+    protected void onHitBlock(@NotNull BlockHitResult result) {
         super.onHitBlock(result);
         this.setDeltaMovement(this.getDeltaMovement().normalize().scale(result.distanceTo(this)));
     }
@@ -425,24 +419,24 @@ public class TideFishingHook extends Projectile {
                 if (blockstate.is(Blocks.WATER)) {
                     fluid = Fluids.WATER.defaultFluidState();
                     if (this.random.nextFloat() < 0.15F) {
-                        level.sendParticles(ParticleTypes.BUBBLE, d0, d1 - (double)0.1F, d2, 1, (double)f1, 0.1D, (double)f2, 0.0D);
+                        level.sendParticles(ParticleTypes.BUBBLE, d0, d1 - 0.1, d2, 1, f1, 0.1D, f2, 0.0D);
                     }
 
                     float f3 = f1 * 0.04F;
                     float f4 = f2 * 0.04F;
-                    level.sendParticles(ParticleTypes.FISHING, d0, d1, d2, 0, (double)f4, 0.01D, (double)(-f3), 1.0D);
-                    level.sendParticles(ParticleTypes.FISHING, d0, d1, d2, 0, (double)(-f4), 0.01D, (double)f3, 1.0D);
+                    level.sendParticles(ParticleTypes.FISHING, d0, d1, d2, 0, f4, 0.01D, -f3, 1.0D);
+                    level.sendParticles(ParticleTypes.FISHING, d0, d1, d2, 0, -f4, 0.01D, f3, 1.0D);
                 } else if (blockstate.is(Blocks.LAVA)) {
                     fluid = Fluids.LAVA.defaultFluidState();
                     if (this.random.nextFloat() < 0.15F) {
-                        level.sendParticles(ParticleTypes.FLAME, d0, d1 - (double)0.1F, d2, 1, (double)f1, 0.1D, (double)f2, 0.0D);
+                        level.sendParticles(ParticleTypes.FLAME, d0, d1 - (double)0.1F, d2, 1, f1, 0.1D, f2, 0.0D);
                     }
 
                     float f3 = f1 * 0.04F;
                     float f4 = f2 * 0.04F;
                     level.sendParticles(ParticleTypes.LAVA, d0, d1, d2, 0, f4, 0.01D, -f3, 1.0D);
                     level.sendParticles(ParticleTypes.SMOKE, d0, d1, d2, 0, 0, 0.01D, 0, 1.0D);
-                    level.sendParticles(ParticleTypes.LAVA, d0, d1, d2, 0, -f4, 0.01D, (double)f3, 1.0D);
+                    level.sendParticles(ParticleTypes.LAVA, d0, d1, d2, 0, -f4, 0.01D, f3, 1.0D);
                 }
             } else {
                 // When a fish first touches the hook
@@ -451,13 +445,13 @@ public class TideFishingHook extends Projectile {
                     this.playSound(SoundEvents.BUCKET_EMPTY_LAVA, 0.25F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
                     if (Tide.PLATFORM.isModLoaded("stardew_fishing")) this.playSound(SoundEvents.FISHING_BOBBER_SPLASH, 0.25F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
                     double d3 = this.getY() + 0.5D;
-                    level.sendParticles(ParticleTypes.LAVA, this.getX(), d3, this.getZ(), (int) (1.0F + this.getBbWidth() * 20.0F), (double) this.getBbWidth(), 0.0D, (double) this.getBbWidth(), (double) 0.2F);
-                    level.sendParticles(ParticleTypes.SMOKE, this.getX(), d3, this.getZ(), (int) (1.0F + this.getBbWidth() * 20.0F), (double) this.getBbWidth(), 0.0D, (double) this.getBbWidth(), (double) 0.2F);
+                    level.sendParticles(ParticleTypes.LAVA, this.getX(), d3, this.getZ(), (int) (1.0F + this.getBbWidth() * 20.0F), this.getBbWidth(), 0.0D, this.getBbWidth(), 0.2);
+                    level.sendParticles(ParticleTypes.SMOKE, this.getX(), d3, this.getZ(), (int) (1.0F + this.getBbWidth() * 20.0F), this.getBbWidth(), 0.0D, this.getBbWidth(), 0.2);
                 } else {
                     this.playSound(SoundEvents.FISHING_BOBBER_SPLASH, 0.25F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
                     double d3 = this.getY() + 0.5D;
-                    level.sendParticles(ParticleTypes.BUBBLE, this.getX(), d3, this.getZ(), (int) (1.0F + this.getBbWidth() * 20.0F), (double) this.getBbWidth(), 0.0D, (double) this.getBbWidth(), (double) 0.2F);
-                    level.sendParticles(ParticleTypes.FISHING, this.getX(), d3, this.getZ(), (int) (1.0F + this.getBbWidth() * 20.0F), (double) this.getBbWidth(), 0.0D, (double) this.getBbWidth(), (double) 0.2F);
+                    level.sendParticles(ParticleTypes.BUBBLE, this.getX(), d3, this.getZ(), (int) (1.0F + this.getBbWidth() * 20.0F), this.getBbWidth(), 0.0D, this.getBbWidth(), 0.2);
+                    level.sendParticles(ParticleTypes.FISHING, this.getX(), d3, this.getZ(), (int) (1.0F + this.getBbWidth() * 20.0F), this.getBbWidth(), 0.0D, this.getBbWidth(), 0.2);
                 }
 
                 // Select a catch
@@ -486,13 +480,13 @@ public class TideFishingHook extends Projectile {
                 float f6 = Mth.nextFloat(this.random, 0.0F, 360.0F) * ((float)Math.PI / 180F);
                 float f7 = Mth.nextFloat(this.random, 25.0F, 60.0F);
                 double d4 = this.getX() + (double)(Mth.sin(f6) * f7) * 0.1D;
-                double d5 = (double)((float)Mth.floor(this.getY()) + 1.0F);
+                double d5 = (float)Mth.floor(this.getY()) + 1.0F;
                 double d6 = this.getZ() + (double)(Mth.cos(f6) * f7) * 0.1D;
                 BlockState blockstate1 = level.getBlockState(BlockPos.containing(d4, d5 - 1.0D, d6));
                 if (blockstate1.is(Blocks.WATER)) {
-                    level.sendParticles(ParticleTypes.SPLASH, d4, d5, d6, 2 + this.random.nextInt(2), (double)0.1F, 0.0D, (double)0.1F, 0.0D);
+                    level.sendParticles(ParticleTypes.SPLASH, d4, d5, d6, 2 + this.random.nextInt(2), 0.1F, 0.0D, 0.1F, 0.0D);
                 } else if (blockstate1.is(Blocks.LAVA)) {
-                    level.sendParticles(ParticleTypes.LAVA, d4, d5, d6, 2 + this.random.nextInt(2), (double)0.1F, 0.0D, (double)0.1F, 0.0D);
+                    level.sendParticles(ParticleTypes.LAVA, d4, d5, d6, 2 + this.random.nextInt(2), 0.1F, 0.0D, 0.1F, 0.0D);
                 }
             }
 
@@ -554,16 +548,16 @@ public class TideFishingHook extends Projectile {
         }
     }
 
-    public void addAdditionalSaveData(CompoundTag tag) {}
+    public void addAdditionalSaveData(@NotNull CompoundTag tag) {}
 
-    public void readAdditionalSaveData(CompoundTag tag) {}
+    public void readAdditionalSaveData(@NotNull CompoundTag tag) {}
 
     public void retrieve() {
         getRodItem().retrieveHook(rod, getPlayerOwner(), level());
     }
 
     public int retrieve(ItemStack stack, ServerLevel level, Player player) {
-        if (!this.level().isClientSide && player != null && !shouldStopFishing(player)) {
+        if (!this.level().isClientSide && player != null && shouldKeepFishing(player)) {
 
             int i = 0;
 
@@ -614,7 +608,6 @@ public class TideFishingHook extends Projectile {
                     case CRATE:
                         BlockState lootCrate;
 
-                        ResourceKey<LootTable> lootTable = TideUtils.getCrateLoot(this.getX(), this.getY(), this.getZ(), fluid, level());
                         lootCrate = getCrateBlock(hookedItem);
 
                         LootParams.Builder lootParamsBuilder = new LootParams.Builder((ServerLevel) this.level())
@@ -626,7 +619,7 @@ public class TideFishingHook extends Projectile {
                         if (!Tide.PLATFORM.isFabric()) lootParamsBuilder = lootParamsBuilder
                                 .withParameter(LootContextParams.ATTACKING_ENTITY, Objects.requireNonNull(this.getOwner()));
 
-                        LootParams lootParams = lootParamsBuilder
+                        LootParams params = lootParamsBuilder
                                 .withLuck((float)luck + player.getLuck())
                                 .create(LootContextParamSets.FISHING);
 
@@ -640,7 +633,7 @@ public class TideFishingHook extends Projectile {
                                 dx * 0.0666d,
                                 dy * 0.0666d + Math.sqrt(Math.sqrt(dx * dx + dy * dy + dz * dz)) * 0.082d + 0.27d,
                                 dz * 0.0666d,
-                                lootTable, lootParams);
+                                TideLootTables.Fishing.CRATES, params);
 
                         if (fluid.is(TideTags.Fluids.LAVA_FISHING) && fluid.is(Fluids.LAVA)) level.setBlockAndUpdate(this.blockPosition(), Blocks.LAVA.defaultBlockState());
                         if (fluid.is(TideTags.Fluids.WATER_FISHING) && fluid.is(Fluids.WATER)) level.setBlockAndUpdate(this.blockPosition(), Blocks.WATER.defaultBlockState());
@@ -681,27 +674,30 @@ public class TideFishingHook extends Projectile {
                 .withParameter(LootContextParams.ATTACKING_ENTITY, Objects.requireNonNull(this.getOwner()));
 
         ResourceKey<LootTable> lootKey = BuiltInLootTables.FISHING;
-        LootParams lootParams = lootParamsBuilder
+        LootParams params = lootParamsBuilder
                 .withLuck((float) luck + player.getLuck())
                 .create(LootContextParamSets.FISHING);
 
-        LootTable table = level().getServer().reloadableRegistries().getLootTable(lootKey);
+        ItemStack selection = select(lootKey, params).orElse(Items.SALMON.getDefaultInstance());
         ServerLevel overworld = level().getServer().overworld();
 
-        ItemStack selection = selectFromCatchList(table.getRandomItems(lootParams));
         selection = TideUtils.checkForOverrides(selection, this, overworld);
 
         // Magnetic bait override
         if (usingMagneticBait() && random.nextInt(0, 4) == 0) {
-            lootKey = TideLootTables.Fishing.CRATES;
-            table = level().getServer().reloadableRegistries().getLootTable(lootKey);
-            selection = selectFromCatchList(table.getRandomItems(lootParams));
-
+            // select from crate
+            lootKey = TideLootTables.Fishing.CRATES_BLOCK;
+            selection = select(lootKey, params).orElse(TideItems.SURFACE_LOOT_CRATE.getDefaultInstance());
         } else if (TideUtils.shouldGrabTideLootTable(selection, fluid)) {
+            // check special fish loot table
+            lootKey = TideLootTables.Fishing.SPECIAL_FISH;
+            selection = select(lootKey, params).orElse(Items.AIR.getDefaultInstance());
 
-            lootKey = TideUtils.getTideLootTable(this.getX(), this.getY(), this.getZ(), fluid, level(), random);
-            table = level().getServer().reloadableRegistries().getLootTable(lootKey);
-            selection = selectFromCatchList(table.getRandomItems(lootParams));
+            // if no special fish is selected, use regular tide loot table
+            if (selection.is(Items.AIR)) {
+                lootKey = TideUtils.getTideLootTable(this.getX(), this.getY(), this.getZ(), fluid, level());
+                selection = select(lootKey, params).orElse(Items.SALMON.getDefaultInstance());
+            }
         }
 
         Tide.LOG.info("Loot table used: {}", lootKey.location());
@@ -713,21 +709,29 @@ public class TideFishingHook extends Projectile {
         if (BaitUtils.isHoldingBait(rod)) {
             if (!player.isCreative()) {
                 // consume used bait if necessary
-                BaitUtils.getPrimaryBait(rod).shrink(1);
+                BaitContents.Mutable contents = new BaitContents.Mutable(rod.get(TideDataComponents.BAIT_CONTENTS));
+                contents.shrinkStack(BaitUtils.getPrimaryBait(rod));
+                rod.set(TideDataComponents.BAIT_CONTENTS, contents.toImmutable());
             }
-            Tide.LOG.info("Using bait");
         }
 
         getEntityData().set(DATA_CATCH_TYPE, catchType.ordinal());
     }
 
-    private ItemStack selectFromCatchList(List<ItemStack> list) {
-        if (list == null || list.isEmpty()) list = ObjectArrayList.of(Items.SALMON.getDefaultInstance());
+    private Optional<ItemStack> select(ResourceKey<LootTable> lootKey, LootParams params) {
+        MinecraftServer server = level().getServer();
+        if (server == null) return Optional.empty();
+        LootTable table = server.reloadableRegistries().getLootTable(lootKey);
+        return selectFromCatchList(table.getRandomItems(params));
+    }
+
+    private Optional<ItemStack> selectFromCatchList(List<ItemStack> list) {
+        if (list == null || list.isEmpty()) return Optional.empty();
 
         try {
-            return list.get(new Random().nextInt(0, list.size()));
+            return Optional.ofNullable(list.get(new Random().nextInt(0, list.size())));
         } catch (Exception e) {
-            return list.getFirst();
+            return Optional.ofNullable(list.getFirst());
         }
     }
 
@@ -759,11 +763,11 @@ public class TideFishingHook extends Projectile {
         this.discard();
     }
 
-    protected MovementEmission getMovementEmission() {
+    protected @NotNull MovementEmission getMovementEmission() {
         return MovementEmission.NONE;
     }
 
-    public void remove(RemovalReason reason) {
+    public void remove(@NotNull RemovalReason reason) {
         this.updateOwnerInfo(null);
         super.remove(reason);
     }
@@ -794,10 +798,10 @@ public class TideFishingHook extends Projectile {
         return this.hookedIn;
     }
 
-    public void recreateFromPacket(ClientboundAddEntityPacket p_150150_) {
-        super.recreateFromPacket(p_150150_);
+    public void recreateFromPacket(@NotNull ClientboundAddEntityPacket packet) {
+        super.recreateFromPacket(packet);
         if (this.getPlayerOwner() == null) {
-            int i = p_150150_.getData();
+            int i = packet.getData();
             LOGGER.error("Failed to recreate fishing hook on client. {} (id: {}) is not a valid owner.", this.level().getEntity(i), i);
             this.kill();
         }
@@ -859,12 +863,12 @@ public class TideFishingHook extends Projectile {
     enum FishHookState {
         FLYING,
         HOOKED_IN_ENTITY,
-        BOBBING;
+        BOBBING
     }
 
     enum OpenFluidType {
         ABOVE_WATER,
         INSIDE_WATER,
-        INVALID;
+        INVALID
     }
 }

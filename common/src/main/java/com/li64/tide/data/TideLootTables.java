@@ -14,6 +14,8 @@ public class TideLootTables {
 
     public static class Fishing {
         public static final ResourceKey<LootTable> CRATES = create("gameplay/fishing/crates");
+        public static final ResourceKey<LootTable> CRATES_BLOCK = create("gameplay/fishing/crates/block");
+        public static final ResourceKey<LootTable> SPECIAL_FISH = create("gameplay/fishing/special");
 
         public static final ResourceKey<LootTable> FRESHWATER_NORMAL = create("gameplay/fishing/climates/freshwater_normal");
         public static final ResourceKey<LootTable> FRESHWATER_COLD = create("gameplay/fishing/climates/freshwater_cold");
@@ -51,25 +53,6 @@ public class TideLootTables {
 
     public static class Chests {
         public static final ResourceKey<LootTable> FISHING_BOAT = create("chests/fishing_boat");
-    }
-
-    public static class Biomes {
-        public static final ResourceKey<LootTable> BADLANDS = biome("badlands");
-        public static final ResourceKey<LootTable> BIRCH = biome("birch");
-        public static final ResourceKey<LootTable> CHERRY = biome("cherry");
-        public static final ResourceKey<LootTable> DEEP_DARK = biome("deep_dark");
-        public static final ResourceKey<LootTable> DESERT = biome("desert");
-        public static final ResourceKey<LootTable> DRIPSTONE = biome("dripstone");
-        public static final ResourceKey<LootTable> FOREST = biome("forest");
-        public static final ResourceKey<LootTable> FROZEN = biome("frozen");
-        public static final ResourceKey<LootTable> JUNGLE = biome("jungle");
-        public static final ResourceKey<LootTable> LUSH_CAVES = biome("lush_caves");
-        public static final ResourceKey<LootTable> MOUNTAIN = biome("mountain");
-        public static final ResourceKey<LootTable> MUSHROOM = biome("mushroom");
-        public static final ResourceKey<LootTable> PLAINS = biome("plains");
-        public static final ResourceKey<LootTable> SAVANNA = biome("savanna");
-        public static final ResourceKey<LootTable> SWAMP = biome("swamp");
-        public static final ResourceKey<LootTable> TAIGA = biome("taiga");
     }
 
     public static class Entities {

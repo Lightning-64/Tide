@@ -1,11 +1,9 @@
-package com.li64.tide.data.loot;
+package com.li64.tide.registries;
 
 import com.li64.tide.Tide;
+import com.li64.tide.data.loot.TideFishingPredicate;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.critereon.EntitySubPredicate;
-import net.minecraft.core.component.DataComponentType;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.codec.ByteBufCodecs;
 
 import java.util.HashMap;
 

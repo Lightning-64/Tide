@@ -5,7 +5,7 @@ import com.li64.tide.compat.jei.recipe.RodUpgradingRecipe;
 import com.li64.tide.data.TideCriteriaTriggers;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.TideTags;
-import com.li64.tide.data.loot.TideEntitySubPredicates;
+import com.li64.tide.registries.TideEntitySubPredicates;
 import com.li64.tide.events.FabricEventHandler;
 import com.li64.tide.network.TideMessages;
 import com.li64.tide.registries.*;
@@ -25,7 +25,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.WaterAnimal;
@@ -58,6 +57,7 @@ public class TideFabric implements ModInitializer {
         TideSoundEvents.init();
         TideDataComponents.init();
         TideEntitySubPredicates.init();
+        TideLootConditions.init();
         TideCriteriaTriggers.init();
 
         Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, Tide.resource(RodUpgradingRecipe.Type.ID),

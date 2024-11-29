@@ -2,17 +2,15 @@ package com.li64.tide.util;
 
 import com.li64.tide.Tide;
 import com.li64.tide.client.gui.JournalPage;
-import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.journal.JournalLayout;
 import com.li64.tide.data.TideCriteriaTriggers;
 import com.li64.tide.data.TideLootTables;
 import com.li64.tide.data.TideTags;
+import com.li64.tide.data.loot.DepthLayer;
 import com.li64.tide.data.player.TidePlayerData;
-import com.li64.tide.data.rods.BaitContents;
 import com.li64.tide.network.messages.ShowToastMsg;
 import com.li64.tide.registries.TideItems;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
-import com.li64.tide.registries.items.BaitItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -24,8 +22,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -34,6 +30,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 
 import java.util.HashMap;
@@ -44,16 +41,6 @@ public class TideUtils {
 
     public static boolean moddedDimension(ResourceKey<Level> dimension) {
         return dimension != Level.OVERWORLD && dimension != Level.NETHER && dimension != Level.END;
-    }
-
-    public enum LootLayer {
-        SURFACE, UNDERGROUND, DEPTHS
-    }
-
-    public static LootLayer getLayerAt(double y) {
-        if (y < 0) return LootLayer.DEPTHS;
-        else if (y < 50) return LootLayer.UNDERGROUND;
-        else return LootLayer.SURFACE;
     }
 
     public static ItemStack checkForOverrides(ItemStack item, TideFishingHook hook, ServerLevel level) {
@@ -87,9 +74,10 @@ public class TideUtils {
         return fluid.is(TideTags.Fluids.LAVA_FISHING);
     }
 
-    public static ResourceKey<LootTable> getTideLootTable(double x, double y, double z, FluidState fluid, Level level, RandomSource random) {
-        LootLayer layer = TideUtils.getLayerAt(y);
+    public static ResourceKey<LootTable> getTideLootTable(double x, double y, double z, FluidState fluid, Level level) {
+        DepthLayer layer = DepthLayer.getLayerAt(y);
         Holder<Biome> biomeHolder = level.getBiome(new BlockPos((int) x, (int) y, (int) z));
+
         if (moddedDimension(level.dimension())) {
 
             // Return the default loot tables for an unknown modded dimension
@@ -108,25 +96,19 @@ public class TideUtils {
             if (fluid.is(TideTags.Fluids.LAVA_FISHING)) return TideLootTables.Fishing.END_LAVA;
             else return TideLootTables.Fishing.END_WATER;
 
-        } else if (layer == LootLayer.UNDERGROUND && level.dimension() == Level.OVERWORLD) {
+        } else if (layer == DepthLayer.UNDERGROUND && level.dimension() == Level.OVERWORLD) {
 
             if (fluid.is(TideTags.Fluids.LAVA_FISHING)) return TideLootTables.Fishing.LAVA_UNDERGROUND;
-            ResourceKey<LootTable> biomeLoot = TideUtils.getBiomeLootTable(biomeHolder);
-            if (biomeLoot != null && random.nextInt(0, 21) == 1) return biomeLoot;
             return TideLootTables.Fishing.UNDERGROUND;
 
-        } else if (layer == LootLayer.DEPTHS && level.dimension() == Level.OVERWORLD) {
+        } else if (layer == DepthLayer.DEPTHS && level.dimension() == Level.OVERWORLD) {
 
             if (fluid.is(TideTags.Fluids.LAVA_FISHING)) return TideLootTables.Fishing.LAVA_DEPTHS;
-            ResourceKey<LootTable> biomeLoot = TideUtils.getBiomeLootTable(biomeHolder);
-            if (biomeLoot != null && random.nextInt(0, 21) == 1) return biomeLoot;
             return TideLootTables.Fishing.DEPTHS;
 
         } else {
 
             if (fluid.is(TideTags.Fluids.LAVA_FISHING)) return TideLootTables.Fishing.LAVA_SURFACE;
-            ResourceKey<LootTable> biomeLoot = TideUtils.getBiomeLootTable(biomeHolder);
-            if (biomeLoot != null && random.nextInt(0, 21) == 1) return biomeLoot;
 
             if (biomeHolder.is(TideTags.Climate.IS_COLD)) {
 
@@ -144,42 +126,6 @@ public class TideUtils {
                 else return TideLootTables.Fishing.FRESHWATER_NORMAL;
 
             }
-        }
-    }
-
-    public static ResourceKey<LootTable> getBiomeLootTable(Holder<Biome> biomeHolder) {
-        for (TagKey<Biome> tag : TideTags.Biomes.fishingBiomes) {
-            if (biomeHolder.is(tag)) {
-                return TideLootTables.getByLocation(
-                        Tide.resource("gameplay/fishing/biomes/" + tag.location().getPath()));
-            }
-        }
-        return null;
-    }
-
-    public static ResourceKey<LootTable> getCrateLoot(double x, double y, double z, FluidState fluid, Level level) {
-        Holder<Biome> biomeHolder = level.getBiome(new BlockPos((int)x, (int)y, (int)z));
-        LootLayer layer = TideUtils.getLayerAt(y);
-
-        if (fluid.getType() == Fluids.LAVA) {
-
-            if (level.dimension() == Level.NETHER) return TideLootTables.Crates.NETHER_LAVA;
-            else if (level.dimension() == Level.END) return TideLootTables.Crates.END_LAVA;
-            else if (layer == LootLayer.SURFACE) return TideLootTables.Crates.OVERWORLD_LAVA_SURFACE;
-            else if (layer == LootLayer.UNDERGROUND) return TideLootTables.Crates.OVERWORLD_LAVA_UNDERGROUND;
-            else return TideLootTables.Crates.OVERWORLD_LAVA_DEEP;
-
-        } else {
-
-            if (level.dimension() == Level.END) return TideLootTables.Crates.END_WATER;
-            else {
-                if (layer == LootLayer.SURFACE) {
-                    if (biomeHolder.is(TideTags.Climate.IS_SALTWATER)) return TideLootTables.Crates.OVERWORLD_WATER_OCEAN;
-                    else return TideLootTables.Crates.OVERWORLD_WATER_RIVER;
-                } else if (layer == LootLayer.UNDERGROUND) return TideLootTables.Crates.OVERWORLD_WATER_UNDERGROUND;
-                else return TideLootTables.Crates.OVERWORLD_WATER_DEEP;
-            }
-
         }
     }
 
