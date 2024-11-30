@@ -225,22 +225,6 @@ public class TideFishingHook extends Projectile {
             }
         }
 
-        if (BaitUtils.getPrimaryBait(rod).is(TideItems.MAGNETIC_BAIT) && this.currentState == FishHookState.BOBBING) {
-            particleTimer++;
-            if (particleTimer >= 3) {
-                Vec3 pos = this.position();
-                Vec3 randomPos = new Vec3(
-                        this.getX() + 0.5 * (this.random.nextGaussian() - this.random.nextGaussian()),
-                        this.getY() + 0.5 * (this.random.nextGaussian() - this.random.nextGaussian()),
-                        this.getZ() + 0.5 * (this.random.nextGaussian() - this.random.nextGaussian()));
-                Vec3 speed = pos.vectorTo(randomPos);
-                this.level().addParticle(ParticleTypes.UNDERWATER,
-                        pos.x(), pos.y(), pos.z(),
-                        speed.x(), speed.y(), speed.z());
-                particleTimer = 0;
-            }
-        }
-
         Player player = this.getPlayerOwner();
         if (player == null) {
             this.discard();
