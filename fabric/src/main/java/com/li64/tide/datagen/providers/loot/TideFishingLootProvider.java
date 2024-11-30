@@ -290,7 +290,7 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
         output.accept(
                 TideLootTables.Fishing.END_WATER,
                 LootTable.lootTable().withPool(LootPool.lootPool()
-                        .add(LootItem.lootTableItem(TideItems.ENDSTONE_PERCH).setWeight(90))
+                        .add(LootItem.lootTableItem(TideItems.END_STONE_PERCH).setWeight(90))
                         .add(LootItem.lootTableItem(TideItems.ENDERFIN).setWeight(95))
                         .add(LootItem.lootTableItem(TideItems.ENDERGAZER).setWeight(80))
                         .add(LootItem.lootTableItem(TideItems.PURPUR_PIKE).setWeight(80))

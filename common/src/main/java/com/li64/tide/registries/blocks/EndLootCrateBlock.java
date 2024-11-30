@@ -5,6 +5,7 @@ import com.li64.tide.registries.blocks.entities.EndLootCrateBlockEntity;
 import com.li64.tide.registries.blocks.entities.LootCrateBlockEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,7 +19,7 @@ public class EndLootCrateBlock extends AbstractLootCrateBlock<LootCrateBlockEnti
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new EndLootCrateBlockEntity(pos, state);
     }
 }

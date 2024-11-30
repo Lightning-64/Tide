@@ -1,19 +1,63 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_bait_plants": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "tide:bait_plants"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_bone_meal": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:bone_meal"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_rotten_flesh": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:rotten_flesh"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_seeds": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "c:seeds"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "tide:bait"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "impossible": {
-      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
-      "impossible",
+      "has_bait_plants",
+      "has_rotten_flesh",
+      "has_seeds",
+      "has_bone_meal",
       "has_the_recipe"
     ]
   ],

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_purpur_pike": {
+    "has_luminescent_jellyfish": {
       "conditions": {
         "items": [
           {
             "items": [
-              "tide:purpur_pike"
+              "tide:luminescent_jellyfish"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tide:purpur_from_pike"
+        "recipe": "tide:jelly_torch_from_jellyfish"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_purpur_pike",
+      "has_luminescent_jellyfish",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "tide:purpur_from_pike"
+      "tide:jelly_torch_from_jellyfish"
     ]
   },
   "sends_telemetry_event": false

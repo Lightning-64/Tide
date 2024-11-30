@@ -1,19 +1,50 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_diamond": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "c:gems/diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_iron_fishing_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tide:iron_fishing_rod"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_string": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "c:strings"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "tide:diamond_rod_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "impossible": {
-      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
-      "impossible",
+      "has_string",
+      "has_iron_fishing_rod",
+      "has_diamond",
       "has_the_recipe"
     ]
   ],

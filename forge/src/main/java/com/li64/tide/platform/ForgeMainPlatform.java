@@ -3,9 +3,7 @@ package com.li64.tide.platform;
 import com.li64.tide.TideForge;
 import com.li64.tide.compat.stardewfishing.StardewFishingCompat;
 import com.li64.tide.platform.services.TideMainPlatform;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.CriterionTrigger;
-import net.minecraft.advancements.critereon.EntitySubPredicate;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.nbt.CompoundTag;
@@ -20,6 +18,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.event.entity.player.ItemFishedEvent;
@@ -63,6 +62,11 @@ public class ForgeMainPlatform implements TideMainPlatform {
     @Override
     public void registerCriteriaTrigger(String key, CriterionTrigger<?> trigger) {
         CriteriaTriggers.register(trigger);
+    }
+
+    @Override
+    public void registerLootCondition(String key, LootItemConditionType type) {
+        TideForge.LOOT_CONDITION_TYPES.register(key, () -> type);
     }
 
     @Override

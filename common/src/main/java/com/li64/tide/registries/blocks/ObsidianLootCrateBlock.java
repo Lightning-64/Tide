@@ -18,7 +18,7 @@ public class ObsidianLootCrateBlock extends AbstractLootCrateBlock<LootCrateBloc
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new ObsidianLootCrateBlockEntity(pos, state);
     }
 }

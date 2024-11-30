@@ -19,7 +19,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -45,7 +44,7 @@ public class TideUtils {
             // new moon and full moon are the only phases where you can get the voidseeker,
             // otherwise it will just be replaced with an end stone perch.
             if (moonPhase != 0 && moonPhase != 4)
-                item = new ItemStack(TideItems.ENDSTONE_PERCH, 1);
+                item = new ItemStack(TideItems.END_STONE_PERCH, 1);
         }
         if (hook.getLuck() >= 5) {
             // 1/24 chance to catch the midas fish if the player has max luck (5)

@@ -1,19 +1,28 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_hardened_clayfish": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tide:hardened_clayfish"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "tide:bricks_from_clayfish"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "impossible": {
-      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
-      "impossible",
+      "has_hardened_clayfish",
       "has_the_recipe"
     ]
   ],

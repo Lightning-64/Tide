@@ -1,19 +1,28 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_enderfin": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tide:enderfin"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "tide:ender_pearl_from_enderfin"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "impossible": {
-      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
-      "impossible",
+      "has_enderfin",
       "has_the_recipe"
     ]
   ],

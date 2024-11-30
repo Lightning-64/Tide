@@ -1,19 +1,37 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_cobble": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "c:cobblestones"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_iron_nugget": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "c:nuggets/iron"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "tide:fishing_hook"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "impossible": {
-      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
-      "impossible",
+      "has_cobble",
+      "has_iron_nugget",
       "has_the_recipe"
     ]
   ],

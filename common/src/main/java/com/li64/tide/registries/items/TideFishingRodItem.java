@@ -85,7 +85,7 @@ public class TideFishingRodItem extends FishingRodItem {
     }
 
     @Override
-    public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
+    public @NotNull Optional<TooltipComponent> getTooltipImage(@NotNull ItemStack stack) {
         return Optional.of(new FishingRodTooltip(getContents(stack)));
     }
 
@@ -278,7 +278,7 @@ public class TideFishingRodItem extends FishingRodItem {
     }
 
     @Override
-    public int getUseDuration(ItemStack stack) {
+    public int getUseDuration(@NotNull ItemStack stack) {
         return 60000;
     }
 

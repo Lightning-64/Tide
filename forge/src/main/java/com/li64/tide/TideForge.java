@@ -17,6 +17,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,6 +34,7 @@ public class TideForge {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Tide.MOD_ID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Tide.MOD_ID);
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Tide.MOD_ID);
+    public static final DeferredRegister<LootItemConditionType> LOOT_CONDITION_TYPES = DeferredRegister.create(Registries.LOOT_CONDITION_TYPE, Tide.MOD_ID);
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.MENU_TYPES, Tide.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Tide.MOD_ID);
 
@@ -47,6 +49,7 @@ public class TideForge {
         BLOCK_ENTITIES.register(eventBus);
         ITEMS.register(eventBus);
         ENTITY_TYPES.register(eventBus);
+        LOOT_CONDITION_TYPES.register(eventBus);
         MENU_TYPES.register(eventBus);
         SOUND_EVENTS.register(eventBus);
 
@@ -69,6 +72,7 @@ public class TideForge {
         event.register(ForgeRegistries.Keys.ENTITY_TYPES, helper -> TideEntityTypes.init());
         event.register(ForgeRegistries.Keys.MENU_TYPES, helper -> TideMenuTypes.init());
         event.register(ForgeRegistries.Keys.SOUND_EVENTS, helper -> TideSoundEvents.init());
+        event.register(Registries.LOOT_CONDITION_TYPE, helper -> TideLootConditions.init());
 
         event.register(Registries.CREATIVE_MODE_TAB, helper -> Registry.register(
                 BuiltInRegistries.CREATIVE_MODE_TAB, Tide.MOD_ID,

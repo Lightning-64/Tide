@@ -1,19 +1,28 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_end_stone_perch": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tide:endstone_perch"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "tide:end_stone_from_perch"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "impossible": {
-      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
-      "impossible",
+      "has_end_stone_perch",
       "has_the_recipe"
     ]
   ],

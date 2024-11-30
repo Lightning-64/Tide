@@ -219,7 +219,7 @@ public class TideItems {
     public static final Item BEDROCK_TETRA = register("bedrock_tetra",
             new TideFishItem(new Item.Properties(), 5.6f));
 
-    public static final Item ENDSTONE_PERCH = register("endstone_perch",
+    public static final Item END_STONE_PERCH = register("endstone_perch",
             new TideFishItem(new Item.Properties(), 4.1f));
     public static final Item ENDERFIN = register("enderfin",
             new TideFishItem(new Item.Properties().food(TideFoods.AVERAGE_RAW_FISH), 4.5f));

@@ -3,9 +3,7 @@ package com.li64.tide.registries.blocks;
 import com.li64.tide.registries.TideBlockEntities;
 import com.li64.tide.registries.blocks.entities.LootCrateBlockEntity;
 import com.li64.tide.registries.blocks.entities.SurfaceLootCrateBlockEntity;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +16,7 @@ public class SurfaceLootCrateBlock extends AbstractLootCrateBlock<LootCrateBlock
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new SurfaceLootCrateBlockEntity(pos, state);
     }
 }
