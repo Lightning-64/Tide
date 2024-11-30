@@ -10,7 +10,6 @@
       "MixinFishingRod"
    ],
    "client": [
-      "ClientTooltipComponentMixin",
       "GuiRenderMixin"
    ],
    "server": [],

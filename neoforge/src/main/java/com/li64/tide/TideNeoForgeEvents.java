@@ -6,6 +6,8 @@ import com.li64.tide.client.gui.screens.AnglerWorkshopScreen;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.data.commands.JournalCommand;
 import com.li64.tide.data.player.TidePlayerData;
+import com.li64.tide.data.rods.ClientFishingRodTooltip;
+import com.li64.tide.data.rods.FishingRodTooltip;
 import com.li64.tide.events.TideEventHandler;
 import com.li64.tide.loot.LootTableAccessor;
 import com.li64.tide.registries.*;
@@ -37,6 +39,7 @@ import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
@@ -54,6 +57,11 @@ import java.util.List;
 public class TideNeoForgeEvents {
     @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = Tide.MOD_ID)
     public static class Mod {
+        @SubscribeEvent
+        public static void registerClientTooltipComponents(RegisterClientTooltipComponentFactoriesEvent event) {
+            event.register(FishingRodTooltip.class, (tooltip -> new ClientFishingRodTooltip(tooltip.contents())));
+        }
+
         @SubscribeEvent
         public static void entitySpawnRestrictions(RegisterSpawnPlacementsEvent event) {
             tideFishSpawnRules(TideEntityTypes.TROUT, event);
