@@ -1,6 +1,7 @@
 package com.li64.tide;
 
 import com.google.common.collect.ImmutableList;
+import com.li64.tide.data.TideTags;
 import com.li64.tide.data.commands.JournalCommand;
 import com.li64.tide.data.player.TidePlayerData;
 import com.li64.tide.events.TideEventHandler;
@@ -8,6 +9,7 @@ import com.li64.tide.loot.LootTableAccessor;
 import com.li64.tide.registries.*;
 import com.li64.tide.registries.entities.util.AbstractTideFish;
 import com.li64.tide.registries.items.BaitItem;
+import com.li64.tide.registries.items.TideFishingRodItem;
 import com.li64.tide.util.BaitUtils;
 import com.li64.tide.util.TideUtils;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -143,10 +145,9 @@ public class TideForgeEvents {
 
         @SubscribeEvent
         public static void itemTooltipEvent(ItemTooltipEvent event) {
-            if (BaitUtils.isBait(event.getItemStack()) && !(event.getItemStack().getItem() instanceof BaitItem)) {
-                Style style = Component.empty().getStyle().withColor(ChatFormatting.GRAY).withItalic(true);
-                event.getToolTip().add(Component.translatable("item.tide.bait.desc").setStyle(style));
-            }
+            ItemStack stack = event.getItemStack();
+            if (BaitUtils.isBait(stack)) event.getToolTip().addAll(BaitUtils.getDescriptionLines(stack));
+            if (stack.is(TideTags.Items.CUSTOMIZABLE_RODS)) event.getToolTip().addAll(TideFishingRodItem.getDescriptionLines(stack, event.getEntity().registryAccess()));
         }
 
         @SubscribeEvent

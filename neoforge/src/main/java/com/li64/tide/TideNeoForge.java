@@ -2,39 +2,30 @@ package com.li64.tide;
 
 import com.li64.tide.client.gui.TideMenuTypes;
 import com.li64.tide.compat.jei.TideRecipeSerializers;
-import com.li64.tide.config.TideConfig;
 import com.li64.tide.data.TideCriteriaTriggers;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.loot.TideLootModifiers;
 import com.li64.tide.network.TideMessages;
 import com.li64.tide.registries.*;
-import com.li64.tide.registries.items.TideFishingRodItem;
-import me.shedaniel.autoconfig.AutoConfig;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.CriterionTrigger;
-import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
-import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.FishingRodItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -48,6 +39,8 @@ public class TideNeoForge {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, Tide.MOD_ID);
     public static final DeferredRegister<CriterionTrigger<?>> TRIGGER_TYPES = DeferredRegister.create(Registries.TRIGGER_TYPE, Tide.MOD_ID);
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES = DeferredRegister.create(BuiltInRegistries.DATA_COMPONENT_TYPE, Tide.MOD_ID);
+    public static final DeferredRegister<MapCodec<? extends EntitySubPredicate>> ENTITY_SUB_PREDICATES = DeferredRegister.create(Registries.ENTITY_SUB_PREDICATE_TYPE, Tide.MOD_ID);
+    public static final DeferredRegister<LootItemConditionType> LOOT_CONDITION_TYPES = DeferredRegister.create(Registries.LOOT_CONDITION_TYPE, Tide.MOD_ID);
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(BuiltInRegistries.MENU, Tide.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, Tide.MOD_ID);
 
@@ -66,6 +59,8 @@ public class TideNeoForge {
         ENTITY_TYPES.register(eventBus);
         TRIGGER_TYPES.register(eventBus);
         DATA_COMPONENT_TYPES.register(eventBus);
+        ENTITY_SUB_PREDICATES.register(eventBus);
+        LOOT_CONDITION_TYPES.register(eventBus);
         MENU_TYPES.register(eventBus);
         SOUND_EVENTS.register(eventBus);
 
@@ -85,6 +80,8 @@ public class TideNeoForge {
         event.register(Registries.SOUND_EVENT, helper -> TideSoundEvents.init());
         event.register(Registries.TRIGGER_TYPE, helper -> TideCriteriaTriggers.init());
         event.register(Registries.DATA_COMPONENT_TYPE, helper -> TideDataComponents.init());
+        event.register(Registries.ENTITY_SUB_PREDICATE_TYPE, helper -> TideEntitySubPredicates.init());
+        event.register(Registries.LOOT_CONDITION_TYPE, helper -> TideLootConditions.init());
 
         event.register(Registries.CREATIVE_MODE_TAB, helper -> Registry.register(
                 BuiltInRegistries.CREATIVE_MODE_TAB, Tide.MOD_ID,

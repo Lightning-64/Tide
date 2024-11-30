@@ -1,20 +1,27 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_aqua_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tide:deep_aqua_crystal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "tide:deep_aqua_arrow"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "impossible": {
-      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "impossible"
+      "has_aqua_crystal"
     ]
   ],
   "rewards": {

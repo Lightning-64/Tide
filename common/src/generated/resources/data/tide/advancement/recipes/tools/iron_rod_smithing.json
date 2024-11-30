@@ -1,20 +1,49 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_iron_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:ingots/iron"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_stone_fishing_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tide:stone_fishing_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_string": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:strings"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "tide:iron_rod_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "impossible": {
-      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "impossible"
+      "has_string",
+      "has_stone_fishing_rod",
+      "has_iron_ingot"
     ]
   ],
   "rewards": {

@@ -1,20 +1,27 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tide:glowfish"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "tide:glow_ink_from_fish"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "impossible": {
-      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "impossible"
+      "has"
     ]
   ],
   "rewards": {

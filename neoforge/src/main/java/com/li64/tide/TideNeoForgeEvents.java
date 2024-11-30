@@ -1,13 +1,17 @@
 package com.li64.tide;
 
+import com.google.common.collect.ImmutableList;
 import com.li64.tide.client.gui.TideMenuTypes;
 import com.li64.tide.client.gui.screens.AnglerWorkshopScreen;
+import com.li64.tide.data.TideTags;
 import com.li64.tide.data.commands.JournalCommand;
 import com.li64.tide.data.player.TidePlayerData;
 import com.li64.tide.events.TideEventHandler;
+import com.li64.tide.loot.LootTableAccessor;
 import com.li64.tide.registries.*;
 import com.li64.tide.registries.entities.util.AbstractTideFish;
 import com.li64.tide.registries.items.BaitItem;
+import com.li64.tide.registries.items.TideFishingRodItem;
 import com.li64.tide.util.BaitUtils;
 import com.li64.tide.util.TideUtils;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -28,11 +32,14 @@ import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.LootTableLoadEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
@@ -112,6 +119,18 @@ public class TideNeoForgeEvents {
     @EventBusSubscriber(modid = Tide.MOD_ID)
     public static class Game {
         @SubscribeEvent
+        public static void onLootTableLoad(LootTableLoadEvent event) {
+            if (event.getName().toString().equals("minecraft:gameplay/fishing")) {
+                // Add crate rolls
+                LootPool pool = ((LootTableAccessor) event.getTable()).tide$getPool(0);
+                ((LootTableAccessor) event.getTable()).tide$getPool(0).entries = new ImmutableList.Builder<LootPoolEntryContainer>()
+                        .addAll(pool.entries)
+                        .add(Tide.getCrateFishingEntry().build())
+                        .build();
+            }
+        }
+
+        @SubscribeEvent
         public static void onServerReloadListeners(AddReloadListenerEvent event) {
             Tide.onRegisterReloadListeners((id, listener) -> event.addListener(listener));
         }
@@ -135,10 +154,9 @@ public class TideNeoForgeEvents {
 
         @SubscribeEvent
         public static void itemTooltipEvent(ItemTooltipEvent event) {
-            if (BaitUtils.isBait(event.getItemStack()) && !(event.getItemStack().getItem() instanceof BaitItem)) {
-                Style style = Component.empty().getStyle().withColor(ChatFormatting.GRAY).withItalic(true);
-                event.getToolTip().add(Component.translatable("item.tide.bait.desc").setStyle(style));
-            }
+            ItemStack stack = event.getItemStack();
+            if (BaitUtils.isBait(stack)) event.getToolTip().addAll(BaitUtils.getDescriptionLines(stack));
+            if (stack.is(TideTags.Items.CUSTOMIZABLE_RODS)) event.getToolTip().addAll(TideFishingRodItem.getDescriptionLines(stack, event.getContext().registries()));
         }
 
         @SubscribeEvent

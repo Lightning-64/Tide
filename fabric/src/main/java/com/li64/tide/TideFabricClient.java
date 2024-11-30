@@ -34,7 +34,7 @@ public class TideFabricClient implements ClientModInitializer {
 
         ItemTooltipCallback.EVENT.register((stack, context, type, lines) -> {
             if (BaitUtils.isBait(stack)) lines.addAll(BaitUtils.getDescriptionLines(stack));
-            if (stack.is(TideTags.Items.CUSTOMIZABLE_RODS)) lines.addAll(TideFishingRodItem.getDescriptionLines(stack, context));
+            if (stack.is(TideTags.Items.CUSTOMIZABLE_RODS)) lines.addAll(TideFishingRodItem.getDescriptionLines(stack, context.registries()));
         });
 
         ClampedItemPropertyFunction rodCastFunction = (itemStack, level, player, i) -> {

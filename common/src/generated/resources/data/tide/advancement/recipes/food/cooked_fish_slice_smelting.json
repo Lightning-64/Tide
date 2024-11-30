@@ -1,20 +1,27 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_fish_slice": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tide:fish_slice"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "tide:cooked_fish_slice_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "impossible": {
-      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "impossible"
+      "has_fish_slice"
     ]
   ],
   "rewards": {

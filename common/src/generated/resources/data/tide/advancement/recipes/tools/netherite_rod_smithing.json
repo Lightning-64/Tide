@@ -1,20 +1,49 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_diamond_fishing_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tide:diamond_fishing_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_netherite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:ingots/netherite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_string": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:strings"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "tide:netherite_rod_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "impossible": {
-      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "impossible"
+      "has_string",
+      "has_diamond_fishing_rod",
+      "has_netherite"
     ]
   ],
   "rewards": {

@@ -1,20 +1,27 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_elytrout": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tide:elytrout"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "tide:membrane_from_elytrout"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "impossible": {
-      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "impossible"
+      "has_elytrout"
     ]
   ],
   "rewards": {

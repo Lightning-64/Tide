@@ -2,7 +2,9 @@ package com.li64.tide.platform;
 
 import com.li64.tide.TideNeoForge;
 import com.li64.tide.platform.services.TideMainPlatform;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,6 +19,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.common.NeoForge;
@@ -36,8 +39,7 @@ public class NeoForgeMainPlatform implements TideMainPlatform {
 
     @Override
     public void registerItem(String key, Item item) {
-        if (key.contains("minecraft:")) {}//TideNeoForge.OVERRIDE_ITEMS.register(key.split(":")[1], () -> item);
-        else TideNeoForge.ITEMS.register(key, () -> item);
+        TideNeoForge.ITEMS.register(key, () -> item);
     }
 
     @Override
@@ -63,6 +65,16 @@ public class NeoForgeMainPlatform implements TideMainPlatform {
     @Override
     public void registerComponentType(String key, DataComponentType<?> componentType) {
         TideNeoForge.DATA_COMPONENT_TYPES.register(key, () -> componentType);
+    }
+
+    @Override
+    public void registerEntitySubPredicate(String key, MapCodec<? extends EntitySubPredicate> codec) {
+        TideNeoForge.ENTITY_SUB_PREDICATES.register(key, () -> codec);
+    }
+
+    @Override
+    public void registerLootCondition(String key, LootItemConditionType type) {
+        TideNeoForge.LOOT_CONDITION_TYPES.register(key, () -> type);
     }
 
     @Override

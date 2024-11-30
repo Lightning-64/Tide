@@ -1,20 +1,38 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_cobble": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:cobblestones"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_string": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:strings"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "tide:stone_fishing_rod"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "impossible": {
-      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "impossible"
+      "has_string",
+      "has_cobble"
     ]
   ],
   "rewards": {

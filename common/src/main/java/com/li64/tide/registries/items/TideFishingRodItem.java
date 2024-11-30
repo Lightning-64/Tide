@@ -54,24 +54,24 @@ public class TideFishingRodItem extends FishingRodItem {
         );
     }
 
-    public static List<Component> getDescriptionLines(ItemStack stack, TooltipContext context) {
+    public static List<Component> getDescriptionLines(ItemStack stack, HolderLookup.Provider registries) {
         ArrayList<Component> builder = new ArrayList<>();
 
-        ItemStack bobber = CustomRodManager.getBobber(stack, context.registries());
-        ItemStack hook = CustomRodManager.getHook(stack, context.registries());
-        ItemStack line = CustomRodManager.getLine(stack, context.registries());
+        ItemStack bobber = CustomRodManager.getBobber(stack, registries);
+        ItemStack hook = CustomRodManager.getHook(stack, registries);
+        ItemStack line = CustomRodManager.getLine(stack, registries);
 
-        if (CustomRodManager.hasBobber(stack, context.registries())) {
+        if (CustomRodManager.hasBobber(stack, registries)) {
             MutableComponent bobberComponent = CustomRodManager.getTranslation(bobber);
             builder.add(bobberComponent.withStyle(ChatFormatting.BLUE));
         }
 
-        if (CustomRodManager.hasHook(stack, context.registries())) {
+        if (CustomRodManager.hasHook(stack, registries)) {
             MutableComponent hookComponent = CustomRodManager.getTranslation(hook);
             builder.add(hookComponent.withStyle(ChatFormatting.BLUE));
         }
 
-        if (CustomRodManager.hasLine(stack, context.registries())) {
+        if (CustomRodManager.hasLine(stack, registries)) {
             MutableComponent lineComponent = CustomRodManager.getTranslation(line);
             builder.add(lineComponent.withStyle(ChatFormatting.BLUE));
         }

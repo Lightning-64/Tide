@@ -1,20 +1,27 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_fishing_line": {
+      "conditions": {
+        "items": [
+          {
+            "items": "tide:fishing_line"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "tide:fortune_line"
       },
       "trigger": "minecraft:recipe_unlocked"
-    },
-    "impossible": {
-      "trigger": "minecraft:impossible"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "impossible"
+      "has_fishing_line"
     ]
   ],
   "rewards": {

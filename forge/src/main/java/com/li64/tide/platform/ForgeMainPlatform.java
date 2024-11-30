@@ -20,6 +20,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.event.entity.player.ItemFishedEvent;
@@ -73,6 +74,11 @@ public class ForgeMainPlatform implements TideMainPlatform {
     @Override
     public void registerEntitySubPredicate(String key, MapCodec<? extends EntitySubPredicate> codec) {
         TideForge.ENTITY_SUB_PREDICATES.register(key, () -> codec);
+    }
+
+    @Override
+    public void registerLootCondition(String key, LootItemConditionType type) {
+        TideForge.LOOT_CONDITION_TYPES.register(key, () -> type);
     }
 
     @Override

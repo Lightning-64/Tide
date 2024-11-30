@@ -12,20 +12,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ObsidianLootCrateBlock extends AbstractLootCrateBlock<LootCrateBlockEntity> {
-    public static final MapCodec<ObsidianLootCrateBlock> CODEC = simpleCodec(ObsidianLootCrateBlock::new);
-
     public ObsidianLootCrateBlock(Properties properties) {
         super(properties, () -> TideBlockEntities.OBSIDIAN_LOOT_CRATE);
     }
 
-    @Override
-    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
-    }
-
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return new ObsidianLootCrateBlockEntity(pos, state);
     }
 }
