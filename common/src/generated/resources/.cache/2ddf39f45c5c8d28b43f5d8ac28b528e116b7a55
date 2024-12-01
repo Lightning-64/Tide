@@ -1,9 +1,9 @@
-// 1.20.1	2024-11-03T09:12:23.4232726	Tide/Advancements
+// 1.20.1	2024-12-01T01:46:18.0909759	Tide/Advancements
 488a12540195e52ed1ebd2f4826a3e7b50596827 data\tide\advancements\finish_journal_page.json
 5f1bf8b7395458329bbcd9cba4c2ca37dac28fec data\tide\advancements\all_fishing_rods.json
 45fcd0d46761199fb6e8bf73ef36deb1c2423e82 data\tide\advancements\fish_in_lava.json
-4ee96a557f11a83eb1a3e4735d8507336e80a017 data\tide\advancements\fish_crate.json
 74d7864d13128b897adc99dbdfd6255e6ac291d0 data\tide\advancements\journal_completed.json
+4ee96a557f11a83eb1a3e4735d8507336e80a017 data\tide\advancements\fish_crate.json
 b414a8462b8c09f3b9e0125b8b17888711f3c801 data\tide\advancements\all_biome_fish.json
 cd0be867f6d7fa4b69aaaf08b67eddd32cf37fe9 data\tide\advancements\get_bait.json
 0ca8c2f2aafbc66b7a92147a7ad3dd01eac10a1f data\tide\advancements\catch_legendary.json

@@ -22,6 +22,7 @@ public class TideTags {
 
         public static final TagKey<Item> TWILIGHT_ANGLER_EATABLE = TagKey.create(Registries.ITEM, Tide.resource("twilight_angler_eatable"));
         public static final TagKey<Item> BAIT_PLANTS = TagKey.create(Registries.ITEM, Tide.resource("bait_plants"));
+        public static final TagKey<Item> CRATES = TagKey.create(Registries.ITEM, Tide.resource("crates"));
 
         public static final TagKey<Item> CUSTOMIZABLE_RODS = TagKey.create(Registries.ITEM, Tide.resource("customizable_rods"));
         public static final TagKey<Item> BOBBERS = TagKey.create(Registries.ITEM, Tide.resource("bobbers"));

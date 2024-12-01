@@ -116,6 +116,11 @@ public class TideItemTagsProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(TideTags.Items.TWILIGHT_ANGLER_EATABLE)
                 .forceAddTag(TideTags.Items.COOKABLE_FISH);
 
+        getOrCreateTagBuilder(TideTags.Items.CRATES)
+                .add(TideItems.SURFACE_LOOT_CRATE)
+                .add(TideItems.OBSIDIAN_LOOT_CRATE)
+                .add(TideItems.END_LOOT_CRATE);
+
         /* Common tags */
 
         getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("forge", "tools/fishing_rods")))

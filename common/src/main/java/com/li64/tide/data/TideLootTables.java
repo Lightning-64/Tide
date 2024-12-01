@@ -1,30 +1,30 @@
 package com.li64.tide.data;
 
 import com.li64.tide.Tide;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.storage.loot.LootTable;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class TideLootTables {
 
     public static class Fishing {
+        public static final ResourceLocation CRATES = create("gameplay/fishing/crates");
+
         public static final ResourceLocation FRESHWATER_NORMAL = create("gameplay/fishing/climates/freshwater_normal");
         public static final ResourceLocation FRESHWATER_COLD = create("gameplay/fishing/climates/freshwater_cold");
         public static final ResourceLocation FRESHWATER_WARM = create("gameplay/fishing/climates/freshwater_warm");
+
         public static final ResourceLocation SALTWATER_NORMAL = create("gameplay/fishing/climates/saltwater_normal");
         public static final ResourceLocation SALTWATER_COLD = create("gameplay/fishing/climates/saltwater_cold");
         public static final ResourceLocation SALTWATER_WARM = create("gameplay/fishing/climates/saltwater_warm");
-        public static final ResourceLocation LAVA_SURFACE = create("gameplay/fishing/climates/lava_surface");
+
         public static final ResourceLocation UNDERGROUND = create("gameplay/fishing/climates/underground");
-        public static final ResourceLocation LAVA_UNDERGROUND = create("gameplay/fishing/climates/lava_underground");
         public static final ResourceLocation DEPTHS = create("gameplay/fishing/climates/depths");
+
+        public static final ResourceLocation LAVA_SURFACE = create("gameplay/fishing/climates/lava_surface");
+        public static final ResourceLocation LAVA_UNDERGROUND = create("gameplay/fishing/climates/lava_underground");
         public static final ResourceLocation LAVA_DEPTHS = create("gameplay/fishing/climates/lava_depths");
+
         public static final ResourceLocation NETHER = create("gameplay/fishing/climates/nether");
+
         public static final ResourceLocation END_WATER = create("gameplay/fishing/climates/end_water");
         public static final ResourceLocation END_LAVA = create("gameplay/fishing/climates/end_lava");
     }
@@ -83,21 +83,6 @@ public class TideLootTables {
         public static final ResourceLocation BARRACUDA = create("entities/barracuda");
         public static final ResourceLocation SAILFISH = create("entities/sailfish");
     }
-
-    public static class Blocks {
-        public static final ResourceLocation ALGAE = create("blocks/algae");
-        public static final ResourceLocation ANGLER_WORKSHOP = create("blocks/angler_workshop");
-        public static final ResourceLocation JELLY_TORCH = create("blocks/jelly_torch");
-        public static final ResourceLocation SURFACE_LOOT_CRATE = create("blocks/surface_loot_crate");
-        public static final ResourceLocation OBSIDIAN_LOOT_CRATE = create("blocks/obsidian_loot_crate");
-        public static final ResourceLocation END_LOOT_CRATE = create("blocks/end_loot_crate");
-    }
-
-    public static class Modded {
-        public static final ResourceLocation EVERBRIGHT = create("gameplay/fishing/climates/blue_skies/everbright");
-        public static final ResourceLocation EVERDAWN = create("gameplay/fishing/climates/blue_skies/everdawn");
-    }
-
 
     private static ResourceLocation biome(String biome) {
         return create("gameplay/fishing/biomes/" + biome);

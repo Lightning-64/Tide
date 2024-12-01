@@ -1,23 +1,19 @@
 package com.li64.tide.events;
 
+import com.li64.tide.Tide;
 import com.li64.tide.data.commands.JournalCommand;
 import com.li64.tide.data.TideEntity;
 import com.li64.tide.registries.TideItems;
-import com.li64.tide.registries.items.BaitItem;
-import com.li64.tide.util.TideUtils;
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -52,6 +48,10 @@ public class FabricEventHandler {
                 TideEventHandler.onPlayerJoinWorld(handler.getPlayer()));
 
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (id.toString().matches(BuiltInLootTables.FISHING.toString())) {
+                tableBuilder.modifyPools(builder -> builder.add(Tide.getCrateFishingEntry()));
+            }
+
             if (id.toString().matches(BuiltInLootTables.FISHING_JUNK.toString())) {
                 tableBuilder.modifyPools(builder -> builder
                         .add(LootItem.lootTableItem(TideItems.FISH_BONE).setWeight(8)));

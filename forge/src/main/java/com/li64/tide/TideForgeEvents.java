@@ -1,8 +1,10 @@
 package com.li64.tide;
 
+import com.google.common.collect.ImmutableList;
 import com.li64.tide.data.commands.JournalCommand;
 import com.li64.tide.data.player.TidePlayerData;
 import com.li64.tide.events.TideEventHandler;
+import com.li64.tide.loot.LootTableAccessor;
 import com.li64.tide.registries.*;
 import com.li64.tide.registries.entities.util.AbstractTideFish;
 import com.li64.tide.registries.items.BaitItem;
@@ -24,19 +26,22 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
+import java.util.Arrays;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -102,6 +107,18 @@ public class TideForgeEvents {
 
     @EventBusSubscriber(modid = Tide.MOD_ID, bus = EventBusSubscriber.Bus.FORGE)
     public static class Forge {
+        @SubscribeEvent
+        public static void onLootTableLoad(LootTableLoadEvent event) {
+            if (event.getName().toString().equals("minecraft:gameplay/fishing")) {
+                // Add crate rolls
+                LootPool pool = ((LootTableAccessor) event.getTable()).tide$getPool(0);
+                ((LootTableAccessor) event.getTable()).tide$getPool(0).entries = new ImmutableList.Builder<LootPoolEntryContainer>()
+                        .addAll(Arrays.asList(pool.entries))
+                        .add(Tide.getCrateFishingEntry().build())
+                        .build().toArray(new LootPoolEntryContainer[0]);
+            }
+        }
+
         @SubscribeEvent
         public static void onServerReloadListeners(AddReloadListenerEvent event) {
             Tide.onRegisterReloadListeners((id, listener) -> event.addListener(listener));

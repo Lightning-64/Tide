@@ -1,7 +1,9 @@
 package com.li64.tide.platform.services;
 
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;

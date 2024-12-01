@@ -1,17 +1,26 @@
 package com.li64.tide.datagen.providers.loot;
 
 import com.li64.tide.data.TideLootTables;
+import com.li64.tide.data.loot.TideFishingPredicate;
 import com.li64.tide.registries.TideItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.FishingHookPredicate;
+import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
@@ -23,6 +32,21 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
 
     @Override
     public void generate(BiConsumer<ResourceLocation, LootTable.Builder> output) {
+        output.accept(
+                TideLootTables.Fishing.CRATES,
+                LootTable.lootTable().withPool(LootPool.lootPool().add(AlternativesEntry.alternatives(
+                        LootItem.lootTableItem(TideItems.END_LOOT_CRATE).when(
+                                LocationCheck.checkLocation(LocationPredicate.Builder.location().setDimension(Level.END))
+                        ),
+                        LootItem.lootTableItem(TideItems.OBSIDIAN_LOOT_CRATE).when(
+                                LocationCheck.checkLocation(LocationPredicate.Builder.location().setDimension(Level.NETHER))
+                                        .or(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity()
+                                                .subPredicate(TideFishingPredicate.isLavaFishing(true))))
+                        ),
+                        LootItem.lootTableItem(TideItems.SURFACE_LOOT_CRATE)
+                )))
+        );
+
         output.accept(
                 TideLootTables.Fishing.FRESHWATER_NORMAL,
                 LootTable.lootTable().withPool(LootPool.lootPool()

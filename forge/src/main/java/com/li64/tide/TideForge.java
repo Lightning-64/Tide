@@ -1,6 +1,5 @@
 package com.li64.tide;
 
-import com.bonker.stardewfishing.StardewFishing;
 import com.li64.tide.client.gui.TideMenuTypes;
 import com.li64.tide.compat.jei.TideRecipeSerializers;
 import com.li64.tide.config.TideConfig;

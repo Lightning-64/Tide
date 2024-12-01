@@ -1,6 +1,7 @@
 package com.li64.tide.registries.entities.misc.fishing;
 
 import com.li64.tide.data.TideCriteriaTriggers;
+import com.li64.tide.data.TideLootTables;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.data.rods.CustomRodManager;
 import com.li64.tide.registries.TideBlocks;
@@ -30,10 +31,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.FishingRodItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -152,6 +150,11 @@ public class TideFishingHook extends Projectile {
 
     public boolean isOpenWaterFishing() {
         return this.openWater;
+    }
+
+    public boolean usingMagneticBait() {
+        return getPlayerOwner().getOffhandItem().is(TideItems.MAGNETIC_BAIT)
+                || getPlayerOwner().getMainHandItem().is(TideItems.MAGNETIC_BAIT);
     }
 
     public enum CatchType {
@@ -582,7 +585,7 @@ public class TideFishingHook extends Projectile {
                         BlockState lootCrate;
 
                         ResourceLocation lootTable = TideUtils.getCrateLoot(this.getX(), this.getY(), this.getZ(), fluid, level());
-                        lootCrate = getCrateBlock(fluid);
+                        lootCrate = getCrateBlock(hookedItem);
 
                         LootParams.Builder lootParamsBuilder = new LootParams.Builder((ServerLevel) this.level())
                                 .withParameter(LootContextParams.ORIGIN, this.position())
@@ -636,57 +639,46 @@ public class TideFishingHook extends Projectile {
     }
 
     public void selectCatch(Player player, ItemStack rod) {
-        List<ItemStack> list;
-
         catchType = CatchType.NOTHING;
         hookedItem = null;
 
-        boolean pullCrate = false;
+        LootParams.Builder lootParamsBuilder = new LootParams.Builder((ServerLevel) this.level())
+                .withParameter(LootContextParams.ORIGIN, this.position())
+                .withParameter(LootContextParams.TOOL, rod)
+                .withParameter(LootContextParams.THIS_ENTITY, this);
 
-        if (player.getOffhandItem().is(TideItems.MAGNETIC_BAIT)) {
-            if (random.nextInt(0, (int) Math.ceil(Tide.CONFIG.general.baseCrateRarity / 5.0)) == 0) pullCrate = true;
-        } else if (random.nextInt(0, Tide.CONFIG.general.baseCrateRarity) == 0) pullCrate = true;
+        // Only forge and neoforge can use this parameter here
+        if (!Tide.PLATFORM.isFabric()) lootParamsBuilder = lootParamsBuilder
+                .withParameter(LootContextParams.KILLER_ENTITY, Objects.requireNonNull(this.getOwner()));
 
-        if (TideUtils.moddedDimension(level().dimension())) pullCrate = false;
+        ResourceLocation lootKey = BuiltInLootTables.FISHING;
+        LootParams lootParams = lootParamsBuilder
+                .withLuck((float) luck + player.getLuck())
+                .create(LootContextParamSets.FISHING);
 
-        if (pullCrate) {
-            catchType = CatchType.CRATE;
-        } else {
-            LootParams.Builder lootParamsBuilder = new LootParams.Builder((ServerLevel) this.level())
-                    .withParameter(LootContextParams.ORIGIN, this.position())
-                    .withParameter(LootContextParams.TOOL, rod)
-                    .withParameter(LootContextParams.THIS_ENTITY, this);
+        LootTable table = level().getServer().getLootData().getLootTable(lootKey);
+        ServerLevel overworld = level().getServer().overworld();
 
-            // Only forge and neoforge can use this parameter here
-            if (!Tide.PLATFORM.isFabric()) lootParamsBuilder = lootParamsBuilder
-                    .withParameter(LootContextParams.KILLER_ENTITY, Objects.requireNonNull(this.getOwner()));
+        ItemStack selection = selectFromCatchList(table.getRandomItems(lootParams));
+        selection = TideUtils.checkForOverrides(selection, this, overworld);
 
-            LootParams lootParams = lootParamsBuilder
-                    .withLuck((float)luck + player.getLuck())
-                    .create(LootContextParamSets.FISHING);
+        // Magnetic bait override
+        if (usingMagneticBait() && random.nextInt(0, 4) == 0) {
+            lootKey = TideLootTables.Fishing.CRATES;
+            table = level().getServer().getLootData().getLootTable(lootKey);
+            selection = selectFromCatchList(table.getRandomItems(lootParams));
 
-            ResourceLocation lootKey = BuiltInLootTables.FISHING;
-
-            LootTable table = level().getServer().getLootData().getLootTable(lootKey);
-            ServerLevel overworld = level().getServer().overworld();
-
-            list = table.getRandomItems(lootParams);
-            if (list.isEmpty()) list = ObjectArrayList.of(Items.SALMON.getDefaultInstance());
-
-            list = TideUtils.checkForOverrides(list, this, overworld);
-
-            if (TideUtils.shouldGrabTideLootTable(list, fluid)) {
-                lootKey = TideUtils.getTideLootTable(this.getX(), this.getY(), this.getZ(), fluid, level(), random);
-
-                table = level().getServer().getLootData().getLootTable(lootKey);
-                list = table.getRandomItems(lootParams);
-            }
-
-            Tide.LOG.info("Loot table used: {}", lootKey);
-
-            hookedItem = list.size() == 1 ? list.get(0) : list.get(new Random().nextInt(0, list.size()));
-            catchType = (hookedItem.is(ItemTags.FISHES) || TideUtils.isJournalFish(hookedItem)) ? CatchType.FISH : CatchType.ITEM;
+        } else if (TideUtils.shouldGrabTideLootTable(selection, fluid)) {
+            lootKey = TideUtils.getTideLootTable(this.getX(), this.getY(), this.getZ(), fluid, level(), random);
+            table = level().getServer().getLootData().getLootTable(lootKey);
+            selection = selectFromCatchList(table.getRandomItems(lootParams));
         }
+
+        Tide.LOG.info("Loot table used: {}", lootKey);
+        hookedItem = selection;
+
+        catchType = (hookedItem.is(ItemTags.FISHES) || TideUtils.isJournalFish(hookedItem)) ? CatchType.FISH : CatchType.ITEM;
+        if (selection.is(TideTags.Items.CRATES)) catchType = CatchType.CRATE;
 
         if (TideUtils.isHoldingBait(player)) {
             if (!player.isCreative()) player.getOffhandItem().shrink(1);
@@ -695,23 +687,20 @@ public class TideFishingHook extends Projectile {
         getEntityData().set(DATA_CATCH_TYPE, catchType.ordinal());
     }
 
-    public BlockState getCrateBlock(FluidState fluid) {
-        Level level = level();
-        if (fluid.getType() == Fluids.LAVA) {
-            if (level.dimension() == Level.NETHER) {
-                return TideBlocks.OBSIDIAN_LOOT_CRATE.defaultBlockState();
-            } else if (level.dimension() == Level.END) {
-                return TideBlocks.END_LOOT_CRATE.defaultBlockState();
-            } else {
-                return TideBlocks.OBSIDIAN_LOOT_CRATE.defaultBlockState();
-            }
-        } else {
-            if (level.dimension() == Level.END) {
-                return TideBlocks.END_LOOT_CRATE.defaultBlockState();
-            } else {
-                return TideBlocks.SURFACE_LOOT_CRATE.defaultBlockState();
-            }
+    private ItemStack selectFromCatchList(List<ItemStack> list) {
+        if (list == null || list.isEmpty()) list = ObjectArrayList.of(Items.SALMON.getDefaultInstance());
+
+        try {
+            return list.get(new Random().nextInt(0, list.size()));
+        } catch (Exception e) {
+            return list.get(0);
         }
+    }
+
+    public BlockState getCrateBlock(ItemStack crate) {
+        if (crate.getItem() instanceof BlockItem blockItem) {
+            return blockItem.getBlock().defaultBlockState();
+        } else return TideBlocks.SURFACE_LOOT_CRATE.defaultBlockState();
     }
 
     public void handleEntityEvent(byte event) {
