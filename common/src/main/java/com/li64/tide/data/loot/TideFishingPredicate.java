@@ -30,7 +30,7 @@ public record TideFishingPredicate(Optional<Boolean> isLavaFishing, Optional<Boo
 
     public boolean matches(@NotNull Entity entity, @NotNull ServerLevel level, @Nullable Vec3 position) {
         if (entity instanceof TideFishingHook hook) {
-            if (this.isLavaFishing.isPresent()) return this.isLavaFishing.get() == hook.isInLava();
+            if (this.isLavaFishing.isPresent()) return this.isLavaFishing.get() == hook.isLavaFishing();
             if (this.usingMagneticBait.isPresent()) return this.usingMagneticBait.get() == hook.usingMagneticBait();
             if (this.depthLayer.isPresent()) {
                 Optional<DepthLayer> layer = DepthLayer.fromKey(this.depthLayer.get());

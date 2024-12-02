@@ -77,6 +77,7 @@ public class TideFishingHook extends Projectile {
     private Entity hookedIn;
     private FishHookState currentState = FishHookState.FLYING;
     private FluidState fluid;
+    private FluidState lastTouchedFluid;
     private final int luck;
     private final int lureSpeed;
     private boolean minigameActive = false;
@@ -154,6 +155,10 @@ public class TideFishingHook extends Projectile {
 
     public boolean isOpenWaterFishing() {
         return this.openWater;
+    }
+
+    public boolean isLavaFishing() {
+        return lastTouchedFluid.is(TideTags.Fluids.LAVA_FISHING);
     }
 
     public boolean usingMagneticBait() {
@@ -318,6 +323,8 @@ public class TideFishingHook extends Projectile {
             this.setDeltaMovement(this.getDeltaMovement().scale(d1));
             this.reapplyPosition();
         }
+
+        if (!fluid.isEmpty()) lastTouchedFluid = fluid;
     }
 
     private boolean shouldKeepFishing(Player player) {
@@ -402,6 +409,7 @@ public class TideFishingHook extends Projectile {
 
                 if (blockstate.is(Blocks.WATER)) {
                     fluid = Fluids.WATER.defaultFluidState();
+                    lastTouchedFluid = fluid;
                     if (this.random.nextFloat() < 0.15F) {
                         level.sendParticles(ParticleTypes.BUBBLE, d0, d1 - 0.1, d2, 1, f1, 0.1D, f2, 0.0D);
                     }
@@ -412,6 +420,7 @@ public class TideFishingHook extends Projectile {
                     level.sendParticles(ParticleTypes.FISHING, d0, d1, d2, 0, -f4, 0.01D, f3, 1.0D);
                 } else if (blockstate.is(Blocks.LAVA)) {
                     fluid = Fluids.LAVA.defaultFluidState();
+                    lastTouchedFluid = fluid;
                     if (this.random.nextFloat() < 0.15F) {
                         level.sendParticles(ParticleTypes.FLAME, d0, d1 - (double)0.1F, d2, 1, f1, 0.1D, f2, 0.0D);
                     }
@@ -425,7 +434,7 @@ public class TideFishingHook extends Projectile {
             } else {
                 // When a fish first touches the hook
 
-                if (fluid.is(TideTags.Fluids.LAVA_FISHING)) {
+                if (isLavaFishing()) {
                     this.playSound(SoundEvents.BUCKET_EMPTY_LAVA, 0.25F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
                     if (Tide.PLATFORM.isModLoaded("stardew_fishing")) this.playSound(SoundEvents.FISHING_BOBBER_SPLASH, 0.25F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
                     double d3 = this.getY() + 0.5D;
