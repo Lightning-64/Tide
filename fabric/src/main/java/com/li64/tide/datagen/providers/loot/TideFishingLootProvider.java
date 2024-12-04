@@ -2,13 +2,12 @@ package com.li64.tide.datagen.providers.loot;
 
 import com.li64.tide.data.TideLootTables;
 import com.li64.tide.data.TideTags;
-import com.li64.tide.data.loot.BiomeTagCheck;
-import com.li64.tide.data.loot.DepthLayer;
-import com.li64.tide.data.loot.TideFishingPredicate;
+import com.li64.tide.data.loot.*;
 import com.li64.tide.registries.TideItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
 import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceKey;
@@ -62,7 +61,7 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
                                         .when(entityPredicate(TideFishingPredicate.depthLayer(DepthLayer.UNDERGROUND))),
                                 AlternativesEntry.alternatives(
                                         NestedLootTable.lootTableReference(TideLootTables.Crates.OVERWORLD_WATER_OCEAN).when(
-                                                BiomeTagCheck.checkTag(TideTags.Climate.IS_SALTWATER)),
+                                                BiomeTagPredicate.checkTag(TideTags.Climate.IS_SALTWATER)),
                                         NestedLootTable.lootTableReference(TideLootTables.Crates.OVERWORLD_WATER_RIVER)
                                 )
                         )
@@ -83,28 +82,41 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
 
         output.accept(
                 TideLootTables.Fishing.SPECIAL_FISH,
-                LootTable.lootTable().withPool(LootPool.lootPool().add(
-                        // biome fish (1/20 chance in overworld water)
-                        AlternativesEntry.alternatives(
-                            LootItem.lootTableItem(TideItems.BLOSSOM_BASS).when(BiomeTagCheck.checkTag(TideTags.Biomes.CHERRY)),
-                            LootItem.lootTableItem(TideItems.ECHOFIN_SNAPPER).when(BiomeTagCheck.checkTag(TideTags.Biomes.DEEP_DARK)),
-                            LootItem.lootTableItem(TideItems.DRIPSTONE_DARTER).when(BiomeTagCheck.checkTag(TideTags.Biomes.DRIPSTONE)),
-                            LootItem.lootTableItem(TideItems.FLUTTERGILL).when(BiomeTagCheck.checkTag(TideTags.Biomes.LUSH_CAVES)),
-                            LootItem.lootTableItem(TideItems.SUNSPIKE_GOBY).when(BiomeTagCheck.checkTag(TideTags.Biomes.SAVANNA)),
-                            LootItem.lootTableItem(TideItems.BIRCH_TROUT).when(BiomeTagCheck.checkTag(TideTags.Biomes.BIRCH)),
-                            LootItem.lootTableItem(TideItems.MIRAGE_CATFISH).when(BiomeTagCheck.checkTag(TideTags.Biomes.BADLANDS)),
-                            LootItem.lootTableItem(TideItems.SLIMEFIN_SNAPPER).when(BiomeTagCheck.checkTag(TideTags.Biomes.SWAMP)),
-                            LootItem.lootTableItem(TideItems.SPORESTALKER).when(BiomeTagCheck.checkTag(TideTags.Biomes.MUSHROOM)),
-                            LootItem.lootTableItem(TideItems.LEAFBACK).when(BiomeTagCheck.checkTag(TideTags.Biomes.JUNGLE)),
-                            LootItem.lootTableItem(TideItems.PINE_PERCH).when(BiomeTagCheck.checkTag(TideTags.Biomes.TAIGA)),
-                            LootItem.lootTableItem(TideItems.SANDSKIPPER).when(BiomeTagCheck.checkTag(TideTags.Biomes.DESERT)),
-                            LootItem.lootTableItem(TideItems.STONEFISH).when(BiomeTagCheck.checkTag(TideTags.Biomes.MOUNTAIN)),
-                            LootItem.lootTableItem(TideItems.FROSTBITE_FLOUNDER).when(BiomeTagCheck.checkTag(TideTags.Biomes.FROZEN)),
-                            LootItem.lootTableItem(TideItems.OAKFISH).when(BiomeTagCheck.checkTag(TideTags.Biomes.FOREST)),
-                            LootItem.lootTableItem(TideItems.PRAIRIE_PIKE).when(BiomeTagCheck.checkTag(TideTags.Biomes.PLAINS))
-                        ).when(LocationCheck.checkLocation(LocationPredicate.Builder.inDimension(Level.OVERWORLD))
-                                .and(entityPredicate(TideFishingPredicate.isLavaFishing(false)))
-                                .and(LootItemRandomChanceCondition.randomChance(ConstantValue.exactly(0.05f)))))
+                LootTable.lootTable().withPool(LootPool.lootPool()
+                        .add(
+                            // biome fish (1/20 chance in overworld water)
+                            AlternativesEntry.alternatives(
+                                LootItem.lootTableItem(TideItems.BLOSSOM_BASS).when(BiomeTagPredicate.checkTag(TideTags.Biomes.CHERRY)),
+                                LootItem.lootTableItem(TideItems.ECHOFIN_SNAPPER).when(BiomeTagPredicate.checkTag(TideTags.Biomes.DEEP_DARK)),
+                                LootItem.lootTableItem(TideItems.DRIPSTONE_DARTER).when(BiomeTagPredicate.checkTag(TideTags.Biomes.DRIPSTONE)),
+                                LootItem.lootTableItem(TideItems.FLUTTERGILL).when(BiomeTagPredicate.checkTag(TideTags.Biomes.LUSH_CAVES)),
+                                LootItem.lootTableItem(TideItems.SUNSPIKE_GOBY).when(BiomeTagPredicate.checkTag(TideTags.Biomes.SAVANNA)),
+                                LootItem.lootTableItem(TideItems.BIRCH_TROUT).when(BiomeTagPredicate.checkTag(TideTags.Biomes.BIRCH)),
+                                LootItem.lootTableItem(TideItems.MIRAGE_CATFISH).when(BiomeTagPredicate.checkTag(TideTags.Biomes.BADLANDS)),
+                                LootItem.lootTableItem(TideItems.SLIMEFIN_SNAPPER).when(BiomeTagPredicate.checkTag(TideTags.Biomes.SWAMP)),
+                                LootItem.lootTableItem(TideItems.SPORESTALKER).when(BiomeTagPredicate.checkTag(TideTags.Biomes.MUSHROOM)),
+                                LootItem.lootTableItem(TideItems.LEAFBACK).when(BiomeTagPredicate.checkTag(TideTags.Biomes.JUNGLE)),
+                                LootItem.lootTableItem(TideItems.PINE_PERCH).when(BiomeTagPredicate.checkTag(TideTags.Biomes.TAIGA)),
+                                LootItem.lootTableItem(TideItems.SANDSKIPPER).when(BiomeTagPredicate.checkTag(TideTags.Biomes.DESERT)),
+                                LootItem.lootTableItem(TideItems.STONEFISH).when(BiomeTagPredicate.checkTag(TideTags.Biomes.MOUNTAIN)),
+                                LootItem.lootTableItem(TideItems.FROSTBITE_FLOUNDER).when(BiomeTagPredicate.checkTag(TideTags.Biomes.FROZEN)),
+                                LootItem.lootTableItem(TideItems.OAKFISH).when(BiomeTagPredicate.checkTag(TideTags.Biomes.FOREST)),
+                                LootItem.lootTableItem(TideItems.PRAIRIE_PIKE).when(BiomeTagPredicate.checkTag(TideTags.Biomes.PLAINS))
+                            ).when(LocationCheck.checkLocation(LocationPredicate.Builder.inDimension(Level.OVERWORLD))
+                                    .and(entityPredicate(TideFishingPredicate.isLavaFishing(false)))
+                                    .and(LootItemRandomChanceCondition.randomChance(ConstantValue.exactly(0.05f)))))
+
+                        .add(LootItem.lootTableItem(TideItems.MIDAS_FISH).setWeight(10).when(
+                                entityPredicate(FishingStatsPredicate.luckOf(5))
+                                        .and(LootItemRandomChanceCondition.randomChance(ConstantValue.exactly(0.041f)))))
+                        .add(LootItem.lootTableItem(TideItems.VOIDSEEKER).setWeight(10).when(
+                                LocationCheck.checkLocation(LocationPredicate.Builder.inDimension(Level.END))
+                                        .and(MoonPhasePredicate.anyOf(0, 4))
+                                        .and(LootItemRandomChanceCondition.randomChance(ConstantValue.exactly(0.041f)))))
+                        .add(LootItem.lootTableItem(TideItems.SHOOTING_STARFISH).setWeight(10).when(
+                                MoonPhasePredicate.anyOf(0).and(IsNightPredicate.isNight())
+                                        .and(BiomeTagPredicate.checkTag(TideTags.Biomes.CAN_CATCH_STARFISH))
+                                        .and(LootItemRandomChanceCondition.randomChance(ConstantValue.exactly(0.041f)))))
                 )
         );
 
@@ -288,18 +300,17 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
         output.accept(
                 TideLootTables.Fishing.END_WATER,
                 LootTable.lootTable().withPool(LootPool.lootPool()
-                        .add(LootItem.lootTableItem(TideItems.END_STONE_PERCH).setWeight(90))
+                        .add(LootItem.lootTableItem(TideItems.END_STONE_PERCH).setWeight(100))
                         .add(LootItem.lootTableItem(TideItems.ENDERFIN).setWeight(95))
                         .add(LootItem.lootTableItem(TideItems.ENDERGAZER).setWeight(80))
                         .add(LootItem.lootTableItem(TideItems.PURPUR_PIKE).setWeight(80))
                         .add(LootItem.lootTableItem(TideItems.CHORUS_COD).setWeight(70))
                         .add(LootItem.lootTableItem(TideItems.ELYTROUT).setWeight(20).setQuality(2))
-                        .add(LootItem.lootTableItem(TideItems.VOIDSEEKER).setWeight(25).setQuality(1))
                 )
         );
     }
 
-    private LootItemCondition.Builder entityPredicate(TideFishingPredicate predicate) {
+    private LootItemCondition.Builder entityPredicate(EntitySubPredicate predicate) {
         return LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(predicate));
     }
 }

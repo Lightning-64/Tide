@@ -679,9 +679,6 @@ public class TideFishingHook extends Projectile {
                 .create(LootContextParamSets.FISHING);
 
         ItemStack selection = select(lootKey, params).orElse(Items.SALMON.getDefaultInstance());
-        ServerLevel overworld = level().getServer().overworld();
-
-        selection = TideUtils.checkForOverrides(selection, this, overworld);
 
         // Magnetic bait override
         if (usingMagneticBait() && random.nextInt(0, 4) == 0) {

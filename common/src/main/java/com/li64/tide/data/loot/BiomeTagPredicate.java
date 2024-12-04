@@ -17,13 +17,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
-public record BiomeTagCheck(TagKey<Biome> biomeTag) implements LootItemCondition {
-    public static final MapCodec<BiomeTagCheck> CODEC = RecordCodecBuilder.mapCodec((instance) ->
+public record BiomeTagPredicate(TagKey<Biome> biomeTag) implements LootItemCondition {
+    public static final MapCodec<BiomeTagPredicate> CODEC = RecordCodecBuilder.mapCodec((instance) ->
             instance.group(TagKey.codec(Registries.BIOME).fieldOf("tag")
-                    .forGetter(BiomeTagCheck::biomeTag)).apply(instance, BiomeTagCheck::new));
+                    .forGetter(BiomeTagPredicate::biomeTag)).apply(instance, BiomeTagPredicate::new));
 
     public static LootItemCondition.Builder checkTag(TagKey<Biome> biomeTag) {
-        return () -> new BiomeTagCheck(biomeTag);
+        return () -> new BiomeTagPredicate(biomeTag);
     }
 
     @Override

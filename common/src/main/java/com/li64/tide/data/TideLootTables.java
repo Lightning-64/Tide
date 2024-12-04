@@ -3,15 +3,9 @@ package com.li64.tide.data;
 import com.li64.tide.Tide;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.LootTable;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class TideLootTables {
-    private static final Set<ResourceKey<LootTable>> LOCATIONS = new HashSet<>();
-
     public static class Fishing {
         public static final ResourceKey<LootTable> CRATES = create("gameplay/fishing/crates");
         public static final ResourceKey<LootTable> CRATES_BLOCK = create("gameplay/fishing/crates/block");
@@ -74,35 +68,7 @@ public class TideLootTables {
         public static final ResourceKey<LootTable> SAILFISH = create("entities/sailfish");
     }
 
-    public static class Blocks {
-        public static final ResourceKey<LootTable> ALGAE = create("blocks/algae");
-        public static final ResourceKey<LootTable> ANGLER_WORKSHOP = create("blocks/angler_workshop");
-        public static final ResourceKey<LootTable> JELLY_TORCH = create("blocks/jelly_torch");
-        public static final ResourceKey<LootTable> SURFACE_LOOT_CRATE = create("blocks/surface_loot_crate");
-        public static final ResourceKey<LootTable> OBSIDIAN_LOOT_CRATE = create("blocks/obsidian_loot_crate");
-        public static final ResourceKey<LootTable> END_LOOT_CRATE = create("blocks/end_loot_crate");
-    }
-
-    public static class Modded {
-        public static final ResourceKey<LootTable> EVERBRIGHT = create("gameplay/fishing/climates/blue_skies/everbright");
-        public static final ResourceKey<LootTable> EVERDAWN = create("gameplay/fishing/climates/blue_skies/everdawn");
-    }
-
-    private static ResourceKey<LootTable> biome(String biome) {
-        return create("gameplay/fishing/biomes/" + biome);
-    }
-
     private static ResourceKey<LootTable> create(String path) {
-        return register(ResourceKey.create(Registries.LOOT_TABLE, Tide.resource(path)));
-    }
-
-    private static ResourceKey<LootTable> register(ResourceKey<LootTable> lootTableKey) {
-        LOCATIONS.add(lootTableKey);
-        return lootTableKey;
-    }
-
-    public static ResourceKey<LootTable> getByLocation(ResourceLocation location) {
-        return LOCATIONS.stream().filter(resourceKey -> resourceKey.location().equals(location))
-                .findFirst().orElse(null);
+        return ResourceKey.create(Registries.LOOT_TABLE, Tide.resource(path));
     }
 }
