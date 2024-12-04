@@ -210,6 +210,22 @@
   "entity.tide.deep_aqua_arrow": "Deep Aqua Arrow",
   "entity.tide.fishing_bobber": "Fishing Bobber",
 
+  "entity.tide.trout": "Trout",
+  "entity.tide.bass": "Bass",
+  "entity.tide.yellow_perch": "Yellow Perch",
+  "entity.tide.bluegill": "Bluegill",
+  "entity.tide.mint_carp": "Mint Carp",
+  "entity.tide.pike": "Pike",
+  "entity.tide.guppy": "Guppy",
+  "entity.tide.catfish": "Catfish",
+  "entity.tide.clayfish": "Clayfish",
+  "entity.tide.tuna": "Tuna",
+  "entity.tide.ocean_perch": "Ocean Perch",
+  "entity.tide.mackerel": "Mackerel",
+  "entity.tide.angelfish": "Angelfish",
+  "entity.tide.barracuda": "Barracuda",
+  "entity.tide.sailfish": "Sailfish",
+
   "item.tide.jelly_torch.desc": "Can be placed underwater",
 
   "item.tide.braided_line.desc": "Increases rod charge speed",

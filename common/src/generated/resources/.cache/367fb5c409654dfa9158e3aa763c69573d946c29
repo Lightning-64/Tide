@@ -1,4 +1,4 @@
-// 1.20.1	2024-12-02T02:10:08.1605317	Tide/Recipes
+// 1.20.1	2024-12-05T07:51:22.8301893	Tide/Recipes
 7321beab4a35f1365e1dbcfa15a5e1f7fff0ec18 data\tide\recipes\clayfish_smelting.json
 2ceeb40bba609e1f8ae6f284209f9cb57da3a30a data\tide\recipes\rod_upgrading\netherite.json
 0567afd1f64ecd225bfb6061da8d80bee84a5fe4 data\tide\recipes\lucky_bait.json
@@ -10,8 +10,8 @@ c231990a78dddc87bab3f9e14866ac60af0d7a57 data\tide\advancements\recipes\misc\bon
 548ea961d3988fda776b57369d127ae37af14f9e data\tide\advancements\recipes\misc\bobbers\pink.json
 1b9e65221322cb06c73c02a47e09db743526d2b9 data\tide\advancements\recipes\food\cooked_fish_slice_campfire_cooking.json
 7db1dd1572b02630ab4888428507008400e2fb1e data\tide\recipes\obsidian_from_fragments.json
-3125c99cbfc8a35638022aa5f63554ab1310f0b5 data\tide\advancements\recipes\building_blocks\obsidian_from_fragments.json
 e5a13c4b2e244714afadc2d2221237377cffdb8b data\tide\advancements\recipes\misc\amethyst_from_shrimp.json
+3125c99cbfc8a35638022aa5f63554ab1310f0b5 data\tide\advancements\recipes\building_blocks\obsidian_from_fragments.json
 365328bc83be63d546271bea0f8ae941f64ad115 data\tide\recipes\bobbers\light_blue.json
 10fd43229ce188e1ea45615126ac3305f0e8754e data\tide\recipes\bobbers\purple.json
 c6cbdd87f4c8707ab0ef84f05dde022325dd8308 data\tide\recipes\gold_from_minnow.json
@@ -124,8 +124,8 @@ f97a03b4dcbcad171f04f3c7e5a9ce7b736ea44e data\tide\advancements\recipes\food\coo
 6dad175c7a83dbb3a1c5d454b5b021394bdf7c61 data\tide\recipes\glow_ink_from_fish.json
 8b51cabd4f12f8d1818f4aa44a6a7fd7833f8cba data\tide\recipes\membrane_from_elytrout.json
 e76a80e46bdaa9db43c2301f8425589d6dd8b9da data\tide\recipes\bobbers\red.json
-07f72d14bf0c693d520e8483fe3ee23b667d6368 data\tide\recipes\bobbers\blue.json
 a3cd994815342cb9831f803bc6cf5d3648961644 data\tide\advancements\recipes\misc\bobbers\gray.json
+07f72d14bf0c693d520e8483fe3ee23b667d6368 data\tide\recipes\bobbers\blue.json
 c82250d4a0b43abce5467359bc32e5750eaa8864 data\tide\recipes\diamond_rod_smithing.json
 76f3e97e0c082efa20dbe3d765276f6306bd22a7 data\tide\recipes\eye_from_endergazer.json
 5937ed27fe8c0a6070fdf6fbd275ed1267dbf10c data\tide\advancements\recipes\misc\bait.json

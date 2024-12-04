@@ -22,13 +22,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
-public record BiomeTagCheck(TagKey<Biome> biomeTag) implements LootItemCondition {
-    public static final MapCodec<BiomeTagCheck> CODEC = RecordCodecBuilder.mapCodec((instance) ->
-            instance.group(TagKey.codec(Registries.BIOME).fieldOf("tag")
-                    .forGetter(BiomeTagCheck::biomeTag)).apply(instance, BiomeTagCheck::new));
-
+public record BiomeTagPredicate(TagKey<Biome> biomeTag) implements LootItemCondition {
     public static LootItemCondition.Builder checkTag(TagKey<Biome> biomeTag) {
-        return () -> new BiomeTagCheck(biomeTag);
+        return () -> new BiomeTagPredicate(biomeTag);
     }
 
     @Override
@@ -46,16 +42,14 @@ public record BiomeTagCheck(TagKey<Biome> biomeTag) implements LootItemCondition
         return Set.of(LootContextParams.ORIGIN);
     }
 
-    public static class Serializer implements net.minecraft.world.level.storage.loot.Serializer<BiomeTagCheck> {
-        public Serializer() {}
-
-        public void serialize(JsonObject jsonObject, BiomeTagCheck tagCheck, @NotNull JsonSerializationContext context) {
+    public static class Serializer implements net.minecraft.world.level.storage.loot.Serializer<BiomeTagPredicate> {
+        public void serialize(JsonObject jsonObject, BiomeTagPredicate tagCheck, @NotNull JsonSerializationContext context) {
             jsonObject.addProperty("tag", tagCheck.biomeTag().location().toString());
         }
 
-        public @NotNull BiomeTagCheck deserialize(@NotNull JsonObject jsonObject, @NotNull JsonDeserializationContext context) {
+        public @NotNull BiomeTagPredicate deserialize(@NotNull JsonObject jsonObject, @NotNull JsonDeserializationContext context) {
             ResourceLocation location = new ResourceLocation(GsonHelper.getAsString(jsonObject, "tag"));
-            return new BiomeTagCheck(TagKey.create(Registries.BIOME, location));
+            return new BiomeTagPredicate(TagKey.create(Registries.BIOME, location));
         }
     }
 }

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableBiMap;
 import com.li64.tide.data.TideLootTables;
 import com.li64.tide.data.journal.JournalLayout;
 import com.li64.tide.config.TideConfig;
+import com.li64.tide.data.loot.FishingStatsPredicate;
 import com.li64.tide.network.TideMessages;
 import com.li64.tide.data.journal.config.CustomPageLoader;
 import com.li64.tide.data.journal.config.CustomProfileLoader;
@@ -13,11 +14,13 @@ import com.li64.tide.data.rods.CustomBaitLoader;
 import com.li64.tide.platform.Services;
 import com.li64.tide.platform.services.TideMainPlatform;
 import com.li64.tide.platform.services.TideNetworkPlatform;
+import com.li64.tide.registries.TideEntityTypes;
 import com.li64.tide.registries.TideItems;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.EntitySubPredicate;
+import net.minecraft.advancements.critereon.EntityTypePredicate;
 import net.minecraft.advancements.critereon.FishingHookPredicate;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -53,6 +56,7 @@ public class Tide {
         EntitySubPredicate.Types.TYPES = ImmutableBiMap.<String, EntitySubPredicate.Type>builder()
                 .putAll(EntitySubPredicate.Types.TYPES)
                 .put("tide_fishing", TideFishingPredicate::fromJson)
+                .put("fishing_stats", FishingStatsPredicate::fromJson)
                 .build();
     }
 
@@ -95,6 +99,9 @@ public class Tide {
                                 .subPredicate(FishingHookPredicate.inOpenWater(true)))
                         .or(LootItemEntityPropertyCondition.hasProperties(
                                 LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity()
-                                        .subPredicate(TideFishingPredicate.isLavaFishing(true)))));
+                                        .subPredicate(TideFishingPredicate.isLavaFishing(true))))
+                        .and(LootItemEntityPropertyCondition.hasProperties(
+                                LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity()
+                                        .entityType(EntityTypePredicate.of(TideEntityTypes.FISHING_BOBBER)))));
     }
 }

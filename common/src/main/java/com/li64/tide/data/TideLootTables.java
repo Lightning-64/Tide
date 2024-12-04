@@ -4,7 +4,6 @@ import com.li64.tide.Tide;
 import net.minecraft.resources.ResourceLocation;
 
 public class TideLootTables {
-
     public static class Fishing {
         public static final ResourceLocation CRATES = create("gameplay/fishing/crates");
         public static final ResourceLocation CRATES_BLOCK = create("gameplay/fishing/crates/block");

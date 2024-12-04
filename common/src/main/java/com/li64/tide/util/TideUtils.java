@@ -9,15 +9,12 @@ import com.li64.tide.data.TideTags;
 import com.li64.tide.data.loot.DepthLayer;
 import com.li64.tide.data.player.TidePlayerData;
 import com.li64.tide.network.messages.ShowToastMsg;
-import com.li64.tide.registries.TideItems;
-import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -34,31 +31,6 @@ public class TideUtils {
 
     public static boolean moddedDimension(ResourceKey<Level> dimension) {
         return dimension != Level.OVERWORLD && dimension != Level.NETHER && dimension != Level.END;
-    }
-
-    public static ItemStack checkForOverrides(ItemStack item, TideFishingHook hook, ServerLevel level) {
-        int luck = hook.getLuck();
-        int moonPhase = level.getMoonPhase();
-
-        if (item.is(TideItems.VOIDSEEKER)) {
-            // new moon and full moon are the only phases where you can get the voidseeker,
-            // otherwise it will just be replaced with an end stone perch.
-            if (moonPhase != 0 && moonPhase != 4)
-                item = new ItemStack(TideItems.END_STONE_PERCH, 1);
-        }
-        if (hook.getLuck() >= 5) {
-            // 1/24 chance to catch the midas fish if the player has max luck (5)
-            // Technically luck can go higher through the luck effect but im not doing that
-            if (new Random().nextInt(0, 24) == 1)
-                item = new ItemStack(TideItems.MIDAS_FISH, 1);
-        }
-        if (moonPhase == 0 && hook.getBiome().is(TideTags.Biomes.CAN_CATCH_STARFISH) && level.isNight()) {
-            // 1/24 (with luck) chance to catch the shooting starfish at night, on a full moon,
-            // when fishing in any deep ocean biome
-            if (new Random().nextInt(0, 24 - luck) == 1)
-                item = new ItemStack(TideItems.SHOOTING_STARFISH, 1);
-        }
-        return item;
     }
 
     public static boolean shouldGrabTideLootTable(ItemStack item, FluidState fluid) {

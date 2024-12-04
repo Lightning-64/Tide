@@ -1,3 +1,28 @@
+## Version 1.4.0 - 12/2/2024
+
+### 🎣 New features 🎣
+
+---
+**New Bait System:**
+- Added bait slots to Tide fishing rod tooltip.
+- Bait can now be equipped directly onto a fishing rod; to do this, open the inventory GUI and drag the bait item over to the rod (or the other way around) and right click. This will fill up the first bait slot if possible. Similarly, bait can be removed from the slots by right-clicking the rod item.
+- Whatever bait item that is placed in the first bait slot will provide bait bonuses.
+- Holding bait in your offhand will no longer provide bait bonuses.
+---
+**Datapack Features**
+- Items can now be marked as bait and receive bait bonuses through datapacks. This can be done by creating json files in the `data / tide / bait` folder (see the [wiki](https://github.com/Lightning-64/Tide/wiki) for info)
+- Created more fishing loot tables that can be customized with datapacks. These include `gameplay/fishing/crates`, `gameplay/fishing/crates/block`, and `gameplay/fishing/special`. These can be found on the [github repository](https://github.com/Lightning-64/Tide/tree/main/common/src/generated/resources/data/tide/loot_table/gameplay/fishing).
+---
+**Misc Features**
+- Some tooltip text changes, such as the fishing rod accessory display and the bait info display.
+- Fishing rod accessories are stored as `ItemStack` instances and not `Item` instances.
+- Fishing rod accessories use a more compatibility-friendly system to get their info
+
+### ⚙️ Bug fixes ⚙️
+- text _([#0](link))_
+
+---
+
 ## Version 1.3.4 - 11/2/2024
 
 ### 🎣 New features 🎣
