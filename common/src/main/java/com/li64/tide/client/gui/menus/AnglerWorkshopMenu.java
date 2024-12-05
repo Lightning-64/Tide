@@ -9,7 +9,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.ContainerListener;
 import net.minecraft.world.inventory.ItemCombinerMenu;
 import net.minecraft.world.inventory.ItemCombinerMenuSlotDefinition;
 import net.minecraft.world.item.ItemStack;
@@ -30,7 +29,7 @@ public class AnglerWorkshopMenu extends ItemCombinerMenu {
     }
 
     @Override
-    protected boolean mayPickup(Player player, boolean hasItem) {
+    protected boolean mayPickup(@NotNull Player player, boolean hasItem) {
         return true;
     }
 
@@ -44,7 +43,7 @@ public class AnglerWorkshopMenu extends ItemCombinerMenu {
     }
 
     @Override
-    public void removed(Player player) {
+    public void removed(@NotNull Player player) {
         super.removed(player);
     }
 
@@ -58,20 +57,20 @@ public class AnglerWorkshopMenu extends ItemCombinerMenu {
         if (!inputSlots.getItem(0).isEmpty()) {
             ItemStack rod = inputSlots.getItem(0);
             if (CustomRodManager.hasLine(rod, player.registryAccess())) {
-                if (!inputSlots.getItem(1).isEmpty()) player.drop(inputSlots.getItem(1), true);
                 ItemStack line = CustomRodManager.getLine(rod, player.registryAccess());
+                if (!inputSlots.getItem(1).isEmpty()) player.drop(line, true);
                 CustomRodManager.setLine(rod, null, player.registryAccess());
                 inputSlots.setItem(1, line);
             }
             if (CustomRodManager.hasBobber(rod, player.registryAccess())) {
-                if (!inputSlots.getItem(2).isEmpty()) player.drop(inputSlots.getItem(2), true);
                 ItemStack bobber = CustomRodManager.getBobber(rod, player.registryAccess());
+                if (!inputSlots.getItem(2).isEmpty()) player.drop(bobber, true);
                 CustomRodManager.setBobber(rod, null, player.registryAccess());
                 inputSlots.setItem(2, bobber);
             }
             if (CustomRodManager.hasHook(rod, player.registryAccess())) {
-                if (!inputSlots.getItem(3).isEmpty()) player.drop(inputSlots.getItem(3), true);
                 ItemStack hook = CustomRodManager.getHook(rod, player.registryAccess());
+                if (!inputSlots.getItem(3).isEmpty()) player.drop(hook, true);
                 CustomRodManager.setHook(rod, null, player.registryAccess());
                 inputSlots.setItem(3, hook);
             }

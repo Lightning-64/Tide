@@ -9,6 +9,10 @@
 - Whatever bait item that is placed in the first bait slot will provide bait bonuses.
 - Holding bait in your offhand will no longer provide bait bonuses.
 ---
+**Angler's Workshop**
+- Accessory items are now stored in the rod and can be retrieved by placing the rod in the angler's workshop.
+- By grabbing the output item, the accessories in the input slots will be stored in the rod and will be consumed.
+---
 **Datapack Features**
 - Items can now be marked as bait and receive bait bonuses through datapacks. This can be done by creating json files in the `data / tide / bait` folder (see the [wiki](https://github.com/Lightning-64/Tide/wiki) for info)
 - Created more fishing loot tables that can be customized with datapacks. These include `gameplay/fishing/crates`, `gameplay/fishing/crates/block`, and `gameplay/fishing/special`. These can be found on the [github repository](https://github.com/Lightning-64/Tide/tree/main/common/src/generated/resources/data/tide/loot_table/gameplay/fishing).
@@ -19,6 +23,7 @@
 - Fishing rod accessories use a more compatibility-friendly system to get their info
 
 ### ⚙️ Bug fixes ⚙️
+- Missing internal translations for fish entities _([#48](https://github.com/Lightning-64/Tide/issues/48))_
 - text _([#0](link))_
 
 ---

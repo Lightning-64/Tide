@@ -78,7 +78,7 @@ public class Tide {
 
     public static LootPoolEntryContainer.Builder<?> getCrateFishingEntry() {
         return NestedLootTable.lootTableReference(TideLootTables.Fishing.CRATES_BLOCK)
-                .setWeight(7).setQuality(2)
+                .setWeight(7).setQuality(2) // 7, 2
                 // crates can only be caught in open water (or any lava)
                 .when(LootItemEntityPropertyCondition.hasProperties(
                         LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity()

@@ -38,31 +38,6 @@ public class TideUtils {
         return dimension != Level.OVERWORLD && dimension != Level.NETHER && dimension != Level.END;
     }
 
-    public static ItemStack checkForOverrides(ItemStack item, TideFishingHook hook, ServerLevel level) {
-        int luck = hook.getLuck();
-        int moonPhase = level.getMoonPhase();
-
-        if (item.is(TideItems.VOIDSEEKER)) {
-            // new moon and full moon are the only phases where you can get the voidseeker,
-            // otherwise it will just be replaced with an end stone perch.
-            if (moonPhase != 0 && moonPhase != 4)
-                item = new ItemStack(TideItems.END_STONE_PERCH, 1);
-        }
-        if (hook.getLuck() >= 5) {
-            // 1/24 chance to catch the midas fish if the player has max phases (5)
-            // Technically phases can go higher through the phases effect but im not doing that
-            if (new Random().nextInt(0, 24) == 1)
-                item = new ItemStack(TideItems.MIDAS_FISH, 1);
-        }
-        if (moonPhase == 0 && hook.getBiome().is(TideTags.Biomes.CAN_CATCH_STARFISH) && level.isNight()) {
-            // 1/24 (with phases) chance to catch the shooting starfish at night, on a full moon,
-            // when fishing in any deep ocean biome
-            if (new Random().nextInt(0, 24 - luck) == 1)
-                item = new ItemStack(TideItems.SHOOTING_STARFISH, 1);
-        }
-        return item;
-    }
-
     public static boolean shouldGrabTideLootTable(ItemStack item, FluidState fluid) {
         if (item.is(TideTags.Items.CRATES)) return false;
         if (item.is(TideTags.Items.VANILLA_FISH) || new Random().nextInt(0, 4) == 0) return true;

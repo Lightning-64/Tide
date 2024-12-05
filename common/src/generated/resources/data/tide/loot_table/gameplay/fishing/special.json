@@ -211,10 +211,6 @@
                       "luck": 5
                     }
                   }
-                },
-                {
-                  "chance": 0.041,
-                  "condition": "minecraft:random_chance"
                 }
               ]
             }
@@ -240,10 +236,6 @@
                     4
                   ],
                   "condition": "tide:check_moon_phase"
-                },
-                {
-                  "chance": 0.041,
-                  "condition": "minecraft:random_chance"
                 }
               ]
             }
@@ -269,10 +261,6 @@
                 {
                   "condition": "tide:check_biome_tag",
                   "tag": "tide:can_catch_starfish"
-                },
-                {
-                  "chance": 0.041,
-                  "condition": "minecraft:random_chance"
                 }
               ]
             }
