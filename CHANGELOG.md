@@ -20,11 +20,17 @@
 **Misc Features**
 - Some tooltip text changes, such as the fishing rod accessory display and the bait info display.
 - Fishing rod accessories are stored as `ItemStack` instances and not `Item` instances.
-- Fishing rod accessories use a more compatibility-friendly system to get their info
+- Fishing rod accessories use a more compatibility-friendly system to get their info.
+- Torchflowers and pitcher pods can be used as bait.
+---
+**Compatibility**
+- Butterflies/caterpillars from [Naturalist](https://www.curseforge.com/minecraft/mc-mods/naturalist) can be used as bait.
+---
 
 ### ⚙️ Bug fixes ⚙️
-- Missing internal translations for fish entities _([#48](https://github.com/Lightning-64/Tide/issues/48))_
-- text _([#0](link))_
+- Added internal translations for fish entities _([#48](https://github.com/Lightning-64/Tide/issues/48))_
+- Fixed a crash relating to fishing loot tables _([#37](https://github.com/Lightning-64/Tide/issues/37))_
+- Tide's "maximum fishing luck" was set as 5, but should have been 6.
 
 ---
 
