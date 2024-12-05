@@ -1,6 +1,7 @@
 package com.li64.tide.data.loot;
 
 import com.google.gson.*;
+import com.li64.tide.Tide;
 import com.li64.tide.registries.TideLootConditions;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -55,10 +56,11 @@ public record MoonPhasePredicate(Optional<List<Integer>> phases) implements Loot
         }
 
         public @NotNull MoonPhasePredicate deserialize(@NotNull JsonObject jsonObject, @NotNull JsonDeserializationContext context) {
-            Optional<List<Integer>> phases = jsonObject.isJsonArray() ?
-                    Optional.of(jsonObject.getAsJsonArray("any_of")
+            Optional<List<Integer>> phases = jsonObject.has("any_of") ?
+                    Optional.of(jsonObject.get("any_of").getAsJsonArray()
                         .asList().stream()
                         .map(JsonElement::getAsInt).toList()) : Optional.empty();
+            Tide.LOG.info("deserialized {} moon phases", phases.orElse(List.of()).size());
             return new MoonPhasePredicate(phases);
         }
     }

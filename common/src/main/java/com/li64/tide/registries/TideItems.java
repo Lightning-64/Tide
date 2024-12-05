@@ -240,7 +240,7 @@ public class TideItems {
     public static final Item BLOSSOM_BASS = register("blossom_bass",
             new TideFishItem(new Item.Properties().food(TideFoods.UNHEALTHY_RAW_FISH), 6.0f));
     public static final Item OAKFISH = register("oakfish",
-            new TideFishItem(new Item.Properties(), 0));
+            new TideFishItem(new Item.Properties(), 6.0f));
     public static final Item FROSTBITE_FLOUNDER = register("frostbite_flounder",
             new TideFishItem(new Item.Properties().food(TideFoods.AVERAGE_RAW_FISH), 6.0f));
     public static final Item MIRAGE_CATFISH = register("mirage_catfish",

@@ -102,16 +102,16 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
                                 .and(entityPredicate(TideFishingPredicate.isLavaFishing(false)))
                                 .and(LootItemRandomChanceCondition.randomChance(0.05f))))
                         .add(LootItem.lootTableItem(TideItems.MIDAS_FISH).setWeight(10).when(
-                                entityPredicate(FishingStatsPredicate.luckOf(5))
-                                        .and(LootItemRandomChanceCondition.randomChance(0.041f))))
+                                entityPredicate(FishingStatsPredicate.luckOf(6))
+                                        .and(LootItemRandomChanceCondition.randomChance(0.05f))))
                         .add(LootItem.lootTableItem(TideItems.VOIDSEEKER).setWeight(10).when(
                                 LocationCheck.checkLocation(LocationPredicate.Builder.location().setDimension(Level.END))
                                         .and(MoonPhasePredicate.anyOf(0, 4))
-                                        .and(LootItemRandomChanceCondition.randomChance(0.041f))))
+                                        .and(LootItemRandomChanceCondition.randomChance(0.05f))))
                         .add(LootItem.lootTableItem(TideItems.SHOOTING_STARFISH).setWeight(10).when(
                                 MoonPhasePredicate.anyOf(0).and(IsNightPredicate.isNight())
                                         .and(BiomeTagPredicate.checkTag(TideTags.Biomes.CAN_CATCH_STARFISH))
-                                        .and(LootItemRandomChanceCondition.randomChance(0.041f))))
+                                        .and(LootItemRandomChanceCondition.randomChance(0.05f))))
                 )
         );
 

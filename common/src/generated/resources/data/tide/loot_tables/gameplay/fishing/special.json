@@ -208,12 +208,12 @@
                   "predicate": {
                     "type_specific": {
                       "type": "fishing_stats",
-                      "luck": 5
+                      "luck": 6
                     }
                   }
                 },
                 {
-                  "chance": 0.041,
+                  "chance": 0.05,
                   "condition": "minecraft:random_chance"
                 }
               ]
@@ -242,7 +242,7 @@
                   "condition": "tide:check_moon_phase"
                 },
                 {
-                  "chance": 0.041,
+                  "chance": 0.05,
                   "condition": "minecraft:random_chance"
                 }
               ]
@@ -271,7 +271,7 @@
                   "tag": "tide:can_catch_starfish"
                 },
                 {
-                  "chance": 0.041,
+                  "chance": 0.05,
                   "condition": "minecraft:random_chance"
                 }
               ]

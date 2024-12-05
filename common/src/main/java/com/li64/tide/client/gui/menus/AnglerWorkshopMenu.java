@@ -29,7 +29,7 @@ public class AnglerWorkshopMenu extends ItemCombinerMenu {
     }
 
     @Override
-    protected boolean mayPickup(Player player, boolean hasItem) {
+    protected boolean mayPickup(@NotNull Player player, boolean hasItem) {
         return true;
     }
 
@@ -43,7 +43,7 @@ public class AnglerWorkshopMenu extends ItemCombinerMenu {
     }
 
     @Override
-    public void removed(Player player) {
+    public void removed(@NotNull Player player) {
         super.removed(player);
     }
 
@@ -57,20 +57,20 @@ public class AnglerWorkshopMenu extends ItemCombinerMenu {
         if (!inputSlots.getItem(0).isEmpty()) {
             ItemStack rod = inputSlots.getItem(0);
             if (CustomRodManager.hasLine(rod)) {
-                if (!inputSlots.getItem(1).isEmpty()) player.drop(inputSlots.getItem(1), true);
                 ItemStack line = CustomRodManager.getLine(rod);
+                if (!inputSlots.getItem(1).isEmpty()) player.drop(line, true);
                 CustomRodManager.setLine(rod, null);
                 inputSlots.setItem(1, line);
             }
             if (CustomRodManager.hasBobber(rod)) {
-                if (!inputSlots.getItem(2).isEmpty()) player.drop(inputSlots.getItem(2), true);
                 ItemStack bobber = CustomRodManager.getBobber(rod);
+                if (!inputSlots.getItem(2).isEmpty()) player.drop(bobber, true);
                 CustomRodManager.setBobber(rod, null);
                 inputSlots.setItem(2, bobber);
             }
             if (CustomRodManager.hasHook(rod)) {
-                if (!inputSlots.getItem(3).isEmpty()) player.drop(inputSlots.getItem(3), true);
                 ItemStack hook = CustomRodManager.getHook(rod);
+                if (!inputSlots.getItem(3).isEmpty()) player.drop(hook, true);
                 CustomRodManager.setHook(rod, null);
                 inputSlots.setItem(3, hook);
             }
