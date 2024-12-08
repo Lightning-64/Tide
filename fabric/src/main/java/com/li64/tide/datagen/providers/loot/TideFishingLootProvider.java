@@ -107,7 +107,7 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
                                     .and(LootItemRandomChanceCondition.randomChance(ConstantValue.exactly(0.05f)))))
 
                         .add(LootItem.lootTableItem(TideItems.MIDAS_FISH).setWeight(10).when(
-                                entityPredicate(FishingStatsPredicate.luckOf(5))
+                                entityPredicate(FishingStatsPredicate.luckOf(6))
                                         .and(LootItemRandomChanceCondition.randomChance(ConstantValue.exactly(0.05f)))))
                         .add(LootItem.lootTableItem(TideItems.VOIDSEEKER).setWeight(10).when(
                                 LocationCheck.checkLocation(LocationPredicate.Builder.inDimension(Level.END))
