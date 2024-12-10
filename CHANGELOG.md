@@ -31,6 +31,7 @@
 - Added internal translations for fish entities _([#48](https://github.com/Lightning-64/Tide/issues/48))_
 - Fixed a crash relating to fishing loot tables _([#37](https://github.com/Lightning-64/Tide/issues/37))_
 - Tide's "maximum fishing luck" was set as 5, but should have been 6.
+- The Oakfish now has its minigame "strength" value set to 6.0 instead of 0.
 
 ---
 
