@@ -96,20 +96,23 @@ public class TideFishingRodItem extends FishingRodItem {
     public boolean overrideStackedOnOther(@NotNull ItemStack stack, @NotNull Slot slot, @NotNull ClickAction action, @NotNull Player player) {
         if (action != ClickAction.SECONDARY) return false;
         else {
-            BaitContents.Mutable contents = new BaitContents.Mutable(stack.get(TideDataComponents.BAIT_CONTENTS));
+            BaitContents contents = stack.get(TideDataComponents.BAIT_CONTENTS);
+            if (contents == null) return false;
+
+            BaitContents.Mutable mutable = new BaitContents.Mutable(contents);
             ItemStack slotStack = slot.getItem();
 
-            if (slotStack.isEmpty() && !contents.isEmpty()) {
+            if (slotStack.isEmpty() && !mutable.isEmpty()) {
                 // place next stack
-                ItemStack removedStack = contents.removeStack();
+                ItemStack removedStack = mutable.removeStack();
                 if (removedStack != null) slot.safeInsert(removedStack);
 
             } else if (slotStack.getItem().canFitInsideContainerItems() && BaitUtils.isBait(slotStack)) {
                 // insert stack
-                contents.tryTransfer(slot, player);
+                mutable.tryTransfer(slot, player);
             }
 
-            stack.set(TideDataComponents.BAIT_CONTENTS, contents.toImmutable());
+            stack.set(TideDataComponents.BAIT_CONTENTS, mutable.toImmutable());
             return true;
         }
     }
@@ -117,19 +120,22 @@ public class TideFishingRodItem extends FishingRodItem {
     @Override
     public boolean overrideOtherStackedOnMe(@NotNull ItemStack stack, @NotNull ItemStack other, @NotNull Slot slot, @NotNull ClickAction action, @NotNull Player player, @NotNull SlotAccess access) {
         if (action == ClickAction.SECONDARY && slot.allowModification(player)) {
-            BaitContents.Mutable contents = new BaitContents.Mutable(stack.get(TideDataComponents.BAIT_CONTENTS));
+            BaitContents contents = stack.get(TideDataComponents.BAIT_CONTENTS);
+            if (contents == null) return false;
+
+            BaitContents.Mutable mutableContents = new BaitContents.Mutable(stack.get(TideDataComponents.BAIT_CONTENTS));
 
             if (other.isEmpty()) {
                 // pull next stack
-                ItemStack itemstack = contents.removeStack();
+                ItemStack itemstack = mutableContents.removeStack();
                 if (itemstack != null) access.set(itemstack);
 
             } else if (other.getItem().canFitInsideContainerItems() && BaitUtils.isBait(other)) {
                 // insert stack
-                contents.tryInsert(other);
+                mutableContents.tryInsert(other);
             }
 
-            stack.set(TideDataComponents.BAIT_CONTENTS, contents.toImmutable());
+            stack.set(TideDataComponents.BAIT_CONTENTS, mutableContents.toImmutable());
             return true;
         } else {
             return false;

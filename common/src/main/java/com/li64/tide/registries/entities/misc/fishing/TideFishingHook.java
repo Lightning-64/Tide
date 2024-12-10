@@ -337,10 +337,8 @@ public class TideFishingHook extends Projectile {
     }
 
     private boolean shouldKeepFishing(Player player) {
-        ItemStack mainHand = player.getMainHandItem();
-        ItemStack offHand = player.getOffhandItem();
-        boolean flag = mainHand.getItem() instanceof FishingRodItem;
-        boolean flag1 = offHand.getItem() instanceof FishingRodItem;
+        boolean flag = player.getMainHandItem().equals(rod);
+        boolean flag1 = player.getOffhandItem().equals(rod);
         if (!player.isRemoved() && player.isAlive() && (flag || flag1) && !(this.distanceToSqr(player) > 1224.0D)) {
             return true;
         } else {

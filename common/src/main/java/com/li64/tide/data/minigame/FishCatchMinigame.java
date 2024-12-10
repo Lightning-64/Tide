@@ -13,10 +13,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class FishCatchMinigame {
+    private static final int DELAY_MILLIS = 500;
     public static ArrayList<FishCatchMinigame> ACTIVE_MINIGAMES = new ArrayList<>();
 
     protected TideFishingHook hook;
     protected ServerPlayer player;
+
+    private final long delay;
 
     public static FishCatchMinigame getInstance(Player player) {
         for (FishCatchMinigame minigame : ACTIVE_MINIGAMES) {
@@ -55,6 +58,7 @@ public class FishCatchMinigame {
 
         // Start client minigame gui
         Tide.NETWORK.sendToPlayer(new MinigameClientMsg(0, strength), player);
+        delay = System.currentTimeMillis() + DELAY_MILLIS;
     }
 
     private ServerPlayer getPlayer() {
@@ -62,7 +66,7 @@ public class FishCatchMinigame {
     }
 
     public void interact() {
-        if (cancelIfNecessary()) return;
+        if (cancelIfNecessary() || System.currentTimeMillis() < delay) return;
         // Request a result from the client (either win or fail)
         Tide.NETWORK.sendToPlayer(new MinigameClientMsg(1), player);
     }

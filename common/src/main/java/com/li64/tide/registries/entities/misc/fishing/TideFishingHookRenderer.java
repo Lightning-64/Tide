@@ -1,12 +1,11 @@
 package com.li64.tide.registries.entities.misc.fishing;
 
 import com.li64.tide.data.rods.CustomRodManager;
-import com.li64.tide.registries.items.FishingHookItem;
-import com.li64.tide.registries.items.FishingLineItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -21,9 +20,10 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.FishingRodItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.Vec3;
 import com.li64.tide.Tide;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
@@ -40,7 +40,7 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
     }
 
     @Override
-    public void render(TideFishingHook hookEntity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+    public void render(TideFishingHook hookEntity, float entityYaw, float partialTick, @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer, int packedLight) {
         Player player = hookEntity.getPlayerOwner();
         if (player == null) return;
 
@@ -53,21 +53,21 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
         poseStack.scale(-1.0F, -1.0F, 1.0F);
 
         model.setupAnim(hookEntity, partialTick, 0.0F, -0.1F, 0.0F, 0.0F);
-        VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(getTextureLocation(hookEntity)));
+        VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityCutoutNoCull(getTextureLocation(hookEntity)));
 
         model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, FastColor.ARGB32.color(255, 255, 255, 255));
-        bobberLayer.render(poseStack, bufferSource, packedLight, hookEntity, 0, 0, 0, 0, 0, 0);
+        bobberLayer.render(poseStack, buffer, packedLight, hookEntity, 0, 0, 0, 0, 0, 0);
 
         poseStack.popPose();
 
-        renderConnectingString(hookEntity, partialTick, poseStack, bufferSource, player);
+        renderConnectingString(hookEntity, partialTick, poseStack, buffer, player);
 
         poseStack.popPose();
 
-        super.render(hookEntity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+        super.render(hookEntity, entityYaw, partialTick, poseStack, buffer, packedLight);
     }
 
-    private void renderConnectingString(TideFishingHook hookEntity, float partialTick, PoseStack poseStack, MultiBufferSource multiBufferSource, Player player) {
+    private void renderConnectingString(TideFishingHook hookEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, Player player) {
         int i = player.getMainArm() == HumanoidArm.RIGHT ? 1 : -1;
         ItemStack itemstack = player.getMainHandItem();
         if (!(itemstack.getItem() instanceof FishingRodItem)) {
@@ -80,7 +80,6 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
         double d0 = Mth.sin(f2);
         double d1 = Mth.cos(f2);
         double d2 = (double)i * 0.35D;
-        double d3 = 0.8D;
         double d4;
         double d5;
         double d6;
@@ -111,22 +110,22 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
         float f5 = (float)(d5 - d10) + f3;
         float f6 = (float)(d6 - d8);
 
-        VertexConsumer vertexconsumer1 = multiBufferSource.getBuffer(RenderType.lineStrip());
-        PoseStack.Pose posestack$pose1 = poseStack.last();
+        VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.lineStrip());
+        PoseStack.Pose pose = poseStack.last();
 
         for (int k = 0; k <= 16; ++k) {
-            BlockPos vertexPos = new BlockPos((int) d9, (int) d10, (int) d8);
+//            BlockPos vertexPos = new BlockPos((int) d9, (int) d10, (int) d8);
 
-            stringVertex(f4, f5, f6, vertexconsumer1, posestack$pose1, fraction(k, 16),
-                    fraction(k + 1, 16), vertexPos, hookEntity.level(), CustomRodManager.getLineColor(hookEntity.getLine()));
+            stringVertex(f4, f5, f6, vertexConsumer, pose, fraction(k),
+                    fraction(k + 1), player, CustomRodManager.getLineColor(hookEntity.getLine()), partialTick);
         }
     }
 
-    private static float fraction(int a, int b) {
-        return (float)a / (float)b;
+    private static float fraction(int a) {
+        return (float) a / (float) 16;
     }
 
-    private static void stringVertex(float x, float y, float z, VertexConsumer vertexConsumer, PoseStack.Pose pose, float frac1, float frac2, BlockPos hookPos, Level level, String colorHex) {
+    private static void stringVertex(float x, float y, float z, VertexConsumer vertexConsumer, PoseStack.Pose pose, float frac1, float frac2, Player player, String colorHex, float partialTick) {
         float f = x * frac1;
         float f1 = y * (frac1 * frac1 + frac1) * 0.5F + 0.25F;
         float f2 = z * frac1;
@@ -141,14 +140,13 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
 
         Color color = Color.decode(colorHex);
 
-//        BlockPos vertexPos = new BlockPos(Mth.floor(hookPos.getX() + f),
-//                Mth.floor(hookPos.getY() + f1), Mth.floor(hookPos.getZ() + f2));
-//
-//        int vertexBrightness = (int) Mth.lerp(level.dimensionType().ambientLight(),
-//                level.getRawBrightness(vertexPos, level.getSkyDarken()), 15f);
-//        float colorBrightness = Mth.clamp(vertexBrightness / 15f, 0.05f, 1f);
+        float skyDarken = (1 - ((ClientLevel) player.level()).getSkyDarken(partialTick)) * 15;
+        float blockBrightness = player.level().getBrightness(LightLayer.BLOCK, player.blockPosition());
+        float skyBrightness = player.level().getBrightness(LightLayer.SKY, player.blockPosition()) - skyDarken + 1;
 
-        float colorBrightness = Tide.CONFIG.general.defaultLineColor ? 0.0f : 1.0f;
+        float colorBrightness = Tide.CONFIG.general.defaultLineColor ? 0.0f : Mth.clamp(
+                Math.max(blockBrightness, skyBrightness) / 15f,
+                player.level().dimensionType().ambientLight(), 1f);
 
         int r = (int) (color.getRed() * colorBrightness);
         int g = (int) (color.getGreen() * colorBrightness);
@@ -160,12 +158,12 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
     }
 
     @Override
-    public TideFishingHookModel<TideFishingHook> getModel() {
+    public @NotNull TideFishingHookModel<TideFishingHook> getModel() {
         return this.model;
     }
 
     @Override
-    public ResourceLocation getTextureLocation(TideFishingHook hookEntity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull TideFishingHook hookEntity) {
         if (!allowModifiers()) return HOOK_TEX_LOCATION;
         return CustomRodManager.getHookTexture(hookEntity.getHook());
     }

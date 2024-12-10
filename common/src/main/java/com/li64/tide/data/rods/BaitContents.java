@@ -44,6 +44,22 @@ public class BaitContents implements TooltipComponent {
         return this.items.isEmpty();
     }
 
+    @SuppressWarnings("deprecation")
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else {
+            if (other instanceof BaitContents contents)
+                return ItemStack.listMatches(this.items, contents.items);
+            else return false;
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    public int hashCode() {
+        return ItemStack.hashStackList(this.items);
+    }
+
     public String toString() {
         return "BaitContents" + this.items;
     }
@@ -89,7 +105,7 @@ public class BaitContents implements TooltipComponent {
 
                     this.items.set(index, added);
                 } else {
-                    if (items.size() < MAX_STACKS) this.items.addFirst(stack.split(count));
+                    if (items.size() < MAX_STACKS) this.items.add(stack.split(count));
                 }
             }
         }

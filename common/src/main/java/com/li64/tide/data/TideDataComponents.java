@@ -29,8 +29,9 @@ public class TideDataComponents {
 
     public static final DataComponentType<BaitContents> BAIT_CONTENTS = register(
             "bait_contents", DataComponentType.<BaitContents>builder()
-                    .persistent(BaitContents.CODEC).cacheEncoding()
-                    .networkSynchronized(BaitContents.STREAM_CODEC).build());
+                    .persistent(BaitContents.CODEC)
+                    .networkSynchronized(BaitContents.STREAM_CODEC)
+                    .cacheEncoding().build());
 
     public static <T> DataComponentType<T> register(String key, DataComponentType<T> component) {
         DATA_COMPONENT_TYPES.put(key, component);

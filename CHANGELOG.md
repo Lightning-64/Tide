@@ -18,9 +18,11 @@
 - Created more fishing loot tables that can be customized with datapacks. These include `gameplay/fishing/crates`, `gameplay/fishing/crates/block`, and `gameplay/fishing/special`. These can be found on the [github repository](https://github.com/Lightning-64/Tide/tree/main/common/src/generated/resources/data/tide/loot_table/gameplay/fishing).
 ---
 **Misc Features**
+- Fishing rod line will now darken with the current block lighting.
 - Some tooltip text changes, such as the fishing rod accessory display and the bait info display.
 - Fishing rod accessories are stored as `ItemStack` instances and not `Item` instances.
 - Fishing rod accessories use a more compatibility-friendly system to get their info.
+- Added a bit of delay before minigame inputs can be received after one starts
 - Torchflowers and pitcher pods can be used as bait.
 ---
 **Compatibility**
@@ -30,6 +32,7 @@
 ### ⚙️ Bug fixes ⚙️
 - Added internal translations for fish entities _([#48](https://github.com/Lightning-64/Tide/issues/48))_
 - Fixed a crash relating to fishing loot tables _([#37](https://github.com/Lightning-64/Tide/issues/37))_
+- Fixed a bug where you could switch between fishing rods without retrieving the hook.
 - Tide's "maximum fishing luck" was set as 5, but should have been 6.
 - The Oakfish now has its minigame "strength" value set to 6.0 instead of 0.
 
