@@ -94,7 +94,7 @@ public class BaitContents implements TooltipComponent {
 
                     this.items.set(index, added);
                 } else {
-                    if (items.size() < MAX_STACKS) this.items.add(0, stack.split(count));
+                    if (items.size() < MAX_STACKS) this.items.add(stack.split(count));
                 }
             }
         }
