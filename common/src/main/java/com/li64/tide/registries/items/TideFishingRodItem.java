@@ -80,6 +80,7 @@ public class TideFishingRodItem extends FishingRodItem {
             builder.addFirst(Component.translatable("text.tide.rod_tooltip.accessories_prefix")
                     .withStyle(ChatFormatting.GRAY));
             builder.addFirst(Component.empty());
+            builder.add(Component.empty());
         }
 
         return ImmutableList.copyOf(builder);
