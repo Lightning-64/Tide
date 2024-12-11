@@ -76,9 +76,9 @@ public class TideFishingRodItem extends FishingRodItem {
         }
 
         if (!builder.isEmpty()) {
-            builder.add(0, Component.translatable("text.tide.rod_tooltip.accessories_prefix")
-                    .withStyle(ChatFormatting.GRAY));
+            builder.add(0, Component.translatable("text.tide.rod_tooltip.accessories_prefix").withStyle(ChatFormatting.GRAY));
             builder.add(0, Component.empty());
+            builder.add(Component.empty());
         }
 
         return ImmutableList.copyOf(builder);
