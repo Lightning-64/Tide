@@ -4,6 +4,7 @@ import com.li64.tide.client.gui.TideMenuTypes;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.data.rods.CustomRodManager;
 import com.li64.tide.registries.TideBlocks;
+import com.li64.tide.registries.blocks.AnglerWorkshopBlock;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
@@ -49,7 +50,7 @@ public class AnglerWorkshopMenu extends ItemCombinerMenu {
 
     @Override
     protected boolean isValidBlock(BlockState blockState) {
-        return blockState.is(TideBlocks.ANGLER_WORKSHOP);
+        return blockState.getBlock() instanceof AnglerWorkshopBlock;
     }
 
     @Override

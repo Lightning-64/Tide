@@ -67,11 +67,9 @@ public class BaitContents implements TooltipComponent {
         }
 
         private int findStackIndex(ItemStack stack) {
-            if (stack.isStackable()) {
-                for (int i = 0; i < this.items.size(); ++i) {
-                    if (ItemStack.isSameItemSameTags(this.items.get(i), stack)) {
-                        return i;
-                    }
+            for (int i = 0; i < this.items.size(); ++i) {
+                if (ItemStack.isSameItemSameTags(this.items.get(i), stack)) {
+                    return i;
                 }
             }
             return -1;
@@ -117,6 +115,7 @@ public class BaitContents implements TooltipComponent {
 
         public void shrinkStack(ItemStack stack) {
             int index = findStackIndex(stack);
+            if (index == -1) return;
             this.items.get(index).shrink(1);
             if (this.items.get(index).isEmpty()) this.items.remove(index);
         }

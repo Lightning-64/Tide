@@ -1,4 +1,4 @@
-## Version 1.4.0 - 12/2/2024
+## Version 1.4 - 12/13/2024
 
 ### 🎣 New features 🎣
 
