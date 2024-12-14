@@ -5,6 +5,7 @@ import com.li64.tide.client.gui.JournalPage;
 import com.li64.tide.data.journal.JournalLayout;
 import com.li64.tide.data.player.TidePlayerData;
 import com.li64.tide.network.messages.ShowToastMsg;
+import com.li64.tide.network.messages.UpdateBaitDataMsg;
 import com.li64.tide.network.messages.UpdateJournalMsg;
 import com.li64.tide.registries.TideItems;
 import com.li64.tide.util.TideUtils;
@@ -38,6 +39,7 @@ public class TideEventHandler {
         if (!Tide.CONFIG.general.giveJournal) return;
 
         Tide.NETWORK.sendToPlayer(new UpdateJournalMsg(), player);
+        Tide.NETWORK.sendToPlayer(new UpdateBaitDataMsg(), player);
 
         TidePlayerData playerData = TidePlayerData.getOrCreate(player);
         playerData.syncTo(player);

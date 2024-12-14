@@ -10,6 +10,7 @@ public class TideMessages {
         network.registerClientBoundPacket(SyncDataMsg.class, SyncDataMsg.ID, SyncDataMsg::encode, SyncDataMsg::new, SyncDataMsg::handle);
         network.registerClientBoundPacket(ShowToastMsg.class, ShowToastMsg.ID, ShowToastMsg::encode, ShowToastMsg::new, ShowToastMsg::handle);
         network.registerClientBoundPacket(UpdateJournalMsg.class, UpdateJournalMsg.ID, UpdateJournalMsg::encode, UpdateJournalMsg::new, UpdateJournalMsg::handle);
+        network.registerClientBoundPacket(UpdateBaitDataMsg.class, UpdateBaitDataMsg.ID, UpdateBaitDataMsg::encode, UpdateBaitDataMsg::new, UpdateBaitDataMsg::handle);
 
         network.registerServerBoundPacket(MinigameServerMsg.class, MinigameServerMsg.ID, MinigameServerMsg::encode, MinigameServerMsg::new, MinigameServerMsg::handle);
         network.registerServerBoundPacket(ReadProfileMsg.class, ReadProfileMsg.ID, ReadProfileMsg::encode, ReadProfileMsg::new, ReadProfileMsg::handle);
