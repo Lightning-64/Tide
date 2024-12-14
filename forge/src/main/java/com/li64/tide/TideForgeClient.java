@@ -62,6 +62,7 @@ public class TideForgeClient {
                 (forgeGui, gui, partialTick, width, height) -> CatchMinigameOverlay.render(gui, partialTick));
     }
 
+    @SubscribeEvent
     public static void registerClientTooltipComponents(RegisterClientTooltipComponentFactoriesEvent event) {
         event.register(FishingRodTooltip.class, (tooltip -> new ClientFishingRodTooltip(tooltip.contents())));
     }
