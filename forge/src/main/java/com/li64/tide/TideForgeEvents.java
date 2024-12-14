@@ -4,8 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.data.commands.JournalCommand;
 import com.li64.tide.data.player.TidePlayerData;
-import com.li64.tide.data.rods.ClientFishingRodTooltip;
-import com.li64.tide.data.rods.FishingRodTooltip;
 import com.li64.tide.events.TideEventHandler;
 import com.li64.tide.loot.LootTableAccessor;
 import com.li64.tide.registries.*;
@@ -30,7 +28,6 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -48,11 +45,6 @@ import java.util.List;
 public class TideForgeEvents {
     @EventBusSubscriber(modid = Tide.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
     public static class Mod {
-        @SubscribeEvent
-        public static void registerClientTooltipComponents(RegisterClientTooltipComponentFactoriesEvent event) {
-            event.register(FishingRodTooltip.class, (tooltip -> new ClientFishingRodTooltip(tooltip.contents())));
-        }
-
         @SubscribeEvent
         public static void entitySpawnRestrictions(SpawnPlacementRegisterEvent event) {
             tideFishSpawnRules(TideEntityTypes.TROUT, event);

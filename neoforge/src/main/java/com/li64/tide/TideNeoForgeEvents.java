@@ -6,20 +6,13 @@ import com.li64.tide.client.gui.screens.AnglerWorkshopScreen;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.data.commands.JournalCommand;
 import com.li64.tide.data.player.TidePlayerData;
-import com.li64.tide.data.rods.ClientFishingRodTooltip;
-import com.li64.tide.data.rods.FishingRodTooltip;
 import com.li64.tide.events.TideEventHandler;
 import com.li64.tide.loot.LootTableAccessor;
 import com.li64.tide.registries.*;
 import com.li64.tide.registries.entities.util.AbstractTideFish;
-import com.li64.tide.registries.items.BaitItem;
 import com.li64.tide.registries.items.TideFishingRodItem;
 import com.li64.tide.util.BaitUtils;
-import com.li64.tide.util.TideUtils;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -39,7 +32,6 @@ import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
@@ -57,11 +49,6 @@ import java.util.List;
 public class TideNeoForgeEvents {
     @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = Tide.MOD_ID)
     public static class Mod {
-        @SubscribeEvent
-        public static void registerClientTooltipComponents(RegisterClientTooltipComponentFactoriesEvent event) {
-            event.register(FishingRodTooltip.class, (tooltip -> new ClientFishingRodTooltip(tooltip.contents())));
-        }
-
         @SubscribeEvent
         public static void entitySpawnRestrictions(RegisterSpawnPlacementsEvent event) {
             tideFishSpawnRules(TideEntityTypes.TROUT, event);

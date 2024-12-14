@@ -22,7 +22,7 @@ public class CustomBaitLoader extends SimpleJsonResourceReloadListener {
     public static final String DATA_PATH = "bait";
     private static final Gson GSON = new Gson();
 
-    private List<BaitData> baits;
+    private List<BaitData> baits = new ArrayList<>();
 
     public CustomBaitLoader() {
         super(GSON, DATA_PATH);
@@ -55,5 +55,9 @@ public class CustomBaitLoader extends SimpleJsonResourceReloadListener {
 
     public List<BaitData> getBaitData() {
         return baits;
+    }
+
+    public void setBaitData(List<BaitData> baitData) {
+        baits = new ArrayList<>(baitData);
     }
 }

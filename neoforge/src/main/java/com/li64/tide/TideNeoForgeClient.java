@@ -1,6 +1,8 @@
 package com.li64.tide;
 
 import com.li64.tide.config.TideConfig;
+import com.li64.tide.data.rods.ClientFishingRodTooltip;
+import com.li64.tide.data.rods.FishingRodTooltip;
 import com.li64.tide.registries.TideItems;
 import com.li64.tide.registries.items.TideFishingRodItem;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -14,6 +16,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
 @SuppressWarnings("unused")
@@ -48,5 +51,10 @@ public class TideNeoForgeClient {
             ItemProperties.register(TideItems.DIAMOND_FISHING_ROD, TideFishingRodItem.CAST_PROPERTY, rodCastFunction);
             ItemProperties.register(TideItems.NETHERITE_FISHING_ROD, TideFishingRodItem.CAST_PROPERTY, rodCastFunction);
         });
+    }
+
+    @SubscribeEvent
+    public static void registerClientTooltipComponents(RegisterClientTooltipComponentFactoriesEvent event) {
+        event.register(FishingRodTooltip.class, (tooltip -> new ClientFishingRodTooltip(tooltip.contents())));
     }
 }
