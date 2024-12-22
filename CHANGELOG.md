@@ -2,7 +2,7 @@
 
 ### 🎣 New features 🎣
 
-- Added 2 new legendary fish that can be found in structures
+- Added 2 new legendary fish that can be found in structures (one of them is 1.21+ exclusive)
 ---
 
 ### ⚙️ Bug fixes ⚙️
