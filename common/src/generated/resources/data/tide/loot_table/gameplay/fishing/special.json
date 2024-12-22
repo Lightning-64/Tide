@@ -203,14 +203,62 @@
               "condition": "minecraft:all_of",
               "terms": [
                 {
+                  "condition": "minecraft:location_check",
+                  "predicate": {
+                    "structures": "minecraft:monument"
+                  }
+                },
+                {
+                  "chance": 0.05,
+                  "condition": "minecraft:random_chance"
+                }
+              ]
+            }
+          ],
+          "name": "tide:aquathorn",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:all_of",
+              "terms": [
+                {
+                  "condition": "minecraft:location_check",
+                  "predicate": {
+                    "structures": "minecraft:trial_chambers"
+                  }
+                },
+                {
+                  "chance": 0.05,
+                  "condition": "minecraft:random_chance"
+                }
+              ]
+            }
+          ],
+          "name": "tide:windbass",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:all_of",
+              "terms": [
+                {
                   "condition": "minecraft:entity_properties",
                   "entity": "this",
                   "predicate": {
                     "type_specific": {
                       "type": "tide:fishing_stats",
-                      "luck": 5
+                      "luck": 6
                     }
                   }
+                },
+                {
+                  "chance": 0.05,
+                  "condition": "minecraft:random_chance"
                 }
               ]
             }
@@ -236,6 +284,10 @@
                     4
                   ],
                   "condition": "tide:check_moon_phase"
+                },
+                {
+                  "chance": 0.05,
+                  "condition": "minecraft:random_chance"
                 }
               ]
             }
@@ -261,6 +313,10 @@
                 {
                   "condition": "tide:check_biome_tag",
                   "tag": "tide:can_catch_starfish"
+                },
+                {
+                  "chance": 0.05,
+                  "condition": "minecraft:random_chance"
                 }
               ]
             }

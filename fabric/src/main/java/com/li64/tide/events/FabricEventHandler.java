@@ -3,7 +3,7 @@ package com.li64.tide.events;
 
 import com.li64.tide.Tide;
 import com.li64.tide.data.commands.JournalCommand;
-import com.li64.tide.data.TideEntity;
+import com.li64.tide.data.TidePlayer;
 import com.li64.tide.registries.TideItems;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
@@ -34,8 +34,8 @@ public class FabricEventHandler {
                 new JournalCommand(dispatcher, registryAccess));
 
         ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
-            CompoundTag data = ((TideEntity) oldPlayer).getTidePlayerData();
-            ((TideEntity) newPlayer).setTidePlayerData(data);
+            CompoundTag data = ((TidePlayer) oldPlayer).tide$getTidePlayerData();
+            ((TidePlayer) newPlayer).tide$setTidePlayerData(data);
         });
 
         ServerTickEvents.END_SERVER_TICK.register((server -> server.getPlayerList()
@@ -122,6 +122,30 @@ public class FabricEventHandler {
                                                 Component.translatable("note.tide.author").getString(),
                                                 0,
                                                 List.of(Filterable.passThrough(Component.translatable("note.tide.shooting_starfish.contents"))),
+                                                true
+                                        )
+                                ))
+                        ).add(LootItem.lootTableItem(Items.WRITTEN_BOOK)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                                .apply(SetComponentsFunction.setComponent(
+                                        DataComponents.WRITTEN_BOOK_CONTENT,
+                                        new WrittenBookContent(
+                                                Filterable.passThrough(Component.translatable("note.tide.title").getString()),
+                                                Component.translatable("note.tide.author").getString(),
+                                                0,
+                                                List.of(Filterable.passThrough(Component.translatable("note.tide.aquathorn.contents"))),
+                                                true
+                                        )
+                                ))
+                        ).add(LootItem.lootTableItem(Items.WRITTEN_BOOK)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                                .apply(SetComponentsFunction.setComponent(
+                                        DataComponents.WRITTEN_BOOK_CONTENT,
+                                        new WrittenBookContent(
+                                                Filterable.passThrough(Component.translatable("note.tide.title").getString()),
+                                                Component.translatable("note.tide.author").getString(),
+                                                0,
+                                                List.of(Filterable.passThrough(Component.translatable("note.tide.windbass.contents"))),
                                                 true
                                         )
                                 ))

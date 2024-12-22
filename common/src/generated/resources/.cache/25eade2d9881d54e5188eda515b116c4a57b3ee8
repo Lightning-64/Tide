@@ -1,10 +1,10 @@
-// 1.21	2024-12-04T07:42:53.0378931	Tide/minecraft:fishing Loot Table
+// 1.21	2024-12-22T13:30:46.5396189	Tide/minecraft:fishing Loot Table
 9435cc38dcf801d501a4df5e722820513f75f06b data\tide\loot_table\gameplay\fishing\climates\lava_underground.json
 f08d26eba2a0535e5bacf4ab893ba77bbf21eff8 data\tide\loot_table\gameplay\fishing\climates\freshwater_normal.json
 573b98f5077917112d401850d08cbdd80da4b966 data\tide\loot_table\gameplay\fishing\climates\lava_surface.json
 0a7899cd5229efaedc93d90c12b34e1ebd861f2f data\tide\loot_table\gameplay\fishing\climates\saltwater_normal.json
 679c062c481baffe929d997f71c815a3cf26440a data\tide\loot_table\gameplay\fishing\climates\depths.json
-e8d1dfddad811faca3a7a889ce453d97d3e08ecf data\tide\loot_table\gameplay\fishing\special.json
+d103cfc60c56381dfd1832bb8262eac1c22f4e91 data\tide\loot_table\gameplay\fishing\special.json
 6d0584fef210f9263fa8290937d237ac0e944103 data\tide\loot_table\gameplay\fishing\climates\end_water.json
 ff0f4d6230f2c650561246c040a1975e90a15d9b data\tide\loot_table\gameplay\fishing\climates\freshwater_cold.json
 95897fff6418d45ccaaccc97db41a7e1badd76b6 data\tide\loot_table\gameplay\fishing\climates\lava_depths.json

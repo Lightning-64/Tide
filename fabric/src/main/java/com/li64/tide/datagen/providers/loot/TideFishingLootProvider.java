@@ -10,9 +10,12 @@ import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.Structures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -30,8 +33,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
+    private final HolderLookup.Provider registries;
+
     public TideFishingLootProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, registryLookup, LootContextParamSets.FISHING);
+        registries = registryLookup.join();
     }
 
     @Override
@@ -106,6 +112,14 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
                                     .and(entityPredicate(TideFishingPredicate.isLavaFishing(false)))
                                     .and(LootItemRandomChanceCondition.randomChance(ConstantValue.exactly(0.05f)))))
 
+                        .add(LootItem.lootTableItem(TideItems.AQUATHORN).setWeight(10).when(
+                                LocationCheck.checkLocation(LocationPredicate.Builder.inStructure(registries
+                                                .lookupOrThrow(Registries.STRUCTURE).getOrThrow(BuiltinStructures.OCEAN_MONUMENT)))
+                                        .and(LootItemRandomChanceCondition.randomChance(ConstantValue.exactly(0.05f)))))
+                        .add(LootItem.lootTableItem(TideItems.WINDBASS).setWeight(10).when(
+                                LocationCheck.checkLocation(LocationPredicate.Builder.inStructure(registries
+                                                .lookupOrThrow(Registries.STRUCTURE).getOrThrow(BuiltinStructures.TRIAL_CHAMBERS)))
+                                        .and(LootItemRandomChanceCondition.randomChance(ConstantValue.exactly(0.05f)))))
                         .add(LootItem.lootTableItem(TideItems.MIDAS_FISH).setWeight(10).when(
                                 entityPredicate(FishingStatsPredicate.luckOf(6))
                                         .and(LootItemRandomChanceCondition.randomChance(ConstantValue.exactly(0.05f)))))

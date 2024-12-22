@@ -1,7 +1,7 @@
 package com.li64.tide.platform;
 
 import com.li64.tide.Tide;
-import com.li64.tide.data.TideEntity;
+import com.li64.tide.data.TidePlayer;
 import com.li64.tide.platform.services.TideMainPlatform;
 import com.mojang.serialization.MapCodec;
 import net.fabricmc.loader.api.FabricLoader;
@@ -20,7 +20,6 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 public class FabricMainPlatform implements TideMainPlatform {
@@ -46,7 +45,7 @@ public class FabricMainPlatform implements TideMainPlatform {
 
     @Override
     public CompoundTag getPlayerData(ServerPlayer player) {
-        return ((TideEntity) player).getTidePlayerData();
+        return ((TidePlayer) player).tide$getTidePlayerData();
     }
 
     @Override

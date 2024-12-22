@@ -5,7 +5,7 @@
    "refmap": "${mod_id}.refmap.json",
    "compatibilityLevel": "JAVA_21",
    "mixins": [
-      "TideEntityMixin"
+      "TidePlayerMixin"
    ],
    "client": [
       "ClientTooltipComponentMixin"
