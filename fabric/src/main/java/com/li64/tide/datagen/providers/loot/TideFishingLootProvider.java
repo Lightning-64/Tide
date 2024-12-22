@@ -12,6 +12,7 @@ import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -101,6 +102,9 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
                         ).when(LocationCheck.checkLocation(LocationPredicate.Builder.location().setDimension(Level.OVERWORLD))
                                 .and(entityPredicate(TideFishingPredicate.isLavaFishing(false)))
                                 .and(LootItemRandomChanceCondition.randomChance(0.05f))))
+                        .add(LootItem.lootTableItem(TideItems.AQUATHORN).setWeight(10).when(
+                                LocationCheck.checkLocation(LocationPredicate.Builder.location().setStructure(BuiltinStructures.OCEAN_MONUMENT))
+                                        .and(LootItemRandomChanceCondition.randomChance(0.05f))))
                         .add(LootItem.lootTableItem(TideItems.MIDAS_FISH).setWeight(10).when(
                                 entityPredicate(FishingStatsPredicate.luckOf(6))
                                         .and(LootItemRandomChanceCondition.randomChance(0.05f))))

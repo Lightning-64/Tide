@@ -292,11 +292,13 @@ public class TideItems {
                     new Item.Properties().fireResistant()));
 
     public static final Item MIDAS_FISH = register("midas_fish",
-            new TideFishItem(new Item.Properties().fireResistant().rarity(Rarity.EPIC), 8.0f));
+            new TideFishItem(new Item.Properties().fireResistant().rarity(Rarity.EPIC), 7.5f));
+    public static final Item AQUATHORN = register("aquathorn",
+            new TideFishItem(new Item.Properties().fireResistant().rarity(Rarity.EPIC), 7.5f));
     public static final Item VOIDSEEKER = register("voidseeker",
-            new TideFishItem(new Item.Properties().food(TideFoods.VOIDSEEKER).fireResistant().rarity(Rarity.EPIC), 8.0f));
+            new TideFishItem(new Item.Properties().food(TideFoods.VOIDSEEKER).fireResistant().rarity(Rarity.EPIC), 7.5f));
     public static final Item SHOOTING_STARFISH = register("shooting_starfish",
-            new TideFishItem(new Item.Properties().fireResistant().rarity(Rarity.EPIC), 8.0f));
+            new TideFishItem(new Item.Properties().fireResistant().rarity(Rarity.EPIC), 7.5f));
 
     public static final Item TROUT_SPAWN_EGG = register("trout_spawn_egg",
             new SpawnEggItem(TideEntityTypes.TROUT, 2580837, 7197881, new Item.Properties()));

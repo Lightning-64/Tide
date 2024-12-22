@@ -2,7 +2,7 @@ package com.li64.tide.events;
 
 import com.li64.tide.Tide;
 import com.li64.tide.data.commands.JournalCommand;
-import com.li64.tide.data.TideEntity;
+import com.li64.tide.data.TidePlayer;
 import com.li64.tide.registries.TideItems;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
@@ -33,8 +33,8 @@ public class FabricEventHandler {
                 new JournalCommand(dispatcher, registryAccess));
 
         ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
-            CompoundTag data = ((TideEntity) oldPlayer).getTidePlayerData();
-            ((TideEntity) newPlayer).setTidePlayerData(data);
+            CompoundTag data = ((TidePlayer) oldPlayer).tide$getTidePlayerData();
+            ((TidePlayer) newPlayer).tide$setTidePlayerData(data);
         });
 
         ServerTickEvents.END_SERVER_TICK.register((server -> server.getPlayerList()
@@ -92,6 +92,7 @@ public class FabricEventHandler {
                 tags.add(new CompoundTag());
                 tags.add(new CompoundTag());
                 tags.add(new CompoundTag());
+                tags.add(new CompoundTag());
 
                 ListTag pages1 = new ListTag();
                 pages1.add(StringTag.valueOf(Component.Serializer.toJson(Component.translatable("note.tide.midas_fish.contents"))));
@@ -102,9 +103,13 @@ public class FabricEventHandler {
                 ListTag pages3 = new ListTag();
                 pages3.add(StringTag.valueOf(Component.Serializer.toJson(Component.translatable("note.tide.shooting_starfish.contents"))));
 
+                ListTag pages4 = new ListTag();
+                pages4.add(StringTag.valueOf(Component.Serializer.toJson(Component.translatable("note.tide.aquathorn.contents"))));
+
                 tags.get(0).put("pages", pages1);
                 tags.get(1).put("pages", pages2);
                 tags.get(2).put("pages", pages3);
+                tags.get(3).put("pages", pages4);
 
                 tags.forEach(tag -> tag.putString("title", Component.translatable("note.tide.title").getString()));
                 tags.forEach(tag -> tag.putString("author", Component.translatable("note.tide.author").getString()));
@@ -119,6 +124,9 @@ public class FabricEventHandler {
                         ).add(LootItem.lootTableItem(Items.WRITTEN_BOOK)
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                                 .apply(SetNbtFunction.setTag(tags.get(2)))
+                        ).add(LootItem.lootTableItem(Items.WRITTEN_BOOK)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+                                .apply(SetNbtFunction.setTag(tags.get(3)))
                         ).build()
                 );
             }

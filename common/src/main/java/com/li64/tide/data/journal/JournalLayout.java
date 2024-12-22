@@ -212,6 +212,7 @@ public class JournalLayout {
         }
 
         addProfile("tide:midas_fish", "profile.item.tide.midas_fish", "legendary", "any", "lucky");
+        addProfile("tide:aquathorn", "profile.item.tide.aquathorn", "legendary", "structures", "any");
         addProfile("tide:voidseeker", "profile.item.tide.voidseeker", "legendary", "end", "full_new_moon");
         addProfile("tide:shooting_starfish", "profile.item.tide.shooting_starfish", "legendary", "saltwater", "night_full_moon");
     }

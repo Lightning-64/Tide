@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "tide:midas_fish",
+    "tide:aquathorn",
     "tide:voidseeker",
     "tide:shooting_starfish"
   ]

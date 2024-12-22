@@ -98,6 +98,7 @@ public class TideItemTagsProvider extends FabricTagProvider<Item> {
 
         getOrCreateTagBuilder(TideTags.Items.LEGENDARY_FISH)
                 .add(TideItems.MIDAS_FISH)
+                .add(TideItems.AQUATHORN)
                 .add(TideItems.VOIDSEEKER)
                 .add(TideItems.SHOOTING_STARFISH);
 

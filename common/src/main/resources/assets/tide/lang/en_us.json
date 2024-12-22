@@ -173,6 +173,8 @@
   "item.tide.pine_perch": "Pine Perch",
 
   "item.tide.voidseeker": "Voidseeker",
+  "item.tide.aquathorn": "Aquathorn",
+  "item.tide.windbass": "Windbass",
   "item.tide.midas_fish": "Midas Fish",
   "item.tide.shooting_starfish": "Shooting Starfish",
 
@@ -310,8 +312,10 @@
 
   "note.tide.title": "Note",
   "note.tide.author": "an unknown author",
-  "note.tide.midas_fish.contents": "Legend speaks of a fish coated in gold that can only be caught by people who are extremely lucky. Could this refer to items that are said to increase luck? I haven't found this fish yet, but I believe it might be possible to catch.",
-  "note.tide.voidseeker.contents": "Legend speaks of a fish that hops around between dimensions that humans cannot access. Despite this, apparently it has been spotted in the end dimension? I unfortunately don't know how I can get there, but maybe someone else can help with this task.",
+  "note.tide.midas_fish.contents": "Legend speaks of a fish coated in gold that can only be caught by people who are extremely lucky. Could this refer to items that are said to increase luck?",
+  "note.tide.aquathorn.contents": "Legend speaks of a fish covered in spikes, caught inside an ancient underwater temple. It is said to be an ancestor of those who guard it.",
+  "note.tide.windbass.contents": "Legend speaks of a fish that rests where travelers must face monsters, copper, and wind, whatever that means.",
+  "note.tide.voidseeker.contents": "Legend speaks of a fish that hops around between dimensions that humans cannot access. Despite this, apparently it has been spotted in the end dimension?",
   "note.tide.shooting_starfish.contents": "Legend speaks of a fish that fell from the sky in years past. It is said to be swimming in the depths of the deepest oceans, only appearing when the moon shines its fullest light on the water.",
 
   "sounds.tide.journal_open": "Fishing Journal Opens",
@@ -435,6 +439,8 @@
   "profile.item.tide.elytrout": "This fish has a unique feature — a pair of magnificent gray wings on its back. These delicate wings, resembling the elytra, grant the Elytrout the ability to gracefully glide from pool to pool in search of food.",
 
   "profile.item.tide.midas_fish": "This fish has been blessed (or cursed) with the ability to turn other fish that it touches into pure gold. It stands out as a legend among the other fish due to its shiny colors and extremely rare composition.",
+  "profile.item.tide.aquathorn": "This species of fish has been around since its home, the Ocean Monument, was built. Although most have evolved into a larger, more powerful species, these fish still exist due to their strong defense mechanisms.",
+  "profile.item.tide.windbass": "The Windbass makes its home among its fellow wind-powered friends in the trial chambers. It possesses incredible speed, powered by its ability to create wind currents beneath the water's surface.",
   "profile.item.tide.voidseeker": "The Voidseeker lives in an unknown dimension, making it one of the rarest aquatic creatures in existence. Only during specific moon phases, when the borders between dimensions thin, can this fish be glimpsed in the waters of the End.",
   "profile.item.tide.shooting_starfish": "The Shooting Starfish, a radiant marvel of the deep ocean, is a sight to behold. It's said to have dropped from the sky in years past. This elusive creature will only appear at night, often under the light of a full moon.",
 

@@ -32,9 +32,10 @@ public class NoteInCratesModifier extends LootModifier {
         if (!(context.getQueriedLootTableId().toString().contains("crates/overworld/water_ocean")
             || context.getQueriedLootTableId().toString().contains("crates/overworld/water_river"))) return generatedLoot;
 
-        String contents = switch (new Random().nextInt(0, 3)) {
+        String contents = switch (new Random().nextInt(0, 4)) {
             case 0 -> "note.tide.midas_fish.contents";
             case 1 -> "note.tide.voidseeker.contents";
+            case 2 -> "note.tide.aquathorn.contents";
             default -> "note.tide.shooting_starfish.contents";
         };
 

@@ -1,14 +1,12 @@
 package com.li64.tide.data.loot;
 
 import com.google.gson.*;
-import com.li64.tide.Tide;
 import com.li64.tide.registries.TideLootConditions;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import org.jetbrains.annotations.NotNull;
@@ -60,7 +58,6 @@ public record MoonPhasePredicate(Optional<List<Integer>> phases) implements Loot
                     Optional.of(jsonObject.get("any_of").getAsJsonArray()
                         .asList().stream()
                         .map(JsonElement::getAsInt).toList()) : Optional.empty();
-            Tide.LOG.info("deserialized {} moon phases", phases.orElse(List.of()).size());
             return new MoonPhasePredicate(phases);
         }
     }

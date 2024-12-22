@@ -1,7 +1,7 @@
-// 1.20.1	2024-12-05T09:16:56.2503247	Tide/minecraft:fishing Loot Table
+// 1.20.1	2024-12-22T16:10:04.1233591	Tide/minecraft:fishing Loot Table
 6d0584fef210f9263fa8290937d237ac0e944103 data\tide\loot_tables\gameplay\fishing\climates\end_water.json
 25ac5cf752dba311f51a9d1455ced857d7032f9d data\tide\loot_tables\gameplay\fishing\climates\saltwater_cold.json
-b5cf89778e54ff2e539ae5c0ffef62575e0ba54b data\tide\loot_tables\gameplay\fishing\special.json
+ae408ec3c6dcedbe72514365eeab41dff08ea328 data\tide\loot_tables\gameplay\fishing\special.json
 f08d26eba2a0535e5bacf4ab893ba77bbf21eff8 data\tide\loot_tables\gameplay\fishing\climates\freshwater_normal.json
 573b98f5077917112d401850d08cbdd80da4b966 data\tide\loot_tables\gameplay\fishing\climates\lava_surface.json
 0a7899cd5229efaedc93d90c12b34e1ebd861f2f data\tide\loot_tables\gameplay\fishing\climates\saltwater_normal.json
