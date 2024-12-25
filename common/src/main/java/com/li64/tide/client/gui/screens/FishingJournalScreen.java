@@ -45,6 +45,7 @@ public class FishingJournalScreen extends Screen {
         super(GameNarrator.NO_TITLE);
         this.player = player;
         loadJournalPages();
+        init();
 
         player.playSound(TideSoundEvents.JOURNAL_OPEN, 0.9f, 1.0f + new Random().nextFloat() * 0.2f);
     }
@@ -59,20 +60,24 @@ public class FishingJournalScreen extends Screen {
         }
 
         pages.removeIf(journalPage -> !TidePlayerData.CLIENT_DATA.hasPageUnlocked(journalPage));
+
+        // Remove welcome page if other pages are unlocked
+        if (pages.size() > 1) pages.remove(0);
     }
 
     private void nextPage(int page) {
         clearWidgets();
         this.page = page;
-        this.totalSlots = getPage().getAllProfiles().size();
-        this.numCols = calculateNumCols(totalSlots);
-        this.numRows = calculateNumRows(totalSlots);
         init();
         player.playSound(TideSoundEvents.PAGE_FLIP, 1.0f, 1.0f + new Random().nextFloat() * 0.2f);
     }
 
     @Override
     protected void init() {
+        this.totalSlots = getPage().getAllProfiles().size();
+        this.numCols = calculateNumCols(totalSlots);
+        this.numRows = calculateNumRows(totalSlots);
+
         clearWidgets();
         if (profileFish != null) {
             this.createProfileControls();
@@ -131,16 +136,18 @@ public class FishingJournalScreen extends Screen {
         this.addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, button -> onClose())
                 .bounds(this.width / 2 - 80, this.height - 40, 160, 18)
                 .build());
-        if (page > 0) {
-            this.addRenderableWidget(Button.builder(Component.literal("<<"), button -> this.pageLeft())
-                .bounds(30, this.height - 40, 18, 18)
-                .build());
-        }
-        if (page < pages.size() - 1) {
-            this.addRenderableWidget(Button.builder(Component.literal(">>"), button -> this.pageRight())
-                .bounds(this.width - 30, this.height - 40, 18, 18)
-                .build());
-        }
+
+        Button rightButton = Button.builder(Component.literal("<<"), button -> this.pageLeft())
+                .bounds(this.width / 2 - 110, this.height - 40, 26, 18)
+                .build();
+        rightButton.active = page > 0;
+        this.addRenderableWidget(rightButton);
+
+        Button leftButton = Button.builder(Component.literal(">>"), button -> this.pageRight())
+                .bounds(this.width / 2 + 84, this.height - 40, 26, 18)
+                .build();
+        leftButton.active = page < pages.size() - 1;
+        this.addRenderableWidget(leftButton);
     }
 
     private void createProfileControls() {

@@ -133,6 +133,7 @@ public class TideItemTagsProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(ItemTags.CAT_FOOD).forceAddTag(TideTags.Items.COOKABLE_FISH);
         getOrCreateTagBuilder(ItemTags.FISHES).forceAddTag(TideTags.Items.JOURNAL_FISH);
         getOrCreateTagBuilder(ItemTags.FISHING_ENCHANTABLE).forceAddTag(TideTags.Items.CUSTOMIZABLE_RODS);
+        getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE).forceAddTag(TideTags.Items.CUSTOMIZABLE_RODS);
         getOrCreateTagBuilder(ItemTags.SWORD_ENCHANTABLE).add(TideItems.BLAZING_SWORDFISH);
         getOrCreateTagBuilder(ItemTags.SWORDS).add(TideItems.BLAZING_SWORDFISH);
 

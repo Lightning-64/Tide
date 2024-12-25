@@ -3,8 +3,10 @@
 ### 🎣 New features 🎣
 
 - All Tide fishing rods can now have durability enchantments applied, such as Unbreaking or Mending
-- Default journal entries for modded fish now have internal translations that can be changed with resource packs or mods _([#32](https://github.com/Lightning-64/Tide/issues/32))_
+- The fishing journal's page selection buttons are closer to the "done" button and will no longer disappear if they're not applicable
+- The fishing journal's "welcome" page will hide itself if other pages are unlocked
 - Renamed "Trout" to "Rainbow Trout" (it looks more like one)
+- Default journal entries for modded fish now have internal translations that can be changed with resource packs or mods _([#32](https://github.com/Lightning-64/Tide/issues/32))_
 - The Origins mod will now recognize fish as meat _([#35](https://github.com/Lightning-64/Tide/issues/35))_
 ---
 
