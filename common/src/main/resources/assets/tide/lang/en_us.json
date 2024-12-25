@@ -84,7 +84,7 @@
   "item.tide.deep_aqua_crystal": "Deep Aqua Crystal",
   "item.tide.deep_aqua_arrow": "Deep Aqua Arrow",
 
-  "item.tide.trout_bucket": "Bucket of Trout",
+  "item.tide.trout_bucket": "Bucket of Rainbow Trout",
   "item.tide.bass_bucket": "Bucket of Bass",
   "item.tide.yellow_perch_bucket": "Bucket of Yellow Perch",
   "item.tide.bluegill_bucket": "Bucket of Bluegill",
@@ -102,7 +102,7 @@
   "item.tide.sailfish_bucket": "Bucket of Sailfish",
 
   "item.tide.mint_carp": "Mint Carp",
-  "item.tide.trout": "Trout",
+  "item.tide.trout": "Rainbow Trout",
   "item.tide.bass": "Bass",
   "item.tide.yellow_perch": "Yellow Perch",
   "item.tide.pike": "Pike",
@@ -212,7 +212,7 @@
   "entity.tide.deep_aqua_arrow": "Deep Aqua Arrow",
   "entity.tide.fishing_bobber": "Fishing Bobber",
 
-  "entity.tide.trout": "Trout",
+  "entity.tide.trout": "Rainbow Trout",
   "entity.tide.bass": "Bass",
   "entity.tide.yellow_perch": "Yellow Perch",
   "entity.tide.bluegill": "Bluegill",
@@ -364,7 +364,7 @@
   "journal.title.legendary": "Legendary Fish",
   "journal.content.legendary": "These priceless fish are known only as legends and are the rarest ones that you could possibly get your hands on. They are also the most difficult to catch.",
 
-  "profile.item.tide.trout": "Trout, commonly found in rivers and lakes, are prized catches for fishing enthusiasts. With their vibrant colors and spirited behavior, these fish are certainly a sight to see.",
+  "profile.item.tide.trout": "Rainbow Trout, commonly found in rivers and lakes, are prized catches for fishing enthusiasts. With their vibrant colors and spirited behavior, these fish are certainly a sight to see.",
   "profile.item.tide.mint_carp": "The mint carp, with its distinct pale green coloration, is a captivating species of carp that inhabits lakes and rivers. People are often drawn to these elusive creatures.",
   "profile.item.minecraft.salmon": "The salmon, a fish known to overcoming all kinds of obstacles, is found mainly in freshwater biomes. However, some venture into the vast expanse of the ocean, showcasing their adaptability to different habitats.",
   "profile.item.tide.clayfish": "The clayfish, a unique inhabitant of rivers, boasts a distinctive appearance with its gray clay composition. In addition to its aesthetics, the clayfish holds practical value. When smelted, it can become a valuable resource.",

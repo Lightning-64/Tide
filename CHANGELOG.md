@@ -1,3 +1,20 @@
+## Version 1.4.2 - 12/25/2024
+
+### 🎣 New features 🎣
+
+- All Tide fishing rods can now have durability enchantments applied, such as Unbreaking or Mending
+- Default journal entries for modded fish now have internal translations that can be changed with resource packs or mods _([#32](https://github.com/Lightning-64/Tide/issues/32))_
+- Renamed "Trout" to "Rainbow Trout" (it looks more like one)
+- The Origins mod will now recognize fish as meat _([#35](https://github.com/Lightning-64/Tide/issues/35))_
+---
+
+### ⚙️ Bug fixes ⚙️
+- Fixed a bug where dropping a fishing rod while fishing would result in a crash _([#55](https://github.com/Lightning-64/Tide/issues/55))_
+- Fixed a bug where having a fishing speed of over 5 would prevent catches _([#54](https://github.com/Lightning-64/Tide/issues/54))_
+- Fixed a crash relating to the EasyNPC mod _([#42](https://github.com/Lightning-64/Tide/issues/42))_
+
+---
+
 ## Version 1.4.1 - 12/22/2024
 
 ### 🎣 New features 🎣

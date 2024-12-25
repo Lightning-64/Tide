@@ -214,6 +214,8 @@ public class TideFishingHook extends Projectile {
     }
 
     public void tick() {
+        if (getRodItem() == null) discard();
+
         this.synchronizedRandom.setSeed(this.getUUID().getLeastSignificantBits() ^ this.level().getGameTime());
         super.tick();
 
@@ -488,7 +490,8 @@ public class TideFishingHook extends Projectile {
 
         } else {
             this.timeUntilLured = Mth.nextInt(this.random, 100, 600);
-            this.timeUntilLured -= this.lureSpeed * 20 * 5;
+            this.timeUntilLured -= this.lureSpeed * 90;
+            if (timeUntilLured <= 0) timeUntilLured = 1;
         }
     }
 
@@ -544,6 +547,7 @@ public class TideFishingHook extends Projectile {
     public void readAdditionalSaveData(@NotNull CompoundTag tag) {}
 
     public void retrieve() {
+        if (getRodItem() == null) discard();
         getRodItem().retrieveHook(rod, getPlayerOwner(), level());
     }
 
@@ -813,11 +817,13 @@ public class TideFishingHook extends Projectile {
     }
 
     public boolean canFishInLava() {
+        if (getRodItem() == null) return false;
         return getRodItem().isLavaproof(rod);
     }
 
     public TideFishingRodItem getRodItem() {
-        return ((TideFishingRodItem) rod.getItem());
+        if (rod.getItem() instanceof TideFishingRodItem rodItem) return rodItem;
+        return null;
     }
 
     public ItemStack getBobber() {
