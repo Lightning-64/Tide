@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class HookAccessor extends FishingHook {
@@ -35,9 +36,9 @@ public class HookAccessor extends FishingHook {
     }
 
     public static TideFishingHook getHook(Player player) {
+        if (player.fishing == null) return null;
         HookAccessor placeholder = ((HookAccessor)player.fishing);
-        if (placeholder != null) return placeholder.hook;
-        else return null;
+        return placeholder.hook;
     }
 
     @Override
@@ -61,18 +62,18 @@ public class HookAccessor extends FishingHook {
     }
 
     @Override
-    public void remove(RemovalReason reason) {
-        hook.remove(reason);
+    public void remove(@NotNull RemovalReason reason) {
+        if (hook != null) hook.remove(reason);
         super.remove(reason);
     }
 
     @Override
-    public Vec3 position() {
+    public @NotNull Vec3 position() {
         return hook.position();
     }
 
     @Override
-    public BlockPos blockPosition() {
+    public @NotNull BlockPos blockPosition() {
         return hook.blockPosition();
     }
 

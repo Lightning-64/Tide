@@ -5,6 +5,7 @@ import com.li64.tide.data.journal.config.CustomRemovalLoader;
 import com.li64.tide.util.TideUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -117,98 +118,98 @@ public class JournalLayout {
         addProfile("tide:elytrout", "profile.item.tide.elytrout", "end", "end", "cold");
 
         if (Tide.PLATFORM.isModLoaded("blue_skies")) {
-            addProfile("blue_skies:municipal_monkfish", "", "blueskies", "everbright", "cold");
-            addProfile("blue_skies:grittle_flatfish", "", "blueskies", "everbright", "cold");
-            addProfile("blue_skies:charscale_moki", "", "blueskies", "everdawn", "warm");
-            addProfile("blue_skies:horizofin_tunid", "", "blueskies", "everdawn", "warm");
+            addProfile("blue_skies:municipal_monkfish", "blueskies", "everbright", "cold");
+            addProfile("blue_skies:grittle_flatfish", "blueskies", "everbright", "cold");
+            addProfile("blue_skies:charscale_moki", "blueskies", "everdawn", "warm");
+            addProfile("blue_skies:horizofin_tunid", "blueskies", "everdawn", "warm");
         }
 
         if (Tide.PLATFORM.isModLoaded("unusualfishmod")) {
-            addProfile("unusualfishmod:raw_eyelash", "", "freshwater", "jungle", "warm");
-            addProfile("unusualfishmod:raw_spindlefish", "", "saltwater", "saltwater", "warm");
-            addProfile("unusualfishmod:raw_snowflake", "", "saltwater", "saltwater", "cold");
-            addProfile("unusualfishmod:raw_aero_mono", "", "saltwater", "saltwater", "normal");
-            addProfile("unusualfishmod:raw_rhino_tetra", "", "freshwater", "freshwater", "normal");
-            addProfile("unusualfishmod:raw_sailor_barb", "", "freshwater", "swamp", "normal");
-            addProfile("unusualfishmod:raw_bark_angelfish", "", "freshwater", "swamp", "normal");
-            addProfile("unusualfishmod:raw_picklefish", "", "saltwater", "saltwater", "warm");
-            addProfile("unusualfishmod:raw_amber_goby", "", "saltwater", "saltwater", "warm");
-            addProfile("unusualfishmod:raw_beaked_herring", "", "saltwater", "saltwater", "normal");
-            addProfile("unusualfishmod:raw_blind_sailfin", "", "freshwater", "overworld", "any");
-            addProfile("unusualfishmod:raw_circus_fish", "", "saltwater", "saltwater", "warm");
-            addProfile("unusualfishmod:raw_copperflame_anthias", "", "saltwater", "saltwater", "warm");
-            addProfile("unusualfishmod:raw_demon_herring", "", "saltwater", "saltwater", "normal");
-            addProfile("unusualfishmod:raw_drooping_gourami", "", "freshwater", "swamp", "normal");
-            addProfile("unusualfishmod:raw_duality_damselfish", "", "saltwater", "saltwater", "warm");
-            addProfile("unusualfishmod:raw_forkfish", "", "saltwater", "saltwater", "warm");
-            addProfile("unusualfishmod:raw_hatchetfish", "", "freshwater", "overworld", "any");
-            addProfile("unusualfishmod:raw_sneep_snorp", "", "saltwater", "saltwater", "warm");
-            addProfile("unusualfishmod:raw_triple_twirl_pleco", "", "freshwater", "freshwater", "normal");
+            addProfile("unusualfishmod:raw_eyelash", "freshwater", "jungle", "warm");
+            addProfile("unusualfishmod:raw_spindlefish", "saltwater", "saltwater", "warm");
+            addProfile("unusualfishmod:raw_snowflake", "saltwater", "saltwater", "cold");
+            addProfile("unusualfishmod:raw_aero_mono", "saltwater", "saltwater", "normal");
+            addProfile("unusualfishmod:raw_rhino_tetra", "freshwater", "freshwater", "normal");
+            addProfile("unusualfishmod:raw_sailor_barb", "freshwater", "swamp", "normal");
+            addProfile("unusualfishmod:raw_bark_angelfish", "freshwater", "swamp", "normal");
+            addProfile("unusualfishmod:raw_picklefish", "saltwater", "saltwater", "warm");
+            addProfile("unusualfishmod:raw_amber_goby", "saltwater", "saltwater", "warm");
+            addProfile("unusualfishmod:raw_beaked_herring", "saltwater", "saltwater", "normal");
+            addProfile("unusualfishmod:raw_blind_sailfin", "freshwater", "overworld", "any");
+            addProfile("unusualfishmod:raw_circus_fish", "saltwater", "saltwater", "warm");
+            addProfile("unusualfishmod:raw_copperflame_anthias", "saltwater", "saltwater", "warm");
+            addProfile("unusualfishmod:raw_demon_herring", "saltwater", "saltwater", "normal");
+            addProfile("unusualfishmod:raw_drooping_gourami", "freshwater", "swamp", "normal");
+            addProfile("unusualfishmod:raw_duality_damselfish", "saltwater", "saltwater", "warm");
+            addProfile("unusualfishmod:raw_forkfish", "saltwater", "saltwater", "warm");
+            addProfile("unusualfishmod:raw_hatchetfish", "freshwater", "overworld", "any");
+            addProfile("unusualfishmod:raw_sneep_snorp", "saltwater", "saltwater", "warm");
+            addProfile("unusualfishmod:raw_triple_twirl_pleco", "freshwater", "freshwater", "normal");
         }
 
         if (Tide.PLATFORM.isModLoaded("rainbowreef")) {
-            addProfile("rainbowreef:raw_basslet", "", "saltwater", "saltwater", "warm");
-            addProfile("rainbowreef:raw_boxfish", "", "saltwater", "saltwater", "warm");
-            addProfile("rainbowreef:raw_butterflyfish", "", "saltwater", "saltwater", "warm");
-            addProfile("rainbowreef:raw_clownfish", "", "saltwater", "saltwater", "warm");
-            addProfile("rainbowreef:raw_dwarf_angelfish", "", "saltwater", "saltwater", "warm");
-            addProfile("rainbowreef:raw_goby", "", "saltwater", "saltwater", "warm");
-            addProfile("rainbowreef:raw_hogfish", "", "saltwater", "saltwater", "warm");
-            addProfile("rainbowreef:raw_parrotfish", "", "saltwater", "saltwater", "warm");
-            addProfile("rainbowreef:raw_pipefish", "", "freshwater", "swamp", "warm");
-            addProfile("rainbowreef:raw_seahorse", "", "saltwater", "saltwater", "warm");
-            addProfile("rainbowreef:raw_tang", "", "saltwater", "saltwater", "warm");
+            addProfile("rainbowreef:raw_basslet", "saltwater", "saltwater", "warm");
+            addProfile("rainbowreef:raw_boxfish", "saltwater", "saltwater", "warm");
+            addProfile("rainbowreef:raw_butterflyfish", "saltwater", "saltwater", "warm");
+            addProfile("rainbowreef:raw_clownfish", "saltwater", "saltwater", "warm");
+            addProfile("rainbowreef:raw_dwarf_angelfish", "saltwater", "saltwater", "warm");
+            addProfile("rainbowreef:raw_goby", "saltwater", "saltwater", "warm");
+            addProfile("rainbowreef:raw_hogfish", "saltwater", "saltwater", "warm");
+            addProfile("rainbowreef:raw_parrotfish", "saltwater", "saltwater", "warm");
+            addProfile("rainbowreef:raw_pipefish", "freshwater", "swamp", "warm");
+            addProfile("rainbowreef:raw_seahorse", "saltwater", "saltwater", "warm");
+            addProfile("rainbowreef:raw_tang", "saltwater", "saltwater", "warm");
         }
 
         if (Tide.PLATFORM.isModLoaded("fishofthieves")) {
-            addProfile("fishofthieves:splashtail", "", "saltwater", "saltwater", "normal");
-            addProfile("fishofthieves:pondie", "", "freshwater", "freshwater", "normal");
-            addProfile("fishofthieves:islehopper", "", "saltwater", "saltwater", "normal");
-            addProfile("fishofthieves:ancientscale", "", "saltwater", "saltwater", "warm");
-            addProfile("fishofthieves:plentifin", "", "saltwater", "saltwater", "warm");
-            addProfile("fishofthieves:wildsplash", "", "freshwater", "jungle", "warm");
-            addProfile("fishofthieves:devilfish", "", "underground", "dripstone", "cold");
-            addProfile("fishofthieves:battlegill", "", "saltwater", "structures", "raids");
-            addProfile("fishofthieves:wrecker", "", "saltwater", "shipwrecks", "any");
-            addProfile("fishofthieves:stormfish", "", "freshwater", "any", "thunderstorms");
+            addProfile("fishofthieves:splashtail", "saltwater", "saltwater", "normal");
+            addProfile("fishofthieves:pondie", "freshwater", "freshwater", "normal");
+            addProfile("fishofthieves:islehopper", "saltwater", "saltwater", "normal");
+            addProfile("fishofthieves:ancientscale", "saltwater", "saltwater", "warm");
+            addProfile("fishofthieves:plentifin", "saltwater", "saltwater", "warm");
+            addProfile("fishofthieves:wildsplash", "freshwater", "jungle", "warm");
+            addProfile("fishofthieves:devilfish", "underground", "dripstone", "cold");
+            addProfile("fishofthieves:battlegill", "saltwater", "structures", "raids");
+            addProfile("fishofthieves:wrecker", "saltwater", "shipwrecks", "any");
+            addProfile("fishofthieves:stormfish", "freshwater", "any", "thunderstorms");
         }
 
         if (Tide.PLATFORM.isModLoaded("netherdepthsupgrade")) {
-            addProfile("netherdepthsupgrade:lava_pufferfish", "", "nether", "nether", "very_hot");
-            addProfile("netherdepthsupgrade:obsidianfish", "", "nether", "nether", "very_hot");
-            addProfile("netherdepthsupgrade:searing_cod", "", "nether", "nether", "very_hot");
-            addProfile("netherdepthsupgrade:bonefish", "", "nether", "nether", "very_hot");
-            addProfile("netherdepthsupgrade:wither_bonefish", "", "nether", "nether", "very_hot");
-            addProfile("netherdepthsupgrade:blazefish", "", "nether", "nether", "very_hot");
-            addProfile("netherdepthsupgrade:magmacubefish", "", "nether", "nether", "very_hot");
-            addProfile("netherdepthsupgrade:glowdine", "", "nether", "nether", "very_hot");
-            addProfile("netherdepthsupgrade:soulsucker", "", "nether", "nether", "very_hot");
-            addProfile("netherdepthsupgrade:fortress_grouper", "", "nether", "nether", "very_hot");
-            addProfile("netherdepthsupgrade:eyeball_fish", "", "nether", "nether", "very_hot");
+            addProfile("netherdepthsupgrade:lava_pufferfish", "nether", "nether", "very_hot");
+            addProfile("netherdepthsupgrade:obsidianfish", "nether", "nether", "very_hot");
+            addProfile("netherdepthsupgrade:searing_cod", "nether", "nether", "very_hot");
+            addProfile("netherdepthsupgrade:bonefish", "nether", "nether", "very_hot");
+            addProfile("netherdepthsupgrade:wither_bonefish", "nether", "nether", "very_hot");
+            addProfile("netherdepthsupgrade:blazefish", "nether", "nether", "very_hot");
+            addProfile("netherdepthsupgrade:magmacubefish", "nether", "nether", "very_hot");
+            addProfile("netherdepthsupgrade:glowdine", "nether", "nether", "very_hot");
+            addProfile("netherdepthsupgrade:soulsucker", "nether", "nether", "very_hot");
+            addProfile("netherdepthsupgrade:fortress_grouper", "nether", "nether", "very_hot");
+            addProfile("netherdepthsupgrade:eyeball_fish", "nether", "nether", "very_hot");
         }
 
         if (Tide.PLATFORM.isModLoaded("aquamirae")) {
-            addProfile("aquamirae:spinefish", "", "saltwater", "saltwater", "cold");
+            addProfile("aquamirae:spinefish", "saltwater", "saltwater", "cold");
         }
 
         if (Tide.PLATFORM.isModLoaded("finsandtails")) {
-            addProfile("finsandtails:banded_redback_shrimp", "", "saltwater", "saltwater", "warm");
-            addProfile("finsandtails:wee_wee", "", "freshwater", "freshwater", "normal");
-            addProfile("finsandtails:pea_wee", "", "freshwater", "jungle", "warm");
-            addProfile("finsandtails:blu_wee", "", "saltwater", "saltwater", "cold");
-            addProfile("finsandtails:vibra_wee", "", "freshwater", "jungle", "warm");
-            addProfile("finsandtails:papa_wee", "", "freshwater", "freshwater", "normal");
-            addProfile("finsandtails:flatback_sucker", "", "freshwater", "freshwater", "normal");
-            addProfile("finsandtails:high_finned_blue", "", "saltwater", "saltwater", "normal");
-            addProfile("finsandtails:night_light_squid", "", "saltwater", "saltwater", "cold");
-            addProfile("finsandtails:ornate_bugfish", "", "saltwater", "saltwater", "warm");
-            addProfile("finsandtails:swamp_mucker", "", "freshwater", "swamp", "warm");
-            addProfile("finsandtails:teal_arrowfish", "", "saltwater", "saltwater", "cold");
-            addProfile("finsandtails:ruby_spindly_gem_crab", "", "saltwater", "saltwater", "warm");
-            addProfile("finsandtails:amber_spindly_gem_crab", "", "saltwater", "saltwater", "warm");
-            addProfile("finsandtails:emerald_spindly_gem_crab", "", "saltwater", "saltwater", "warm");
-            addProfile("finsandtails:pearl_spindly_gem_crab", "", "saltwater", "saltwater", "warm");
-            addProfile("finsandtails:sapphire_spindly_gem_crab", "", "saltwater", "saltwater", "warm");
+            addProfile("finsandtails:banded_redback_shrimp", "saltwater", "saltwater", "warm");
+            addProfile("finsandtails:wee_wee", "freshwater", "freshwater", "normal");
+            addProfile("finsandtails:pea_wee", "freshwater", "jungle", "warm");
+            addProfile("finsandtails:blu_wee", "saltwater", "saltwater", "cold");
+            addProfile("finsandtails:vibra_wee", "freshwater", "jungle", "warm");
+            addProfile("finsandtails:papa_wee", "freshwater", "freshwater", "normal");
+            addProfile("finsandtails:flatback_sucker", "freshwater", "freshwater", "normal");
+            addProfile("finsandtails:high_finned_blue", "saltwater", "saltwater", "normal");
+            addProfile("finsandtails:night_light_squid", "saltwater", "saltwater", "cold");
+            addProfile("finsandtails:ornate_bugfish", "saltwater", "saltwater", "warm");
+            addProfile("finsandtails:swamp_mucker", "freshwater", "swamp", "warm");
+            addProfile("finsandtails:teal_arrowfish", "saltwater", "saltwater", "cold");
+            addProfile("finsandtails:ruby_spindly_gem_crab", "saltwater", "saltwater", "warm");
+            addProfile("finsandtails:amber_spindly_gem_crab", "saltwater", "saltwater", "warm");
+            addProfile("finsandtails:emerald_spindly_gem_crab", "saltwater", "saltwater", "warm");
+            addProfile("finsandtails:pearl_spindly_gem_crab", "saltwater", "saltwater", "warm");
+            addProfile("finsandtails:sapphire_spindly_gem_crab", "saltwater", "saltwater", "warm");
         }
 
         addProfile("tide:midas_fish", "profile.item.tide.midas_fish", "legendary", "any", "lucky");
@@ -220,6 +221,12 @@ public class JournalLayout {
 
     private void addPage(String id, String name, String content, String icon, boolean unlocked) {
         pages.add(new Page(id, name, content, icon, unlocked));
+    }
+
+    private void addProfile(String fish, String page, String location, String climate) {
+        ResourceLocation item = ResourceLocation.parse(fish);
+        String desc = "profile.item." + item.getNamespace() + "." + item.getPath();
+        addProfile(fish, desc, page, location, climate);
     }
 
     private void addProfile(String fish, String desc, String page, String location, String climate) {

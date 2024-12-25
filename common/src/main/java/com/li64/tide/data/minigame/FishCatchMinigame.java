@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class FishCatchMinigame {
-    private static final int DELAY_MILLIS = 500;
+    private static final int DELAY_MILLIS = 400;
     public static ArrayList<FishCatchMinigame> ACTIVE_MINIGAMES = new ArrayList<>();
 
     protected TideFishingHook hook;

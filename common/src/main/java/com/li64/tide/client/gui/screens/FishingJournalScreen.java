@@ -261,14 +261,14 @@ public class FishingJournalScreen extends Screen {
         Style underlined = Component.empty().getStyle().withUnderlined(true);
 
         Component descriptionRaw = Component.translatable(profileConfig.description());
-
         Component locationTitleRaw = Component.translatable("profile.info.location").withStyle(underlined);
         Component locationRaw = Component.translatable("profile.info.location." + profileConfig.location());
-
         Component climateTitleRaw = Component.translatable("profile.info.climate").withStyle(underlined);
         Component climateRaw = Component.translatable("profile.info.climate." + profileConfig.climate());
 
         List<FormattedCharSequence> description = font.split(descriptionRaw, 114);
+        boolean isDescriptionEmpty = descriptionRaw.getString().isEmpty()
+                || descriptionRaw.getString().matches(profileConfig.description());
 
         List<FormattedCharSequence> location = new ArrayList<>();
         location.addAll(font.split(locationTitleRaw, 114));
@@ -290,14 +290,16 @@ public class FishingJournalScreen extends Screen {
 
         // Roughly center the content if there's no description
         int rightTop = (this.height - 204) / 2 - 6;
-        int leftTop = rightTop + (descriptionRaw.getString().isEmpty() ? 55 : 0);
+        int leftTop = rightTop + (isDescriptionEmpty ? 55 : 0);
 
         graphics.drawString(font, fishName, titleX, leftTop, 0, false);
 
-        for (int i = 0; i < description.size(); i++) {
-            graphics.drawString(font, description.get(i),
-                    leftContentX - 56, leftTop + 46 + (11 * i),
-                    0, false);
+        if (!isDescriptionEmpty) {
+            for (int i = 0; i < description.size(); i++) {
+                graphics.drawString(font, description.get(i),
+                        leftContentX - 56, leftTop + 46 + (11 * i),
+                        0, false);
+            }
         }
 
         for (int i = 0; i < location.size(); i++) {
