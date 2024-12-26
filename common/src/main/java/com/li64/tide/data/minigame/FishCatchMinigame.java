@@ -10,16 +10,16 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class FishCatchMinigame {
-    private static final int DELAY_MILLIS = 400;
-    public static ArrayList<FishCatchMinigame> ACTIVE_MINIGAMES = new ArrayList<>();
+    private static final int SERVER_DELAY_MILLIS = 200;
+    private static final ArrayList<FishCatchMinigame> ACTIVE_MINIGAMES = new ArrayList<>();
+    private static final HashMap<ServerPlayer, Long> ACTIVE_DELAYS = new HashMap<>();
 
-    protected TideFishingHook hook;
-    protected ServerPlayer player;
-
-    private final long delay;
+    private final TideFishingHook hook;
+    private final ServerPlayer player;
 
     public static FishCatchMinigame getInstance(Player player) {
         for (FishCatchMinigame minigame : ACTIVE_MINIGAMES) {
@@ -58,17 +58,18 @@ public class FishCatchMinigame {
 
         // Start client minigame gui
         Tide.NETWORK.sendToPlayer(new MinigameClientMsg(0, strength), player);
-        delay = System.currentTimeMillis() + DELAY_MILLIS;
+    }
+
+    public static boolean delayActive(ServerPlayer player) {
+        if (!ACTIVE_DELAYS.containsKey(player)) return false;
+        if (System.currentTimeMillis() > ACTIVE_DELAYS.get(player)) {
+            ACTIVE_DELAYS.remove(player);
+            return false;
+        } else return true;
     }
 
     private ServerPlayer getPlayer() {
         return player;
-    }
-
-    public void interact() {
-        if (cancelIfNecessary() || System.currentTimeMillis() < delay) return;
-        // Request a result from the client (either win or fail)
-        Tide.NETWORK.sendToPlayer(new MinigameClientMsg(1), player);
     }
 
     public void onFinish() {
@@ -76,6 +77,7 @@ public class FishCatchMinigame {
         hook.setMinigameActive(false);
         Tide.NETWORK.sendToPlayer(new MinigameClientMsg(2), player);
         ACTIVE_MINIGAMES.remove(this);
+        ACTIVE_DELAYS.put(player, System.currentTimeMillis() + SERVER_DELAY_MILLIS);
     }
 
     public void onTimeout() {

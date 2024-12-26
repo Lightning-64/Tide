@@ -3,6 +3,7 @@ package com.li64.tide.registries.items;
 import com.google.common.collect.ImmutableList;
 import com.li64.tide.Tide;
 import com.li64.tide.client.gui.overlays.CastBarOverlay;
+import com.li64.tide.client.gui.overlays.CatchMinigameOverlay;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.minigame.FishCatchMinigame;
 import com.li64.tide.data.rods.BaitContents;
@@ -152,7 +153,7 @@ public class TideFishingRodItem extends FishingRodItem {
         if (isHookActive(player)) {
             TideFishingHook hook = getHook(player);
 
-            if (isMinigameStopped(player) && Tide.CONFIG.general.doMinigame) {
+            if (isMinigameStopped(player, level.isClientSide()) && Tide.CONFIG.general.doMinigame) {
                 // No minigame active, create a new one if necessary
 
                 if (Tide.PLATFORM.isModLoaded("stardew_fishing")) {
@@ -173,27 +174,30 @@ public class TideFishingRodItem extends FishingRodItem {
                     } else retrieveHook(player.getItemInHand(hand), player, level);
 
                 } else if (hook.getCatchType() == TideFishingHook.CatchType.FISH) {
-                    if (!level.isClientSide() && isMinigameStopped(player)) {
+                    if (!level.isClientSide() && isMinigameStopped(player, level.isClientSide())) {
                         Tide.LOG.info("Starting tide fishing minigame");
                         FishCatchMinigame.create(player);
                     }
-                } else retrieveHook(player.getItemInHand(hand), player, level);
+                } else {
+                    if (!level.isClientSide() && FishCatchMinigame.delayActive((ServerPlayer) player))
+                        return InteractionResultHolder.consume(player.getItemInHand(hand));
+                    retrieveHook(player.getItemInHand(hand), player, level);
+                }
 
             } else {
                 // Minigame is either active or disabled
-                if (!level.isClientSide()) {
-                    if (Tide.CONFIG.general.doMinigame) {
-                        FishCatchMinigame minigame = FishCatchMinigame.getInstance(player);
-                        if (minigame != null) {
-                            minigame.interact();
-                        }
-                    } else {
-                        hook.retrieve();
-                    }
+                if (!Tide.CONFIG.general.doMinigame) {
+                    if (!level.isClientSide()) hook.retrieve();
+                } else if (level.isClientSide()) {
+                    // Interact with minigame (from the client)
+                    CatchMinigameOverlay.interact();
                 }
             }
             return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
         } else {
+            if (!level.isClientSide() && FishCatchMinigame.delayActive((ServerPlayer) player))
+                return InteractionResultHolder.consume(player.getItemInHand(hand));
+
             if (Tide.CONFIG.general.holdToCast) {
                 // Charge the cast if the hook isn't active
                 level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.FISHING_BOBBER_RETRIEVE,
@@ -208,8 +212,8 @@ public class TideFishingRodItem extends FishingRodItem {
         }
     }
 
-    private boolean isMinigameStopped(Player player) {
-        return !FishCatchMinigame.minigameActive(player);
+    private boolean isMinigameStopped(Player player, boolean clientSide) {
+        return clientSide ? !CatchMinigameOverlay.isActive() : !FishCatchMinigame.minigameActive(player);
     }
 
     @Override

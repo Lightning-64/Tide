@@ -17,6 +17,7 @@ import net.minecraft.util.Mth;
 import java.util.Random;
 
 public class CatchMinigameOverlay {
+    private static final int INIT_DELAY_MILLIS = 400;
     private static final ResourceLocation BAR_BG_TEX = Tide.resource("textures/gui/fishing/catch_bar_bg.png");
     private static final ResourceLocation MARKER_TEX = Tide.resource("textures/gui/fishing/catch_marker.png");
     private static final ResourceLocation SELECT_TEX = Tide.resource("textures/gui/fishing/catch_marker_select.png");
@@ -24,15 +25,16 @@ public class CatchMinigameOverlay {
     private static float timeLeft = 80f;
     private static float animProgress = 0f;
     private static float timer = 20f;
-    private static boolean active = false;
+    private static boolean isActive = false;
     private static MutableComponent accuracyText = null;
     private static ChatFormatting textColor = ChatFormatting.WHITE;
     private static float fishStrength;
+    private static long delayTime;
 
     private static final float DEFAULT_SPEED = 0.12f;
 
     public static void start(float strength) {
-        if (active) return;
+        if (isActive) return;
 
         fishStrength = strength;
 
@@ -42,11 +44,12 @@ public class CatchMinigameOverlay {
         timeLeft = 0;
         timer = 0;
 
-        active = true;
+        isActive = true;
+        delayTime = System.currentTimeMillis() + INIT_DELAY_MILLIS;
     }
 
     public static void interact() {
-        if (!active) return;
+        if (!isActive || System.currentTimeMillis() < delayTime) return;
 
         // Calculate accuracy
         float accuracy = Math.abs(Mth.sin(animProgress * getSpeed()));
@@ -98,7 +101,7 @@ public class CatchMinigameOverlay {
     }
 
     public static void close() {
-        active = false;
+        isActive = false;
         timer = 0f;
     }
 
@@ -110,7 +113,7 @@ public class CatchMinigameOverlay {
         float delta = deltaTracker.getRealtimeDeltaTicks();
 
         if (timer >= 20f) return;
-        if (!active) timer += delta;
+        if (!isActive) timer += delta;
         else {
             timeLeft += delta;
             animProgress += delta;
@@ -147,5 +150,9 @@ public class CatchMinigameOverlay {
                 0, false);
         RenderSystem.disableBlend();
         graphics.setColor(1f, 1f, 1f, 1f);
+    }
+
+    public static boolean isActive() {
+        return isActive;
     }
 }
