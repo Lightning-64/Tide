@@ -192,6 +192,10 @@ public class JournalLayout {
             addProfile("aquamirae:spinefish", "saltwater", "saltwater", "cold");
         }
 
+        if (Tide.PLATFORM.isModLoaded("betterend")) {
+            addProfile("betterend:end_fish_raw", "end", "end", "cold");
+        }
+
         if (Tide.PLATFORM.isModLoaded("finsandtails")) {
             addProfile("finsandtails:banded_redback_shrimp", "saltwater", "saltwater", "warm");
             addProfile("finsandtails:wee_wee", "freshwater", "freshwater", "normal");
