@@ -1,0 +1,6 @@
+{
+   "parent": "tide:item/fishing_bobber_pearl",
+   "textures": {
+      "1": "tide:item/ender_fishing_bobber"
+   }
+}

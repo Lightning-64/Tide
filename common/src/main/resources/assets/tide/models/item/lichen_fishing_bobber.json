@@ -1,0 +1,6 @@
+{
+   "parent": "tide:item/fishing_bobber_growth",
+   "textures": {
+      "1": "tide:item/lichen_fishing_bobber"
+   }
+}

@@ -1,6 +1,7 @@
 package com.li64.tide;
 
 import com.google.common.collect.ImmutableBiMap;
+import com.li64.tide.data.TideDataLoader;
 import com.li64.tide.data.TideLootTables;
 import com.li64.tide.data.journal.JournalLayout;
 import com.li64.tide.config.TideConfig;
@@ -10,7 +11,10 @@ import com.li64.tide.data.journal.config.CustomPageLoader;
 import com.li64.tide.data.journal.config.CustomProfileLoader;
 import com.li64.tide.data.journal.config.CustomRemovalLoader;
 import com.li64.tide.data.loot.TideFishingPredicate;
-import com.li64.tide.data.rods.CustomBaitLoader;
+import com.li64.tide.data.rods.AccessoryData;
+import com.li64.tide.data.rods.AccessoryDataLoader;
+import com.li64.tide.data.rods.BaitData;
+import com.li64.tide.data.rods.BaitDataLoader;
 import com.li64.tide.platform.Services;
 import com.li64.tide.platform.services.TideMainPlatform;
 import com.li64.tide.platform.services.TideNetworkPlatform;
@@ -34,6 +38,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.function.BiConsumer;
 
 public class Tide {
@@ -44,13 +49,21 @@ public class Tide {
     public static final TideMainPlatform PLATFORM = Services.load(TideMainPlatform.class);
     public static final TideNetworkPlatform NETWORK = Services.load(TideNetworkPlatform.class);
 
+    private static final ArrayList<TideDataLoader<?>> LOADERS = new ArrayList<>();
+
     public static TideConfig CONFIG;
     public static JournalLayout JOURNAL;
 
-    public static CustomBaitLoader BAIT_LOADER = new CustomBaitLoader();
-    public static CustomPageLoader PAGE_LOADER = new CustomPageLoader();
-    public static CustomProfileLoader PROFILE_LOADER = new CustomProfileLoader();
-    public static CustomRemovalLoader REMOVAL_LOADER = new CustomRemovalLoader();
+    public static TideDataLoader<BaitData> BAIT_DATA = registerDataLoader(new BaitDataLoader());
+    public static TideDataLoader<AccessoryData> ACCESSORY_DATA = registerDataLoader(new AccessoryDataLoader());
+    public static TideDataLoader<JournalLayout.Page> PAGE_DATA = registerDataLoader(new CustomPageLoader());
+    public static TideDataLoader<JournalLayout.Profile> PROFILE_DATA = registerDataLoader(new CustomProfileLoader());
+    public static TideDataLoader<CustomRemovalLoader.Removal> REMOVAL_DATA = registerDataLoader(new CustomRemovalLoader());
+
+    private static <T> TideDataLoader<T> registerDataLoader(TideDataLoader<T> loader) {
+        LOADERS.add(loader);
+        return loader;
+    }
 
     static {
         EntitySubPredicate.Types.TYPES = ImmutableBiMap.<String, EntitySubPredicate.Type>builder()
@@ -84,10 +97,7 @@ public class Tide {
     }
 
     public static void onRegisterReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {
-        registry.accept(resource(CustomBaitLoader.DATA_PATH), BAIT_LOADER);
-        registry.accept(resource(CustomPageLoader.DATA_PATH), PAGE_LOADER);
-        registry.accept(resource(CustomProfileLoader.DATA_PATH), PROFILE_LOADER);
-        registry.accept(resource(CustomRemovalLoader.DATA_PATH), REMOVAL_LOADER);
+        LOADERS.forEach(loader -> registry.accept(loader.getDirectory(), loader));
     }
 
     public static LootPoolEntryContainer.Builder<?> getCrateFishingEntry() {

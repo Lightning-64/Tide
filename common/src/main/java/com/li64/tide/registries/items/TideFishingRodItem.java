@@ -5,6 +5,7 @@ import com.li64.tide.Tide;
 import com.li64.tide.client.gui.overlays.CastBarOverlay;
 import com.li64.tide.client.gui.overlays.CatchMinigameOverlay;
 import com.li64.tide.data.minigame.FishCatchMinigame;
+import com.li64.tide.data.rods.AccessoryData;
 import com.li64.tide.data.rods.BaitContents;
 import com.li64.tide.data.rods.CustomRodManager;
 import com.li64.tide.data.rods.FishingRodTooltip;
@@ -19,6 +20,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.inventory.ClickAction;
@@ -29,7 +31,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -62,17 +63,17 @@ public class TideFishingRodItem extends FishingRodItem {
         ItemStack line = CustomRodManager.getLine(stack);
 
         if (CustomRodManager.hasBobber(stack)) {
-            MutableComponent bobberComponent = CustomRodManager.getTranslation(bobber);
+            MutableComponent bobberComponent = AccessoryData.getTranslation(bobber);
             builder.add(bobberComponent.withStyle(ChatFormatting.BLUE));
         }
 
         if (CustomRodManager.hasHook(stack)) {
-            MutableComponent hookComponent = CustomRodManager.getTranslation(hook);
+            MutableComponent hookComponent = AccessoryData.getTranslation(hook);
             builder.add(hookComponent.withStyle(ChatFormatting.BLUE));
         }
 
         if (CustomRodManager.hasLine(stack)) {
-            MutableComponent lineComponent = CustomRodManager.getTranslation(line);
+            MutableComponent lineComponent = AccessoryData.getTranslation(line);
             builder.add(lineComponent.withStyle(ChatFormatting.BLUE));
         }
 

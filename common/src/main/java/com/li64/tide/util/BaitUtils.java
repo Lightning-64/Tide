@@ -31,11 +31,11 @@ public class BaitUtils {
     }
 
     public static boolean isBait(ItemStack stack) {
-        return Tide.BAIT_LOADER.getBaitData().stream().anyMatch(baitData -> stack.is(baitData.getItem()));
+        return Tide.BAIT_DATA.get().stream().anyMatch(baitData -> stack.is(baitData.getItem()));
     }
 
     public static Optional<BaitData> getBaitData(ItemStack stack) {
-        return Tide.BAIT_LOADER.getBaitData().stream()
+        return Tide.BAIT_DATA.get().stream()
                 .filter(baitData -> stack.is(baitData.getItem()))
                 .findFirst();
     }

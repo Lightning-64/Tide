@@ -1,11 +1,11 @@
-// 1.20.1	2024-12-22T16:10:04.126691	Tide/Tide Item Tags
+// 1.20.1	2025-01-10T11:24:11.912351	Tide/Tide Item Tags
 c347a74f95ceca9c52198a36b61ca7daf7393e2d data\tide\tags\items\hooks.json
 0983800561fdf064433c06aa92c2c8144263c91b data\forge\tags\items\tools\fishing_rods.json
 7c6369b297ab98c486f787bfa2b8a085d74d7f06 data\tide\tags\items\cookable_fish.json
 5aaf00716e2d8e4f06731b308aef0c9ee56d64c1 data\minecraft\tags\items\swords.json
 ecd594e19b47c76fc5097074f8b83e03ed2514eb data\c\tags\items\safe_raw_fish.json
-75368041d31b432ef48b365b42674a14613d6e43 data\tide\tags\items\bobbers.json
 9d6e35a32ff899597f81286b7057435002a950a7 data\tide\tags\items\legendary_fish.json
+9177522c44f5b2114289f79f25b6b13dead05fd5 data\tide\tags\items\bobbers.json
 80e56f6effead78902dc0cc2c37c79e264d399c5 data\tide\tags\items\vanilla_fish.json
 70abfb6ad6552d70af4e7925fd1bc80b2aaabfcf data\tide\tags\items\biome_fish.json
 490dba6b199d9e2b468ff59c7917f6b1c0233582 data\tide\tags\items\cooked_fish.json

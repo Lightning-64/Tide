@@ -1,22 +1,13 @@
 package com.li64.tide.data.rods;
 
-import com.li64.tide.Tide;
-import com.li64.tide.registries.items.FishingBobberItem;
-import com.li64.tide.registries.items.FishingHookItem;
-import com.li64.tide.registries.items.FishingLineItem;
 import net.minecraft.nbt.CompoundTag;
 import com.li64.tide.registries.TideItems;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
-import java.lang.reflect.Method;
-
 public class CustomRodManager {
-    private static final FishingBobberItem DEFAULT_BOBBER = (FishingBobberItem) TideItems.RED_FISHING_BOBBER;
-    private static final FishingHookItem DEFAULT_HOOK = (FishingHookItem) TideItems.FISHING_HOOK;
-    private static final FishingLineItem DEFAULT_LINE = (FishingLineItem) TideItems.FISHING_LINE;
+    private static final ItemStack DEFAULT_BOBBER = TideItems.RED_FISHING_BOBBER.getDefaultInstance();
+    private static final ItemStack DEFAULT_HOOK = TideItems.FISHING_HOOK.getDefaultInstance();
+    private static final ItemStack DEFAULT_LINE = TideItems.FISHING_LINE.getDefaultInstance();
 
     private static void createModifierTag(ItemStack stack) {
         CompoundTag modifierTag = new CompoundTag();
@@ -65,15 +56,15 @@ public class CustomRodManager {
     }
 
     public static ItemStack getBobber(ItemStack rod) {
-        return getAccessory(rod, ModifierType.BOBBER, DEFAULT_BOBBER.getDefaultInstance());
+        return getAccessory(rod, ModifierType.BOBBER, DEFAULT_BOBBER);
     }
 
     public static ItemStack getHook(ItemStack rod) {
-        return getAccessory(rod, ModifierType.HOOK, DEFAULT_HOOK.getDefaultInstance());
+        return getAccessory(rod, ModifierType.HOOK, DEFAULT_HOOK);
     }
 
     public static ItemStack getLine(ItemStack rod) {
-        return getAccessory(rod, ModifierType.LINE, DEFAULT_LINE.getDefaultInstance());
+        return getAccessory(rod, ModifierType.LINE, DEFAULT_LINE);
     }
 
     public static boolean hasBobber(ItemStack rod) {
@@ -99,32 +90,5 @@ public class CustomRodManager {
         if (accessoryTag.isEmpty()) return defaultInstance;
         ItemStack accessory = ItemStack.of(accessoryTag);
         return accessory.isEmpty() ? defaultInstance : accessory;
-    }
-
-    public static ResourceLocation getBobberTexture(ItemStack bobber) {
-        return getAccessoryAttribute(bobber, "getTextureLocation", DEFAULT_BOBBER.getTextureLocation());
-    }
-
-    public static ResourceLocation getHookTexture(ItemStack hook) {
-        return getAccessoryAttribute(hook, "getTextureLocation", DEFAULT_HOOK.getTextureLocation());
-    }
-
-    public static String getLineColor(ItemStack line) {
-        return getAccessoryAttribute(line, "getColor", DEFAULT_LINE.getColor());
-    }
-
-    public static MutableComponent getTranslation(ItemStack accessory) {
-        return getAccessoryAttribute(accessory, "getTranslation", Component.literal(""));
-    }
-
-    @SuppressWarnings("unchecked")
-    private static <T> T getAccessoryAttribute(ItemStack accessory, String getterName, T defaultValue) {
-        try {
-            Method method = accessory.getItem().getClass().getMethod(getterName);
-            return (T) method.invoke(accessory.getItem());
-        } catch (Exception e) {
-            Tide.LOG.error("Fishing rod accessory class \"{}\" does not have a \"{}\" method defined!", accessory.getItem().getClass(), getterName);
-            return defaultValue;
-        }
     }
 }

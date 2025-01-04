@@ -9,7 +9,6 @@ import com.mojang.serialization.Codec;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +21,9 @@ public class UpdateJournalMsg {
     private final List<CustomRemovalLoader.Removal> removals;
 
     public UpdateJournalMsg() {
-        customPages = Tide.PAGE_LOADER.getPageConfigs();
-        customProfiles = Tide.PROFILE_LOADER.getProfileConfigs();
-        removals = Tide.REMOVAL_LOADER.getRemovalConfigs();
+        customPages = Tide.PAGE_DATA.get();
+        customProfiles = Tide.PROFILE_DATA.get();
+        removals = Tide.REMOVAL_DATA.get();
     }
 
     public UpdateJournalMsg(FriendlyByteBuf buf) {

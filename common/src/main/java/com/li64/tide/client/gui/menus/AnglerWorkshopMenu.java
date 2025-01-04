@@ -3,7 +3,6 @@ package com.li64.tide.client.gui.menus;
 import com.li64.tide.client.gui.TideMenuTypes;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.data.rods.CustomRodManager;
-import com.li64.tide.registries.TideBlocks;
 import com.li64.tide.registries.blocks.AnglerWorkshopBlock;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -59,21 +58,21 @@ public class AnglerWorkshopMenu extends ItemCombinerMenu {
             ItemStack rod = inputSlots.getItem(0);
             if (CustomRodManager.hasLine(rod)) {
                 ItemStack line = CustomRodManager.getLine(rod);
-                if (!inputSlots.getItem(1).isEmpty()) player.drop(line, true);
                 CustomRodManager.setLine(rod, null);
-                inputSlots.setItem(1, line);
+                if (!inputSlots.getItem(1).isEmpty()) player.drop(line, true);
+                else inputSlots.setItem(1, line);
             }
             if (CustomRodManager.hasBobber(rod)) {
                 ItemStack bobber = CustomRodManager.getBobber(rod);
-                if (!inputSlots.getItem(2).isEmpty()) player.drop(bobber, true);
                 CustomRodManager.setBobber(rod, null);
-                inputSlots.setItem(2, bobber);
+                if (!inputSlots.getItem(2).isEmpty()) player.drop(bobber, true);
+                else inputSlots.setItem(2, bobber);
             }
             if (CustomRodManager.hasHook(rod)) {
                 ItemStack hook = CustomRodManager.getHook(rod);
-                if (!inputSlots.getItem(3).isEmpty()) player.drop(hook, true);
                 CustomRodManager.setHook(rod, null);
-                inputSlots.setItem(3, hook);
+                if (!inputSlots.getItem(3).isEmpty()) player.drop(hook, true);
+                else inputSlots.setItem(3, hook);
             }
         }
 
