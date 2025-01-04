@@ -22,9 +22,9 @@ public class UpdateJournalMsg implements CustomPacketPayload {
     private final List<CustomRemovalLoader.Removal> removals;
 
     public UpdateJournalMsg() {
-        customPages = Tide.PAGE_LOADER.getPageConfigs();
-        customProfiles = Tide.PROFILE_LOADER.getProfileConfigs();
-        removals = Tide.REMOVAL_LOADER.getRemovalConfigs();
+        customPages = Tide.PAGE_DATA.get();
+        customProfiles = Tide.PROFILE_DATA.get();
+        removals = Tide.REMOVAL_DATA.get();
     }
 
     public UpdateJournalMsg(FriendlyByteBuf buf) {

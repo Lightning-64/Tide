@@ -1,6 +1,7 @@
 package com.li64.tide.registries.entities.misc.fishing;
 
-import com.li64.tide.data.rods.CustomRodManager;
+import com.li64.tide.registries.items.FishingHookItem;
+import com.li64.tide.registries.items.FishingLineItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -12,7 +13,6 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
@@ -35,7 +35,7 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
     public TideFishingHookRenderer(EntityRendererProvider.Context context) {
         super(context);
         this.model = new TideFishingHookModel<>(context.bakeLayer(TideFishingHookModel.LAYER_LOCATION));
-        this.bobberLayer = new TideFishingBobberLayer(this, context.getModelSet());
+        this.bobberLayer = new TideFishingBobberLayer(this, context.getModelSet(), context.getItemRenderer());
         this.shadowRadius = 0.1f;
     }
 
@@ -117,7 +117,7 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
 //            BlockPos vertexPos = new BlockPos((int) d9, (int) d10, (int) d8);
 
             stringVertex(f4, f5, f6, vertexConsumer, pose, fraction(k),
-                    fraction(k + 1), player, CustomRodManager.getLineColor(hookEntity.getLine()), partialTick);
+                    fraction(k + 1), player, FishingLineItem.getColor(hookEntity.getLine()), partialTick);
         }
     }
 
@@ -165,7 +165,7 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull TideFishingHook hookEntity) {
         if (!allowModifiers()) return HOOK_TEX_LOCATION;
-        return CustomRodManager.getHookTexture(hookEntity.getHook());
+        return FishingHookItem.getTexture(hookEntity.getHook());
     }
 
     /** Override this to disable bobber, hook, and line modifiers */

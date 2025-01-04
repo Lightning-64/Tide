@@ -1,0 +1,6 @@
+{
+   "parent": "tide:item/fishing_bobber_shard",
+   "textures": {
+      "1": "tide:item/echo_fishing_bobber"
+   }
+}

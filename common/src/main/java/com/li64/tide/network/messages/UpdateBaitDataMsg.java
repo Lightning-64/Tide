@@ -18,7 +18,7 @@ public class UpdateBaitDataMsg implements CustomPacketPayload {
     private final List<BaitData> baitData;
 
     public UpdateBaitDataMsg() {
-        baitData = Tide.BAIT_LOADER.getBaitData();
+        baitData = Tide.BAIT_DATA.get();
     }
 
     public UpdateBaitDataMsg(FriendlyByteBuf buf) {
@@ -44,7 +44,7 @@ public class UpdateBaitDataMsg implements CustomPacketPayload {
     }
 
     public static void handle(UpdateBaitDataMsg message, Player player) {
-        Tide.BAIT_LOADER.setBaitData(message.baitData);
+        Tide.BAIT_DATA.set(message.baitData);
     }
 
     @Override

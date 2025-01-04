@@ -1,24 +1,23 @@
 package com.li64.tide.registries.items;
 
-import net.minecraft.network.chat.MutableComponent;
+import com.li64.tide.Tide;
+import com.li64.tide.data.rods.AccessoryData;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public class FishingBobberItem extends Item {
-    private final ResourceLocation texture;
-    private final MutableComponent translation;
-
-    public FishingBobberItem(ResourceLocation textureLocation, MutableComponent translation, Properties properties) {
+    public FishingBobberItem(Properties properties) {
         super(properties);
-        this.texture = textureLocation;
-        this.translation = translation;
     }
 
-    public ResourceLocation getTextureLocation() {
-        return texture;
+    public static ResourceLocation getTexture(ItemStack stack) {
+        return Tide.resource("textures/item/" + BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath() + ".png");
     }
 
-    public MutableComponent getTranslation() {
-        return translation;
+    public static boolean renderItemModel(ItemStack stack) {
+        AccessoryData data = AccessoryData.get(stack);
+        return (data == null || data.renderItem().isEmpty() || data.renderItem().get());
     }
 }

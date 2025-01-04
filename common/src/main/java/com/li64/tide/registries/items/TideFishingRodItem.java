@@ -6,6 +6,7 @@ import com.li64.tide.client.gui.overlays.CastBarOverlay;
 import com.li64.tide.client.gui.overlays.CatchMinigameOverlay;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.minigame.FishCatchMinigame;
+import com.li64.tide.data.rods.AccessoryData;
 import com.li64.tide.data.rods.BaitContents;
 import com.li64.tide.data.rods.CustomRodManager;
 import com.li64.tide.data.rods.FishingRodTooltip;
@@ -63,17 +64,17 @@ public class TideFishingRodItem extends FishingRodItem {
         ItemStack line = CustomRodManager.getLine(stack, registries);
 
         if (CustomRodManager.hasBobber(stack, registries)) {
-            MutableComponent bobberComponent = CustomRodManager.getTranslation(bobber);
+            MutableComponent bobberComponent = AccessoryData.getTranslation(bobber);
             builder.add(bobberComponent.withStyle(ChatFormatting.BLUE));
         }
 
         if (CustomRodManager.hasHook(stack, registries)) {
-            MutableComponent hookComponent = CustomRodManager.getTranslation(hook);
+            MutableComponent hookComponent = AccessoryData.getTranslation(hook);
             builder.add(hookComponent.withStyle(ChatFormatting.BLUE));
         }
 
         if (CustomRodManager.hasLine(stack, registries)) {
-            MutableComponent lineComponent = CustomRodManager.getTranslation(line);
+            MutableComponent lineComponent = AccessoryData.getTranslation(line);
             builder.add(lineComponent.withStyle(ChatFormatting.BLUE));
         }
 

@@ -59,21 +59,21 @@ public class AnglerWorkshopMenu extends ItemCombinerMenu {
             ItemStack rod = inputSlots.getItem(0);
             if (CustomRodManager.hasLine(rod, player.registryAccess())) {
                 ItemStack line = CustomRodManager.getLine(rod, player.registryAccess());
-                if (!inputSlots.getItem(1).isEmpty()) player.drop(line, true);
                 CustomRodManager.setLine(rod, null, player.registryAccess());
-                inputSlots.setItem(1, line);
+                if (!inputSlots.getItem(1).isEmpty()) player.drop(line, true);
+                else inputSlots.setItem(1, line);
             }
             if (CustomRodManager.hasBobber(rod, player.registryAccess())) {
                 ItemStack bobber = CustomRodManager.getBobber(rod, player.registryAccess());
-                if (!inputSlots.getItem(2).isEmpty()) player.drop(bobber, true);
                 CustomRodManager.setBobber(rod, null, player.registryAccess());
-                inputSlots.setItem(2, bobber);
+                if (!inputSlots.getItem(2).isEmpty()) player.drop(bobber, true);
+                else inputSlots.setItem(2, bobber);
             }
             if (CustomRodManager.hasHook(rod, player.registryAccess())) {
                 ItemStack hook = CustomRodManager.getHook(rod, player.registryAccess());
-                if (!inputSlots.getItem(3).isEmpty()) player.drop(hook, true);
                 CustomRodManager.setHook(rod, null, player.registryAccess());
-                inputSlots.setItem(3, hook);
+                if (!inputSlots.getItem(3).isEmpty()) player.drop(hook, true);
+                else inputSlots.setItem(3, hook);
             }
         }
 

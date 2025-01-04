@@ -6,10 +6,8 @@ import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.rods.BaitContents;
 import com.li64.tide.data.rods.BaitData;
 import com.li64.tide.registries.TideItems;
-import com.li64.tide.registries.items.BaitItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
@@ -33,11 +31,11 @@ public class BaitUtils {
     }
 
     public static boolean isBait(ItemStack stack) {
-        return Tide.BAIT_LOADER.getBaitData().stream().anyMatch(baitData -> stack.is(baitData.getItem()));
+        return Tide.BAIT_DATA.get().stream().anyMatch(baitData -> stack.is(baitData.getItem()));
     }
 
     public static Optional<BaitData> getBaitData(ItemStack stack) {
-        return Tide.BAIT_LOADER.getBaitData().stream()
+        return Tide.BAIT_DATA.get().stream()
                 .filter(baitData -> stack.is(baitData.getItem()))
                 .findFirst();
     }

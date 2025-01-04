@@ -1,0 +1,6 @@
+{
+   "parent": "tide:item/fishing_bobber_fruit",
+   "textures": {
+      "1": "tide:item/feather_fishing_bobber"
+   }
+}
