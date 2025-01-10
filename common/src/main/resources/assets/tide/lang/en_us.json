@@ -10,27 +10,53 @@
 
   "text.autoconfig.tide.title": "Tide Config",
   "text.autoconfig.tide.category.general": "General",
+  "text.autoconfig.tide.category.minigame": "Minigame",
   "text.autoconfig.tide.category.worldgen": "World Generation",
+
   "text.autoconfig.tide.option.general.giveJournal": "Give Journal",
   "text.autoconfig.tide.option.general.giveJournal.@Tooltip": "Turn this setting off to stpo giving new players a fishing journal upon joining a new world",
+
   "text.autoconfig.tide.option.general.holdToCast": "Hold to Cast",
   "text.autoconfig.tide.option.general.holdToCast.@Tooltip": "When turned off, fishing rods can be cast by clicking once, as opposed to charging to cast them farther or closer",
-  "text.autoconfig.tide.option.general.doMinigame": "Do Minigame",
-  "text.autoconfig.tide.option.general.doMinigame.@Tooltip": "Turn this setting off to disable the fishing mingame.",
+
   "text.autoconfig.tide.option.general.showUnread": "Alert Unread Profiles",
   "text.autoconfig.tide.option.general.showUnread.@Tooltip": "Turn this off to disable the alerts for when a profile is unread in the journal",
+
   "text.autoconfig.tide.option.general.showToasts": "Show New Fish Toasts",
   "text.autoconfig.tide.option.general.showToasts.@Tooltip": "Turn this off to disable the notifications (toasts) that appear when a new fish is obtained",
-  "text.autoconfig.tide.option.general.minigameDifficulty": "Minigame Difficulty",
-  "text.autoconfig.tide.option.general.minigameDifficulty.@Tooltip": "A multiplier that increases or decreases the speed of the minigame.\nFor example, 0.5 would be twice as easy, while 2.0 would be twice as difficult",
+
   "text.autoconfig.tide.option.general.rodDurabilityMultiplier": "Rod Durability Multiplier",
   "text.autoconfig.tide.option.general.rodDurabilityMultiplier.@Tooltip": "A multiplier that increases or decreases the durability of fishing rods.",
+
+  "text.autoconfig.tide.option.general.crateWeight": "Crate Weight",
+  "text.autoconfig.tide.option.general.crateWeight.@Tooltip": "Change this to increase or decrease the chance of a crate being selected. (not a percent)",
+
+  "text.autoconfig.tide.option.general.crateQuality": "Crate Luck Scaling",
+  "text.autoconfig.tide.option.general.crateQuality.@Tooltip": "Change this to increase or decrease the amount that the crate chance is scaled with higher fishing luck.",
+
   "text.autoconfig.tide.option.general.defaultLineColor": "Use Vanilla Line Color",
-  "text.autoconfig.tide.option.general.defaultLineColor.@Tooltip": "Enable this to use the default black fishing string color, which generally looks better with shaders.",
+  "text.autoconfig.tide.option.general.defaultLineColor.@Tooltip": "Enable this to use the default black fishing string color.",
+
   "text.autoconfig.tide.option.general.hideUnknownFishNames": "Hide Unknown Fish Names",
   "text.autoconfig.tide.option.general.hideUnknownFishNames.@Tooltip": "If set to true, fish entities' names will be displayed as '???' until unlocked in the fishing journal.",
+
   "text.autoconfig.tide.option.worldgen.disableFishingBoat": "Disable Fishing Boats",
   "text.autoconfig.tide.option.worldgen.disableFishingBoat.@Tooltip": "Turn this on to disable the generation of fishing boat structures",
+
+  "text.autoconfig.tide.option.minigame.doMinigame": "Do Minigame",
+  "text.autoconfig.tide.option.minigame.doMinigame.@Tooltip": "Turn this setting off to disable the fishing mingame.",
+
+  "text.autoconfig.tide.option.minigame.doFeedback": "Do Feedback",
+  "text.autoconfig.tide.option.minigame.doFeedback.@Tooltip": "Turn this setting off to disable the scoring messages after a minigame (Perfect, Good, Great, etc.)",
+
+  "text.autoconfig.tide.option.minigame.doSuccessSound": "Do Success Sound",
+  "text.autoconfig.tide.option.minigame.doSuccessSound.@Tooltip": "Turn this setting off to disable the sound played when you win the minigame",
+
+  "text.autoconfig.tide.option.minigame.doFailSound": "Do Fail Sound",
+  "text.autoconfig.tide.option.minigame.doFailSound.@Tooltip": "Turn this setting off to disable the sound played when you lose the minigame",
+
+  "text.autoconfig.tide.option.minigame.minigameDifficulty": "Minigame Difficulty",
+  "text.autoconfig.tide.option.minigame.minigameDifficulty.@Tooltip": "A multiplier that increases or decreases the speed of the minigame.\nFor example, 0.5 would be twice as easy, while 2.0 would be twice as difficult",
 
   "item.tide.stone_fishing_rod": "Stone Fishing Rod",
   "item.tide.iron_fishing_rod": "Iron Fishing Rod",
@@ -313,8 +339,8 @@
   "commands.level.get": "Fishing level of player %s is %s",
   "commands.level.set": "Set fishing level of player %s to %s",
 
-  "minigame.rating.perfect": "Perfect!",
-  "minigame.rating.great": "Great!",
+  "minigame.rating.perfect": "Perfect Catch!",
+  "minigame.rating.great": "Great Catch!",
   "minigame.rating.good": "Good",
   "minigame.rating.ok": "Ok",
   "minigame.rating.bad": "Bad",

@@ -7,6 +7,8 @@ import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import com.li64.tide.registries.items.StrengthFish;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
@@ -87,6 +89,10 @@ public class FishCatchMinigame {
 
     public void onFail() {
         if (cancelIfNecessary()) return;
+        if (Tide.CONFIG.minigame.doFailSound) hook.level().playSound(
+                null, hook.getPlayerOwner().blockPosition(),
+                SoundEvents.SHEEP_SHEAR, SoundSource.AMBIENT,
+                0.9f, 1.0f);
         hook.invalidateCatch();
         hook.retrieve();
         onFinish();
@@ -94,6 +100,10 @@ public class FishCatchMinigame {
 
     public void onWin() {
         if (cancelIfNecessary()) return;
+        if (Tide.CONFIG.minigame.doSuccessSound) hook.level().playSound(
+                null, hook.getPlayerOwner().blockPosition(),
+                SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.AMBIENT,
+                0.15f, 1.0f);
         hook.retrieve();
         onFinish();
     }

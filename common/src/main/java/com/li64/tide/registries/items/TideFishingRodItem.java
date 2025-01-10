@@ -154,7 +154,7 @@ public class TideFishingRodItem extends FishingRodItem {
         if (isHookActive(player)) {
             TideFishingHook hook = getHook(player);
 
-            if (isMinigameStopped(player, level.isClientSide()) && Tide.CONFIG.general.doMinigame) {
+            if (isMinigameStopped(player, level.isClientSide()) && Tide.CONFIG.minigame.doMinigame) {
                 // No minigame active, create a new one if necessary
 
                 if (Tide.PLATFORM.isModLoaded("stardew_fishing")) {
@@ -187,7 +187,7 @@ public class TideFishingRodItem extends FishingRodItem {
 
             } else {
                 // Minigame is either active or disabled
-                if (!Tide.CONFIG.general.doMinigame) {
+                if (!Tide.CONFIG.minigame.doMinigame) {
                     if (!level.isClientSide()) hook.retrieve();
                 } else if (level.isClientSide()) {
                     // Interact with minigame (from the client)
