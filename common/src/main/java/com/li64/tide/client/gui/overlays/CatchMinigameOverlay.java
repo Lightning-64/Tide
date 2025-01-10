@@ -104,7 +104,7 @@ public class CatchMinigameOverlay {
     }
 
     public static float getSpeed() {
-        return (fishStrength * 0.048f + DEFAULT_SPEED) * (float) Tide.CONFIG.general.minigameDifficulty;
+        return (fishStrength * 0.048f + DEFAULT_SPEED) * (float) Tide.CONFIG.minigame.minigameDifficulty;
     }
 
     public static void render(GuiGraphics graphics, float partialTick) {
@@ -125,19 +125,20 @@ public class CatchMinigameOverlay {
 
         float alpha = -Mth.clamp((timer - 10f) / 10f, 0f, 1f) + 1f;
 
-        int texWidth = 32;
+        int texWidth = 36;
         int texHeight = 16;
 
         int x = (graphics.guiWidth() - texWidth) / 2;
         int y = graphics.guiHeight() / 2 - texHeight - 6;
 
         int markerX = (int) (x + Mth.sin(animProgress * getSpeed()) * (texWidth / 2f - 2));
+        ResourceLocation markerTexture = timer % 4 < 2 ? MARKER_TEX : SELECT_TEX;
 
         graphics.setColor(1f, 1f, 1f, alpha);
         graphics.blit(BAR_BG_TEX, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
-        graphics.blit(MARKER_TEX, markerX, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
+        graphics.blit(markerTexture, markerX, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
 
-        if (accuracyText == null) return;
+        if (!Tide.CONFIG.minigame.doFeedback || accuracyText == null) return;
         Font font = Minecraft.getInstance().font;
 
         graphics.drawString(font, accuracyText.withStyle(

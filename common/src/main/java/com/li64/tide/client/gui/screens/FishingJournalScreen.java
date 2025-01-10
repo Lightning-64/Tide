@@ -275,7 +275,7 @@ public class FishingJournalScreen extends Screen {
 
         List<FormattedCharSequence> description = font.split(descriptionRaw, 114);
         boolean isDescriptionEmpty = descriptionRaw.getString().isEmpty()
-                || descriptionRaw.getString().matches(profileConfig.description());
+                || descriptionRaw.getString().contains("profile.item.");
 
         List<FormattedCharSequence> location = new ArrayList<>();
         location.addAll(font.split(locationTitleRaw, 114));
