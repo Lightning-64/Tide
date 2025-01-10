@@ -1,23 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_crafting_table": {
+    "has_copper_ingot": {
       "conditions": {
         "items": [
           {
-            "tag": "c:player_workstations/crafting_tables"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_iron_nugget": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:iron_nugget"
-            ]
+            "tag": "c:ingots/copper"
           }
         ]
       },
@@ -52,10 +40,9 @@
   },
   "requirements": [
     [
-      "has_iron_nugget",
       "has_string",
+      "has_copper_ingot",
       "has_planks",
-      "has_crafting_table",
       "has_the_recipe"
     ]
   ],

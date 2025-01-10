@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-10T11:24:11.9044825	Tide/Recipes
+// 1.20.1	2025-01-10T11:50:11.9838285	Tide/Recipes
 7321beab4a35f1365e1dbcfa15a5e1f7fff0ec18 data\tide\recipes\clayfish_smelting.json
 2ceeb40bba609e1f8ae6f284209f9cb57da3a30a data\tide\recipes\rod_upgrading\netherite.json
 0567afd1f64ecd225bfb6061da8d80bee84a5fe4 data\tide\recipes\lucky_bait.json
@@ -55,12 +55,12 @@ e35dbb568d2eeb57e7966221ae8b7abba7f63489 data\tide\recipes\bobbers\yellow.json
 e73e975acfb59f51d437b825c171d1538a421241 data\tide\advancements\recipes\tools\lavaproof_fishing_hook.json
 e03a725b38bdc0555e6928d30b53a852809a89dc data\tide\advancements\recipes\misc\bobbers\cyan.json
 d828116361aaf144b5e225fd08aafeca8d266ea5 data\tide\advancements\recipes\misc\lapis_from_lanternfish.json
-6f72eddca8b116f0628443a919ef87009a2a1eb0 data\tide\recipes\angler_workshop.json
+0159adfa67c22f0e24ca65e32dcc6856fc5b677f data\tide\recipes\angler_workshop.json
 18a4c97ff75c717c1b0dfa29ca27bdf7d1d7b2b0 data\tide\recipes\rod_upgrading\golden.json
 0aee32aa187384c3e5015034ab374efc81decf3f data\tide\advancements\recipes\misc\end_stone_from_perch.json
 9b99cf1ff0cb8b7c40e43ea5bcd72e4c69f928f0 data\tide\advancements\recipes\misc\bobbers\brown.json
 acff1e872d8bacad63126825916c6dda1f735af2 data\tide\advancements\recipes\misc\bobbers\orange.json
-b097a0a067ec06d803a3228b5efaf90d34c96b9f data\tide\advancements\recipes\decorations\angler_workshop.json
+00fa769f60c4510fbf7909d03b51b98d473eb11d data\tide\advancements\recipes\decorations\angler_workshop.json
 23c2f96860660d52305124b7b572da707e6bd2a6 data\tide\recipes\bobbers\pink.json
 9b02bebec803866d99a6925b09df98528bd2c3d5 data\tide\recipes\chorus_flower_from_cod.json
 2c8148213af658eb1af10b52eb945d2ed9c83409 data\tide\recipes\rod_upgrading\crystal.json

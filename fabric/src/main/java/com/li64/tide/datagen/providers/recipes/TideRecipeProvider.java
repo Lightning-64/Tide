@@ -165,17 +165,15 @@ public class TideRecipeProvider extends FabricRecipeProvider {
         // -- Shaped --
 
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, TideItems.ANGLER_WORKSHOP)
-                .pattern("#S#")
-                .pattern("ICI")
-                .pattern("#I#")
-                .define('C', craftingTables)
+                .pattern("SS")
+                .pattern("CC")
+                .pattern("##")
                 .define('S', strings)
-                .define('I', ironNuggets)
+                .define('C', copperIngots)
                 .define('#', ItemTags.PLANKS)
-                .unlockedBy("has_iron_nugget", has(Items.IRON_NUGGET))
                 .unlockedBy("has_string", has(strings))
+                .unlockedBy("has_copper_ingot", has(copperIngots))
                 .unlockedBy("has_planks", has(ItemTags.PLANKS))
-                .unlockedBy("has_crafting_table", has(craftingTables))
                 .save(output);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, TideItems.DEEP_AQUA_ARROW, 8)
