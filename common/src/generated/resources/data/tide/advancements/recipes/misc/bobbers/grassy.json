@@ -1,11 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cyan_dye": {
+    "has_grass_block": {
       "conditions": {
         "items": [
           {
-            "tag": "c:dyes/cyan"
+            "items": [
+              "minecraft:grass_block"
+            ]
           }
         ]
       },
@@ -23,7 +25,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tide:bobbers/cyan"
+        "recipe": "tide:bobbers/grassy"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -31,13 +33,13 @@
   "requirements": [
     [
       "has_slimeball",
-      "has_cyan_dye",
+      "has_grass_block",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "tide:bobbers/cyan"
+      "tide:bobbers/grassy"
     ]
   },
   "sends_telemetry_event": false

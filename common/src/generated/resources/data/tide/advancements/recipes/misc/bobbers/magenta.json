@@ -1,6 +1,16 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_magenta_dye": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "c:dyes/magenta"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_slimeball": {
       "conditions": {
         "items": [
@@ -21,6 +31,7 @@
   "requirements": [
     [
       "has_slimeball",
+      "has_magenta_dye",
       "has_the_recipe"
     ]
   ],

@@ -1,6 +1,16 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_brown_dye": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "c:dyes/brown"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_slimeball": {
       "conditions": {
         "items": [
@@ -21,6 +31,7 @@
   "requirements": [
     [
       "has_slimeball",
+      "has_brown_dye",
       "has_the_recipe"
     ]
   ],

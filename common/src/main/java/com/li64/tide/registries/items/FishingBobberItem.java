@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class FishingBobberItem extends Item {
     public FishingBobberItem(Properties properties) {
-        super(properties);
+        super(properties.stacksTo(1));
     }
 
     public static ResourceLocation getTexture(ItemStack stack) {
