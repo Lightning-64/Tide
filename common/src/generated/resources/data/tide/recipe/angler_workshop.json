@@ -17,19 +17,16 @@
       "tag": "minecraft:planks"
     },
     "C": {
-      "tag": "c:player_workstations/crafting_tables"
-    },
-    "I": {
-      "item": "minecraft:iron_nugget"
+      "tag": "c:ingots/copper"
     },
     "S": {
       "tag": "c:strings"
     }
   },
   "pattern": [
-    "#S#",
-    "ICI",
-    "#I#"
+    "SS",
+    "CC",
+    "##"
   ],
   "result": {
     "count": 1,

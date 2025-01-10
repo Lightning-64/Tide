@@ -1,8 +1,12 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "bottom": "tide:block/surface_loot_crate_bottom",
-    "side": "tide:block/angler_workshop_side",
-    "top": "tide:block/angler_workshop_top"
+    "down": "tide:block/angler_workshop_bottom",
+    "up": "tide:block/angler_workshop_top",
+    "north": "tide:block/angler_workshop",
+    "south": "tide:block/angler_workshop",
+    "east": "tide:block/angler_workshop_side",
+    "west": "tide:block/angler_workshop_side",
+    "particle": "tide:block/angler_workshop"
   }
 }

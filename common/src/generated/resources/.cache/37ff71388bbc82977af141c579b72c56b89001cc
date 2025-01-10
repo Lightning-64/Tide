@@ -1,4 +1,4 @@
-// 1.21	2025-01-03T18:06:53.730399	Tide/Tide Item Tags
+// 1.21	2025-01-19T13:03:56.2453012	Tide/Tide Item Tags
 9848e89ff245bbfdc2c682369771182a82878a8b data\tide\tags\item\vanilla_fish.json
 8a8658d1b53118cf2b53f97e14473278a8346df8 data\tide\tags\item\bait_plants.json
 0f7538e03af1cad955f503b4447a04d9c17dec2b data\minecraft\tags\item\swords.json
@@ -11,9 +11,9 @@ c252bdb0e7d945cd99663b13e1865c9027246481 data\tide\tags\item\lines.json
 e09348676c94800c4642964083d41b3918b959fc data\tide\tags\item\bobbers.json
 95ea3d68dfc6e48f13451173f9f82bbe64a44a7a data\tide\tags\item\customizable_rods.json
 febb1ea86d6ed0180ccf8e7c8c1cd61114295d6a data\tide\tags\item\cooked_fish.json
-518951c64d45048dfe358d468de83d9a577c9f5d data\tide\tags\item\journal_fish.json
-95616995e01a8fa30e92078d12836bf712d367bd data\minecraft\tags\item\enchantable\fishing.json
 3be239c5af643db8e05c8f429a8262526757ba4a data\minecraft\tags\item\fishes.json
+95616995e01a8fa30e92078d12836bf712d367bd data\minecraft\tags\item\enchantable\fishing.json
+518951c64d45048dfe358d468de83d9a577c9f5d data\tide\tags\item\journal_fish.json
 d30f1010d935f3311e393a6e5dfbf53e43ee6996 data\tide\tags\item\crates.json
 879427138899641203ab2cce1429dd2deb009523 data\c\tags\item\safe_raw_fish.json
 3be239c5af643db8e05c8f429a8262526757ba4a data\stardew_fishing\tags\item\starts_minigame.json
