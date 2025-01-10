@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_pink_dye": {
+    "has_heart_of_the_sea": {
       "conditions": {
         "items": [
           {
-            "items": "#c:dyes/pink"
+            "items": "minecraft:heart_of_the_sea"
           }
         ]
       },
@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tide:bobbers/pink"
+        "recipe": "tide:bobbers/heart"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -32,12 +32,12 @@
     [
       "has_the_recipe",
       "has_slimeball",
-      "has_pink_dye"
+      "has_heart_of_the_sea"
     ]
   ],
   "rewards": {
     "recipes": [
-      "tide:bobbers/pink"
+      "tide:bobbers/heart"
     ]
   }
 }

@@ -16,12 +16,23 @@
         "recipe": "tide:bobbers/white"
       },
       "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_dye": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:dyes/white"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_slimeball"
+      "has_slimeball",
+      "has_white_dye"
     ]
   ],
   "rewards": {

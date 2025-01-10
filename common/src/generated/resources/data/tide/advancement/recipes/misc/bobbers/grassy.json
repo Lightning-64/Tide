@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_pink_dye": {
+    "has_grass_block": {
       "conditions": {
         "items": [
           {
-            "items": "#c:dyes/pink"
+            "items": "minecraft:grass_block"
           }
         ]
       },
@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tide:bobbers/pink"
+        "recipe": "tide:bobbers/grassy"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -32,12 +32,12 @@
     [
       "has_the_recipe",
       "has_slimeball",
-      "has_pink_dye"
+      "has_grass_block"
     ]
   ],
   "rewards": {
     "recipes": [
-      "tide:bobbers/pink"
+      "tide:bobbers/grassy"
     ]
   }
 }

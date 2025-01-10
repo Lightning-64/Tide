@@ -1,3 +1,35 @@
+## Version 1.5.0 - 1/10/2024
+
+### 🎣 New features 🎣
+
+---
+**Minigame Changes**
+- Modified the minigame GUI textures (mainly to make them slightly larger)
+- Added subtle sound effects for winning and losing the minigame
+- Added a simple blinking animation to the bar when the minigame ends
+- Slightly modified some of the feedback messages
+---
+**New Bobbers**
+- Added 16 new themed fishing bobber variants that can be crafted with various materials
+- Fishing bobbers now render their item model on the hook
+- New datapack-based rod accessory data system
+---
+**Angling Table**
+- Renamed the "Angler's Workshop" to "Angling Table"
+- New block texture (created by yawpbaron) that more closely matches other minecraft workstations
+- Changed the recipe for the Angling Table: it now requires 2 copper, 2 string, and 2 planks
+---
+**Misc Features**
+- Created 2 config settings for modifying crate probabilities
+---
+
+### ⚙️ Bug fixes ⚙️
+- Fixed a bug where interacting with the minigame would be heavily delayed on servers with high latency _([#4](https://github.com/Lightning-64/Tide/issues/4))_
+- Fixed a bug where putting a rod into the Angling Table would delete already inputted accessories
+- Fixed a bug where custom journal profiles would have no description text unless they used a translation
+
+---
+
 ## Version 1.4.2 - 12/25/2024
 
 ### 🎣 New features 🎣

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:slime_balls"
+    },
+    {
+      "tag": "minecwraft:planks"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:amethyst_fishing_bobber"
+  }
+}

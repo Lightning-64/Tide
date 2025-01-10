@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:slime_balls"
+    },
+    {
+      "tag": "minecraft:planks"
+    },
+    {
+      "item": "minecraft:nautilus_shell"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "tide:nautilus_fishing_bobber"
+  }
+}

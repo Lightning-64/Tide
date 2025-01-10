@@ -9,6 +9,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.ImpossibleTrigger;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -45,7 +46,7 @@ public class TideRecipeProvider extends FabricRecipeProvider {
     public TideRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
-
+w
     @Override
     public void buildRecipes(@NotNull RecipeOutput output) {
         // -- Shapeless --
@@ -156,7 +157,23 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy("has_luminescent_jellyfish", has(TideItems.LUMINESCENT_JELLYFISH))
                 .save(output, "tide:jelly_torch_from_jellyfish");
 
-        createBobberRecipes(output);
+        createColoredBobberRecipes(output);
+        createSimpleBobberRecipe(output, TideItems.APPLE_FISHING_BOBBER, Items.APPLE);
+        createSimpleBobberRecipe(output, TideItems.GOLDEN_APPLE_FISHING_BOBBER, Items.GOLDEN_APPLE);
+        createSimpleBobberRecipe(output, TideItems.ENCHANTED_GOLDEN_APPLE_FISHING_BOBBER, Items.ENCHANTED_GOLDEN_APPLE);
+        createSimpleBobberRecipe(output, TideItems.IRON_FISHING_BOBBER, Items.IRON_INGOT);
+        createSimpleBobberRecipe(output, TideItems.GOLDEN_FISHING_BOBBER, Items.GOLD_INGOT);
+        createSimpleBobberRecipe(output, TideItems.DIAMOND_FISHING_BOBBER, Items.DIAMOND);
+        createSimpleBobberRecipe(output, TideItems.NETHERITE_FISHING_BOBBER, Items.NETHERITE_INGOT);
+        createSimpleBobberRecipe(output, TideItems.AMETHYST_FISHING_BOBBER, Items.AMETHYST_SHARD);
+        createSimpleBobberRecipe(output, TideItems.ECHO_FISHING_BOBBER, Items.ECHO_SHARD);
+        createSimpleBobberRecipe(output, TideItems.CHORUS_FISHING_BOBBER, Items.CHORUS_FRUIT);
+        createSimpleBobberRecipe(output, TideItems.FEATHER_FISHING_BOBBER, Items.FEATHER);
+        createSimpleBobberRecipe(output, TideItems.LICHEN_FISHING_BOBBER, Items.GLOW_LICHEN);
+        createSimpleBobberRecipe(output, TideItems.NAUTILUS_FISHING_BOBBER, Items.NAUTILUS_SHELL);
+        createSimpleBobberRecipe(output, TideItems.PEARL_FISHING_BOBBER, Items.ENDER_PEARL);
+        createSimpleBobberRecipe(output, TideItems.HEART_FISHING_BOBBER, Items.HEART_OF_THE_SEA);
+        createSimpleBobberRecipe(output, TideItems.GRASSY_FISHING_BOBBER, Items.GRASS_BLOCK);
 
         // -- Shaped --
 
@@ -423,17 +440,34 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                 .save(output, "tide:rod_upgrading/netherite");
     }
 
-    private void createBobberRecipes(RecipeOutput output) {
+    private void createSimpleBobberRecipe(RecipeOutput output, Item bobber, Item addition) {
+        TagKey<Item> slimeballTag = neoForgeConventionTag("slime_balls");
+        String identifier = BuiltInRegistries.ITEM.getKey(bobber).getPath()
+                .replace("_fishing_bobber", "");
+        String additionPath = BuiltInRegistries.ITEM.getKey(addition).getPath();
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, bobber)
+                .requires(slimeballTag)
+                .requires(ItemTags.PLANKS)
+                .requires(addition)
+                .unlockedBy("has_slimeball", has(slimeballTag))
+                .unlockedBy("has_" + additionPath, has(addition))
+                .save(output, "tide:bobbers/" + identifier);
+    }
+
+    private void createColoredBobberRecipes(RecipeOutput output) {
         TagKey<Item> slimeballTag = neoForgeConventionTag("slime_balls");
         BOBBERS.forEach(bobber -> {
-            String dyeId = bobber.toString().split("_fishing_bobber")[0].split("tide:")[1];
+            String dyeId = BuiltInRegistries.ITEM.getKey(bobber).getPath()
+                    .replace("_fishing_bobber", "");
+            TagKey<Item> dyeTag = TagKey.create(Registries.ITEM, ResourceLocation
+                    .fromNamespaceAndPath("c", "dyes/" + dyeId));
 
             ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, bobber)
                     .requires(slimeballTag)
                     .requires(ItemTags.PLANKS)
-                    .requires(TagKey.create(Registries.ITEM, ResourceLocation
-                            .fromNamespaceAndPath("c", "dyes/" + dyeId)))
+                    .requires(dyeTag)
                     .unlockedBy("has_slimeball", has(slimeballTag))
+                    .unlockedBy("has_" + dyeId + "_dye", has(dyeTag))
                     .save(output, "tide:bobbers/" + dyeId);
         });
     }

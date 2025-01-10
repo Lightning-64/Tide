@@ -1,6 +1,16 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_cyan_dye": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:dyes/cyan"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_slimeball": {
       "conditions": {
         "items": [
@@ -21,7 +31,8 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_slimeball"
+      "has_slimeball",
+      "has_cyan_dye"
     ]
   ],
   "rewards": {

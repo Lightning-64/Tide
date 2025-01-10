@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_pink_dye": {
+    "has_chorus_fruit": {
       "conditions": {
         "items": [
           {
-            "items": "#c:dyes/pink"
+            "items": "minecraft:chorus_fruit"
           }
         ]
       },
@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tide:bobbers/pink"
+        "recipe": "tide:bobbers/chorus"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -32,12 +32,12 @@
     [
       "has_the_recipe",
       "has_slimeball",
-      "has_pink_dye"
+      "has_chorus_fruit"
     ]
   ],
   "rewards": {
     "recipes": [
-      "tide:bobbers/pink"
+      "tide:bobbers/chorus"
     ]
   }
 }
