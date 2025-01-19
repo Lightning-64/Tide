@@ -46,7 +46,7 @@ public class TideRecipeProvider extends FabricRecipeProvider {
     public TideRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
-w
+
     @Override
     public void buildRecipes(@NotNull RecipeOutput output) {
         // -- Shapeless --

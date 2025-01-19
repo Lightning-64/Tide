@@ -7,7 +7,7 @@
    "mixins": [
       "ChunkGenMixin",
       "HookPredicateMixin",
-      "MixinFishingRod"
+      "ItemsMixin"
    ],
    "client": [
       "GuiRenderMixin"
