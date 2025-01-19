@@ -354,7 +354,6 @@ public class TideItems {
         ITEMS.forEach(Tide.PLATFORM::registerItem);
     }
 
-
     public static void assignTags() {
         JOURNAL_FISH_LIST = ORDERED_ITEMS.stream().filter(item -> item instanceof TideFishItem)
                 .map((item) -> BuiltInRegistries.ITEM.getResourceKey(item).orElse(null)).toList();

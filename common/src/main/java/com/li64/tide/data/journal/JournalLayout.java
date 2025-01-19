@@ -216,6 +216,40 @@ public class JournalLayout {
             addProfile("finsandtails:sapphire_spindly_gem_crab", "saltwater", "saltwater", "warm");
         }
 
+        if (Tide.PLATFORM.isModLoaded("hybrid-aquatic")) {
+            addProfile("hybrid-aquatic:anglerfish", "underground", "underground", "normal");
+            addProfile("hybrid-aquatic:barreleye", "underground", "underground", "normal");
+            addProfile("hybrid-aquatic:boxfish", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:betta", "freshwater", "swamp", "any");
+            addProfile("hybrid-aquatic:carp", "freshwater", "freshwater", "any");
+            addProfile("hybrid-aquatic:koi", "freshwater", "freshwater", "any");
+            addProfile("hybrid-aquatic:danio", "freshwater", "freshwater", "warm");
+            addProfile("hybrid-aquatic:discus", "freshwater", "freshwater", "warm");
+            addProfile("hybrid-aquatic:golden_dorado", "freshwater", "freshwater", "warm");
+            addProfile("hybrid-aquatic:goldfish", "freshwater", "cherry", "any");
+            addProfile("hybrid-aquatic:gourami", "freshwater", "freshwater", "warm");
+            addProfile("hybrid-aquatic:mackerel", "saltwater", "saltwater", "normal");
+            addProfile("hybrid-aquatic:moray_eel", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:oscar", "freshwater", "freshwater", "warm");
+            addProfile("hybrid-aquatic:pearlfish", "saltwater", "saltwater", "any");
+            addProfile("hybrid-aquatic:piranha", "freshwater", "freshwater", "warm");
+            addProfile("hybrid-aquatic:rockfish", "saltwater", "saltwater", "normal");
+            addProfile("hybrid-aquatic:sea_bass", "saltwater", "saltwater", "normal");
+            addProfile("hybrid-aquatic:snailfish", "saltwater", "saltwater", "any");
+            addProfile("hybrid-aquatic:squirrelfish", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:blue_spotted_stingray", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:spotted_eagle_ray", "saltwater", "saltwater", "normal");
+            addProfile("hybrid-aquatic:stonefish", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:sunfish", "saltwater", "saltwater", "normal");
+            addProfile("hybrid-aquatic:blue_tang", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:powder_blue_tang", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:surgeonfish_lined", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:surgeonfish_orangeshoulder", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:surgeonfish_sohal", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:unicornfish", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:yellow_tang", "saltwater", "saltwater", "warm");
+        }
+
         addProfile("tide:midas_fish", "profile.item.tide.midas_fish", "legendary", "any", "lucky");
         addProfile("tide:aquathorn", "profile.item.tide.aquathorn", "legendary", "structures", "any");
         addProfile("tide:voidseeker", "profile.item.tide.voidseeker", "legendary", "end", "full_new_moon");

@@ -1,4 +1,4 @@
-## Version 1.5.0 - 1/10/2024
+## Version 1.5.0 - 1/17/2024
 
 ### 🎣 New features 🎣
 
@@ -21,6 +21,7 @@
 ---
 **Misc Features**
 - Created 2 config settings for modifying crate probabilities
+- New fishing journal texture (created by miqotepetter)
 ---
 
 ### ⚙️ Bug fixes ⚙️
