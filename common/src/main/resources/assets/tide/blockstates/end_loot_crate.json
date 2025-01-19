@@ -4,7 +4,7 @@
       "model": "tide:block/end_loot_crate"
     },
     "open=true": {
-      "model": "tide:block/end_loot_crate"
+      "model": "tide:block/end_loot_crate_open"
     }
   }
 }

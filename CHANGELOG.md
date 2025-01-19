@@ -21,6 +21,8 @@
 ---
 **Misc Features**
 - Created 2 config settings for modifying crate probabilities
+- Fish from the Hybrid Aquatic mod will appear in the fishing journal
+- New crate and hook textures (created by yawpbaron)
 - New fishing journal texture (created by miqotepetter)
 ---
 

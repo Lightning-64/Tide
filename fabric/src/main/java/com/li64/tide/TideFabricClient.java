@@ -50,9 +50,9 @@ public class TideFabricClient implements ClientModInitializer {
         ItemProperties.register(TideItems.DIAMOND_FISHING_ROD, TideFishingRodItem.CAST_PROPERTY, rodCastFunction);
         ItemProperties.register(TideItems.NETHERITE_FISHING_ROD, TideFishingRodItem.CAST_PROPERTY, rodCastFunction);
 
-        BlockRenderLayerMap.INSTANCE.putBlock(TideBlocks.ALGAE, RenderType.cutoutMipped());
-        BlockRenderLayerMap.INSTANCE.putBlock(TideBlocks.JELLY_TORCH, RenderType.cutoutMipped());
-        BlockRenderLayerMap.INSTANCE.putBlock(TideBlocks.JELLY_WALL_TORCH, RenderType.cutoutMipped());
+        BlockRenderLayerMap.INSTANCE.putBlock(TideBlocks.ALGAE, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(TideBlocks.JELLY_TORCH, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(TideBlocks.JELLY_WALL_TORCH, RenderType.cutout());
 
         TideEntityRenderers.init();
         TideEntityRenderers.REGISTRY.forEach(TideFabricClient::registerRenderer);

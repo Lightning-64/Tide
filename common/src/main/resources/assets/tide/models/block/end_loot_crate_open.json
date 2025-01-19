@@ -3,6 +3,6 @@
   "textures": {
     "bottom": "tide:block/end_loot_crate_bottom",
     "side": "tide:block/end_loot_crate",
-    "top": "tide:block/end_loot_crate_bottom"
+    "top": "tide:block/end_loot_crate_open"
   }
 }
