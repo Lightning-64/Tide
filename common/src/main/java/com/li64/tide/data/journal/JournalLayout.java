@@ -251,6 +251,10 @@ public class JournalLayout {
             addProfile("hybrid-aquatic:yellow_tang", "saltwater", "saltwater", "warm");
         }
 
+        if (Tide.PLATFORM.isModLoaded("unusualend")) {
+            addProfile("unusualend:raw_bluk", "end", "end", "any");
+        }
+
         addProfile("tide:midas_fish", "profile.item.tide.midas_fish", "legendary", "any", "lucky");
         addProfile("tide:windbass", "profile.item.tide.windbass", "legendary", "structures", "any");
         addProfile("tide:aquathorn", "profile.item.tide.aquathorn", "legendary", "structures", "any");
@@ -269,7 +273,7 @@ public class JournalLayout {
     }
 
     private void addProfile(String fish, String desc, String page, String location, String climate) {
-        if (!BuiltInRegistries.ITEM.containsKey(new ResourceLocation(fish))) return;
+        if (!BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(fish))) return;
         profiles.add(new Profile(fish, desc, page, location, climate));
     }
 

@@ -69,17 +69,20 @@ public class HookAccessor extends FishingHook {
 
     @Override
     public @NotNull Vec3 position() {
+        if (hook == null) return new Vec3(0, 0, 0);
         return hook.position();
     }
 
     @Override
     public @NotNull BlockPos blockPosition() {
+        if (hook == null) return new BlockPos(0, 0, 0);
         return hook.blockPosition();
     }
 
     @Nullable
     @Override
     public Player getPlayerOwner() {
+        if (hook == null) return null;
         return hook.getPlayerOwner();
     }
 }
