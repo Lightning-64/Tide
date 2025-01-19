@@ -22,6 +22,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -685,8 +686,8 @@ public class TideFishingHook extends Projectile {
         ItemStack selection = select(lootKey, params).orElse(Items.SALMON.getDefaultInstance());
 
         // Primitive compat with unusual end
-        if (Tide.PLATFORM.isModLoaded("unusualend") && getBiome().is(new ResourceLocation("unusualend:warped_reef")))
-            selection = BuiltInRegistries.ITEM.get(new ResourceLocation("unusualend:raw_bluk")).getDefaultInstance();
+        if (Tide.PLATFORM.isModLoaded("unusualend") && getBiome().is(ResourceLocation.parse("unusualend:warped_reef")))
+            selection = BuiltInRegistries.ITEM.get(ResourceLocation.parse("unusualend:raw_bluk")).getDefaultInstance();
 
         // Magnetic bait override
         if (usingMagneticBait() && random.nextInt(0, 4) == 0) {

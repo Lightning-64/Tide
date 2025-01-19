@@ -189,6 +189,14 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy("has_planks", has(ItemTags.PLANKS))
                 .save(output);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, TideItems.SURFACE_LOOT_CRATE)
+                .pattern("SSS")
+                .pattern("S S")
+                .pattern("SSS")
+                .define('S', ItemTags.WOODEN_SLABS)
+                .unlockedBy("has_wooden_slab", has(ItemTags.WOODEN_SLABS))
+                .save(output);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, TideItems.DEEP_AQUA_ARROW, 8)
                 .pattern("###")
                 .pattern("#C#")

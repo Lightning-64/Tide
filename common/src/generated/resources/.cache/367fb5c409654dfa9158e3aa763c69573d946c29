@@ -1,4 +1,4 @@
-// 1.21	2025-01-19T13:10:32.4509083	Tide/Recipes
+// 1.21	2025-01-19T13:27:03.0883318	Tide/Recipes
 fd28e2397c5700ad230f0d8122a494632b8a9b4d data\tide\recipe\fishing_line.json
 4d2574c338140624f33922f683d313a15d17f8dc data\tide\advancement\recipes\food\cooked_fish_slice_smelting.json
 124d2cf3ae4db9005f607297455fc4dcc642d08c data\tide\advancement\recipes\misc\bobbers\black.json
@@ -15,6 +15,7 @@ a77707ee432a13251e697393a5f8ea285b793c65 data\tide\recipe\bobbers\diamond.json
 e2d9285d3b86728bd958cf6fcc15cc23d3dddf75 data\tide\recipe\bobbers\grassy.json
 5ffc662833b6be9940f8626e105f65d93cc414b6 data\tide\advancement\recipes\decorations\angler_workshop.json
 94a96ed409833a72630a8eaf900ed84ae83a0821 data\tide\recipe\bobbers\purple.json
+48de7e68dfe0a75d178ae2b50eec18babb0a4a2c data\tide\advancement\recipes\misc\surface_loot_crate.json
 e1c068ce1bbcacaa84be5152e89bd0ebebc49204 data\tide\advancement\recipes\tools\iron_rod_smithing.json
 0584d84d651db39f31566145bf75b8d128127cad data\tide\advancement\recipes\food\cooked_fish_smelting.json
 2319841d6f9d4d7ff440c31b2f39fd97540ab1b3 data\tide\advancement\recipes\misc\bone_meal_from_fish_bone.json
@@ -57,6 +58,7 @@ b894ba18bdd0279152061f1c547246e8bb777338 data\tide\advancement\recipes\tools\iro
 6bb0082739017930d37334ead31536cc7cd58675 data\tide\recipe\membrane_from_elytrout.json
 5ee1ba47ddeea431a4bb68f1da1273667bcaf64e data\tide\recipe\bobbers\enchanted_golden_apple.json
 c01d2b154b02cba910871753d14fccb3681543aa data\tide\recipe\bobbers\golden_apple.json
+3bdc460a4474f82b93dd8ce38f30ed69fe47b94a data\tide\recipe\surface_loot_crate.json
 68edd70cf20594f3f01034502435a0a081d8da7d data\tide\advancement\recipes\tools\rod_upgrading\crystal.json
 700be7e6f38692c4e59f4509e97cfd7e854c8c23 data\tide\recipe\jelly_torch_from_jellyfish.json
 44bbbe1ccf5373e4c4c562a49f5c168d1e76a02c data\tide\recipe\rod_upgrading\normal.json
