@@ -22,6 +22,7 @@
 **Misc Features**
 - Created 2 config settings for modifying crate probabilities
 - Fish from the Hybrid Aquatic mod will appear in the fishing journal
+- Fish from the Unusual End mod will appear in the fishing journal
 - New crate and hook textures (created by yawpbaron)
 - New fishing journal texture (created by miqotepetter)
 ---
@@ -30,6 +31,7 @@
 - Fixed a bug where interacting with the minigame would be heavily delayed on servers with high latency _([#4](https://github.com/Lightning-64/Tide/issues/4))_
 - Fixed a bug where putting a rod into the Angling Table would delete already inputted accessories
 - Fixed a bug where custom journal profiles would have no description text unless they used a translation
+- Fixed a bug where attempting to fish while Mine Cells is installed would not work
 
 ---
 

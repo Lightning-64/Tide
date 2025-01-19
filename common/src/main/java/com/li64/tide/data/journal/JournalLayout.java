@@ -251,6 +251,10 @@ public class JournalLayout {
             addProfile("hybrid-aquatic:yellow_tang", "saltwater", "saltwater", "warm");
         }
 
+        if (Tide.PLATFORM.isModLoaded("unusualend")) {
+            addProfile("unusualend:raw_bluk", "end", "end", "any");
+        }
+
         addProfile("tide:midas_fish", "profile.item.tide.midas_fish", "legendary", "any", "lucky");
         addProfile("tide:aquathorn", "profile.item.tide.aquathorn", "legendary", "structures", "any");
         addProfile("tide:voidseeker", "profile.item.tide.voidseeker", "legendary", "end", "full_new_moon");

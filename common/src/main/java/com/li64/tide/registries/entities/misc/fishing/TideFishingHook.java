@@ -14,6 +14,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -575,7 +576,7 @@ public class TideFishingHook extends Projectile {
                         // This needs to be awarded even if the event is canceled
                         if (fluid.is(TideTags.Fluids.LAVA_FISHING)) TideCriteriaTriggers.FISHED_IN_LAVA.trigger((ServerPlayer) player);
 
-                        boolean canceled = Tide.PLATFORM.forgeItemFishedEvent(itemList, this.onGround() ? 2 : 1, player.fishing);
+                        boolean canceled = Tide.PLATFORM.forgeItemFishedEvent(List.copyOf(itemList), this.onGround() ? 2 : 1, player.fishing);
 
                         if (canceled) {
                             this.discard();
@@ -675,6 +676,10 @@ public class TideFishingHook extends Projectile {
                 .create(LootContextParamSets.FISHING);
 
         ItemStack selection = select(lootKey, params).orElse(Items.SALMON.getDefaultInstance());
+
+        // Primitive compat with unusual end
+        if (Tide.PLATFORM.isModLoaded("unusualend") && getBiome().is(new ResourceLocation("unusualend:warped_reef")))
+            selection = BuiltInRegistries.ITEM.get(new ResourceLocation("unusualend:raw_bluk")).getDefaultInstance();
 
         // Magnetic bait override
         if (usingMagneticBait() && random.nextInt(0, 4) == 0) {

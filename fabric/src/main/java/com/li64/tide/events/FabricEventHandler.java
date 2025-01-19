@@ -49,7 +49,8 @@ public class FabricEventHandler {
 
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
             if (id.toString().matches(BuiltInLootTables.FISHING.toString())) {
-                tableBuilder.modifyPools(builder -> builder.add(Tide.getCrateFishingEntry()));
+                if (Tide.CONFIG.general.crateWeight > 0)
+                    tableBuilder.modifyPools(builder -> builder.add(Tide.getCrateFishingEntry()));
             }
 
             if (id.toString().matches(BuiltInLootTables.FISHING_JUNK.toString())) {
