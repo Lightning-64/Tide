@@ -5,6 +5,7 @@ import com.li64.tide.data.journal.config.CustomRemovalLoader;
 import com.li64.tide.util.TideUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -268,6 +269,7 @@ public class JournalLayout {
     }
 
     private void addProfile(String fish, String desc, String page, String location, String climate) {
+        if (!BuiltInRegistries.ITEM.containsKey(new ResourceLocation(fish))) return;
         profiles.add(new Profile(fish, desc, page, location, climate));
     }
 

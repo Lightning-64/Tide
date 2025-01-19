@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "bottom": "tide:block/obsidian_loot_crate_bottom",
+    "bottom": "tide:block/obsidian_loot_crate",
     "side": "tide:block/obsidian_loot_crate",
     "top": "tide:block/obsidian_loot_crate_open"
   }
