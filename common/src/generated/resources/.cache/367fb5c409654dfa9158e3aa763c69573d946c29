@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-10T13:05:37.2713546	Tide/Recipes
+// 1.20.1	2025-01-20T08:44:08.3708768	Tide/Recipes
 7321beab4a35f1365e1dbcfa15a5e1f7fff0ec18 data\tide\recipes\clayfish_smelting.json
 cf81ab7de9c10a23a7c18251353eaf242973d519 data\tide\recipes\bobbers\pearl.json
 2ceeb40bba609e1f8ae6f284209f9cb57da3a30a data\tide\recipes\rod_upgrading\netherite.json
@@ -70,6 +70,7 @@ d828116361aaf144b5e225fd08aafeca8d266ea5 data\tide\advancements\recipes\misc\lap
 0159adfa67c22f0e24ca65e32dcc6856fc5b677f data\tide\recipes\angler_workshop.json
 311bee5b81ea8324fcf0a57777f18c14961e3c5d data\tide\recipes\bobbers\grassy.json
 18a4c97ff75c717c1b0dfa29ca27bdf7d1d7b2b0 data\tide\recipes\rod_upgrading\golden.json
+b7102b20210bdf74a638c28abfe550ea9ab60709 data\tide\advancements\recipes\misc\surface_loot_crate.json
 0aee32aa187384c3e5015034ab374efc81decf3f data\tide\advancements\recipes\misc\end_stone_from_perch.json
 a90612b61538e7703c3c4a8abd4ceee05674f584 data\tide\advancements\recipes\misc\bobbers\brown.json
 42ef55b1826034f2d7b519f36931be328bab9454 data\tide\recipes\bobbers\nautilus.json
@@ -125,6 +126,7 @@ d80f26c79424c1e29edcdcb1484046f4254ae707 data\tide\recipes\jelly_torch_from_jell
 e3f2bba96a7f69dd5dc37b6b0ad3c7d38ae357fe data\tide\advancements\recipes\misc\bobbers\red.json
 e588a77d17196564b1e3e70c08f86eef894645b6 data\tide\recipes\cooked_fish_smoking.json
 03e31956abda836d41aa063476eebd3954083415 data\tide\advancements\recipes\combat\deep_aqua_arrow.json
+96bec8d90ba656d90b9f0a67434242976fba6c0c data\tide\recipes\surface_loot_crate.json
 b43c7ef6269d643db4532a12e119bc6af0710e5c data\tide\recipes\bobbers\white.json
 5cbb0cfad953681060ddd76421d3d3f4933f0510 data\tide\recipes\bobbers\magenta.json
 710f353e89ba037163f6eb6de80daaf51be47b75 data\tide\advancements\recipes\misc\bobbers\apple.json
@@ -155,8 +157,8 @@ f396f2462b0a6a9e48c183d7d09ca3aa0b1dd311 data\tide\recipes\bobbers\diamond.json
 8b51cabd4f12f8d1818f4aa44a6a7fd7833f8cba data\tide\recipes\membrane_from_elytrout.json
 27ef37a16bbb5b78fa52fff2bd1111a3f39455b0 data\tide\advancements\recipes\misc\bobbers\echo.json
 e76a80e46bdaa9db43c2301f8425589d6dd8b9da data\tide\recipes\bobbers\red.json
-07f72d14bf0c693d520e8483fe3ee23b667d6368 data\tide\recipes\bobbers\blue.json
 c7352334710d54f5eb41cbf68bb0195d02781c5d data\tide\advancements\recipes\misc\bobbers\gray.json
+07f72d14bf0c693d520e8483fe3ee23b667d6368 data\tide\recipes\bobbers\blue.json
 c82250d4a0b43abce5467359bc32e5750eaa8864 data\tide\recipes\diamond_rod_smithing.json
 509406897e4e9f13d8298d024294b46727f47cd9 data\tide\recipes\bobbers\apple.json
 76f3e97e0c082efa20dbe3d765276f6306bd22a7 data\tide\recipes\eye_from_endergazer.json
