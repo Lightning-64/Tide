@@ -2,6 +2,7 @@ package com.li64.tide.network.messages;
 
 import com.google.common.collect.ImmutableList;
 import com.li64.tide.Tide;
+import com.li64.tide.data.rods.AccessoryData;
 import com.li64.tide.data.rods.BaitData;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.FriendlyByteBuf;
@@ -11,21 +12,25 @@ import net.minecraft.world.entity.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UpdateBaitDataMsg {
+public class UpdateDataMsg {
     public static final ResourceLocation ID = Tide.resource("update_bait_data");
 
     private final List<BaitData> baitData;
+    private final List<AccessoryData> accessoryData;
 
-    public UpdateBaitDataMsg() {
+    public UpdateDataMsg() {
         baitData = Tide.BAIT_DATA.get();
+        accessoryData = Tide.ACCESSORY_DATA.get();
     }
 
-    public UpdateBaitDataMsg(FriendlyByteBuf buf) {
+    public UpdateDataMsg(FriendlyByteBuf buf) {
         baitData = readEntries(BaitData.CODEC, buf);
+        accessoryData = readEntries(AccessoryData.CODEC, buf);
     }
 
-    public static void encode(UpdateBaitDataMsg message, FriendlyByteBuf buf) {
+    public static void encode(UpdateDataMsg message, FriendlyByteBuf buf) {
         writeEntries(message.baitData, BaitData.CODEC, buf);
+        writeEntries(message.accessoryData, AccessoryData.CODEC, buf);
     }
 
     public static <T> ImmutableList<T> readEntries(Codec<T> codec, FriendlyByteBuf buf) {
@@ -42,7 +47,8 @@ public class UpdateBaitDataMsg {
         entries.forEach(entry -> buf.writeJsonWithCodec(codec, entry));
     }
 
-    public static void handle(UpdateBaitDataMsg message, Player player) {
+    public static void handle(UpdateDataMsg message, Player player) {
         Tide.BAIT_DATA.set(message.baitData);
+        Tide.ACCESSORY_DATA.set(message.accessoryData);
     }
 }

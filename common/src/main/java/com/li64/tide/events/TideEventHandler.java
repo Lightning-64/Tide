@@ -5,12 +5,11 @@ import com.li64.tide.client.gui.JournalPage;
 import com.li64.tide.data.journal.JournalLayout;
 import com.li64.tide.data.player.TidePlayerData;
 import com.li64.tide.network.messages.ShowToastMsg;
-import com.li64.tide.network.messages.UpdateBaitDataMsg;
+import com.li64.tide.network.messages.UpdateDataMsg;
 import com.li64.tide.network.messages.UpdateJournalMsg;
 import com.li64.tide.registries.TideItems;
 import com.li64.tide.util.TideUtils;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -39,7 +38,7 @@ public class TideEventHandler {
         if (!Tide.CONFIG.general.giveJournal) return;
 
         Tide.NETWORK.sendToPlayer(new UpdateJournalMsg(), player);
-        Tide.NETWORK.sendToPlayer(new UpdateBaitDataMsg(), player);
+        Tide.NETWORK.sendToPlayer(new UpdateDataMsg(), player);
 
         TidePlayerData playerData = TidePlayerData.getOrCreate(player);
         playerData.syncTo(player);
