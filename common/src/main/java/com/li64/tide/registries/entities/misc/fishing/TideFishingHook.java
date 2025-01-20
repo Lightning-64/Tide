@@ -576,12 +576,10 @@ public class TideFishingHook extends Projectile {
                         // This needs to be awarded even if the event is canceled
                         if (fluid.is(TideTags.Fluids.LAVA_FISHING)) TideCriteriaTriggers.FISHED_IN_LAVA.trigger((ServerPlayer) player);
 
-                        boolean canceled = Tide.PLATFORM.forgeItemFishedEvent(List.copyOf(itemList), this.onGround() ? 2 : 1, player.fishing);
-
-                        if (canceled) {
-                            this.discard();
-                            return 1;
-                        }
+//                        if (Tide.PLATFORM.forgeItemFishedEvent(List.copyOf(itemList), this.onGround() ? 2 : 1, player.fishing)) {
+//                            this.discard();
+//                            return 1;
+//                        }
 
                         ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), hookedItem);
 
@@ -678,8 +676,9 @@ public class TideFishingHook extends Projectile {
         ItemStack selection = select(lootKey, params).orElse(Items.SALMON.getDefaultInstance());
 
         // Primitive compat with unusual end
-        if (Tide.PLATFORM.isModLoaded("unusualend") && getBiome().is(new ResourceLocation("unusualend:warped_reef")))
-            selection = BuiltInRegistries.ITEM.get(new ResourceLocation("unusualend:raw_bluk")).getDefaultInstance();
+        if (Tide.PLATFORM.isModLoaded("unusualend") && getBiome().is(new ResourceLocation("unusualend:warped_reef"))) {
+            if (random.nextFloat() > 0.5f) selection = BuiltInRegistries.ITEM.get(new ResourceLocation("unusualend:raw_bluk")).getDefaultInstance();
+        }
 
         // Magnetic bait override
         if (usingMagneticBait() && random.nextInt(0, 4) == 0) {

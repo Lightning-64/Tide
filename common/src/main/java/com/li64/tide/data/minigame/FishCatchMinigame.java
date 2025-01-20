@@ -6,6 +6,7 @@ import com.li64.tide.registries.TideItems;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import com.li64.tide.registries.items.StrengthFish;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -53,8 +54,8 @@ public class FishCatchMinigame {
         hook.setMinigameActive(true);
 
         float strength = 0f;
-        if (hook.getHookedItem() instanceof StrengthFish strengthFish)
-            strength = strengthFish.getStrength();
+        if (hook.getHookedItem() instanceof StrengthFish strengthFish) strength = strengthFish.getStrength();
+        if (BuiltInRegistries.ITEM.getKey(hook.getHookedItem()).getNamespace().contains("unusualend")) strength = 4.5f;
 
         if (hook.getHook().is(TideItems.IRON_FISHING_HOOK)) strength *= 0.89f;
 
