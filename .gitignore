@@ -22,3 +22,8 @@ build
 eclipse
 run
 runs
+
+# jars
+!fabric/build/libs
+!forge/build/libs
+!neoforge/build/libs

@@ -10,7 +10,7 @@ neoForge {
     def datagenLocation = project(':common').file('src/generated/resources').getAbsolutePath()
 
     if (at.exists()) {
-        accessTransformers.add(at.absolutePath)
+        accessTransformers.from(at.absolutePath)
     }
     parchment {
         minecraftVersion = parchment_minecraft
@@ -25,7 +25,7 @@ neoForge {
             client()
         }
         data {
-            data()
+            clientData()
             programArguments.addAll '--mod', 'tide',
                     '--output', datagenLocation
                     '--includeServer'
@@ -59,11 +59,11 @@ repositories {
 }
 
 dependencies {
-    compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
-    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
-    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+//    compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+//    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
+//    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 
-    api("me.shedaniel.cloth:cloth-config-neoforge:15.0.130")
+    api("me.shedaniel.cloth:cloth-config-neoforge:${cloth_config_version}")
 }
 
 sourceSets.main.resources {

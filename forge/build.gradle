@@ -13,6 +13,12 @@ mixin {
     config("${mod_id}.forge.mixins.json")
 }
 
+jar {
+    manifest {
+        attributes["MixinConfigs"] = "${mod_id}.mixins.json,${mod_id}.forge.mixins.json"
+    }
+}
+
 minecraft {
     mappings channel: 'official', version: minecraft_version
 
@@ -85,9 +91,9 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 
-    compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
-    compileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
-    runtimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+//    compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+//    compileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+//    runtimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
     implementation("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
     // implementation("curse.maven:stardewfishing-1066037:5565142")
