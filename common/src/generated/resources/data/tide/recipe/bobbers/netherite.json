@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "tag": "c:slime_balls"
-    },
-    {
-      "tag": "minecraft:planks"
-    },
-    {
-      "item": "minecraft:netherite_ingot"
-    }
+    "#c:slime_balls",
+    "#minecraft:planks",
+    "minecraft:netherite_ingot"
   ],
   "result": {
     "count": 1,

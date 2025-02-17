@@ -1,3 +1,7 @@
+## Version 1.5.0 - 1.21.4 - 2/??/25
+
+- Updated to Minecraft 1.21.4
+
 ## Version 1.5.0 - 1/17/2024
 
 ### 🎣 New features 🎣

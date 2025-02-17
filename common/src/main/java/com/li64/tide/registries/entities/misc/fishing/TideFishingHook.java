@@ -7,7 +7,7 @@ import com.li64.tide.data.TideTags;
 import com.li64.tide.data.rods.BaitContents;
 import com.li64.tide.data.rods.CustomRodManager;
 import com.li64.tide.registries.TideBlocks;
-import com.li64.tide.registries.entities.misc.LootCrateEntity;
+import com.li64.tide.registries.blocks.entities.LootCrateBlockEntity;
 import com.li64.tide.registries.items.TideFishingRodItem;
 import com.li64.tide.util.BaitUtils;
 import com.mojang.logging.LogUtils;
@@ -27,12 +27,12 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -91,7 +91,6 @@ public class TideFishingHook extends Projectile {
 
     private TideFishingHook(EntityType<? extends TideFishingHook> entityType, Level level, int luck, int lureSpeed, ItemStack rod) {
         super(entityType, level);
-        this.noCulling = true;
         this.rod = rod;
         this.entityData.set(DATA_ROD_ITEM, rod);
         this.luck = Math.max(0, luck + (getLine().is(TideItems.FORTUNE_LINE) ? 1 : 0));
@@ -607,38 +606,31 @@ public class TideFishingHook extends Projectile {
 
                         CriteriaTriggers.FISHING_ROD_HOOKED.trigger((ServerPlayer) player, stack, player.fishing, itemList);
 
-                        Tide.LOG.info("Caught fish: {}", hookedItem.getDescriptionId());
+                        Tide.LOG.info("Caught fish: {}", hookedItem.getItem().getDescriptionId());
                         break;
 
                     case CRATE:
-                        BlockState lootCrate;
-
-                        lootCrate = getCrateBlock(hookedItem);
-
-                        LootParams.Builder lootParamsBuilder = new LootParams.Builder((ServerLevel) this.level())
-                                .withParameter(LootContextParams.ORIGIN, this.position())
-                                .withParameter(LootContextParams.TOOL, stack)
-                                .withParameter(LootContextParams.THIS_ENTITY, this);
-
-                        // Only forge and neoforge can use this parameter here
-                        if (!Tide.PLATFORM.isFabric()) lootParamsBuilder = lootParamsBuilder
-                                .withParameter(LootContextParams.ATTACKING_ENTITY, Objects.requireNonNull(this.getOwner()));
-
-                        LootParams params = lootParamsBuilder
-                                .withLuck((float)luck + player.getLuck())
-                                .create(LootContextParamSets.FISHING);
+                        BlockState lootCrate = getCrateBlock(hookedItem);
 
                         level.setBlockAndUpdate(this.blockPosition(), lootCrate);
+                        CompoundTag blockData = new CompoundTag();
+
+                        if (level.getBlockEntity(this.blockPosition()) instanceof LootCrateBlockEntity crateBlockEntity) {
+                            crateBlockEntity.setCrateParams(luck + player.getLuck(), this.position(), player, stack, this);
+                            blockData = crateBlockEntity.saveWithoutMetadata(registryAccess());
+                        }
 
                         double dx = player.getX() - this.blockPosition().getX();
                         double dy = player.getY() - this.blockPosition().getY();
                         double dz = player.getZ() - this.blockPosition().getZ();
 
-                        LootCrateEntity.fall(level, this.blockPosition(), lootCrate,
+                        FallingBlockEntity crateEntity = FallingBlockEntity.fall(level, this.blockPosition(), lootCrate);
+                        crateEntity.blockData = blockData;
+                        crateEntity.setDeltaMovement(
                                 dx * 0.0666d,
                                 dy * 0.0666d + Math.sqrt(Math.sqrt(dx * dx + dy * dy + dz * dz)) * 0.082d + 0.27d,
-                                dz * 0.0666d,
-                                TideLootTables.Fishing.CRATES, params);
+                                dz * 0.0666d
+                        );
 
                         if (fluid.is(TideTags.Fluids.LAVA_FISHING) && fluid.is(Fluids.LAVA)) level.setBlockAndUpdate(this.blockPosition(), Blocks.LAVA.defaultBlockState());
                         if (fluid.is(TideTags.Fluids.WATER_FISHING) && fluid.is(Fluids.WATER)) level.setBlockAndUpdate(this.blockPosition(), Blocks.WATER.defaultBlockState());
@@ -687,10 +679,10 @@ public class TideFishingHook extends Projectile {
 
         // Primitive compat with unusual end
         if (Tide.PLATFORM.isModLoaded("unusualend") && getBiome().is(ResourceLocation.parse("unusualend:warped_reef")))
-            selection = BuiltInRegistries.ITEM.get(ResourceLocation.parse("unusualend:raw_bluk")).getDefaultInstance();
+            selection = BuiltInRegistries.ITEM.get(ResourceLocation.parse("unusualend:raw_bluk")).orElseThrow().value().getDefaultInstance();
 
         // Magnetic bait override
-        if (usingMagneticBait() && random.nextInt(0, 4) == 0) {
+        if (usingMagneticBait() && random.nextInt(0, 1) == 0) { // TODO change 1 back to 4
             // select from crate
             lootKey = TideLootTables.Fishing.CRATES_BLOCK;
             selection = select(lootKey, params).orElse(TideItems.SURFACE_LOOT_CRATE.getDefaultInstance());
@@ -809,7 +801,7 @@ public class TideFishingHook extends Projectile {
         if (this.getPlayerOwner() == null) {
             int i = packet.getData();
             LOGGER.error("Failed to recreate fishing hook on client. {} (id: {}) is not a valid owner.", this.level().getEntity(i), i);
-            this.kill();
+            this.discard();
         }
     }
 

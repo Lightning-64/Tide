@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "tag": "c:slime_balls"
-    },
-    {
-      "tag": "minecraft:planks"
-    },
-    {
-      "item": "minecraft:enchanted_golden_apple"
-    }
+    "#c:slime_balls",
+    "#minecraft:planks",
+    "minecraft:enchanted_golden_apple"
   ],
   "result": {
     "count": 1,

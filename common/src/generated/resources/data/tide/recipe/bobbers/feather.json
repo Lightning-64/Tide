@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "tag": "c:slime_balls"
-    },
-    {
-      "tag": "minecraft:planks"
-    },
-    {
-      "item": "minecraft:feather"
-    }
+    "#c:slime_balls",
+    "#minecraft:planks",
+    "minecraft:feather"
   ],
   "result": {
     "count": 1,

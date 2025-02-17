@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "tag": "c:slime_balls"
-    },
-    {
-      "tag": "minecraft:planks"
-    },
-    {
-      "item": "minecraft:heart_of_the_sea"
-    }
+    "#c:slime_balls",
+    "#minecraft:planks",
+    "minecraft:heart_of_the_sea"
   ],
   "result": {
     "count": 1,

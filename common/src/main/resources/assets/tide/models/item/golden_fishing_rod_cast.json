@@ -1,6 +1,0 @@
-{
-  "parent": "item/handheld_rod",
-  "textures": {
-    "layer0": "tide:item/golden_fishing_rod_cast"
-  }
-}

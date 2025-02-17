@@ -8,16 +8,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class JellyTorchBlockItem extends StandingAndWallBlockItem {
     public JellyTorchBlockItem(Block normal, Block wall, Properties properties, Direction direction) {
-        super(normal, wall, properties, direction);
+        super(normal, wall, direction, properties);
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, TooltipContext context, List<Component> hoverText, TooltipFlag flag) {
+    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext context, @NotNull List<Component> hoverText, @NotNull TooltipFlag flag) {
         super.appendHoverText(itemStack, context, hoverText, flag);
         Style style = Component.empty().getStyle().withColor(ChatFormatting.GRAY).withItalic(true);
         hoverText.add(Component.translatable("item.tide.jelly_torch.desc").setStyle(style));

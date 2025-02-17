@@ -1,8 +1,8 @@
-// 1.21	2025-01-19T13:27:03.085188	Tide/Block Loot Tables
-54ab03d25cc51bc1701999dd71f872c0c978a915 data\tide\loot_table\blocks\jelly_torch.json
-a6ad0f563df2f4eb3d0f40f6488717f40ac6e6a6 data\tide\loot_table\blocks\obsidian_loot_crate.json
-f95f11e35da488ff9f48dec541be6336614f5bf2 data\tide\loot_table\blocks\end_loot_crate.json
-2e53ffb7969f5193c21532544207f79a340b5f2e data\tide\loot_table\blocks\algae.json
-521e220fdfa7da7498a8526e7d63edacf5804073 data\tide\loot_table\blocks\angler_workshop.json
-603ebdae6c3989d76c5c66497b71c1b84e0fc0ba data\tide\loot_table\blocks\surface_loot_crate.json
-54ab03d25cc51bc1701999dd71f872c0c978a915 data\tide\loot_table\blocks\jelly_wall_torch.json
+// 1.21.4	-999999999-01-01T00:00:00	Tide/Block Loot Tables
+2e53ffb7969f5193c21532544207f79a340b5f2e data/tide/loot_table/blocks/algae.json
+521e220fdfa7da7498a8526e7d63edacf5804073 data/tide/loot_table/blocks/angler_workshop.json
+f95f11e35da488ff9f48dec541be6336614f5bf2 data/tide/loot_table/blocks/end_loot_crate.json
+54ab03d25cc51bc1701999dd71f872c0c978a915 data/tide/loot_table/blocks/jelly_torch.json
+54ab03d25cc51bc1701999dd71f872c0c978a915 data/tide/loot_table/blocks/jelly_wall_torch.json
+a6ad0f563df2f4eb3d0f40f6488717f40ac6e6a6 data/tide/loot_table/blocks/obsidian_loot_crate.json
+603ebdae6c3989d76c5c66497b71c1b84e0fc0ba data/tide/loot_table/blocks/surface_loot_crate.json

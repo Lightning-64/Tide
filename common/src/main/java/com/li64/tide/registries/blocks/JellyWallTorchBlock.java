@@ -1,6 +1,6 @@
 package com.li64.tide.registries.blocks;
 
-import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
@@ -16,8 +16,8 @@ import org.jetbrains.annotations.NotNull;
 public class JellyWallTorchBlock extends WallTorchBlock implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    public JellyWallTorchBlock(SimpleParticleType particleType, Properties properties) {
-        super(particleType, properties);
+    public JellyWallTorchBlock(Properties properties) {
+        super(ParticleTypes.END_ROD, properties);
     }
 
     protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> stateBuilder) {
@@ -34,7 +34,7 @@ public class JellyWallTorchBlock extends WallTorchBlock implements SimpleWaterlo
         else return placementState.setValue(WATERLOGGED, false);
     }
 
-    public FluidState getFluidState(BlockState blockState) {
+    public @NotNull FluidState getFluidState(BlockState blockState) {
         return blockState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(blockState);
     }
 }

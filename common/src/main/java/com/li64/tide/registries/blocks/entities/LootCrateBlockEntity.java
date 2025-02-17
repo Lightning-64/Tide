@@ -1,16 +1,22 @@
 package com.li64.tide.registries.blocks.entities;
 
+import com.li64.tide.Tide;
 import com.li64.tide.registries.blocks.AbstractLootCrateBlock;
+import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -21,30 +27,42 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public abstract class LootCrateBlockEntity extends RandomizableContainerBlockEntity {
+import java.util.UUID;
+
+public class LootCrateBlockEntity extends RandomizableContainerBlockEntity {
+    private float fishingLuck;
+    private Vec3 pullOrigin;
+    private UUID player;
+    private ItemStack fishingRod;
+    private UUID fishingHook;
+    private boolean isFresh;
+
     private NonNullList<ItemStack> items = NonNullList.withSize(27, ItemStack.EMPTY);
     private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter() {
         @Override
-        protected void onOpen(Level p_155062_, BlockPos p_155063_, BlockState p_155064_) {
-            LootCrateBlockEntity.this.playSound(p_155064_, SoundEvents.BARREL_OPEN);
-            LootCrateBlockEntity.this.updateBlockState(p_155064_, true);
+        protected void onOpen(Level level, BlockPos pos, BlockState state) {
+            LootCrateBlockEntity.this.playSound(state, SoundEvents.BARREL_OPEN);
+            LootCrateBlockEntity.this.updateBlockState(state, true);
         }
 
         @Override
-        protected void onClose(Level p_155072_, BlockPos p_155073_, BlockState p_155074_) {
-            LootCrateBlockEntity.this.playSound(p_155074_, SoundEvents.BARREL_CLOSE);
-            LootCrateBlockEntity.this.updateBlockState(p_155074_, false);
+        protected void onClose(Level level, BlockPos pos, BlockState state) {
+            LootCrateBlockEntity.this.playSound(state, SoundEvents.BARREL_CLOSE);
+            LootCrateBlockEntity.this.updateBlockState(state, false);
         }
 
         @Override
-        protected void openerCountChanged(Level p_155066_, BlockPos p_155067_, BlockState p_155068_, int p_155069_, int p_155070_) {
+        protected void openerCountChanged(Level level, BlockPos pos, BlockState state, int p_155069_, int p_155070_) {
         }
 
         @Override
-        protected boolean isOwnContainer(Player p_155060_) {
-            if (p_155060_.containerMenu instanceof ChestMenu) {
-                Container container = ((ChestMenu)p_155060_.containerMenu).getContainer();
+        protected boolean isOwnContainer(Player player) {
+            if (player.containerMenu instanceof ChestMenu) {
+                Container container = ((ChestMenu)player.containerMenu).getContainer();
                 return container == LootCrateBlockEntity.this;
             } else {
                 return false;
@@ -57,19 +75,57 @@ public abstract class LootCrateBlockEntity extends RandomizableContainerBlockEnt
     }
 
     @Override
-    protected void saveAdditional(CompoundTag p_187459_, HolderLookup.Provider p_330809_) {
-        super.saveAdditional(p_187459_, p_330809_);
-        if (!this.trySaveLootTable(p_187459_)) {
-            ContainerHelper.saveAllItems(p_187459_, this.items, p_330809_);
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
+        super.saveAdditional(tag, registries);
+
+        tag.putFloat("FishingLuck", this.fishingLuck);
+        tag.putBoolean("IsFresh", this.isFresh);
+
+        if (this.pullOrigin != null) {
+            Vec3.CODEC.encodeStart(NbtOps.INSTANCE, this.pullOrigin)
+                    .resultOrPartial(Tide.LOG::error)
+                    .ifPresent(compound -> tag.put("PullOrigin", compound));
+        }
+
+        if (this.fishingRod != null) {
+            ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, this.fishingRod)
+                    .resultOrPartial(Tide.LOG::error)
+                    .ifPresent(compound -> tag.put("FishingRod", compound));
+        }
+
+        if (this.player != null) tag.putUUID("PlayerID", this.player);
+        if (this.fishingHook != null) tag.putUUID("HookID", this.fishingHook);
+
+        if (!this.trySaveLootTable(tag)) {
+            ContainerHelper.saveAllItems(tag, this.items, registries);
         }
     }
 
     @Override
-    protected void loadAdditional(CompoundTag p_332191_, HolderLookup.Provider p_334663_) {
-        super.loadAdditional(p_332191_, p_334663_);
+    protected void loadAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries) {
+        super.loadAdditional(tag, registries);
+
+        if (tag.contains("FishingLuck")) this.fishingLuck = tag.getFloat("FishingLuck");
+        if (tag.contains("IsFresh")) this.isFresh = tag.getBoolean("IsFresh");
+
+        if (tag.contains("PullOrigin")) {
+            Vec3.CODEC.parse(NbtOps.INSTANCE, tag.getCompound("PullOrigin"))
+                    .resultOrPartial(Tide.LOG::error)
+                    .ifPresent(value -> this.pullOrigin = value);
+        }
+
+        if (tag.contains("FishingRod")) {
+            ItemStack.CODEC.parse(NbtOps.INSTANCE, tag.getCompound("FishingRod"))
+                    .resultOrPartial(Tide.LOG::error)
+                    .ifPresent(value -> this.fishingRod = value);
+        }
+
+        if (tag.contains("PlayerID")) this.player = tag.getUUID("PlayerID");
+        if (tag.contains("HookID")) this.fishingHook = tag.getUUID("HookID");
+
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        if (!this.tryLoadLootTable(p_332191_)) {
-            ContainerHelper.loadAllItems(p_332191_, this.items, p_334663_);
+        if (!this.tryLoadLootTable(tag)) {
+            ContainerHelper.loadAllItems(tag, this.items, registries);
         }
     }
 
@@ -79,36 +135,36 @@ public abstract class LootCrateBlockEntity extends RandomizableContainerBlockEnt
     }
 
     @Override
-    protected NonNullList<ItemStack> getItems() {
+    protected @NotNull NonNullList<ItemStack> getItems() {
         return this.items;
     }
 
     @Override
-    protected void setItems(NonNullList<ItemStack> p_58610_) {
-        this.items = p_58610_;
+    protected void setItems(@NotNull NonNullList<ItemStack> items) {
+        this.items = items;
     }
 
     @Override
-    protected Component getDefaultName() {
+    protected @NotNull Component getDefaultName() {
         return Component.translatable("container.tide.loot_crate");
     }
 
     @Override
-    protected AbstractContainerMenu createMenu(int p_58598_, Inventory p_58599_) {
-        return ChestMenu.threeRows(p_58598_, p_58599_, this);
+    protected @NotNull AbstractContainerMenu createMenu(int var, @NotNull Inventory inventory) {
+        return ChestMenu.threeRows(var, inventory, this);
     }
 
     @Override
-    public void startOpen(Player p_58616_) {
-        if (!this.remove && !p_58616_.isSpectator()) {
-            this.openersCounter.incrementOpeners(p_58616_, this.getLevel(), this.getBlockPos(), this.getBlockState());
+    public void startOpen(@NotNull Player player) {
+        if (!this.remove && !player.isSpectator()) {
+            this.openersCounter.incrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
         }
     }
 
     @Override
-    public void stopOpen(Player p_58614_) {
-        if (!this.remove && !p_58614_.isSpectator()) {
-            this.openersCounter.decrementOpeners(p_58614_, this.getLevel(), this.getBlockPos(), this.getBlockState());
+    public void stopOpen(@NotNull Player player) {
+        if (!this.remove && !player.isSpectator()) {
+            this.openersCounter.decrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
         }
     }
 
@@ -127,5 +183,47 @@ public abstract class LootCrateBlockEntity extends RandomizableContainerBlockEnt
         double d1 = (double)this.worldPosition.getY() + 1.0;
         double d2 = (double)this.worldPosition.getZ() + 0.5;
         this.level.playSound(null, d0, d1, d2, soundEvent, SoundSource.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
+    }
+
+    public float getFishingLuck() {
+        return fishingLuck;
+    }
+
+    public Vec3 getPullOrigin() {
+        return pullOrigin;
+    }
+
+    public Player getPlayer(ServerLevel level) {
+        return level.getPlayerByUUID(this.player);
+    }
+
+    public ItemStack getFishingRod() {
+        return fishingRod;
+    }
+
+    public @Nullable TideFishingHook getFishingHook(ServerLevel level) {
+        Entity entity = level.getEntity(this.fishingHook);
+        if (entity instanceof TideFishingHook hook) return hook;
+        else return null;
+    }
+
+    public boolean isFresh() {
+        return isFresh;
+    }
+
+    public void markNotFresh() {
+        this.isFresh = false;
+        this.setChanged();
+    }
+
+    public void setCrateParams(float luck, Vec3 pullOrigin, Player player, ItemStack fishingRod, TideFishingHook fishingHook) {
+        if (!(player instanceof ServerPlayer)) return;
+        this.fishingLuck = luck;
+        this.pullOrigin = pullOrigin;
+        this.player = player.getUUID();
+        this.fishingRod = fishingRod;
+        this.fishingHook = fishingHook.getUUID();
+        this.isFresh = true;
+        this.setChanged();
     }
 }

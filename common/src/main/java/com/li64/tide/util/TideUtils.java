@@ -9,8 +9,6 @@ import com.li64.tide.data.TideTags;
 import com.li64.tide.data.loot.DepthLayer;
 import com.li64.tide.data.player.TidePlayerData;
 import com.li64.tide.network.messages.ShowToastMsg;
-import com.li64.tide.registries.TideItems;
-import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,10 +16,10 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.FluidState;
@@ -115,7 +113,7 @@ public class TideUtils {
     }
 
     public static Item getItemFromName(String name) {
-        return BuiltInRegistries.ITEM.get(ResourceLocation.read(name).getOrThrow());
+        return BuiltInRegistries.ITEM.get(ResourceLocation.read(name).getOrThrow()).orElseThrow().value();
     }
 
     public static void checkPageCompletion(TidePlayerData data, JournalPage page, ServerPlayer player) {
@@ -209,7 +207,7 @@ public class TideUtils {
 
     public static List<Item> getFishFromProfileList(List<JournalLayout.Profile> profiles) {
         return profiles.stream().map(profile -> BuiltInRegistries.ITEM
-                .get(ResourceLocation.parse(profile.fishItem()))).toList();
+                .get(ResourceLocation.parse(profile.fishItem())).orElseThrow().value()).toList();
     }
 
     public static List<Item> getFishFromPageName(String name) {
@@ -227,8 +225,14 @@ public class TideUtils {
     }
 
     public static JournalLayout.Profile getProfileFromItem(ItemStack item) {
-        return Tide.JOURNAL.getProfileConfigs().stream().filter(config ->
-                        item.is(BuiltInRegistries.ITEM.get(ResourceLocation.parse(config.fishItem()))))
+        return Tide.JOURNAL.getProfileConfigs().stream()
+                .filter(config -> item.is(BuiltInRegistries.ITEM.get(
+                        ResourceLocation.parse(config.fishItem())).orElseThrow().value()))
                 .findFirst().orElse(null);
+    }
+
+    public static Item itemFromLocation(ResourceLocation location) {
+        return BuiltInRegistries.ITEM.get(location).orElse(BuiltInRegistries.ITEM.get(
+                BuiltInRegistries.ITEM.getKey(Items.AIR)).orElseThrow()).value();
     }
 }

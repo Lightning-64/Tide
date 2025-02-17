@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "tide:fish_bone"
-    }
+    "tide:fish_bone"
   ],
   "result": {
     "count": 2,

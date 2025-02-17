@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "tide:hardened_clayfish"
-    }
+    "tide:hardened_clayfish"
   ],
   "result": {
     "count": 8,

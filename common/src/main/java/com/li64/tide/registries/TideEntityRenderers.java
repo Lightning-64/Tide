@@ -2,7 +2,6 @@ package com.li64.tide.registries;
 
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHookRenderer;
 import com.li64.tide.registries.entities.misc.DeepAquaArrowRenderer;
-import com.li64.tide.registries.entities.misc.LootCrateRenderer;
 import com.li64.tide.registries.entities.models.SimpleFishModel.Variant;
 import com.li64.tide.registries.entities.renderers.*;
 import com.li64.tide.registries.entities.util.AbstractTideFish;
@@ -18,7 +17,6 @@ public class TideEntityRenderers {
     public record Registration<T extends Entity>(EntityType<T> entityType, EntityRendererProvider<T> renderer) {}
 
     public static void init() {
-        registerEntityRenderer(TideEntityTypes.LOOT_CRATE, LootCrateRenderer::new);
         registerEntityRenderer(TideEntityTypes.FISHING_BOBBER, TideFishingHookRenderer::new);
         registerEntityRenderer(TideEntityTypes.DEEP_AQUA_ARROW, DeepAquaArrowRenderer::new);
 

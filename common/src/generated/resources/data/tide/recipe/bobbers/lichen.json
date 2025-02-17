@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "tag": "c:slime_balls"
-    },
-    {
-      "tag": "minecraft:planks"
-    },
-    {
-      "item": "minecraft:glow_lichen"
-    }
+    "#c:slime_balls",
+    "#minecraft:planks",
+    "minecraft:glow_lichen"
   ],
   "result": {
     "count": 1,

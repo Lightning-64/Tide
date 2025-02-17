@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "tide:iron_tetra"
-    }
+    "tide:iron_tetra"
   ],
   "result": {
     "count": 2,

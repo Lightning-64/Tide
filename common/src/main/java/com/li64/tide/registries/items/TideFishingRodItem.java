@@ -35,7 +35,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
@@ -150,7 +150,7 @@ public class TideFishingRodItem extends FishingRodItem {
                 || (this == TideItems.NETHERITE_FISHING_ROD);
     }
 
-    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
+    public @NotNull InteractionResult use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
         if (isHookActive(player)) {
             TideFishingHook hook = getHook(player);
 
@@ -181,7 +181,7 @@ public class TideFishingRodItem extends FishingRodItem {
                     }
                 } else {
                     if (!level.isClientSide() && FishCatchMinigame.delayActive((ServerPlayer) player))
-                        return InteractionResultHolder.consume(player.getItemInHand(hand));
+                        return InteractionResult.CONSUME;
                     retrieveHook(player.getItemInHand(hand), player, level);
                 }
 
@@ -194,21 +194,21 @@ public class TideFishingRodItem extends FishingRodItem {
                     CatchMinigameOverlay.interact();
                 }
             }
-            return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
+            return InteractionResult.SUCCESS;
         } else {
             if (!level.isClientSide() && FishCatchMinigame.delayActive((ServerPlayer) player))
-                return InteractionResultHolder.consume(player.getItemInHand(hand));
+                return InteractionResult.CONSUME;
 
             if (Tide.CONFIG.general.holdToCast) {
                 // Charge the cast if the hook isn't active
                 level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.FISHING_BOBBER_RETRIEVE,
                         SoundSource.NEUTRAL, 1.5F, 0.3F / (level.getRandom().nextFloat() * 0.4F + 0.7F));
                 player.startUsingItem(hand);
-                return InteractionResultHolder.consume(player.getItemInHand(hand));
+                return InteractionResult.CONSUME;
             } else {
                 // Cast the hook normally
                 castHook(player.getItemInHand(hand), player, level, 1f);
-                return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
+                return InteractionResult.SUCCESS;
             }
         }
     }
@@ -218,9 +218,8 @@ public class TideFishingRodItem extends FishingRodItem {
     }
 
     @Override
-    public void releaseUsing(@NotNull ItemStack rod, @NotNull Level level, @NotNull LivingEntity user, int charge) {
+    public boolean releaseUsing(@NotNull ItemStack rod, @NotNull Level level, @NotNull LivingEntity user, int charge) {
         if (user instanceof Player player) {
-
             int chargeDifference = this.getUseDuration(rod, user) - charge;
             int chargeDuration = getChargeDuration(rod, level.registryAccess());
 
@@ -228,7 +227,9 @@ public class TideFishingRodItem extends FishingRodItem {
             if (chargeDifference > chargeDuration) chargeDifference = chargeDuration;
             float chargeMultiplier = ((float) chargeDifference / (float) chargeDuration) + 0.5f;
             castHook(rod, player, level, chargeMultiplier);
+            return true;
         }
+        return false;
     }
 
     public boolean isHookActive(Player player) {
@@ -300,7 +301,7 @@ public class TideFishingRodItem extends FishingRodItem {
         return CustomRodManager.getLine(rod, registries).is(TideItems.BRAIDED_LINE) ? 15 : 25;
     }
 
-    public @NotNull UseAnim getUseAnimation(@NotNull ItemStack stack) {
-        return UseAnim.BOW;
+    public @NotNull ItemUseAnimation getUseAnimation(@NotNull ItemStack stack) {
+        return ItemUseAnimation.BOW;
     }
 }

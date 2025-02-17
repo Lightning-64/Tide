@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "tag": "c:ingots/gold"
-    },
-    "L": {
-      "item": "tide:fishing_line"
-    }
+    "#": "#c:ingots/gold",
+    "L": "tide:fishing_line"
   },
   "pattern": [
     "#",

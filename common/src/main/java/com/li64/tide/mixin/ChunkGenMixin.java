@@ -4,9 +4,11 @@ import com.li64.tide.Tide;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
@@ -22,8 +24,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ChunkGenerator.class)
 public class ChunkGenMixin {
     @Inject(method = "tryGenerateStructure", at = @At("HEAD"), cancellable = true)
-    public void disableStructures$AttemptStructureDisable(StructureSet.StructureSelectionEntry entry, StructureManager structureManager, RegistryAccess registries, RandomState $$3, StructureTemplateManager $$4, long $$5, ChunkAccess $$6, ChunkPos $$7, SectionPos $$8, CallbackInfoReturnable<Boolean> cir) {
-        ResourceLocation structure = registries.registryOrThrow(Registries.STRUCTURE).getKey(entry.structure().value());
+    public void disableStructures$AttemptStructureDisable(
+            StructureSet.StructureSelectionEntry entry,
+            StructureManager manager, RegistryAccess registryAccess,
+            RandomState random, StructureTemplateManager structureTemplateManager,
+            long seed, ChunkAccess chunk, ChunkPos chunkPos, SectionPos sectionPos,
+            ResourceKey<Level> level, CallbackInfoReturnable<Boolean> cir) {
+
+        ResourceLocation structure = registryAccess.lookup(Registries.STRUCTURE).orElseThrow().getKey(entry.structure().value());
         if (structure == null) return;
         if (!structure.getNamespace().equals(Tide.MOD_ID)) return;
 
@@ -31,9 +39,13 @@ public class ChunkGenMixin {
     }
 
     @Inject(method = "findNearestMapStructure", at = @At("HEAD"), cancellable = true)
-    public void disableStructures$FindNoDisabledStructuresInsteadOfLooking(ServerLevel level, HolderSet<Structure> structureHolder, BlockPos $$2, int $$3, boolean $$4, CallbackInfoReturnable<Pair<BlockPos, Holder<Structure>>> cir) {
-        structureHolder.stream().forEach(configuredStructureFeatureHolder -> {
-            ResourceLocation structure = level.registryAccess().registryOrThrow(Registries.STRUCTURE).getKey(configuredStructureFeatureHolder.value());
+    public void disableStructures$FindNoDisabledStructuresInsteadOfLooking(
+            ServerLevel level, HolderSet<Structure> structureHolder,
+            BlockPos blockPos, int $$3, boolean $$4,
+            CallbackInfoReturnable<Pair<BlockPos, Holder<Structure>>> cir) {
+
+        structureHolder.stream().forEach(holder -> {
+            ResourceLocation structure = level.registryAccess().lookup(Registries.STRUCTURE).orElseThrow().getKey(holder.value());
             if (structure == null) return;
             if (!structure.getNamespace().equals(Tide.MOD_ID)) return;
 

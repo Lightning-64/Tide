@@ -11,7 +11,7 @@ import java.util.List;
 
 public record JournalPage(String idName, String title, String content, ItemStack icon, boolean unlockedByDefault) {
     public JournalPage(JournalLayout.Page pageConfig) {
-        this(pageConfig.id(), pageConfig.name(), pageConfig.content(), BuiltInRegistries.ITEM.get(ResourceLocation.read(pageConfig.icon()).getOrThrow()).getDefaultInstance(), pageConfig.unlockedByDefault());
+        this(pageConfig.id(), pageConfig.name(), pageConfig.content(), BuiltInRegistries.ITEM.get(ResourceLocation.read(pageConfig.icon()).getOrThrow()).orElseThrow().value().getDefaultInstance(), pageConfig.unlockedByDefault());
     }
 
     public int id() {

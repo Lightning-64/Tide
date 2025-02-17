@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "tide:endstone_perch"
-    }
+    "tide:endstone_perch"
   ],
   "result": {
     "count": 8,

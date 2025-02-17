@@ -1,25 +1,23 @@
 package com.li64.tide.registries.entities.models;
 
 import com.li64.tide.Tide;
-import com.li64.tide.registries.entities.fish.Angelfish;
-import com.li64.tide.registries.entities.fish.Barracuda;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 
-public class BarracudaModel<T extends Barracuda> extends EntityModel<T> {
+public class BarracudaModel extends EntityModel<LivingEntityRenderState> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Tide.resource("barracuda"), "main");
-	private final ModelPart body;
     private final ModelPart back;
 	private final ModelPart tail;
 
 	public BarracudaModel(ModelPart root) {
-		this.body = root.getChild("body");
+		super(root);
+        ModelPart body = root.getChild("body");
 		this.back = body.getChild("back");
 		this.tail = back.getChild("tail");
 	}
@@ -50,21 +48,11 @@ public class BarracudaModel<T extends Barracuda> extends EntityModel<T> {
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
 
-	@Override
-	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float f = 1.0f;
-		float f1 = 1.0f;
-		if (!entity.isInWater()) {
-			f = 1.3f;
-			f1 = 1.7f;
-		}
-
-		this.back.yRot = -f * 0.20f * Mth.sin(f1 * 0.6f * ageInTicks);
-		this.tail.yRot = -f * 0.15f * Mth.sin(f1 * 0.6f * ageInTicks);
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+	public void setupAnim(@NotNull LivingEntityRenderState renderState) {
+		super.setupAnim(renderState);
+		float f = renderState.isInWater ? 1.0F : 1.3F;
+		float f1 = renderState.isInWater ? 1.0F : 1.7F;
+		this.back.yRot = -f * 0.20f * Mth.sin(f1 * 0.6f * renderState.ageInTicks);
+		this.tail.yRot = -f * 0.15f * Mth.sin(f1 * 0.6f * renderState.ageInTicks);
 	}
 }

@@ -32,7 +32,7 @@ public class ShowToastMsg implements CustomPacketPayload {
     public ShowToastMsg(FriendlyByteBuf buf) {
         title = Component.translatable(buf.readUtf());
         description = Component.translatable(buf.readUtf());
-        display = BuiltInRegistries.ITEM.get(ResourceLocation.read(buf.readUtf()).getOrThrow()).getDefaultInstance();
+        display = BuiltInRegistries.ITEM.get(ResourceLocation.read(buf.readUtf()).getOrThrow()).orElseThrow().value().getDefaultInstance();
     }
 
     public static void encode(ShowToastMsg message, FriendlyByteBuf buf) {

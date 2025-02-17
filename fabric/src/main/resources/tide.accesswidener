@@ -1,4 +1,10 @@
 accessWidener v1 named
+
+# Methods
 extendable method net/minecraft/world/entity/Entity getX ()D
 extendable method net/minecraft/world/entity/Entity getY ()D
 extendable method net/minecraft/world/entity/Entity getZ ()D
+accessible method net/minecraft/world/level/block/entity/BlockEntityType <init> (Lnet/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier;Ljava/util/Set;)V
+
+# Classes
+accessible class net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier

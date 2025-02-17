@@ -2,21 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "tide:bait"
-    },
-    "I": {
-      "item": "minecraft:iron_nugget"
-    },
-    "L": {
-      "tag": "c:gems/lapis"
-    },
-    "P": {
-      "tag": "c:gems/prismarine"
-    },
-    "R": {
-      "tag": "c:dusts/redstone"
-    }
+    "#": "tide:bait",
+    "I": "minecraft:iron_nugget",
+    "L": "#c:gems/lapis",
+    "P": "#c:gems/prismarine",
+    "R": "#c:dusts/redstone"
   },
   "pattern": [
     "L#R",

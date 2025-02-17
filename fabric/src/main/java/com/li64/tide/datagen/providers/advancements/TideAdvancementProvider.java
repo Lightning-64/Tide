@@ -14,8 +14,11 @@ import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
 import java.util.Optional;
@@ -29,6 +32,8 @@ public class TideAdvancementProvider extends FabricAdvancementProvider {
 
     @Override
     public void generateAdvancement(HolderLookup.Provider registries, Consumer<AdvancementHolder> output) {
+        HolderGetter<Item> items = registries.lookup(Registries.ITEM).orElseThrow();
+
         AdvancementHolder root = Advancement.Builder.advancement()
                 .display(
                         TideItems.ANGELFISH,
@@ -41,7 +46,7 @@ public class TideAdvancementProvider extends FabricAdvancementProvider {
                         false
                 )
                 .addCriterion("rod", InventoryChangeTrigger.TriggerInstance.hasItems(
-                        ItemPredicate.Builder.item().of(ConventionalItemTags.FISHING_ROD_TOOLS).build()))
+                        ItemPredicate.Builder.item().of(items, ConventionalItemTags.FISHING_ROD_TOOLS).build()))
                 .save(output, Tide.resource("root").toString());
 
         AdvancementHolder bait = Advancement.Builder.advancement()
@@ -57,7 +62,7 @@ public class TideAdvancementProvider extends FabricAdvancementProvider {
                         false
                 )
                 .addCriterion("bait_items", InventoryChangeTrigger.TriggerInstance.hasItems(
-                        ItemPredicate.Builder.item().of(
+                        ItemPredicate.Builder.item().of(items,
                                 TideItems.BAIT, TideItems.MAGNETIC_BAIT, TideItems.LUCKY_BAIT
                         )
                 ))
@@ -175,7 +180,7 @@ public class TideAdvancementProvider extends FabricAdvancementProvider {
                         true
                 )
                 .addCriterion("catch", InventoryChangeTrigger.TriggerInstance.hasItems(
-                        ItemPredicate.Builder.item().of(TideTags.Items.LEGENDARY_FISH).build()))
+                        ItemPredicate.Builder.item().of(items, TideTags.Items.LEGENDARY_FISH).build()))
                 .save(output, Tide.resource("catch_legendary").toString());
 
         Advancement.Builder.advancement()

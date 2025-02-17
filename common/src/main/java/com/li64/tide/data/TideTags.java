@@ -10,9 +10,7 @@ import net.minecraft.world.level.material.Fluid;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("unused")
 public class TideTags {
-
     public static class Items {
         public static final TagKey<Item> VANILLA_FISH = TagKey.create(Registries.ITEM, Tide.resource("vanilla_fish"));
         public static final TagKey<Item> BIOME_FISH = TagKey.create(Registries.ITEM, Tide.resource("biome_fish"));

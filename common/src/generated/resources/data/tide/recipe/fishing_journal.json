@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "tag": "tide:journal_fish"
-    },
-    {
-      "item": "minecraft:book"
-    }
+    "#tide:journal_fish",
+    "minecraft:book"
   ],
   "result": {
     "count": 1,

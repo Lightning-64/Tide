@@ -9,6 +9,7 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -138,9 +139,9 @@ public class CatchMinigameOverlay {
         ResourceLocation markerTexture = timer % 4 < 2 ? MARKER_TEX : SELECT_TEX;
 
         RenderSystem.enableBlend();
-        graphics.setColor(1f, 1f, 1f, alpha);
-        graphics.blit(BAR_BG_TEX, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
-        graphics.blit(markerTexture, markerX, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
+        RenderSystem.setShaderColor(1f, 1f, 1f, alpha);
+        graphics.blit(RenderType::guiTextured, BAR_BG_TEX, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
+        graphics.blit(RenderType::guiTextured, markerTexture, markerX, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
 
         if (!Tide.CONFIG.minigame.doFeedback || accuracyText == null) return;
         Font font = Minecraft.getInstance().font;
@@ -150,7 +151,7 @@ public class CatchMinigameOverlay {
                 (graphics.guiWidth() - font.width(accuracyText)) / 2, y - 10,
                 0, false);
         RenderSystem.disableBlend();
-        graphics.setColor(1f, 1f, 1f, 1f);
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
     }
 
     public static boolean isActive() {

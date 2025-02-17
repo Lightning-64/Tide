@@ -11,6 +11,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
@@ -49,13 +50,13 @@ public class FabricMainPlatform implements TideMainPlatform {
     }
 
     @Override
-    public void registerItem(String key, Item item) {
-        Registry.register(BuiltInRegistries.ITEM, Tide.resource(key), item);
+    public void registerItem(ResourceKey<Item> key, Item item) {
+        Registry.register(BuiltInRegistries.ITEM, key, item);
     }
 
     @Override
-    public void registerBlock(String key, Block block) {
-        Registry.register(BuiltInRegistries.BLOCK, Tide.resource(key), block);
+    public void registerBlock(ResourceKey<Block> key, Block block) {
+        Registry.register(BuiltInRegistries.BLOCK, key, block);
     }
 
     @Override

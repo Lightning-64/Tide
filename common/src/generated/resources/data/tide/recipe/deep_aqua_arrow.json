@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "minecraft:arrow"
-    },
-    "C": {
-      "item": "tide:deep_aqua_crystal"
-    }
+    "#": "minecraft:arrow",
+    "C": "tide:deep_aqua_crystal"
   },
   "pattern": [
     "###",

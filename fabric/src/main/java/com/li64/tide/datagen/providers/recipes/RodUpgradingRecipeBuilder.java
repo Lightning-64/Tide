@@ -1,21 +1,25 @@
 package com.li64.tide.datagen.providers.recipes;
 
-import com.li64.tide.compat.jei.recipe.RodUpgradingRecipe;
+import com.li64.tide.data.rods.RodUpgradingRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class RodUpgradingRecipeBuilder {
+public class RodUpgradingRecipeBuilder implements RecipeBuilder {
     private final ItemStack rod;
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
@@ -23,30 +27,31 @@ public class RodUpgradingRecipeBuilder {
         this.rod = rod.getDefaultInstance();
     }
 
-    public RodUpgradingRecipeBuilder unlocks(String key, Criterion<?> criterion) {
-        this.criteria.put(key, criterion);
+    @Override
+    public @NotNull RecipeBuilder unlockedBy(String name, Criterion<?> criterion) {
+        this.criteria.put(name, criterion);
         return this;
     }
 
-    public void save(RecipeOutput output, String id) {
-        this.save(output, ResourceLocation.parse(id));
+    @Override
+    public @NotNull RecipeBuilder group(@Nullable String groupName) {
+        return this;
     }
 
-    public void save(RecipeOutput output, ResourceLocation id) {
-        this.ensureValid(id);
+    @Override
+    public @NotNull Item getResult() {
+        return rod.getItem();
+    }
+
+    @Override
+    public void save(RecipeOutput output, ResourceKey<Recipe<?>> key) {
         Advancement.Builder builder = output.advancement()
-                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
-                .rewards(AdvancementRewards.Builder.recipe(id))
+                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(key))
+                .rewards(AdvancementRewards.Builder.recipe(key))
                 .requirements(AdvancementRequirements.Strategy.OR);
 
         this.criteria.forEach(builder::addCriterion);
         RodUpgradingRecipe recipe = new RodUpgradingRecipe(rod.copy(), rod.copy());
-        output.accept(id, recipe, builder.build(id.withPrefix("recipes/" + RecipeCategory.TOOLS.getFolderName() + "/")));
-    }
-
-    private void ensureValid(ResourceLocation pLocation) {
-        if (this.criteria.isEmpty()) {
-            throw new IllegalStateException("No way of obtaining recipe " + pLocation);
-        }
+        output.accept(key, recipe, builder.build(key.location().withPrefix("recipes/" + RecipeCategory.TOOLS.getFolderName() + "/")));
     }
 }

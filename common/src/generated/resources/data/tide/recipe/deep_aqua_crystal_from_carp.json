@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "tide:crystalline_carp"
-    }
+    "tide:crystalline_carp"
   ],
   "result": {
     "count": 1,

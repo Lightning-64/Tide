@@ -98,6 +98,6 @@ public class Tide {
                                         .subPredicate(TideFishingPredicate.isLavaFishing(true))))
                         .and(LootItemEntityPropertyCondition.hasProperties(
                                 LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity()
-                                        .entityType(EntityTypePredicate.of(TideEntityTypes.FISHING_BOBBER)))));
+                                        .entityType(EntityTypePredicate.of(null, TideEntityTypes.FISHING_BOBBER)))));
     }
 }

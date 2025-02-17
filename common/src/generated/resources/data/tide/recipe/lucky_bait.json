@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "tide:bait"
-    },
-    "R": {
-      "item": "minecraft:rabbit_foot"
-    }
+    "#": "tide:bait",
+    "R": "minecraft:rabbit_foot"
   },
   "pattern": [
     "###",

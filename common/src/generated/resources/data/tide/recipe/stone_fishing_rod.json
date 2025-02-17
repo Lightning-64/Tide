@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "tag": "c:cobblestones"
-    },
-    "S": {
-      "tag": "c:strings"
-    }
+    "#": "#c:cobblestones",
+    "S": "#c:strings"
   },
   "pattern": [
     "  #",

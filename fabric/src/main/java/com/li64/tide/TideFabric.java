@@ -1,10 +1,10 @@
 package com.li64.tide;
 
 import com.li64.tide.client.gui.TideMenuTypes;
-import com.li64.tide.compat.jei.recipe.RodUpgradingRecipe;
 import com.li64.tide.data.TideCriteriaTriggers;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.TideTags;
+import com.li64.tide.data.rods.RodUpgradingRecipe;
 import com.li64.tide.registries.TideEntitySubPredicates;
 import com.li64.tide.events.FabricEventHandler;
 import com.li64.tide.network.TideMessages;
@@ -205,16 +205,17 @@ public class TideFabric implements ModInitializer {
 
         Tide.onRegisterReloadListeners((id, listener) -> ResourceManagerHelper.get(PackType.SERVER_DATA)
                 .registerReloadListener(new IdentifiableResourceReloadListener() {
-            @Override
-            public ResourceLocation getFabricId() {
-                return id;
-            }
+                    @Override
+                    public ResourceLocation getFabricId() {
+                        return id;
+                    }
 
-            @Override
-            public @NotNull CompletableFuture<Void> reload(PreparationBarrier synchronizer, ResourceManager manager, ProfilerFiller prepareProfiler, ProfilerFiller applyProfiler, Executor prepareExecutor, Executor applyExecutor) {
-                return listener.reload(synchronizer, manager, prepareProfiler, applyProfiler, prepareExecutor, applyExecutor);
-            }
-        }));
+                    @Override
+                    public @NotNull CompletableFuture<Void> reload(PreparationBarrier barrier, ResourceManager manager, Executor backgroundExecutor, Executor gameExecutor) {
+                        return listener.reload(barrier, manager, backgroundExecutor, gameExecutor);
+                    }
+                }
+        ));
     }
 
     public static <T extends LivingEntity> void registerAttributes(TideEntityAttributes.Registration<T> reg) {

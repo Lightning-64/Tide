@@ -6,9 +6,9 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
@@ -32,12 +32,12 @@ public record BiomeTagPredicate(TagKey<Biome> biomeTag) implements LootItemCondi
     }
 
     public boolean test(LootContext context) {
-        Vec3 pos = context.getParamOrNull(LootContextParams.ORIGIN);
+        Vec3 pos = context.getOptionalParameter(LootContextParams.ORIGIN);
         return pos != null && context.getLevel().getBiome(new BlockPos(
                 (int) pos.x(), (int) pos.y(), (int) pos.z())).is(biomeTag());
     }
 
-    public @NotNull Set<LootContextParam<?>> getReferencedContextParams() {
+    public @NotNull Set<ContextKey<?>> getReferencedContextParams() {
         return Set.of(LootContextParams.ORIGIN);
     }
 }

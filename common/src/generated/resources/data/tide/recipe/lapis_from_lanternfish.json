@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "tide:lapis_lanternfish"
-    }
+    "tide:lapis_lanternfish"
   ],
   "result": {
     "count": 2,

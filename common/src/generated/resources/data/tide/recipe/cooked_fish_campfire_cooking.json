@@ -3,9 +3,7 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.35,
-  "ingredient": {
-    "tag": "tide:cookable_fish"
-  },
+  "ingredient": "#tide:cookable_fish",
   "result": {
     "id": "tide:cooked_fish"
   }

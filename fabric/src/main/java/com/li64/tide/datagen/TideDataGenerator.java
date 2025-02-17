@@ -1,6 +1,7 @@
 package com.li64.tide.datagen;
 
 import com.li64.tide.datagen.providers.advancements.TideAdvancementProvider;
+import com.li64.tide.datagen.providers.assets.TideModelProvider;
 import com.li64.tide.datagen.providers.loot.TideBlockLootProvider;
 import com.li64.tide.datagen.providers.loot.TideChestLootProvider;
 import com.li64.tide.datagen.providers.loot.TideEntityLootProvider;
@@ -16,6 +17,8 @@ public class TideDataGenerator implements DataGeneratorEntrypoint {
     public void onInitializeDataGenerator(FabricDataGenerator generator) {
         FabricDataGenerator.Pack pack = generator.createPack();
         TideItems.assignTags();
+
+        pack.addProvider(TideModelProvider::new);
 
         pack.addProvider(TideBlockTagsProvider::new);
         pack.addProvider(TideItemTagsProvider::new);

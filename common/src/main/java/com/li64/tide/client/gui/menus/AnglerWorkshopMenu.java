@@ -3,7 +3,6 @@ package com.li64.tide.client.gui.menus;
 import com.li64.tide.client.gui.TideMenuTypes;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.data.rods.CustomRodManager;
-import com.li64.tide.registries.TideBlocks;
 import com.li64.tide.registries.blocks.AnglerWorkshopBlock;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -25,7 +24,7 @@ public class AnglerWorkshopMenu extends ItemCombinerMenu {
     }
 
     public AnglerWorkshopMenu(int menuId, Inventory inventory, ContainerLevelAccess levelAccess) {
-        super(TideMenuTypes.ANGLER_WORKSHOP, menuId, inventory, levelAccess);
+        super(TideMenuTypes.ANGLER_WORKSHOP, menuId, inventory, levelAccess, createInputSlotDefinitions());
         this.level = inventory.player.level();
     }
 
@@ -100,8 +99,7 @@ public class AnglerWorkshopMenu extends ItemCombinerMenu {
         return newRod;
     }
 
-    @Override
-    protected @NotNull ItemCombinerMenuSlotDefinition createInputSlotDefinitions() {
+    public static ItemCombinerMenuSlotDefinition createInputSlotDefinitions() {
         return ItemCombinerMenuSlotDefinition.create()
             .withSlot(0, 26, 11,
                     stack -> stack.is(TideTags.Items.CUSTOMIZABLE_RODS))

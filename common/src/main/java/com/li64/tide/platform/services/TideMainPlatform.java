@@ -7,6 +7,7 @@ import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
@@ -43,9 +44,9 @@ public interface TideMainPlatform {
 
     CompoundTag getPlayerData(ServerPlayer player);
 
-    void registerItem(String key, Item item);
+    void registerItem(ResourceKey<Item> key, Item item);
 
-    void registerBlock(String key, Block block);
+    void registerBlock(ResourceKey<Block> key, Block block);
 
     void registerBlockEntity(String key, BlockEntityType<?> blockEntity);
 

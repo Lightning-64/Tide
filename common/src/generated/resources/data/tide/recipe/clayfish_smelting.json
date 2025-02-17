@@ -3,9 +3,7 @@
   "category": "misc",
   "cookingtime": 150,
   "experience": 1.0,
-  "ingredient": {
-    "item": "tide:clayfish"
-  },
+  "ingredient": "tide:clayfish",
   "result": {
     "id": "tide:hardened_clayfish"
   }

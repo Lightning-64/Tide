@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "tag": "c:slime_balls"
-    },
-    {
-      "tag": "minecraft:planks"
-    },
-    {
-      "tag": "c:dyes/red"
-    }
+    "#c:slime_balls",
+    "#minecraft:planks",
+    "#c:dyes/red"
   ],
   "result": {
     "count": 1,

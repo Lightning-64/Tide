@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "tide:gilded_minnow"
-    }
+    "tide:gilded_minnow"
   ],
   "result": {
     "count": 2,

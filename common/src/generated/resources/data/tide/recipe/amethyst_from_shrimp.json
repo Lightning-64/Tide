@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "tide:crystal_shrimp"
-    }
+    "tide:crystal_shrimp"
   ],
   "result": {
     "count": 4,

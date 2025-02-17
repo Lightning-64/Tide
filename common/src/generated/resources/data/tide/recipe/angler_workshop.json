@@ -1,27 +1,10 @@
 {
-  "fabric:load_conditions": [
-    {
-      "condition": "fabric:not" ,
-      "value": {
-        "condition": "fabric:all_mods_loaded" ,
-        "values": [
-          "mtideanglersv"
-        ]
-      }
-    }
-  ],
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "tag": "minecraft:planks"
-    },
-    "C": {
-      "tag": "c:ingots/copper"
-    },
-    "S": {
-      "tag": "c:strings"
-    }
+    "#": "#minecraft:planks",
+    "C": "#c:ingots/copper",
+    "S": "#c:strings"
   },
   "pattern": [
     "SS",

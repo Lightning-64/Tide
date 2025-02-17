@@ -7,6 +7,7 @@ import net.minecraft.client.gui.screens.inventory.ItemCombinerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import org.jetbrains.annotations.NotNull;
 
 public class AnglerWorkshopScreen extends ItemCombinerScreen<AnglerWorkshopMenu> {
     public static final ResourceLocation GUI_LOCATION = Tide.resource("textures/gui/container/angler_workshop.png");
@@ -18,5 +19,5 @@ public class AnglerWorkshopScreen extends ItemCombinerScreen<AnglerWorkshopMenu>
     }
 
     @Override
-    protected void renderErrorIcon(GuiGraphics graphics, int p_266822_, int p_267045_) {}
+    protected void renderErrorIcon(@NotNull GuiGraphics graphics, int p_266822_, int p_267045_) {}
 }

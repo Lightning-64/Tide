@@ -11,6 +11,7 @@ import com.li64.tide.registries.entities.util.AbstractTideFish;
 import com.li64.tide.registries.items.TideFishingRodItem;
 import com.li64.tide.util.BaitUtils;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import net.minecraft.client.Minecraft;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacementTypes;

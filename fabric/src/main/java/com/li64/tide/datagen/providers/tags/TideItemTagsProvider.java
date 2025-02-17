@@ -4,7 +4,6 @@ import com.li64.tide.data.TideTags;
 import com.li64.tide.registries.TideItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -87,7 +86,7 @@ public class TideItemTagsProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(TideTags.Items.BAIT_PLANTS)
                 .forceAddTag(neoForgeConventionTag("crops"))
                 .forceAddTag(neoForgeConventionTag("mushrooms"))
-                .forceAddTag(ItemTags.FLOWERS);
+                .forceAddTag(ItemTags.SMALL_FLOWERS);
 
         getOrCreateTagBuilder(TideTags.Items.VANILLA_FISH)
                 .add(Items.COD)

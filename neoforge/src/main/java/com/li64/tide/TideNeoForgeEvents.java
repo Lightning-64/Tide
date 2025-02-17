@@ -120,7 +120,7 @@ public class TideNeoForgeEvents {
                 LootPool pool = ((LootTableAccessor) event.getTable()).tide$getPool(0);
                 ((LootTableAccessor) event.getTable()).tide$getPool(0).entries = new ImmutableList.Builder<LootPoolEntryContainer>()
                         .addAll(pool.entries)
-                        .add(Tide.getCrateFishingEntry().build())
+                        .add(Tide.getCrateFishingEntry(registries.lookup(Registries.ENTITY_TYPE).orElseThrow()).build())
                         .build();
             }
         }

@@ -5,7 +5,8 @@ import com.li64.tide.registries.entities.fish.*;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import com.li64.tide.registries.entities.misc.DeepAquaArrow;
-import com.li64.tide.registries.entities.misc.LootCrateEntity;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -24,11 +25,6 @@ public class TideEntityTypes {
             "fishing_bobber_accessor", EntityType.Builder.<HookAccessor>of(HookAccessor::new, MobCategory.MISC)
                     .noSave().noSummon().sized(0.25f, 0.25f)
                     .clientTrackingRange(4).updateInterval(5));
-
-    public static final EntityType<LootCrateEntity> LOOT_CRATE = register(
-            "loot_crate", EntityType.Builder.of(LootCrateEntity::new, MobCategory.MISC)
-                    .sized(0.98f, 0.98f).clientTrackingRange(10)
-                    .updateInterval(20));
 
     public static final EntityType<DeepAquaArrow> DEEP_AQUA_ARROW = register(
             "deep_aqua_arrow", EntityType.Builder.<DeepAquaArrow>of(DeepAquaArrow::new, MobCategory.MISC)
@@ -113,7 +109,7 @@ public class TideEntityTypes {
                     .clientTrackingRange(4));
 
     public static <T extends Entity> EntityType<T> register(String key, EntityType.Builder<T> builder) {
-        EntityType<T> entityType = builder.build(key);
+        EntityType<T> entityType = builder.build(ResourceKey.create(Registries.ENTITY_TYPE, Tide.resource(key)));
         ENTITY_TYPES.put(key, entityType);
         return entityType;
     }

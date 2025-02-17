@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "tag": "c:ingots/copper"
-    },
-    "O": {
-      "tag": "c:obsidians"
-    }
+    "#": "#c:ingots/copper",
+    "O": "#c:obsidians"
   },
   "pattern": [
     "  #",

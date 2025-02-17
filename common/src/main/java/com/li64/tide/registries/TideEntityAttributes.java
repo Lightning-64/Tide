@@ -23,7 +23,6 @@ public class TideEntityAttributes {
         registerAttributes(TideEntityTypes.CATFISH, Catfish.createAttributes().build());
         registerAttributes(TideEntityTypes.CLAYFISH, Clayfish.createAttributes().build());
 
-
         registerAttributes(TideEntityTypes.TUNA, Tuna.createAttributes().build());
         registerAttributes(TideEntityTypes.OCEAN_PERCH, OceanPerch.createAttributes().build());
         registerAttributes(TideEntityTypes.MACKEREL, Mackerel.createAttributes().build());

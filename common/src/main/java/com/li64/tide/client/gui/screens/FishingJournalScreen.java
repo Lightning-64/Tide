@@ -7,12 +7,14 @@ import com.li64.tide.data.player.TidePlayerData;
 import com.li64.tide.network.messages.ReadProfileMsg;
 import com.li64.tide.registries.TideSoundEvents;
 import com.li64.tide.util.TideUtils;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.GameNarrator;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -62,7 +64,7 @@ public class FishingJournalScreen extends Screen {
         pages.removeIf(journalPage -> !TidePlayerData.CLIENT_DATA.hasPageUnlocked(journalPage));
 
         // Remove welcome page if other pages are unlocked
-        if (pages.size() > 1) pages.remove(0);
+        if (pages.size() > 1) pages.removeFirst();
     }
 
     private void nextPage(int page) {
@@ -177,8 +179,7 @@ public class FishingJournalScreen extends Screen {
 
     @Override
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-//        this.renderBackground(graphics, mouseX, mouseY, partialTick);
-        graphics.setColor(1f, 1f, 1f, 1f);
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         super.render(graphics, mouseX, mouseY, partialTick);
 
         if (profileFish == null) {
@@ -204,7 +205,7 @@ public class FishingJournalScreen extends Screen {
 
     public void openProfile(JournalLayout.Profile profile) {
         profileConfig = profile;
-        profileFish = BuiltInRegistries.ITEM.get(ResourceLocation.read(profile.fishItem()).getOrThrow()).getDefaultInstance();
+        profileFish = BuiltInRegistries.ITEM.get(ResourceLocation.read(profile.fishItem()).getOrThrow()).orElseThrow().value().getDefaultInstance();
         player.playSound(TideSoundEvents.PAGE_FLIP, 1.0f, 1.0f + new Random().nextFloat() * 0.2f);
         Tide.NETWORK.sendToServer(new ReadProfileMsg(profileFish));
         init();
@@ -240,18 +241,20 @@ public class FishingJournalScreen extends Screen {
         @Override
         public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
             ResourceLocation texture = isMouseOver(mouseX, mouseY) ? slotHoverTex : slotTex;
-            graphics.blit(texture, x, y, 0, 0, w, h, w, h);
+            graphics.blit(RenderType::guiTextured, texture, x, y, 0, 0, w, h, w, h);
 
             if (!profile.getFish().isEmpty()) {
-                if (!TidePlayerData.CLIENT_DATA.hasFishUnlocked(profile.getFish())) graphics.setColor(0, 0, 0, 1.0f);
+                if (!TidePlayerData.CLIENT_DATA.hasFishUnlocked(profile.getFish())) {
+                    RenderSystem.setShaderColor(0, 0, 0, 1.0f);
+                }
                 graphics.renderItem(profile.getFish(), x + 3, y + 3);
-                graphics.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
             }
 
             if (!Tide.CONFIG.general.showUnread) return;
             ResourceLocation unreadTexture = isMouseOver(mouseX, mouseY) ? unreadHoverTex : unreadTex;
             if (TidePlayerData.CLIENT_DATA.isUnread(profile))
-                graphics.blit(unreadTexture, x - 1, y - 1, 0, 0, 7, 7, 7, 7);
+                graphics.blit(RenderType::guiTextured, unreadTexture, x - 1, y - 1, 0, 0, 7, 7, 7, 7);
         }
 
         @Override
@@ -263,7 +266,7 @@ public class FishingJournalScreen extends Screen {
         int bgHeight = 202;
         int offsetY = 20;
 
-        graphics.blitSprite(PROFILE_BG, (this.width - bgWidth) / 2, (this.height - bgHeight) / 2 - offsetY, bgWidth, bgHeight);
+        graphics.blitSprite(RenderType::guiTextured, PROFILE_BG, (this.width - bgWidth) / 2, (this.height - bgHeight) / 2 - offsetY, bgWidth, bgHeight);
 
         Style underlined = Component.empty().getStyle().withUnderlined(true);
 

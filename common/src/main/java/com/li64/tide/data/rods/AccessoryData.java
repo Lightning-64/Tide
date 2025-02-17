@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public record AccessoryData(Holder<Item> item, Optional<String> modelPath, Optional<String> color, Optional<Boolean> renderItem) {
     public static final Codec<AccessoryData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            ItemStack.ITEM_NON_AIR_CODEC.fieldOf("item").forGetter(AccessoryData::item),
+            Item.CODEC.fieldOf("item").forGetter(AccessoryData::item),
             Codec.STRING.optionalFieldOf("model_path").forGetter(AccessoryData::modelPath),
             Codec.STRING.optionalFieldOf("color").forGetter(AccessoryData::color),
             Codec.BOOL.optionalFieldOf("render_item_model").forGetter(AccessoryData::renderItem)
@@ -26,6 +26,6 @@ public record AccessoryData(Holder<Item> item, Optional<String> modelPath, Optio
     }
 
     public static MutableComponent getTranslation(ItemStack stack) {
-        return Component.translatable("accessory." + stack.getDescriptionId());
+        return Component.translatable("accessory." + stack.getItem().getDescriptionId());
     }
 }

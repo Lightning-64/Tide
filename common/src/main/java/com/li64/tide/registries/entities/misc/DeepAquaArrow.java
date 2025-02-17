@@ -4,6 +4,7 @@ import com.li64.tide.registries.TideEntityTypes;
 import com.li64.tide.registries.TideItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -18,8 +19,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class DeepAquaArrow extends AbstractArrow {
     public int lifetime = 50;
-
-    private static final ItemStack DEFAULT_ARROW_STACK = new ItemStack(TideItems.DEEP_AQUA_ARROW);
 
     public DeepAquaArrow(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
@@ -44,7 +43,7 @@ public class DeepAquaArrow extends AbstractArrow {
                 lifetime--;
                 if (lifetime <= 0) {
                     playSplashParticles(blockPosition());
-                    kill();
+                    kill((ServerLevel) level());
                 }
             }
         }
@@ -63,7 +62,7 @@ public class DeepAquaArrow extends AbstractArrow {
             BlockPos blockpos = blockhitresult.getBlockPos();
             playSplashParticles(blockpos);
             this.level().gameEvent(GameEvent.PROJECTILE_LAND, blockpos, GameEvent.Context.of(this, this.level().getBlockState(blockpos)));
-            kill();
+            if (level() instanceof ServerLevel level) kill(level);
         }
     }
 
