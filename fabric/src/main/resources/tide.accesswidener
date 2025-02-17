@@ -8,3 +8,6 @@ accessible method net/minecraft/world/level/block/entity/BlockEntityType <init> 
 
 # Classes
 accessible class net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier
+
+# Fields
+accessible field net/minecraft/world/entity/item/FallingBlockEntity blockState Lnet/minecraft/world/level/block/state/BlockState;

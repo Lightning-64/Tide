@@ -1,11 +1,11 @@
 package com.li64.tide.client.gui.overlays;
 
 import com.li64.tide.Tide;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 
 public class CastBarOverlay {
@@ -29,16 +29,8 @@ public class CastBarOverlay {
 
         int fillWidth = (int) Math.ceil(rodChargePercent * texWidth);
 
-        RenderSystem.enableBlend();
-        RenderSystem.setShaderColor(1f, 1f, 1f, alpha);
-        graphics.blit(RenderType::guiTextured, BAR_EMPTY_TEX, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
-
-        RenderSystem.enableBlend();
-        RenderSystem.setShaderColor(1f, 1f, 1f, alpha);
-        graphics.blit(RenderType::guiTextured, BAR_FILLED_TEX, x, y, 0, 0, fillWidth, texHeight, texWidth, texHeight);
-
-        RenderSystem.disableBlend();
-        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+        graphics.blit(RenderType::guiTextured, BAR_EMPTY_TEX, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight, ARGB.white(alpha));
+        graphics.blit(RenderType::guiTextured, BAR_FILLED_TEX, x, y, 0, 0, fillWidth, texHeight, texWidth, texHeight, ARGB.white(alpha));
     }
 
     public static void rodChargeTick(float percent) {

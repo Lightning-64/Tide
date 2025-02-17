@@ -3,7 +3,6 @@ package com.li64.tide.client.gui.overlays;
 import com.li64.tide.Tide;
 import com.li64.tide.network.messages.MinigameServerMsg;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -13,6 +12,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 
 import java.util.Random;
@@ -138,10 +138,8 @@ public class CatchMinigameOverlay {
         int markerX = (int) (x + Mth.sin(animProgress * getSpeed()) * (texWidth / 2f - 2));
         ResourceLocation markerTexture = timer % 4 < 2 ? MARKER_TEX : SELECT_TEX;
 
-        RenderSystem.enableBlend();
-        RenderSystem.setShaderColor(1f, 1f, 1f, alpha);
-        graphics.blit(RenderType::guiTextured, BAR_BG_TEX, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
-        graphics.blit(RenderType::guiTextured, markerTexture, markerX, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
+        graphics.blit(RenderType::guiTextured, BAR_BG_TEX, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight, ARGB.white(alpha));
+        graphics.blit(RenderType::guiTextured, markerTexture, markerX, y, 0, 0, texWidth, texHeight, texWidth, texHeight, ARGB.white(alpha));
 
         if (!Tide.CONFIG.minigame.doFeedback || accuracyText == null) return;
         Font font = Minecraft.getInstance().font;
@@ -149,9 +147,7 @@ public class CatchMinigameOverlay {
         graphics.drawString(font, accuracyText.withStyle(
                 accuracyText.getStyle().withColor(textColor)),
                 (graphics.guiWidth() - font.width(accuracyText)) / 2, y - 10,
-                0, false);
-        RenderSystem.disableBlend();
-        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+                ARGB.color((int) Math.ceil(alpha * 255), 0, 0, 0), false);
     }
 
     public static boolean isActive() {

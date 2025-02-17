@@ -7,7 +7,7 @@ import com.li64.tide.data.TideTags;
 import com.li64.tide.data.rods.BaitContents;
 import com.li64.tide.data.rods.CustomRodManager;
 import com.li64.tide.registries.TideBlocks;
-import com.li64.tide.registries.blocks.entities.LootCrateBlockEntity;
+import com.li64.tide.registries.entities.misc.LootCrateEntity;
 import com.li64.tide.registries.items.TideFishingRodItem;
 import com.li64.tide.util.BaitUtils;
 import com.mojang.logging.LogUtils;
@@ -32,7 +32,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -612,24 +611,30 @@ public class TideFishingHook extends Projectile {
                     case CRATE:
                         BlockState lootCrate = getCrateBlock(hookedItem);
 
-                        level.setBlockAndUpdate(this.blockPosition(), lootCrate);
-                        CompoundTag blockData = new CompoundTag();
+                        LootParams.Builder lootParamsBuilder = new LootParams.Builder((ServerLevel) this.level())
+                                .withParameter(LootContextParams.ORIGIN, this.position())
+                                .withParameter(LootContextParams.TOOL, stack)
+                                .withParameter(LootContextParams.THIS_ENTITY, this);
 
-                        if (level.getBlockEntity(this.blockPosition()) instanceof LootCrateBlockEntity crateBlockEntity) {
-                            crateBlockEntity.setCrateParams(luck + player.getLuck(), this.position(), player, stack, this);
-                            blockData = crateBlockEntity.saveWithoutMetadata(registryAccess());
-                        }
+                        // Only forge and neoforge can use this parameter here
+                        if (!Tide.PLATFORM.isFabric()) lootParamsBuilder = lootParamsBuilder
+                                .withParameter(LootContextParams.ATTACKING_ENTITY, Objects.requireNonNull(this.getOwner()));
+
+                        LootParams params = lootParamsBuilder
+                                .withLuck((float)luck + player.getLuck())
+                                .create(LootContextParamSets.FISHING);
+
+                        level.setBlockAndUpdate(this.blockPosition(), lootCrate);
 
                         double dx = player.getX() - this.blockPosition().getX();
                         double dy = player.getY() - this.blockPosition().getY();
                         double dz = player.getZ() - this.blockPosition().getZ();
 
-                        FallingBlockEntity crateEntity = FallingBlockEntity.fall(level, this.blockPosition(), lootCrate);
-                        crateEntity.blockData = blockData;
-                        crateEntity.setDeltaMovement(
+                        LootCrateEntity.create(level, this.blockPosition(), lootCrate,
                                 dx * 0.0666d,
                                 dy * 0.0666d + Math.sqrt(Math.sqrt(dx * dx + dy * dy + dz * dz)) * 0.082d + 0.27d,
-                                dz * 0.0666d
+                                dz * 0.0666d,
+                                params
                         );
 
                         if (fluid.is(TideTags.Fluids.LAVA_FISHING) && fluid.is(Fluids.LAVA)) level.setBlockAndUpdate(this.blockPosition(), Blocks.LAVA.defaultBlockState());
@@ -682,7 +687,7 @@ public class TideFishingHook extends Projectile {
             selection = BuiltInRegistries.ITEM.get(ResourceLocation.parse("unusualend:raw_bluk")).orElseThrow().value().getDefaultInstance();
 
         // Magnetic bait override
-        if (usingMagneticBait() && random.nextInt(0, 1) == 0) { // TODO change 1 back to 4
+        if (usingMagneticBait() && random.nextInt(0, 4) == 0) { // TODO change 1 back to 4
             // select from crate
             lootKey = TideLootTables.Fishing.CRATES_BLOCK;
             selection = select(lootKey, params).orElse(TideItems.SURFACE_LOOT_CRATE.getDefaultInstance());

@@ -6,8 +6,10 @@ import com.li64.tide.registries.entities.models.SimpleFishModel.Variant;
 import com.li64.tide.registries.entities.renderers.*;
 import com.li64.tide.registries.entities.util.AbstractTideFish;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 
 import java.util.ArrayList;
 
@@ -19,6 +21,7 @@ public class TideEntityRenderers {
     public static void init() {
         registerEntityRenderer(TideEntityTypes.FISHING_BOBBER, TideFishingHookRenderer::new);
         registerEntityRenderer(TideEntityTypes.DEEP_AQUA_ARROW, DeepAquaArrowRenderer::new);
+        registerEntityRenderer(TideEntityTypes.LOOT_CRATE, FallingBlockRenderer::new);
 
         registerSimpleFishRenderer(TideEntityTypes.TROUT, "trout", Variant.NOSE_NORMAL);
         registerSimpleFishRenderer(TideEntityTypes.BASS, "bass", Variant.NOSE_FULL);

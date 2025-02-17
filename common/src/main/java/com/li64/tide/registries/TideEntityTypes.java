@@ -2,6 +2,7 @@ package com.li64.tide.registries;
 
 import com.li64.tide.Tide;
 import com.li64.tide.registries.entities.fish.*;
+import com.li64.tide.registries.entities.misc.LootCrateEntity;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import com.li64.tide.registries.entities.misc.DeepAquaArrow;
@@ -10,6 +11,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 
 import java.util.HashMap;
 
@@ -31,6 +33,10 @@ public class TideEntityTypes {
                     .sized(0.5f, 0.5f)
                     .clientTrackingRange(4).updateInterval(20));
 
+    public static final EntityType<FallingBlockEntity> LOOT_CRATE = register(
+            "loot_crate", EntityType.Builder.of(LootCrateEntity::new, MobCategory.MISC)
+                    .sized(0.98f, 0.98f).clientTrackingRange(10)
+                    .updateInterval(20));
 
     public static final EntityType<Trout> TROUT = register(
             "trout", EntityType.Builder.of(Trout::new, MobCategory.WATER_AMBIENT)
