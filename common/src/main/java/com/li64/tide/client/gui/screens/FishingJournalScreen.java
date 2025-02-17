@@ -245,10 +245,17 @@ public class FishingJournalScreen extends Screen {
 
             if (!profile.getFish().isEmpty()) {
                 if (!TidePlayerData.CLIENT_DATA.hasFishUnlocked(profile.getFish())) {
+                    // Render item silhouette
+                    graphics.flush();
                     RenderSystem.setShaderColor(0, 0, 0, 1.0f);
+
+                    graphics.renderItem(profile.getFish(), x + 3, y + 3);
+
+                    graphics.flush();
+                    RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+                } else {
+                    graphics.renderItem(profile.getFish(), x + 3, y + 3);
                 }
-                graphics.renderItem(profile.getFish(), x + 3, y + 3);
-                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
             }
 
             if (!Tide.CONFIG.general.showUnread) return;
