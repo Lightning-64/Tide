@@ -144,10 +144,11 @@ public class CatchMinigameOverlay {
         if (!Tide.CONFIG.minigame.doFeedback || accuracyText == null) return;
         Font font = Minecraft.getInstance().font;
 
+        if (alpha < 0.03f) return; // This fixes a weird visual glitch
         graphics.drawString(font, accuracyText.withStyle(
                 accuracyText.getStyle().withColor(textColor)),
                 (graphics.guiWidth() - font.width(accuracyText)) / 2, y - 10,
-                ARGB.color((int) Math.ceil(alpha * 255), 0, 0, 0), false);
+                ARGB.white(alpha), false);
     }
 
     public static boolean isActive() {
