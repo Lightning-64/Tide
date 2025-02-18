@@ -8,6 +8,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
@@ -17,6 +18,7 @@ import net.minecraft.world.level.material.Fluids;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
@@ -27,8 +29,13 @@ public class TideItems {
     public static List<ResourceKey<Item>> JOURNAL_FISH_LIST = new ArrayList<>();
     public static List<ResourceKey<Item>> COOKABLE_FISH_LIST = new ArrayList<>();
 
+    public static final Map<ResourceLocation, Function<Item.Properties, Item>> ITEM_OVERRIDE_MAP = Map.of(
+            ResourceLocation.withDefaultNamespace("fishing_rod"),
+            (properties) -> new TideFishingRodItem(32, properties)
+    );
+
     public static final Item STONE_FISHING_ROD = register("stone_fishing_rod",
-            properties -> new TideFishingRodItem(32, properties));
+            properties -> new TideFishingRodItem(48, properties));
     public static final Item IRON_FISHING_ROD = register("iron_fishing_rod",
             properties -> new TideFishingRodItem(64, properties));
     public static final Item GOLDEN_FISHING_ROD = register("golden_fishing_rod",
