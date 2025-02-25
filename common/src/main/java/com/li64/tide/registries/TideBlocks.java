@@ -40,6 +40,7 @@ public class TideBlocks {
     }
 
     public static void init() {
+        Tide.LOG.info("Initializing TideBlocks");
         BLOCKS.forEach(Tide.PLATFORM::registerBlock);
     }
 }

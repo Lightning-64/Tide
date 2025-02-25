@@ -1,5 +1,6 @@
 package com.li64.tide.platform;
 
+import com.li64.tide.Tide;
 import com.li64.tide.TideForge;
 import com.li64.tide.compat.stardewfishing.StardewFishingCompat;
 import com.li64.tide.platform.services.TideMainPlatform;
@@ -9,6 +10,7 @@ import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.core.component.DataComponentType;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
@@ -42,13 +44,13 @@ public class ForgeMainPlatform implements TideMainPlatform {
     public boolean isDevelopmentEnvironment() { return !FMLLoader.isProduction(); }
 
     @Override
-    public void registerItem(String key, Item item) {
-        TideForge.ITEMS.register(key, () -> item);
+    public void registerItem(ResourceKey<Item> key, Item item) {
+        TideForge.ITEMS.register(key.location().getPath(), () -> item);
     }
 
     @Override
-    public void registerBlock(String key, Block block) {
-        TideForge.BLOCKS.register(key, () -> block);
+    public void registerBlock(ResourceKey<Block> key, Block block) {
+        TideForge.BLOCKS.register(key.location().getPath(), () -> block);
     }
 
     @Override

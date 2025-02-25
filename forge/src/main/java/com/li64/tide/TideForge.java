@@ -1,7 +1,6 @@
 package com.li64.tide;
 
 import com.li64.tide.client.gui.TideMenuTypes;
-import com.li64.tide.compat.jei.TideRecipeSerializers;
 import com.li64.tide.config.TideConfig;
 import com.li64.tide.data.TideCriteriaTriggers;
 import com.li64.tide.data.TideDataComponents;
@@ -28,7 +27,6 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -48,37 +46,36 @@ public class TideForge {
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.MENU_TYPES, Tide.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Tide.MOD_ID);
 
-    public TideForge() {
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        eventBus.addListener(this::onRegister);
+    public TideForge(FMLJavaModLoadingContext context) {
+        IEventBus modEventBus = context.getModEventBus();
+        modEventBus.register(this);
 
         Tide.init();
 
         TideForgeNetworking.init();
         TideMessages.init(Tide.NETWORK);
 
-        BLOCKS.register(eventBus);
-        BLOCK_ENTITIES.register(eventBus);
-        ITEMS.register(eventBus);
-        ENTITY_TYPES.register(eventBus);
-        TRIGGER_TYPES.register(eventBus);
-        DATA_COMPONENT_TYPES.register(eventBus);
-        ENTITY_SUB_PREDICATES.register(eventBus);
-        LOOT_CONDITION_TYPES.register(eventBus);
-        MENU_TYPES.register(eventBus);
-        SOUND_EVENTS.register(eventBus);
+        BLOCKS.register(modEventBus);
+        BLOCK_ENTITIES.register(modEventBus);
+        ITEMS.register(modEventBus);
+        ENTITY_TYPES.register(modEventBus);
+        TRIGGER_TYPES.register(modEventBus);
+        DATA_COMPONENT_TYPES.register(modEventBus);
+        ENTITY_SUB_PREDICATES.register(modEventBus);
+        LOOT_CONDITION_TYPES.register(modEventBus);
+        MENU_TYPES.register(modEventBus);
+        SOUND_EVENTS.register(modEventBus);
 
-        TideLootModifiers.register(eventBus);
-        TideRecipeSerializers.register(eventBus);
+        TideLootModifiers.register(modEventBus);
 
-        ModLoadingContext.get().registerExtensionPoint(
+        context.registerExtensionPoint(
                 ConfigScreenHandler.ConfigScreenFactory.class,
                 () -> new ConfigScreenHandler.ConfigScreenFactory(
                         (mc, screen) -> AutoConfig.getConfigScreen(TideConfig.class, screen).get())
         );
     }
 
-    @SubscribeEvent @SuppressWarnings("unused")
+    @SubscribeEvent
     public void onRegister(RegisterEvent event) {
         event.register(ForgeRegistries.Keys.ITEMS, helper -> TideItems.init());
         event.register(ForgeRegistries.Keys.BLOCKS, helper -> TideBlocks.init());
