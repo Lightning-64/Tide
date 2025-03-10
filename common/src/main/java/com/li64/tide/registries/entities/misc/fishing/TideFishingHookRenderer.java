@@ -67,59 +67,55 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
     }
 
     private void renderConnectingString(TideFishingHook hookEntity, float partialTick, PoseStack poseStack, MultiBufferSource buffer, Player player) {
-        int i = player.getMainArm() == HumanoidArm.RIGHT ? 1 : -1;
-        ItemStack itemstack = player.getMainHandItem();
-        if (!(itemstack.getItem() instanceof FishingRodItem)) {
-            i = -i;
-        }
-
         float f = player.getAttackAnim(partialTick);
-        float f1 = Mth.sin(Mth.sqrt(f) * (float)Math.PI);
-        float f2 = Mth.lerp(partialTick, player.yBodyRotO, player.yBodyRot) * ((float)Math.PI / 180F);
-        double d0 = Mth.sin(f2);
-        double d1 = Mth.cos(f2);
-        double d2 = (double)i * 0.35D;
-        double d4;
-        double d5;
-        double d6;
-        float f3;
-
-        if (this.entityRenderDispatcher.options.getCameraType().isFirstPerson() && player == Minecraft.getInstance().player) {
-            double d7 = 960.0D / (double) this.entityRenderDispatcher.options.fov().get();
-            Vec3 vec3 = this.entityRenderDispatcher.camera.getNearPlane().getPointOnPlane((float)i * 0.525F, -0.1F);
-            vec3 = vec3.scale(d7);
-            vec3 = vec3.yRot(f1 * 0.5F);
-            vec3 = vec3.xRot(-f1 * 0.7F);
-            d4 = Mth.lerp(partialTick, player.xo, player.getX()) + vec3.x;
-            d5 = Mth.lerp(partialTick, player.yo, player.getY()) + vec3.y;
-            d6 = Mth.lerp(partialTick, player.zo, player.getZ()) + vec3.z;
-            f3 = player.getEyeHeight();
-        } else {
-            d4 = Mth.lerp(partialTick, player.xo, player.getX()) - d1 * d2 - d0 * 0.8D;
-            d5 = player.yo + (double)player.getEyeHeight() + (player.getY() - player.yo) * (double)partialTick - 0.45D;
-            d6 = Mth.lerp(partialTick, player.zo, player.getZ()) - d0 * d2 + d1 * 0.8D;
-            f3 = player.isCrouching() ? -0.1875F : 0.0F;
-        }
-
-        double d9 = Mth.lerp(partialTick, hookEntity.xo, hookEntity.getX());
-        double d10 = Mth.lerp(partialTick, hookEntity.yo, hookEntity.getY()) + 0.25D;
-        double d8 = Mth.lerp(partialTick, hookEntity.zo, hookEntity.getZ());
-
-        float f4 = (float)(d4 - d9);
-        float f5 = (float)(d5 - d10) + f3;
-        float f6 = (float)(d6 - d8);
-
+        float f1 = Mth.sin(Mth.sqrt(f) * (float) Math.PI);
+        Vec3 vec3 = this.getPlayerHandPos(player, f1, partialTick);
+        Vec3 vec31 = hookEntity.getPosition(partialTick).add(0.0, 0.25, 0.0);
+        float f2 = (float)(vec3.x - vec31.x);
+        float f3 = (float)(vec3.y - vec31.y);
+        float f4 = (float)(vec3.z - vec31.z);
         VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.lineStrip());
         PoseStack.Pose pose = poseStack.last();
 
-        for (int k = 0; k <= 16; ++k) {
-            stringVertex(f4, f5, f6, vertexConsumer, pose, fraction(k),
+        for (int k = 0; k <= 16; k++) {
+            stringVertex(f2, f3, f4, vertexConsumer, pose, fraction(k),
                     fraction(k + 1), player, FishingLineItem.getColor(hookEntity.getLine()), partialTick);
         }
     }
 
-    private static float fraction(int a) {
-        return (float) a / (float) 16;
+    private Vec3 getPlayerHandPos(Player player, float anim, float partialTick) {
+        int i = player.getMainArm() == HumanoidArm.RIGHT ? 1 : -1;
+        ItemStack stack = player.getMainHandItem();
+        if (!(stack.getItem() instanceof FishingRodItem)) {
+            i = -i;
+        }
+
+        if (this.entityRenderDispatcher.options.getCameraType().isFirstPerson() && player == Minecraft.getInstance().player) {
+            double fovOption = this.entityRenderDispatcher.options.fov().get().doubleValue();
+            double d4 = 960.0 / (fovOption);
+            float scalar = (float) (Minecraft.getInstance().gameRenderer.getFov(this.entityRenderDispatcher.camera, partialTick, true)
+                    / fovOption - 1.0) * 2.5f + 1.0f;
+            Vec3 vec3 = this.entityRenderDispatcher.camera
+                    .getNearPlane()
+                    .getPointOnPlane((float)i * 0.525F * scalar, -0.1F * scalar)
+                    .scale(d4)
+                    .yRot(anim * 0.5F)
+                    .xRot(-anim * 0.7F);
+            return player.getEyePosition(partialTick).add(vec3);
+        } else {
+            float f = Mth.lerp(partialTick, player.yBodyRotO, player.yBodyRot) * (float) (Math.PI / 180.0);
+            double d0 = Mth.sin(f);
+            double d1 = Mth.cos(f);
+            float f1 = player.getScale();
+            double d2 = (double)i * 0.35 * (double)f1;
+            double d3 = 0.8 * (double)f1;
+            float f2 = player.isCrouching() ? -0.1875F : 0.0F;
+            return player.getEyePosition(partialTick).add(-d1 * d2 - d0 * d3, (double)f2 - 0.45 * (double)f1, -d0 * d2 + d1 * d3);
+        }
+    }
+
+    private static float fraction(int pNumerator) {
+        return (float)pNumerator / (float) 16;
     }
 
     private static void stringVertex(float x, float y, float z, VertexConsumer vertexConsumer, PoseStack.Pose pose, float frac1, float frac2, Player player, String colorHex, float partialTick) {

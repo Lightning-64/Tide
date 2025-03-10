@@ -5,6 +5,8 @@ extendable method net/minecraft/world/entity/Entity getX ()D
 extendable method net/minecraft/world/entity/Entity getY ()D
 extendable method net/minecraft/world/entity/Entity getZ ()D
 
+accessible method net/minecraft/client/renderer/GameRenderer getFov (Lnet/minecraft/client/Camera;FZ)D
+
 accessible method net/minecraft/world/level/block/entity/BlockEntityType <init> (Lnet/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier;Ljava/util/Set;)V
 
 # Classes
