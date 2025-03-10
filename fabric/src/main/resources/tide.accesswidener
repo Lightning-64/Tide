@@ -11,3 +11,4 @@ accessible class net/minecraft/world/level/block/entity/BlockEntityType$BlockEnt
 
 # Fields
 accessible field net/minecraft/world/entity/item/FallingBlockEntity blockState Lnet/minecraft/world/level/block/state/BlockState;
+accessible method net/minecraft/client/renderer/GameRenderer getFov (Lnet/minecraft/client/Camera;FZ)D
