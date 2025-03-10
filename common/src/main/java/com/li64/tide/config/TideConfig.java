@@ -42,9 +42,6 @@ public final class TideConfig implements ConfigData {
         public boolean defaultLineColor = false;
 
         @ConfigEntry.Gui.Tooltip
-        public boolean hideUnknownFishNames = true;
-
-        @ConfigEntry.Gui.Tooltip
         @ConfigEntry.Gui.RequiresRestart
         public double rodDurabilityMultiplier = 1.0;
 
