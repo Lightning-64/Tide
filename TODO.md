@@ -2,9 +2,13 @@
 
 🎣 Features 🎣
 - New fishing rod textures
+- More fishing rods??
+- "Bell" fishing bobber (rings when fish is caught)
+- "Mechanical" fishing bobber (reels in automatically)
 
 🚀 Compatibility 🚀
-- Fintastic compat
+- Fintastic
+- Hybrid Aquatic hooks
 
 ⚙️ Bug Fixes ⚙️
 - Fix fishing line connecting to other players
