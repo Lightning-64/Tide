@@ -7,6 +7,7 @@ import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
@@ -38,13 +39,13 @@ public class NeoForgeMainPlatform implements TideMainPlatform {
     public boolean isDevelopmentEnvironment() { return !FMLLoader.isProduction(); }
 
     @Override
-    public void registerItem(String key, Item item) {
-        TideNeoForge.ITEMS.register(key, () -> item);
+    public void registerItem(ResourceKey<Item> key, Item item) {
+        TideNeoForge.ITEMS.register(key.location().getPath(), () -> item);
     }
 
     @Override
-    public void registerBlock(String key, Block block) {
-        TideNeoForge.BLOCKS.register(key, () -> block);
+    public void registerBlock(ResourceKey<Block> key, Block block) {
+        TideNeoForge.BLOCKS.register(key.location().getPath(), () -> block);
     }
 
     @Override

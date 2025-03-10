@@ -116,11 +116,12 @@ public class TideNeoForgeEvents {
         @SubscribeEvent
         public static void onLootTableLoad(LootTableLoadEvent event) {
             if (event.getName().toString().equals("minecraft:gameplay/fishing")) {
+                if (Tide.CONFIG.general.crateWeight <= 0) return;
                 // Add crate rolls
                 LootPool pool = ((LootTableAccessor) event.getTable()).tide$getPool(0);
                 ((LootTableAccessor) event.getTable()).tide$getPool(0).entries = new ImmutableList.Builder<LootPoolEntryContainer>()
                         .addAll(pool.entries)
-                        .add(Tide.getCrateFishingEntry(registries.lookup(Registries.ENTITY_TYPE).orElseThrow()).build())
+                        .add(Tide.getCrateFishingEntry().build())
                         .build();
             }
         }

@@ -1,7 +1,6 @@
 package com.li64.tide;
 
 import com.li64.tide.client.gui.TideMenuTypes;
-import com.li64.tide.compat.jei.TideRecipeSerializers;
 import com.li64.tide.data.TideCriteriaTriggers;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.loot.TideLootModifiers;
@@ -65,7 +64,6 @@ public class TideNeoForge {
         SOUND_EVENTS.register(eventBus);
 
         TideLootModifiers.register(eventBus);
-        TideRecipeSerializers.register(eventBus);
 
         CONTAINER = container;
     }
