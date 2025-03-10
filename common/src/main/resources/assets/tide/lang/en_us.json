@@ -37,9 +37,6 @@
   "text.autoconfig.tide.option.general.defaultLineColor": "Use Vanilla Line Color",
   "text.autoconfig.tide.option.general.defaultLineColor.@Tooltip": "Enable this to use the default black fishing string color.",
 
-  "text.autoconfig.tide.option.general.hideUnknownFishNames": "Hide Unknown Fish Names",
-  "text.autoconfig.tide.option.general.hideUnknownFishNames.@Tooltip": "If set to true, fish entities' names will be displayed as '???' until unlocked in the fishing journal.",
-
   "text.autoconfig.tide.option.worldgen.disableFishingBoat": "Disable Fishing Boats",
   "text.autoconfig.tide.option.worldgen.disableFishingBoat.@Tooltip": "Turn this on to disable the generation of fishing boat structures",
 

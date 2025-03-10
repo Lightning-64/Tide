@@ -1,24 +1,11 @@
-+ 📋 TODO for 1.3.0 📋 +
++ 📋 TODO for 1.6.0 📋 +
 
-🐟 Fish entities 🐟
-- Freshwater fish ✔️
-- Saltwater fish ✔️
+🎣 Features 🎣
+- New fishing rod textures
 
-⚙️ Config additions ⚙️
-- Hold to cast ✔️
-- Minigame difficulty ✔️
-- Rod durability ✔️
+🚀 Compatibility 🚀
+- Fintastic compat
 
-🚀 Compatibility features 🚀
-- Rainbow Reef ✔️
-- Nether Depths Upgrade ✔️
-- Stardew Fishing? ✔️
-- Fishing Real? ✔️
-- Aquamirae? ✔️
-
-🎣 Fishing features 🎣
-- Highlight newly unlocked fish ✔️
-
-   Other stuff
-- Remove unnecessary tags
-- Fix algae growing on grass lol ✔️
+⚙️ Bug Fixes ⚙️
+- Fix fishing line connecting to other players
+- Fix fish entities not spawning
