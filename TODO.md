@@ -11,5 +11,6 @@
 - Hybrid Aquatic hooks
 
 ⚙️ Bug Fixes ⚙️
+- Fix amethyst bobber typo ✔️
 - Fix fishing line connecting to other players
 - Fix fish entities not spawning
