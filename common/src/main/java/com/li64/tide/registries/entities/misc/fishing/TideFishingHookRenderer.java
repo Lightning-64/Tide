@@ -1,5 +1,6 @@
 package com.li64.tide.registries.entities.misc.fishing;
 
+import com.li64.tide.registries.TideItems;
 import com.li64.tide.registries.items.FishingHookItem;
 import com.li64.tide.registries.items.FishingLineItem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -21,6 +22,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.FishingRodItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import com.li64.tide.Tide;
 import org.jetbrains.annotations.NotNull;
@@ -87,18 +89,19 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
     private Vec3 getPlayerHandPos(Player player, float anim, float partialTick) {
         int i = player.getMainArm() == HumanoidArm.RIGHT ? 1 : -1;
         ItemStack stack = player.getMainHandItem();
-        if (!(stack.getItem() instanceof FishingRodItem)) {
-            i = -i;
-        }
+        if (!(stack.getItem() instanceof FishingRodItem)) i = -i;
+        Vec2 stringOffset = stack.getItem() == TideItems.STONE_FISHING_ROD ? new Vec2(0.05f, -0.1f)
+                : (stack.getItem() == TideItems.IRON_FISHING_ROD ? new Vec2(0.05f, -0.02f) : new Vec2(0.0f, 0.0f));
 
         if (this.entityRenderDispatcher.options.getCameraType().isFirstPerson() && player == Minecraft.getInstance().player) {
             double fovOption = this.entityRenderDispatcher.options.fov().get().doubleValue();
             double d4 = 960.0 / (fovOption);
-            float scalar = (float) (Minecraft.getInstance().gameRenderer.getFov(this.entityRenderDispatcher.camera, partialTick, true)
-                    / fovOption - 1.0) * 2.5f + 1.0f;
+            double fovScalar = (Minecraft.getInstance().gameRenderer.getFov(this.entityRenderDispatcher.camera, partialTick, true) / fovOption - 1.0) * 2.5 + 1.0;
             Vec3 vec3 = this.entityRenderDispatcher.camera
                     .getNearPlane()
-                    .getPointOnPlane((float)i * 0.525F * scalar, -0.1F * scalar)
+                    .getPointOnPlane(
+                            i * (0.525F + stringOffset.x) * (float) fovScalar,
+                            (-0.1F + stringOffset.y) * (float) fovScalar)
                     .scale(d4)
                     .yRot(anim * 0.5F)
                     .xRot(-anim * 0.7F);
