@@ -5,9 +5,6 @@ import com.li64.tide.registries.TideItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
-import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.critereon.ImpossibleTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -434,36 +431,6 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                             SmeltingRecipe::new)
                     .unlockedBy("has_clayfish", has(TideItems.CLAYFISH))
                     .save(output, "tide:clayfish_smelting");
-
-            // -- Rod Upgrading (for JEI) --
-
-            new RodUpgradingRecipeBuilder(Items.FISHING_ROD)
-                    .unlockedBy("impossible", impossible())
-                    .save(output, "tide:rod_upgrading/normal");
-
-            new RodUpgradingRecipeBuilder(TideItems.STONE_FISHING_ROD)
-                    .unlockedBy("impossible", impossible())
-                    .save(output, "tide:rod_upgrading/stone");
-
-            new RodUpgradingRecipeBuilder(TideItems.IRON_FISHING_ROD)
-                    .unlockedBy("impossible", impossible())
-                    .save(output, "tide:rod_upgrading/iron");
-
-            new RodUpgradingRecipeBuilder(TideItems.GOLDEN_FISHING_ROD)
-                    .unlockedBy("impossible", impossible())
-                    .save(output, "tide:rod_upgrading/golden");
-
-            new RodUpgradingRecipeBuilder(TideItems.CRYSTAL_FISHING_ROD)
-                    .unlockedBy("impossible", impossible())
-                    .save(output, "tide:rod_upgrading/crystal");
-
-            new RodUpgradingRecipeBuilder(TideItems.DIAMOND_FISHING_ROD)
-                    .unlockedBy("impossible", impossible())
-                    .save(output, "tide:rod_upgrading/diamond");
-
-            new RodUpgradingRecipeBuilder(TideItems.NETHERITE_FISHING_ROD)
-                    .unlockedBy("impossible", impossible())
-                    .save(output, "tide:rod_upgrading/netherite");
         }
 
         private void createSimpleBobberRecipe(RecipeOutput output, Item bobber, Item addition) {
@@ -496,10 +463,6 @@ public class TideRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_" + dyeId + "_dye", has(dyeTag))
                         .save(output, "tide:bobbers/" + dyeId);
             });
-        }
-
-        private static Criterion<ImpossibleTrigger.TriggerInstance> impossible() {
-            return CriteriaTriggers.IMPOSSIBLE.createCriterion(new ImpossibleTrigger.TriggerInstance());
         }
 
         public TagKey<Item> neoForgeConventionTag(String name) {

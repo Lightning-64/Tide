@@ -4,7 +4,6 @@ import com.li64.tide.client.gui.TideMenuTypes;
 import com.li64.tide.data.TideCriteriaTriggers;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.TideTags;
-import com.li64.tide.data.rods.RodUpgradingRecipe;
 import com.li64.tide.registries.TideEntitySubPredicates;
 import com.li64.tide.events.FabricEventHandler;
 import com.li64.tide.network.TideMessages;
@@ -25,7 +24,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -60,8 +58,6 @@ public class TideFabric implements ModInitializer {
         TideLootConditions.init();
         TideCriteriaTriggers.init();
 
-        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, Tide.resource(RodUpgradingRecipe.Type.ID),
-                RodUpgradingRecipe.Serializer.INSTANCE);
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, Tide.resource("tide"),
                 Tide.getCreativeTab(FabricItemGroup.builder()).build());
 

@@ -59,17 +59,14 @@ public class CustomRodManager {
         return getAccessory(TideDataComponents.FISHING_LINE, rod, registryAccess) != null;
     }
 
-    private static ItemStack getAccessory(DataComponentType<CompoundTag> componentType, ItemStack rod, HolderLookup.Provider registryAccess, ItemStack defaultItem) {
-        CompoundTag data = rod.get(componentType);
-        if (data == null) return defaultItem;
-        Optional<ItemStack> hook = ItemStack.parse(registryAccess, data);
-        return hook.orElse(defaultItem);
+    private static ItemStack getAccessory(DataComponentType<CompoundTag> componentType, ItemStack rod, HolderLookup.Provider registryAccess) {
+        return getAccessory(componentType, rod, registryAccess, null);
     }
 
-    private static ItemStack getAccessory(DataComponentType<CompoundTag> componentType, ItemStack rod, HolderLookup.Provider registryAccess) {
+    private static ItemStack getAccessory(DataComponentType<CompoundTag> componentType, ItemStack rod, HolderLookup.Provider registryAccess, ItemStack defaultItem) {
         CompoundTag data = rod.get(componentType);
-        if (data == null) return null;
-        Optional<ItemStack> hook = ItemStack.parse(registryAccess, data);
-        return hook.orElse(null);
+        if (data == null || data.isEmpty()) return defaultItem;
+        Optional<ItemStack> accessory = ItemStack.parse(registryAccess, data);
+        return accessory.orElse(defaultItem);
     }
 }
