@@ -1,10 +1,9 @@
 package com.li64.tide.registries;
 
 import com.li64.tide.Tide;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 
 import java.util.HashMap;
 
@@ -18,10 +17,10 @@ public class TideSoundEvents {
     public static SoundEvent register(String key) {
         SoundEvent soundEvent = SoundEvent.createVariableRangeEvent(Tide.resource(key));
         SOUND_EVENTS.put(key, soundEvent);
-        return soundEvent;
+        return Registry.register(BuiltInRegistries.SOUND_EVENT, Tide.resource(key), soundEvent);
     }
 
     public static void init() {
-        SOUND_EVENTS.forEach(Tide.PLATFORM::registerSoundEvent);
+        Tide.LOG.info("Registering Tide Sound Events");
     }
 }

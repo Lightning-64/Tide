@@ -2,6 +2,8 @@ package com.li64.tide.registries;
 
 import com.li64.tide.Tide;
 import com.li64.tide.registries.blocks.entities.LootCrateBlockEntity;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
@@ -26,10 +28,10 @@ public class TideBlockEntities {
 
     public static <T extends BlockEntity> BlockEntityType<T> register(String key, BlockEntityType<T> block) {
         BLOCK_ENTITIES.put(key, block);
-        return block;
+        return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, key, block);
     }
 
     public static void init() {
-        BLOCK_ENTITIES.forEach(Tide.PLATFORM::registerBlockEntity);
+        Tide.LOG.info("Registering Tide Block Entities");
     }
 }

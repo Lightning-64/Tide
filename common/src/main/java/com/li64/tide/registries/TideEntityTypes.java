@@ -6,6 +6,8 @@ import com.li64.tide.registries.entities.misc.LootCrateEntity;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import com.li64.tide.registries.entities.misc.DeepAquaArrow;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
@@ -117,10 +119,10 @@ public class TideEntityTypes {
     public static <T extends Entity> EntityType<T> register(String key, EntityType.Builder<T> builder) {
         EntityType<T> entityType = builder.build(ResourceKey.create(Registries.ENTITY_TYPE, Tide.resource(key)));
         ENTITY_TYPES.put(key, entityType);
-        return entityType;
+        return Registry.register(BuiltInRegistries.ENTITY_TYPE, Tide.resource(key), entityType);
     }
 
     public static void init() {
-        ENTITY_TYPES.forEach(Tide.PLATFORM::registerEntityType);
+        Tide.LOG.info("Registering Tide Entity Types");
     }
 }

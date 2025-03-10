@@ -6,6 +6,8 @@ import com.li64.tide.data.triggers.TideSimpleTrigger;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 import java.util.HashMap;
 
@@ -20,10 +22,10 @@ public class TideCriteriaTriggers {
 
     public static <T extends SimpleCriterionTrigger.SimpleInstance> SimpleCriterionTrigger<T> register(String key, SimpleCriterionTrigger<T> trigger) {
         CRITERIA_TRIGGERS.put(key, trigger);
-        return trigger;
+        return Registry.register(BuiltInRegistries.TRIGGER_TYPES, Tide.resource(key), trigger);
     }
 
     public static void init() {
-        CRITERIA_TRIGGERS.forEach(Tide.PLATFORM::registerCriteriaTrigger);
+        Tide.LOG.info("Registering Tide Trigger Types");
     }
 }

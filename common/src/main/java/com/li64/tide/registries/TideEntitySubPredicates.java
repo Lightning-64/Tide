@@ -5,6 +5,8 @@ import com.li64.tide.data.loot.FishingStatsPredicate;
 import com.li64.tide.data.loot.TideFishingPredicate;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.critereon.EntitySubPredicate;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 import java.util.HashMap;
 
@@ -18,10 +20,10 @@ public class TideEntitySubPredicates {
 
     public static <T extends EntitySubPredicate> MapCodec<T> register(String key, MapCodec<T> codec) {
         ENTITY_SUB_PREDICATES.put(key, codec);
-        return codec;
+        return Registry.register(BuiltInRegistries.ENTITY_SUB_PREDICATE_TYPE, Tide.resource(key), codec);
     }
 
     public static void init() {
-        ENTITY_SUB_PREDICATES.forEach(Tide.PLATFORM::registerEntitySubPredicate);
+        Tide.LOG.info("Registering Tide Entity Sub-predicates");
     }
 }

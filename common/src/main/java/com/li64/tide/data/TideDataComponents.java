@@ -3,7 +3,9 @@ package com.li64.tide.data;
 import com.li64.tide.Tide;
 import com.li64.tide.data.rods.BaitContents;
 import com.li64.tide.data.rods.CustomRodManager;
+import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.codec.ByteBufCodecs;
 
@@ -35,10 +37,10 @@ public class TideDataComponents {
 
     public static <T> DataComponentType<T> register(String key, DataComponentType<T> component) {
         DATA_COMPONENT_TYPES.put(key, component);
-        return component;
+        return Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, Tide.resource(key), component);
     }
 
     public static void init() {
-        DATA_COMPONENT_TYPES.forEach(Tide.PLATFORM::registerComponentType);
+        Tide.LOG.info("Registering Tide Data Components");
     }
 }

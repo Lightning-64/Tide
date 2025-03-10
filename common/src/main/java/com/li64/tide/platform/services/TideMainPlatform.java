@@ -44,26 +44,6 @@ public interface TideMainPlatform {
 
     CompoundTag getPlayerData(ServerPlayer player);
 
-    void registerItem(ResourceKey<Item> key, Item item);
-
-    void registerBlock(ResourceKey<Block> key, Block block);
-
-    void registerBlockEntity(String key, BlockEntityType<?> blockEntity);
-
-    void registerEntityType(String key, EntityType<?> entityType);
-
-    void registerCriteriaTrigger(String key, CriterionTrigger<?> trigger);
-
-    void registerComponentType(String key, DataComponentType<?> componentType);
-
-    void registerEntitySubPredicate(String key, MapCodec<? extends EntitySubPredicate> codec);
-
-    void registerLootCondition(String key, LootItemConditionType type);
-
-    void registerMenuType(String key, MenuType<?> menuType);
-
-    void registerSoundEvent(String key, SoundEvent soundEvent);
-
     default Optional<ArrayList<ItemStack>> stardewGetRewards(HookAccessor hook) { return Optional.empty(); }
 
     default boolean stardewStart(ServerPlayer player, HookAccessor hook, ItemStack item, List<ItemStack> items) {

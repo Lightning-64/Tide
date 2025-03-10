@@ -8,44 +8,21 @@ import com.li64.tide.registries.TideEntitySubPredicates;
 import com.li64.tide.loot.TideLootModifiers;
 import com.li64.tide.network.TideMessages;
 import com.li64.tide.registries.*;
-import com.mojang.serialization.MapCodec;
 import me.shedaniel.autoconfig.AutoConfig;
-import net.minecraft.advancements.CriterionTrigger;
-import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.core.Registry;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 
 @Mod(Tide.MOD_ID)
 public class TideForge {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Tide.MOD_ID);
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Tide.MOD_ID);
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Tide.MOD_ID);
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Tide.MOD_ID);
-    public static final DeferredRegister<CriterionTrigger<?>> TRIGGER_TYPES = DeferredRegister.create(Registries.TRIGGER_TYPE, Tide.MOD_ID);
-    public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES = DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, Tide.MOD_ID);
-    public static final DeferredRegister<MapCodec<? extends EntitySubPredicate>> ENTITY_SUB_PREDICATES = DeferredRegister.create(Registries.ENTITY_SUB_PREDICATE_TYPE, Tide.MOD_ID);
-    public static final DeferredRegister<LootItemConditionType> LOOT_CONDITION_TYPES = DeferredRegister.create(Registries.LOOT_CONDITION_TYPE, Tide.MOD_ID);
-    public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.MENU_TYPES, Tide.MOD_ID);
-    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Tide.MOD_ID);
-
     public TideForge(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
         modEventBus.register(this);
@@ -54,18 +31,6 @@ public class TideForge {
 
         TideForgeNetworking.init();
         TideMessages.init(Tide.NETWORK);
-
-        BLOCKS.register(modEventBus);
-        BLOCK_ENTITIES.register(modEventBus);
-        ITEMS.register(modEventBus);
-        ENTITY_TYPES.register(modEventBus);
-        TRIGGER_TYPES.register(modEventBus);
-        DATA_COMPONENT_TYPES.register(modEventBus);
-        ENTITY_SUB_PREDICATES.register(modEventBus);
-        LOOT_CONDITION_TYPES.register(modEventBus);
-        MENU_TYPES.register(modEventBus);
-        SOUND_EVENTS.register(modEventBus);
-
         TideLootModifiers.register(modEventBus);
 
         context.registerExtensionPoint(

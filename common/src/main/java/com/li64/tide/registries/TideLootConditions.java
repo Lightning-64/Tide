@@ -4,6 +4,8 @@ import com.li64.tide.Tide;
 import com.li64.tide.data.loot.BiomeTagPredicate;
 import com.li64.tide.data.loot.IsNightPredicate;
 import com.li64.tide.data.loot.MoonPhasePredicate;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 import java.util.HashMap;
@@ -20,10 +22,10 @@ public class TideLootConditions {
 
     public static LootItemConditionType register(String key, LootItemConditionType type) {
         LOOT_CONDITIONS.put(key, type);
-        return type;
+        return Registry.register(BuiltInRegistries.LOOT_CONDITION_TYPE, Tide.resource(key), type);
     }
 
     public static void init() {
-        LOOT_CONDITIONS.forEach(Tide.PLATFORM::registerLootCondition);
+        Tide.LOG.info("Registering Tide Loot Conditions");
     }
 }

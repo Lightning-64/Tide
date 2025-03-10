@@ -2,6 +2,8 @@ package com.li64.tide.client.gui;
 
 import com.li64.tide.Tide;
 import com.li64.tide.client.gui.menus.AnglerWorkshopMenu;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -16,10 +18,10 @@ public class TideMenuTypes {
 
     public static <T extends AbstractContainerMenu> MenuType<T> register(String key, MenuType<T> menuType) {
         MENU_TYPES.put(key, menuType);
-        return menuType;
+        return Registry.register(BuiltInRegistries.MENU, Tide.resource(key), menuType);
     }
 
     public static void init() {
-        MENU_TYPES.forEach(Tide.PLATFORM::registerMenuType);
+        Tide.LOG.info("Registering Tide Menu Types");
     }
 }

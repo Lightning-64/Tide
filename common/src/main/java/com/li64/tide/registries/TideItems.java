@@ -4,6 +4,7 @@ import com.li64.tide.Tide;
 import com.li64.tide.registries.blocks.JellyTorchBlockItem;
 import com.li64.tide.registries.items.*;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -346,17 +347,17 @@ public class TideItems {
     public static Item register(String name, Function<Item.Properties, Item> factory, Item.Properties properties) {
         ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, Tide.resource(name));
         Item item = factory.apply(properties.setId(key));
-        return registerItem(key, item);
+        return register(key, item);
     }
 
-    private static Item registerItem(ResourceKey<Item> key, Item item) {
+    private static Item register(ResourceKey<Item> key, Item item) {
         ITEMS.put(key, item);
         ORDERED_ITEMS.add(item);
-        return item;
+        return Registry.register(BuiltInRegistries.ITEM, key, item);
     }
 
     public static void init() {
-        ITEMS.forEach(Tide.PLATFORM::registerItem);
+        Tide.LOG.info("Registering Tide Items");
     }
 
     public static void assignTags() {

@@ -2,7 +2,6 @@ package com.li64.tide.platform;
 
 import com.li64.tide.TideForgeNetworking;
 import com.li64.tide.platform.services.TideNetworkPlatform;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
