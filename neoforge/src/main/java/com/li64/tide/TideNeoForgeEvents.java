@@ -33,7 +33,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
@@ -127,8 +127,8 @@ public class TideNeoForgeEvents {
         }
 
         @SubscribeEvent
-        public static void onServerReloadListeners(AddReloadListenerEvent event) {
-            Tide.onRegisterReloadListeners((id, listener) -> event.addListener(listener));
+        public static void onServerReloadListeners(AddServerReloadListenersEvent event) {
+            Tide.onRegisterReloadListeners(event::addListener);
         }
 
         @SubscribeEvent

@@ -8,7 +8,7 @@ base {
 }
 
 mixin {
-    add(sourceSets.main, "tide.refmap.json")
+//    add(sourceSets.main, "tide.refmap.json")
     config("${mod_id}.mixins.json")
     config("${mod_id}.forge.mixins.json")
 }

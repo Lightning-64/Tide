@@ -1,9 +1,6 @@
 package com.li64.tide;
 
 import com.google.common.collect.ImmutableList;
-import com.li64.tide.client.gui.TideMenuTypes;
-import com.li64.tide.data.TideCriteriaTriggers;
-import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.data.commands.JournalCommand;
 import com.li64.tide.data.player.TidePlayerData;
@@ -14,9 +11,6 @@ import com.li64.tide.registries.entities.util.AbstractTideFish;
 import com.li64.tide.registries.items.TideFishingRodItem;
 import com.li64.tide.util.BaitUtils;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacementTypes;
@@ -25,7 +19,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.ItemCost;
@@ -46,8 +39,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegisterEvent;
 
 import java.util.List;
 
@@ -153,7 +144,7 @@ public class TideForgeEvents {
         public static void itemTooltipEvent(ItemTooltipEvent event) {
             ItemStack stack = event.getItemStack();
             if (BaitUtils.isBait(stack)) event.getToolTip().addAll(BaitUtils.getDescriptionLines(stack));
-            if (stack.is(TideTags.Items.CUSTOMIZABLE_RODS)) event.getToolTip().addAll(
+            if (stack.is(TideTags.Items.CUSTOMIZABLE_RODS) && event.getEntity() != null) event.getToolTip().addAll(
                     TideFishingRodItem.getDescriptionLines(stack, event.getEntity().registryAccess()));
         }
 
