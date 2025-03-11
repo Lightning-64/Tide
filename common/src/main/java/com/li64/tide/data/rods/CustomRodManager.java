@@ -61,15 +61,12 @@ public class CustomRodManager {
 
     private static ItemStack getAccessory(DataComponentType<CompoundTag> componentType, ItemStack rod, HolderLookup.Provider registryAccess, ItemStack defaultItem) {
         CompoundTag data = rod.get(componentType);
-        if (data == null) return defaultItem;
+        if (data == null || data.isEmpty()) return defaultItem;
         Optional<ItemStack> hook = ItemStack.parse(registryAccess, data);
         return hook.orElse(defaultItem);
     }
 
     private static ItemStack getAccessory(DataComponentType<CompoundTag> componentType, ItemStack rod, HolderLookup.Provider registryAccess) {
-        CompoundTag data = rod.get(componentType);
-        if (data == null) return null;
-        Optional<ItemStack> hook = ItemStack.parse(registryAccess, data);
-        return hook.orElse(null);
+        return getAccessory(componentType, rod, registryAccess, null);
     }
 }
