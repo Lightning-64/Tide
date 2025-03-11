@@ -40,7 +40,7 @@ public class TideItems {
     public static final Item IRON_FISHING_ROD = register("iron_fishing_rod",
             properties -> new TideFishingRodItem(64, properties));
     public static final Item GOLDEN_FISHING_ROD = register("golden_fishing_rod",
-            properties -> new TideFishingRodItem(32, properties));
+            properties -> new TideFishingRodItem(36, properties));
     public static final Item CRYSTAL_FISHING_ROD = register("crystal_fishing_rod",
             properties -> new TideFishingRodItem(80, properties));
     public static final Item DIAMOND_FISHING_ROD = register("diamond_fishing_rod",
