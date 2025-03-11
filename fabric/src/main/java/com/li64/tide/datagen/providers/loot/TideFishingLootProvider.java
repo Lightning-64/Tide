@@ -106,7 +106,7 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
                                 LocationCheck.checkLocation(LocationPredicate.Builder.location().setStructure(BuiltinStructures.OCEAN_MONUMENT))
                                         .and(LootItemRandomChanceCondition.randomChance(0.05f))))
                         .add(LootItem.lootTableItem(TideItems.MIDAS_FISH).setWeight(10).when(
-                                entityPredicate(FishingStatsPredicate.luckOf(6))
+                                entityPredicate(FishingStatsPredicate.luckOf(7))
                                         .and(LootItemRandomChanceCondition.randomChance(0.05f))))
                         .add(LootItem.lootTableItem(TideItems.VOIDSEEKER).setWeight(10).when(
                                 LocationCheck.checkLocation(LocationPredicate.Builder.location().setDimension(Level.END))
