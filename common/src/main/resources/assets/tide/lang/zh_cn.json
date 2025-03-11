@@ -1,7 +1,7 @@
 {
    "text.tide.rod_tooltip.bait_desc": "鱼饵槽（右击以填充）",
    "text.tide.rod_tooltip.accessories_prefix": "配件：",
- 
+
    "text.tide.bait_tooltip.unknown_effects": "可以用作鱼饵",
    "text.tide.bait_tooltip.prefix": "当用作鱼饵时：",
    "text.tide.bait_tooltip.speed": "%s 钓鱼速度",
@@ -36,9 +36,6 @@
 
   "text.autoconfig.tide.option.general.defaultLineColor": "使用原版鱼线颜色",
   "text.autoconfig.tide.option.general.defaultLineColor.@Tooltip": "启用此选项可使用默认的黑色鱼线，这种颜色与光影兼容性更好",
-
-  "text.autoconfig.tide.option.general.hideUnknownFishNames": "隐藏未知鱼类的名称",
-  "text.autoconfig.tide.option.general.hideUnknownFishNames.@Tooltip": "开启此选项后，鱼类的名称将在解锁百鱼全书前将显示为'???'。",
 
   "text.autoconfig.tide.option.worldgen.disableFishingBoat": "禁用渔船",
   "text.autoconfig.tide.option.worldgen.disableFishingBoat.@Tooltip": "打开此选项可禁用渔船结构的生成",
@@ -321,11 +318,11 @@
    "accessory.item.tide.pearl_fishing_bobber": "珍珠浮漂",
    "accessory.item.tide.heart_fishing_bobber": "心浮漂",
    "accessory.item.tide.grassy_fishing_bobber": "草浮漂",
- 
+
    "accessory.item.tide.fishing_hook": "普通钓钩",
    "accessory.item.tide.iron_fishing_hook": "铁钓钩",
    "accessory.item.tide.lavaproof_fishing_hook": "熔岩钓钩",
- 
+
    "accessory.item.tide.fishing_line": "普通线",
    "accessory.item.tide.braided_line": "纺织线",
    "accessory.item.tide.reinforced_line": "强化线",
@@ -498,7 +495,7 @@
 
    "profile.item.tide.midas_fish": "这条鱼被赐予（也可以说是诅咒）了一种能力，可以将它接触到的其他鱼类变成纯金。由于它金光闪闪的颜色，使得它在其他鱼类中脱颖而出，成为了传奇鱼中的一条。",
    "profile.item.tide.aquathorn": "这种鱼类自其家园——海底神殿建成以来就一直存在。尽管大多数已进化为更巨大也更强大的物种，但这些鱼因其强大的防御机制而仍然存活了下来。",
-   "profile.item.tide.windbass": "疾风鲈和其依靠风力的伙伴们一起在试炼密室中安家。它拥有惊人的速度，这得益于其能够在水下制造风流的本领。", 
+   "profile.item.tide.windbass": "疾风鲈和其依靠风力的伙伴们一起在试炼密室中安家。它拥有惊人的速度，这得益于其能够在水下制造风流的本领。",
    "profile.item.tide.voidseeker": "虚空栖息在一个未知的维度中，是现存最稀有的鱼之一。据传说在特定的月相期间，各维度的边界变薄之时，才能在末地的水域中瞥见这条鱼。",
    "profile.item.tide.shooting_starfish": "流星的身体光彩夺目，令人叹为观止。据说在多年以前它从天而降。只有在满月的月光洒向大地时，这种鱼才会出现。",
 
