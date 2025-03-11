@@ -3,7 +3,7 @@
 🐟 General Features 🐟
 - Improve fishing line rendering ✔️
 - Update fishing rod textures ✔️
-- Update bait slot textures
+- Update bait slot textures ✔️
 - Structure fish tab
 - Desert well fish
 - Add "Aether" habitat
