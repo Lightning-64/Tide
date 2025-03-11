@@ -11,7 +11,6 @@ import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.Structures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -121,7 +120,7 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
                                                 .lookupOrThrow(Registries.STRUCTURE).getOrThrow(BuiltinStructures.TRIAL_CHAMBERS)))
                                         .and(LootItemRandomChanceCondition.randomChance(ConstantValue.exactly(0.05f)))))
                         .add(LootItem.lootTableItem(TideItems.MIDAS_FISH).setWeight(10).when(
-                                entityPredicate(FishingStatsPredicate.luckOf(6))
+                                entityPredicate(FishingStatsPredicate.luckOf(7))
                                         .and(LootItemRandomChanceCondition.randomChance(ConstantValue.exactly(0.05f)))))
                         .add(LootItem.lootTableItem(TideItems.VOIDSEEKER).setWeight(10).when(
                                 LocationCheck.checkLocation(LocationPredicate.Builder.inDimension(Level.END))

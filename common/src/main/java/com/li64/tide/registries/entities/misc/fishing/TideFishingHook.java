@@ -441,6 +441,9 @@ public class TideFishingHook extends Projectile {
                 }
             } else {
                 // When a fish first touches the hook
+                if (rod.is(TideItems.CRYSTAL_FISHING_ROD)) {
+                    this.level().playSound(null, getPlayerOwner().blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.MASTER, 1.5F, 1.0F - (this.random.nextFloat() - this.random.nextFloat()) * 0.1F);
+                }
 
                 if (fluid.is(TideTags.Fluids.LAVA_FISHING)) {
                     this.playSound(SoundEvents.BUCKET_EMPTY_LAVA, 0.25F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
@@ -598,6 +601,9 @@ public class TideFishingHook extends Projectile {
                         itemEntity.setDeltaMovement(d0 * 0.1D, d1 * 0.1D + Math.sqrt(Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2)) * 0.08D, d2 * 0.1D);
                         this.level().addFreshEntity(itemEntity);
                         player.level().addFreshEntity(new ExperienceOrb(player.level(), player.getX(), player.getY() + 0.5D, player.getZ() + 0.5D, this.random.nextInt(6) + 1));
+                        if (rod.is(TideItems.DIAMOND_FISHING_ROD)) {
+                            player.level().addFreshEntity(new ExperienceOrb(player.level(), player.getX(), player.getY() + 0.5D, player.getZ() + 0.5D, this.random.nextInt(4) + 1));
+                        }
 
                         if (hookedItem.is(ItemTags.FISHES)) {
                             player.awardStat(Stats.FISH_CAUGHT, 1);
