@@ -85,6 +85,11 @@ public class TideFishingRodItem extends FishingRodItem {
             builder.add(Component.empty());
         }
 
+        if (stack.is(TideItems.CRYSTAL_FISHING_ROD)) builder.add(Component.translatable("text.tide.rod_tooltip.crystal_bonus").withStyle(ChatFormatting.GOLD));
+        if (stack.is(TideItems.GOLDEN_FISHING_ROD)) builder.add(Component.translatable("text.tide.rod_tooltip.gold_bonus").withStyle(ChatFormatting.GOLD));
+        if (stack.is(TideItems.DIAMOND_FISHING_ROD)) builder.add(Component.translatable("text.tide.rod_tooltip.diamond_bonus").withStyle(ChatFormatting.GOLD));
+        if (stack.is(TideItems.NETHERITE_FISHING_ROD)) builder.add(Component.translatable("text.tide.rod_tooltip.netherite_bonus").withStyle(ChatFormatting.GOLD));
+
         return ImmutableList.copyOf(builder);
     }
 
@@ -253,6 +258,8 @@ public class TideFishingRodItem extends FishingRodItem {
                     speed += BaitUtils.getBaitSpeed(BaitUtils.getPrimaryBait(rod));
                     luck += BaitUtils.getBaitLuck(BaitUtils.getPrimaryBait(rod));
                 }
+
+                if (rod.is(TideItems.GOLDEN_FISHING_ROD)) luck += 1;
 
                 level.addFreshEntity(new TideFishingHook(TideEntityTypes.FISHING_BOBBER,
                         player, level, luck, speed, charge, rod));

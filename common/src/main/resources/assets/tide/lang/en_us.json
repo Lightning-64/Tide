@@ -1,6 +1,10 @@
 {
   "text.tide.rod_tooltip.bait_desc": "Bait slots (right click to fill)",
   "text.tide.rod_tooltip.accessories_prefix": "Accessories:",
+  "text.tide.rod_tooltip.crystal_bonus": "Plays sound when a fish bites",
+  "text.tide.rod_tooltip.gold_bonus": "Bonus luck",
+  "text.tide.rod_tooltip.diamond_bonus": "Bonus XP",
+  "text.tide.rod_tooltip.netherite_bonus": "Can fish in lava",
 
   "text.tide.bait_tooltip.unknown_effects": "Can be used as bait",
   "text.tide.bait_tooltip.prefix": "When used as bait:",
@@ -14,7 +18,7 @@
   "text.autoconfig.tide.category.worldgen": "World Generation",
 
   "text.autoconfig.tide.option.general.giveJournal": "Give Journal",
-  "text.autoconfig.tide.option.general.giveJournal.@Tooltip": "Turn this setting off to stpo giving new players a fishing journal upon joining a new world",
+  "text.autoconfig.tide.option.general.giveJournal.@Tooltip": "Turn this setting off to stop giving new players a fishing journal upon joining a new world",
 
   "text.autoconfig.tide.option.general.holdToCast": "Hold to Cast",
   "text.autoconfig.tide.option.general.holdToCast.@Tooltip": "When turned off, fishing rods can be cast by clicking once, as opposed to charging to cast them farther or closer",
@@ -421,7 +425,7 @@
 
   "profile.item.tide.trout": "Rainbow Trout, commonly found in rivers and lakes, are prized catches for fishing enthusiasts. With their vibrant colors and spirited behavior, these fish are certainly a sight to see.",
   "profile.item.tide.mint_carp": "The mint carp, with its distinct pale green coloration, is a captivating species of carp that inhabits lakes and rivers. People are often drawn to these elusive creatures.",
-  "profile.item.minecraft.salmon": "The salmon, a fish known to overcoming all kinds of obstacles, is found mainly in freshwater biomes. However, some venture into the vast expanse of the ocean, showcasing their adaptability to different habitats.",
+  "profile.item.minecraft.salmon": "The salmon, a fish known for overcoming all kinds of obstacles, is found mainly in freshwater biomes. However, some venture into the vast expanse of the ocean, showcasing their adaptability to different habitats.",
   "profile.item.tide.clayfish": "The clayfish, a unique inhabitant of rivers, boasts a distinctive appearance with its gray clay composition. In addition to its aesthetics, the clayfish holds practical value. When smelted, it can become a valuable resource.",
   "profile.item.tide.bass": "The bass is a versatile freshwater fish found in various habitats. With its distinct appearance and remarkable agility, this fish is a prized catch.",
   "profile.item.tide.pike": "The pike, a predator of freshwater habitats, has power and stealth with its elongated body and sharp teeth. Its sleek and muscular build allows it to swiftly maneuver through the water, making it an apex hunter.",
