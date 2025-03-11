@@ -22,7 +22,6 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SlotAccess;
@@ -47,8 +46,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class TideFishingRodItem extends FishingRodItem {
-    public static final ResourceLocation CAST_PROPERTY = Tide.resource("cast");
-
     public TideFishingRodItem(double baseDurability, Properties properties) {
         super(properties
                 .durability((int) (baseDurability * (Tide.CONFIG == null ? 1.0 : Tide.CONFIG.general.rodDurabilityMultiplier)))
