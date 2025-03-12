@@ -5,7 +5,7 @@
 - Update fishing rod textures ✔️
 - Update bait slot textures ✔️
 - "Torn notes" instead of written books
-- Structure fish
+- Structure fish ✔️✔️🐟🐟🐟🐟
 
 🎣 Fishing Rod Features 🎣
 - Amethyst rod chimes when a fish bites ✔️

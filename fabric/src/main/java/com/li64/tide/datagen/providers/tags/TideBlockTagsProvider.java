@@ -1,5 +1,6 @@
 package com.li64.tide.datagen.providers.tags;
 
+import com.li64.tide.data.TideTags;
 import com.li64.tide.registries.TideBlocks;
 import com.li64.tide.registries.TideItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -10,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -26,6 +28,9 @@ public class TideBlockTagsProvider extends FabricTagProvider<Block> {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        getOrCreateTagBuilder(TideTags.Blocks.DESERT_WELL_FISH)
+                .add(Blocks.SUSPICIOUS_SAND);
+
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
                 .add(TideBlocks.SURFACE_LOOT_CRATE)
                 .add(TideBlocks.ANGLER_WORKSHOP);

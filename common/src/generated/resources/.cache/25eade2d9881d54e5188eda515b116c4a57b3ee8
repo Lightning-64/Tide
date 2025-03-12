@@ -1,10 +1,13 @@
-// 1.21	2025-03-11T21:49:43.9555368	Tide/minecraft:fishing Loot Table
+// 1.21	2025-03-12T16:08:21.1766561	Tide/minecraft:fishing Loot Table
 9435cc38dcf801d501a4df5e722820513f75f06b data\tide\loot_table\gameplay\fishing\climates\lava_underground.json
+995fae0dc0a1a4364c520fc85d701a61ea18cc33 data\tide\loot_table\gameplay\fishing\special\biome_fish.json
 f08d26eba2a0535e5bacf4ab893ba77bbf21eff8 data\tide\loot_table\gameplay\fishing\climates\freshwater_normal.json
 573b98f5077917112d401850d08cbdd80da4b966 data\tide\loot_table\gameplay\fishing\climates\lava_surface.json
+002d252fa6513400c2b37581080fae4ef1481ecc data\tide\loot_table\gameplay\fishing\special\desert_well.json
+15e19e636d3e02850ee239cd6734cb055db1fd7e data\tide\loot_table\gameplay\fishing\special\trial_chamber.json
 0a7899cd5229efaedc93d90c12b34e1ebd861f2f data\tide\loot_table\gameplay\fishing\climates\saltwater_normal.json
 679c062c481baffe929d997f71c815a3cf26440a data\tide\loot_table\gameplay\fishing\climates\depths.json
-d8ea141f5afeecc59900177ebe8d26f346e47158 data\tide\loot_table\gameplay\fishing\special.json
+930cd8d0044cedd0448b23f0cbc7ad62eb48abc0 data\tide\loot_table\gameplay\fishing\special.json
 6d0584fef210f9263fa8290937d237ac0e944103 data\tide\loot_table\gameplay\fishing\climates\end_water.json
 ff0f4d6230f2c650561246c040a1975e90a15d9b data\tide\loot_table\gameplay\fishing\climates\freshwater_cold.json
 95897fff6418d45ccaaccc97db41a7e1badd76b6 data\tide\loot_table\gameplay\fishing\climates\lava_depths.json
@@ -12,6 +15,7 @@ dcd35a7d130db3a1abff93eaf6cc29e0ad29e82a data\tide\loot_table\gameplay\fishing\c
 9657b4ad257c6446b116c10fc7b19ede3a38b817 data\tide\loot_table\gameplay\fishing\crates\block.json
 e924877d495b95b8ea2f510624b734f6d8bc36c4 data\tide\loot_table\gameplay\fishing\climates\end_lava.json
 b4e2d59cd113e9f97de3a96e14057bd83ab0630a data\tide\loot_table\gameplay\fishing\climates\nether.json
+1cbcb26ec6da05263d1b3dfcdce947b9ac2b31c8 data\tide\loot_table\gameplay\fishing\special\ocean_monument.json
 25ac5cf752dba311f51a9d1455ced857d7032f9d data\tide\loot_table\gameplay\fishing\climates\saltwater_cold.json
 d3854549cfc1d8fa026f372d84275b75716d47b4 data\tide\loot_table\gameplay\fishing\climates\underground.json
 dd061b007e52cd0d3dbb2e268b51db17fbb6d022 data\tide\loot_table\gameplay\fishing\crates.json

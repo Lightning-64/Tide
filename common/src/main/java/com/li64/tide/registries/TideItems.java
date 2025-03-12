@@ -284,11 +284,12 @@ public class TideItems {
             new BlazingSwordfishItem(TideTiers.BLAZING_FISH, new Item.Properties().fireResistant()
                     .attributes(SwordItem.createAttributes(TideTiers.BLAZING_FISH, 3, -2.4F))));
 
-    public static final Item MIDAS_FISH = register("midas_fish",
-            new TideFishItem(new Item.Properties().fireResistant().rarity(Rarity.EPIC), 7.5f));
     public static final Item AQUATHORN = register("aquathorn",
-            new TideFishItem(new Item.Properties().fireResistant().rarity(Rarity.EPIC), 7.5f));
+            new TideFishItem(new Item.Properties().fireResistant().rarity(Rarity.EPIC), 4.5f));
     public static final Item WINDBASS = register("windbass",
+            new TideFishItem(new Item.Properties().fireResistant().rarity(Rarity.EPIC), 4.5f));
+
+    public static final Item MIDAS_FISH = register("midas_fish",
             new TideFishItem(new Item.Properties().fireResistant().rarity(Rarity.EPIC), 7.5f));
     public static final Item VOIDSEEKER = register("voidseeker",
             new TideFishItem(new Item.Properties().food(TideFoods.VOIDSEEKER).fireResistant().rarity(Rarity.EPIC), 7.5f));

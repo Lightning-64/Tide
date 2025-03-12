@@ -700,11 +700,11 @@ public class TideFishingHook extends Projectile {
         // Magnetic bait override
         if (usingMagneticBait() && random.nextInt(0, 4) == 0) {
             // select from crate
-            lootKey = TideLootTables.Fishing.CRATES_BLOCK;
+            lootKey = TideLootTables.Fishing.Crates.BLOCK;
             selection = select(lootKey, params).orElse(TideItems.SURFACE_LOOT_CRATE.getDefaultInstance());
         } else if (TideUtils.shouldGrabTideLootTable(selection, fluid)) {
             // check special fish loot table
-            lootKey = TideLootTables.Fishing.SPECIAL_FISH;
+            lootKey = TideLootTables.Fishing.SPECIAL;
             selection = select(lootKey, params).orElse(Items.AIR.getDefaultInstance());
 
             // if no special fish is selected, use regular tide loot table

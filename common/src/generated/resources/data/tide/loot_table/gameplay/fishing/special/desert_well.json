@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:air",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:gold_nugget",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_nugget",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:emerald",
+          "quality": 1,
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond",
+          "quality": 1
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

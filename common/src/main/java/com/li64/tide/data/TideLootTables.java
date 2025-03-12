@@ -8,8 +8,19 @@ import net.minecraft.world.level.storage.loot.LootTable;
 public class TideLootTables {
     public static class Fishing {
         public static final ResourceKey<LootTable> CRATES = create("gameplay/fishing/crates");
-        public static final ResourceKey<LootTable> CRATES_BLOCK = create("gameplay/fishing/crates/block");
-        public static final ResourceKey<LootTable> SPECIAL_FISH = create("gameplay/fishing/special");
+
+        public static class Crates {
+            public static final ResourceKey<LootTable> BLOCK = create("gameplay/fishing/crates/block");
+        }
+
+        public static final ResourceKey<LootTable> SPECIAL = create("gameplay/fishing/special");
+
+        public static class Special {
+            public static final ResourceKey<LootTable> BIOME_FISH = create("gameplay/fishing/special/biome_fish");
+            public static final ResourceKey<LootTable> DESERT_WELL = create("gameplay/fishing/special/desert_well");
+            public static final ResourceKey<LootTable> TRIAL_CHAMBER = create("gameplay/fishing/special/trial_chamber");
+            public static final ResourceKey<LootTable> OCEAN_MONUMENT = create("gameplay/fishing/special/ocean_monument");
+        }
 
         public static final ResourceKey<LootTable> FRESHWATER_NORMAL = create("gameplay/fishing/climates/freshwater_normal");
         public static final ResourceKey<LootTable> FRESHWATER_COLD = create("gameplay/fishing/climates/freshwater_cold");
