@@ -50,6 +50,11 @@ public class FishingJournalScreen extends Screen {
         player.playSound(TideSoundEvents.JOURNAL_OPEN, 0.9f, 1.0f + new Random().nextFloat() * 0.2f);
     }
 
+    @Override
+    public boolean isPauseScreen() {
+        return false;
+    }
+
     private void loadJournalPages() {
         try {
             pages = new ArrayList<>();
