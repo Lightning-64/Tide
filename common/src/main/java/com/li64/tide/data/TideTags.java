@@ -6,6 +6,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
 import java.util.ArrayList;
@@ -28,6 +29,10 @@ public class TideTags {
         public static final TagKey<Item> BOBBERS = TagKey.create(Registries.ITEM, Tide.resource("bobbers"));
         public static final TagKey<Item> HOOKS = TagKey.create(Registries.ITEM, Tide.resource("hooks"));
         public static final TagKey<Item> LINES = TagKey.create(Registries.ITEM, Tide.resource("lines"));
+    }
+
+    public static class Blocks {
+        public static final TagKey<Block> DESERT_WELL_FISH = TagKey.create(Registries.BLOCK, Tide.resource("desert_well_fish"));
     }
 
     public static class Fluids {

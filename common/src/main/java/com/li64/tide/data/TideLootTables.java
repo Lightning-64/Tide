@@ -6,8 +6,19 @@ import net.minecraft.resources.ResourceLocation;
 public class TideLootTables {
     public static class Fishing {
         public static final ResourceLocation CRATES = create("gameplay/fishing/crates");
-        public static final ResourceLocation CRATES_BLOCK = create("gameplay/fishing/crates/block");
         public static final ResourceLocation SPECIAL_FISH = create("gameplay/fishing/special");
+
+        public static class Crates {
+            public static final ResourceLocation BLOCK = create("gameplay/fishing/crates/block");
+        }
+
+        public static final ResourceLocation SPECIAL = create("gameplay/fishing/special");
+
+        public static class Special {
+            public static final ResourceLocation BIOME_FISH = create("gameplay/fishing/special/biome_fish");
+            public static final ResourceLocation DESERT_WELL = create("gameplay/fishing/special/desert_well");
+            public static final ResourceLocation OCEAN_MONUMENT = create("gameplay/fishing/special/ocean_monument");
+        }
 
         public static final ResourceLocation FRESHWATER_NORMAL = create("gameplay/fishing/climates/freshwater_normal");
         public static final ResourceLocation FRESHWATER_COLD = create("gameplay/fishing/climates/freshwater_cold");
