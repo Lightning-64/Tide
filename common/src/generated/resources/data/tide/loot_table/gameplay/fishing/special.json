@@ -252,7 +252,7 @@
                   "predicate": {
                     "type_specific": {
                       "type": "tide:fishing_stats",
-                      "luck": 6
+                      "luck": 7
                     }
                   }
                 },
