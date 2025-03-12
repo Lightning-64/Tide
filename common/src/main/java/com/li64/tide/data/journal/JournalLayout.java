@@ -31,6 +31,8 @@ public class JournalLayout {
 
         addPage("biome", "journal.title.biome", "journal.content.biome", "tide:sporestalker", false);
 
+        addPage("structure", "journal.title.structure", "journal.content.structure", "tide:aquathorn", false);
+
         addPage("lava", "journal.title.lava", "journal.content.lava", "tide:fish_bone", false);
 
         addPage("nether", "journal.title.nether", "journal.content.nether", "tide:magma_mackerel", false);
@@ -117,6 +119,8 @@ public class JournalLayout {
         addProfile("tide:purpur_pike", "profile.item.tide.purpur_pike", "end", "end", "cold");
         addProfile("tide:chorus_cod", "profile.item.tide.chorus_cod", "end", "end", "cold");
         addProfile("tide:elytrout", "profile.item.tide.elytrout", "end", "end", "cold");
+
+        addProfile("tide:aquathorn", "profile.item.tide.aquathorn", "structure", "monument", "any");
 
         if (Tide.PLATFORM.isModLoaded("blue_skies")) {
             addProfile("blue_skies:municipal_monkfish", "blueskies", "everbright", "cold");
@@ -256,7 +260,6 @@ public class JournalLayout {
         }
 
         addProfile("tide:midas_fish", "profile.item.tide.midas_fish", "legendary", "any", "lucky");
-        addProfile("tide:aquathorn", "profile.item.tide.aquathorn", "legendary", "structures", "any");
         addProfile("tide:voidseeker", "profile.item.tide.voidseeker", "legendary", "end", "full_new_moon");
         addProfile("tide:shooting_starfish", "profile.item.tide.shooting_starfish", "legendary", "saltwater", "night_full_moon");
     }
