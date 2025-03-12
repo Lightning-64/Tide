@@ -3,10 +3,9 @@
 🐟 General Features 🐟
 - Improve fishing line rendering ✔️
 - Update fishing rod textures ✔️
-- Update bait slot textures
-- Structure fish tab
-- Desert well fish
-- Add "Aether" habitat
+- Update bait slot textures ✔️
+- "Torn notes" instead of written books
+- Structure fish
 
 🎣 Fishing Rod Features 🎣
 - Amethyst rod chimes when a fish bites ✔️
@@ -20,8 +19,8 @@
 - Reinforced line's bonus is applied to regular line ✔️
 - Fishing rod repairs when spamming right click ✔️
 - Fishing line connects to other players' bobbers
-- Crates don't give "treasure" enchanted books
 
 🚀 Compatibility 🚀
 - Fintastic
 - Hybrid Aquatic hooks
+- Add "Aether" habitat
