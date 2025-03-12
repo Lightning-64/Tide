@@ -288,11 +288,12 @@ public class TideItems {
     public static final Item BLAZING_SWORDFISH = register("blazing_swordfish",
             BlazingSwordfishItem::new, new Item.Properties().fireResistant());
 
-    public static final Item MIDAS_FISH = register("midas_fish", properties ->
-            new TideFishItem(properties, 7.5f), new Item.Properties().fireResistant().rarity(Rarity.EPIC));
     public static final Item AQUATHORN = register("aquathorn", properties ->
-            new TideFishItem(properties, 7.5f), new Item.Properties().fireResistant().rarity(Rarity.EPIC));
+            new TideFishItem(properties, 4.5f), new Item.Properties().fireResistant().rarity(Rarity.EPIC));
     public static final Item WINDBASS = register("windbass", properties ->
+            new TideFishItem(properties, 4.5f), new Item.Properties().fireResistant().rarity(Rarity.EPIC));
+
+    public static final Item MIDAS_FISH = register("midas_fish", properties ->
             new TideFishItem(properties, 7.5f), new Item.Properties().fireResistant().rarity(Rarity.EPIC));
     public static final Item VOIDSEEKER = register("voidseeker", properties ->
             new TideFishItem(properties, 7.5f), new Item.Properties().food(TideFoods.VOIDSEEKER, TideFoods.VOIDSEEKER_CONSUMABLE).fireResistant().rarity(Rarity.EPIC));

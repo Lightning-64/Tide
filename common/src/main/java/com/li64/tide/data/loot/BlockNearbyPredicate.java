@@ -27,7 +27,7 @@ public record BlockNearbyPredicate(TagKey<Block> blocks, int distance) implement
 
     @Override
     public @NotNull LootItemConditionType getType() {
-        return TideLootConditions.BIOME_TAG_CHECK;
+        return TideLootConditions.BLOCK_NEARBY;
     }
 
     @Override
