@@ -1,5 +1,6 @@
 package com.li64.tide.registries.items;
 
+import com.li64.tide.Tide;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.loot.TornNoteData;
 import com.li64.tide.registries.TideItems;
@@ -27,6 +28,13 @@ public class TornNoteItem extends Item {
         return note;
     }
 
+    public static void finalizeData(ItemStack note) {
+        if (!note.has(TideDataComponents.TORN_NOTE_VARIANT)) {
+            TornNoteData data = TornNoteData.random();
+            note.set(TideDataComponents.TORN_NOTE_VARIANT, data);
+        }
+    }
+
     public static TornNoteData getData(ItemStack note) {
         return note.getOrDefault(TideDataComponents.TORN_NOTE_VARIANT, TornNoteData.EMPTY);
     }
@@ -34,7 +42,10 @@ public class TornNoteItem extends Item {
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, @NotNull Player player, @NotNull InteractionHand hand) {
         ItemStack note = player.getItemInHand(hand);
-        if (!level.isClientSide()) note.set(TideDataComponents.TORN_NOTE_VARIANT, new TornNoteData(getData(note).id(), true));
+        if (level.isClientSide()) {
+            finalizeData(note);
+            note.set(TideDataComponents.TORN_NOTE_VARIANT, new TornNoteData(getData(note).id(), true));
+        }
         player.openItemGui(note, hand);
         return InteractionResultHolder.sidedSuccess(note, level.isClientSide());
     }
@@ -43,7 +54,7 @@ public class TornNoteItem extends Item {
     public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, @NotNull List<Component> components, @NotNull TooltipFlag flag) {
         TornNoteData data = getData(stack);
         if (data.unlocked() || flag.isCreative()) components.add(Component.translatable(
-                "item.tide.torn_note.variant." + getData(stack).id()).withStyle(ChatFormatting.GRAY));
+                "item.tide.torn_note.variant." + data.id()).withStyle(ChatFormatting.GRAY));
         else components.add(Component.translatable(
                 "item.tide.torn_note.variant.unknown").withStyle(ChatFormatting.GRAY));
         super.appendHoverText(stack, context, components, flag);
