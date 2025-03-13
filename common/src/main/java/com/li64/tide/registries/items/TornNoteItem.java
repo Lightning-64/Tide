@@ -34,6 +34,12 @@ public class TornNoteItem extends Item {
         return note;
     }
 
+    public static void finalizeData(ItemStack note) {
+        if (!note.getOrCreateTag().contains("TornNoteData")) {
+            setData(note, TornNoteData.random());
+        }
+    }
+
     public static TornNoteData getData(ItemStack note) {
         CompoundTag tag = note.getOrCreateTag().getCompound("TornNoteData");
         if (!note.getOrCreateTag().contains("TornNoteData") || !tag.contains("id")
@@ -51,7 +57,10 @@ public class TornNoteItem extends Item {
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, @NotNull Player player, @NotNull InteractionHand hand) {
         ItemStack note = player.getItemInHand(hand);
-        if (!level.isClientSide()) setData(note, new TornNoteData(getData(note).id(), true));
+        if (level.isClientSide()) {
+            finalizeData(note);
+            setData(note, new TornNoteData(getData(note).id(), true));
+        }
         player.openItemGui(note, hand);
         return InteractionResultHolder.sidedSuccess(note, level.isClientSide());
     }
@@ -60,7 +69,7 @@ public class TornNoteItem extends Item {
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> components, @NotNull TooltipFlag flag) {
         TornNoteData data = getData(stack);
         if (data.unlocked() || flag.isCreative()) components.add(Component.translatable(
-                "item.tide.torn_note.variant." + getData(stack).id()).withStyle(ChatFormatting.GRAY));
+                "item.tide.torn_note.variant." + data.id()).withStyle(ChatFormatting.GRAY));
         else components.add(Component.translatable(
                 "item.tide.torn_note.variant.unknown").withStyle(ChatFormatting.GRAY));
         super.appendHoverText(stack, level, components, flag);

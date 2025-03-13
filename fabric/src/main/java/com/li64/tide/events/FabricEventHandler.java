@@ -14,13 +14,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.functions.SetNbtFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
@@ -116,19 +114,9 @@ public class FabricEventHandler {
                 tags.forEach(tag -> tag.putString("author", Component.translatable("note.tide.author").getString()));
 
                 tableBuilder.pool(new LootPool.Builder().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(Items.WRITTEN_BOOK)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-                                .apply(SetNbtFunction.setTag(tags.get(0)))
-                        ).add(LootItem.lootTableItem(Items.WRITTEN_BOOK)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-                                .apply(SetNbtFunction.setTag(tags.get(1)))
-                        ).add(LootItem.lootTableItem(Items.WRITTEN_BOOK)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-                                .apply(SetNbtFunction.setTag(tags.get(2)))
-                        ).add(LootItem.lootTableItem(Items.WRITTEN_BOOK)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-                                .apply(SetNbtFunction.setTag(tags.get(3)))
-                        ).build()
+                        .add(LootItem.lootTableItem(TideItems.TORN_NOTE)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
+                        .build()
                 );
             }
         });
