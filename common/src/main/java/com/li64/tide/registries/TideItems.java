@@ -1,6 +1,7 @@
 package com.li64.tide.registries;
 
 import com.li64.tide.Tide;
+import com.li64.tide.data.loot.TornNoteData;
 import com.li64.tide.registries.blocks.JellyTorchBlockItem;
 import com.li64.tide.registries.items.*;
 import net.minecraft.core.Direction;
@@ -369,8 +370,9 @@ public class TideItems {
         }).map((item) -> BuiltInRegistries.ITEM.getResourceKey(item).orElse(null)).toList();
     }
 
-    public static ArrayList<Item> getItems() {
+    public static ArrayList<Item> getCreativeModeItemList() {
         if (!ORDERED_ITEMS.contains(Items.FISHING_ROD)) ORDERED_ITEMS.addFirst(Items.FISHING_ROD);
+        ORDERED_ITEMS.remove(TORN_NOTE);
         return ORDERED_ITEMS;
     }
 }

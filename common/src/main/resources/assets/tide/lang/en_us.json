@@ -112,7 +112,12 @@
    "item.tide.fishing_journal.desc": "By an unknown author",
 
    "item.tide.torn_note": "Torn Note",
-   "item.tide.torn_note.desc": "Interact to examine",
+   "item.tide.torn_note.variant.unknown": "???",
+   "item.tide.torn_note.variant.empty": "Empty",
+   "item.tide.torn_note.variant.lucky": "Very Lucky",
+   "item.tide.torn_note.variant.stars_over_ocean": "Stars Over Ocean",
+   "item.tide.torn_note.variant.the_end": "The End",
+   "item.tide.torn_note.variant.desert_well": "Desert Well",
 
    "item.tide.fish_pottery_shard": "Fish Pottery Shard",
    "item.tide.fish_bone": "Fish Bone",
