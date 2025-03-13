@@ -11,6 +11,7 @@ import com.li64.tide.data.journal.config.CustomPageLoader;
 import com.li64.tide.data.journal.config.CustomProfileLoader;
 import com.li64.tide.data.journal.config.CustomRemovalLoader;
 import com.li64.tide.data.loot.TideFishingPredicate;
+import com.li64.tide.data.loot.TornNoteData;
 import com.li64.tide.data.rods.AccessoryData;
 import com.li64.tide.data.rods.AccessoryDataLoader;
 import com.li64.tide.data.rods.BaitData;
@@ -20,6 +21,7 @@ import com.li64.tide.platform.services.TideMainPlatform;
 import com.li64.tide.platform.services.TideNetworkPlatform;
 import com.li64.tide.registries.TideEntityTypes;
 import com.li64.tide.registries.TideItems;
+import com.li64.tide.registries.items.TornNoteItem;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.minecraft.advancements.critereon.EntityPredicate;
@@ -93,7 +95,8 @@ public class Tide {
     }
 
     public static void displayItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
-        TideItems.getItems().forEach(output::accept);
+        TideItems.getCreativeModeItemList().forEach(output::accept);
+        TornNoteData.INSTANCES.forEach(instance -> output.accept(TornNoteItem.create(instance)));
     }
 
     public static void onRegisterReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {

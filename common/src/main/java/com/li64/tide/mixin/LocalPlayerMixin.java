@@ -2,6 +2,7 @@ package com.li64.tide.mixin;
 
 import com.li64.tide.client.gui.screens.TornNoteScreen;
 import com.li64.tide.registries.TideItems;
+import com.li64.tide.registries.items.TornNoteItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.InteractionHand;
@@ -19,6 +20,6 @@ public class LocalPlayerMixin {
 
     @Inject(at = @At(value = "TAIL"), method = "openItemGui")
     public void openItemGui(ItemStack stack, InteractionHand hand, CallbackInfo ci) {
-        if (stack.is(TideItems.TORN_NOTE)) minecraft.setScreen(new TornNoteScreen());
+        if (stack.is(TideItems.TORN_NOTE)) minecraft.setScreen(new TornNoteScreen(TornNoteItem.getData(stack)));
     }
 }

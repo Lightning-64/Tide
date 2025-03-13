@@ -366,8 +366,9 @@ public class TideItems {
         }).map((item) -> BuiltInRegistries.ITEM.getResourceKey(item).orElse(null)).toList();
     }
 
-    public static ArrayList<Item> getItems() {
+    public static ArrayList<Item> getCreativeModeItemList() {
         if (!ORDERED_ITEMS.contains(Items.FISHING_ROD)) ORDERED_ITEMS.add(0, Items.FISHING_ROD);
+        ORDERED_ITEMS.remove(TORN_NOTE);
         return ORDERED_ITEMS;
     }
 }
