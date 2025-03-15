@@ -146,6 +146,8 @@ public class TideItemTagsProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(ItemTags.FISHES).forceAddTag(TideTags.Items.JOURNAL_FISH);
         getOrCreateTagBuilder(ItemTags.SWORDS).add(TideItems.BLAZING_SWORDFISH);
 
+        getOrCreateTagBuilder(ItemTags.LECTERN_BOOKS).add(TideItems.FISHING_JOURNAL);
+
         /* Compat tags */
 
         getOrCreateTagBuilder(TagKey.create(Registries.ITEM, new ResourceLocation("stardew_fishing", "starts_minigame")))
