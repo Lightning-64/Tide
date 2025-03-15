@@ -614,6 +614,7 @@ public class TideFishingHook extends Projectile {
                         LootParams.Builder lootParamsBuilder = new LootParams.Builder((ServerLevel) this.level())
                                 .withParameter(LootContextParams.ORIGIN, this.position())
                                 .withParameter(LootContextParams.TOOL, stack)
+                                .withParameter(LootContextParams.BLOCK_STATE, lootCrate)
                                 .withParameter(LootContextParams.THIS_ENTITY, this);
 
                         // Only forge and neoforge can use this parameter here
