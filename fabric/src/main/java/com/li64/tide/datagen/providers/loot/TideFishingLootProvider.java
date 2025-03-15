@@ -128,7 +128,7 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
         output.accept(
                 TideLootTables.Fishing.Special.OCEAN_MONUMENT,
                 LootTable.lootTable().withPool(LootPool.lootPool()
-                        .add(LootItem.lootTableItem(Items.AIR).setWeight(40)) // Use default
+                        .add(LootItem.lootTableItem(Items.BARRIER).setWeight(40)) // Use default
                         .add(LootItem.lootTableItem(Items.PRISMARINE_SHARD).setWeight(15))
                         .add(LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS).setWeight(10))
                         .add(LootItem.lootTableItem(TideItems.AQUATHORN).setWeight(7))
@@ -140,7 +140,7 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
         output.accept(
                 TideLootTables.Fishing.Special.TRIAL_CHAMBER,
                 LootTable.lootTable().withPool(LootPool.lootPool()
-                        .add(LootItem.lootTableItem(Items.AIR).setWeight(40)) // Use default
+                        .add(LootItem.lootTableItem(Items.BARRIER).setWeight(40)) // Use default
                         .add(LootItem.lootTableItem(Items.COPPER_INGOT).setWeight(17))
                         .add(LootItem.lootTableItem(TideItems.WINDBASS).setWeight(7))
                         .add(LootItem.lootTableItem(Items.WIND_CHARGE).setWeight(6))
@@ -153,7 +153,7 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
         output.accept(
                 TideLootTables.Fishing.Special.DESERT_WELL,
                 LootTable.lootTable().withPool(LootPool.lootPool()
-                        .add(LootItem.lootTableItem(Items.AIR).setWeight(20)) // Use default
+                        .add(LootItem.lootTableItem(Items.BARRIER).setWeight(20)) // Use default
                         .add(LootItem.lootTableItem(Items.GOLD_NUGGET).setWeight(25))
                         .add(LootItem.lootTableItem(Items.IRON_NUGGET).setWeight(20))
                         .add(LootItem.lootTableItem(Items.EMERALD).setWeight(3).setQuality(1))

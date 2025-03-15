@@ -696,17 +696,17 @@ public class TideFishingHook extends Projectile {
             selection = BuiltInRegistries.ITEM.get(ResourceLocation.parse("unusualend:raw_bluk")).orElseThrow().value().getDefaultInstance();
 
         // Magnetic bait override
-        if (usingMagneticBait() && random.nextInt(0, 4) == 0) { // TODO change 1 back to 4
+        if (usingMagneticBait() && random.nextInt(0, 4) == 0) {
             // select from crate
             lootKey = TideLootTables.Fishing.Crates.BLOCK;
             selection = select(lootKey, params).orElse(TideItems.SURFACE_LOOT_CRATE.getDefaultInstance());
         } else if (TideUtils.shouldGrabTideLootTable(selection, fluid)) {
             // check special fish loot table
             lootKey = TideLootTables.Fishing.SPECIAL;
-            selection = select(lootKey, params).orElse(Items.AIR.getDefaultInstance());
+            selection = select(lootKey, params).orElse(Items.BARRIER.getDefaultInstance());
 
             // if no special fish is selected, use regular tide loot table
-            if (selection.is(Items.AIR)) {
+            if (selection.is(Items.BARRIER)) {
                 lootKey = TideUtils.getTideLootTable(this.getX(), this.getY(), this.getZ(), fluid, level());
                 selection = select(lootKey, params).orElse(Items.SALMON.getDefaultInstance());
             }

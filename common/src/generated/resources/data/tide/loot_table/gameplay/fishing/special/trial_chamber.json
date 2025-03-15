@@ -1,0 +1,46 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:barrier",
+          "weight": 40
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:copper_ingot",
+          "weight": 17
+        },
+        {
+          "type": "minecraft:item",
+          "name": "tide:windbass",
+          "weight": 7
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:wind_charge",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bolt_armor_trim_smithing_template",
+          "quality": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:flow_armor_trim_smithing_template",
+          "quality": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:heavy_core",
+          "quality": 1
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

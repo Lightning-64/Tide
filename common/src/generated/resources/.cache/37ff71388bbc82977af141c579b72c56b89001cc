@@ -7,6 +7,7 @@
 95616995e01a8fa30e92078d12836bf712d367bd data/minecraft/tags/item/enchantable/fishing.json
 0f7538e03af1cad955f503b4447a04d9c17dec2b data/minecraft/tags/item/enchantable/sword.json
 3be239c5af643db8e05c8f429a8262526757ba4a data/minecraft/tags/item/fishes.json
+73fcee4bed7eaa93c68292cb3967eeedadcf6dea data/minecraft/tags/item/lectern_books.json
 0f7538e03af1cad955f503b4447a04d9c17dec2b data/minecraft/tags/item/swords.json
 3be239c5af643db8e05c8f429a8262526757ba4a data/stardew_fishing/tags/item/starts_minigame.json
 c4dae2bc7f809aebe453fe8954b3ce55eba28dd9 data/tide/tags/item/bait_plants.json
@@ -17,7 +18,7 @@ febb1ea86d6ed0180ccf8e7c8c1cd61114295d6a data/tide/tags/item/cooked_fish.json
 d30f1010d935f3311e393a6e5dfbf53e43ee6996 data/tide/tags/item/crates.json
 95ea3d68dfc6e48f13451173f9f82bbe64a44a7a data/tide/tags/item/customizable_rods.json
 1e8f6c110a32e2df7a58175db72e36c988d77cc0 data/tide/tags/item/hooks.json
-eef6d9b3b44375ee8ff3040223a0d9d1a0137878 data/tide/tags/item/journal_fish.json
+2dca18683c735bd05149b16a33143ddaf622ffe2 data/tide/tags/item/journal_fish.json
 441e990f1a910ec52b2e25cbbd4b9fb3fc18f4f4 data/tide/tags/item/legendary_fish.json
 c252bdb0e7d945cd99663b13e1865c9027246481 data/tide/tags/item/lines.json
 8f5b93a9547f792db798f2523aace39576d6338b data/tide/tags/item/twilight_angler_eatable.json

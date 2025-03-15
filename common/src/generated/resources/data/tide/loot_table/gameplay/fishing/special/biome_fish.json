@@ -1,0 +1,176 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:cherry"
+                }
+              ],
+              "name": "tide:blossom_bass"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:deep_dark"
+                }
+              ],
+              "name": "tide:echofin_snapper"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:dripstone"
+                }
+              ],
+              "name": "tide:dripstone_darter"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:lush_caves"
+                }
+              ],
+              "name": "tide:fluttergill"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:savanna"
+                }
+              ],
+              "name": "tide:sunspike_goby"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:birch"
+                }
+              ],
+              "name": "tide:birch_trout"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:badlands"
+                }
+              ],
+              "name": "tide:mirage_catfish"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:swamp"
+                }
+              ],
+              "name": "tide:slimefin_snapper"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:mushroom"
+                }
+              ],
+              "name": "tide:sporestalker"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:jungle"
+                }
+              ],
+              "name": "tide:leafback"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:taiga"
+                }
+              ],
+              "name": "tide:pine_perch"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:desert"
+                }
+              ],
+              "name": "tide:sandskipper"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:mountain"
+                }
+              ],
+              "name": "tide:stonefish"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:frozen"
+                }
+              ],
+              "name": "tide:frostbite_flounder"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:forest"
+                }
+              ],
+              "name": "tide:oakfish"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "tide:check_biome_tag",
+                  "tag": "tide:plains"
+                }
+              ],
+              "name": "tide:prarie_pike"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

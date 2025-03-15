@@ -6,7 +6,7 @@
 - Update bait slot textures ✔️
 - "Torn notes" instead of written books ✔️
 - Structure fish ✔️✔️🐟🐟🐟🐟
-- Lectern support for fishing journal
+- Lectern support for fishing journal ✔️
 
 🎣 Fishing Rod Features 🎣
 - Amethyst rod chimes when a fish bites ✔️

@@ -15,4 +15,8 @@ dcd35a7d130db3a1abff93eaf6cc29e0ad29e82a data/tide/loot_table/gameplay/fishing/c
 d3854549cfc1d8fa026f372d84275b75716d47b4 data/tide/loot_table/gameplay/fishing/climates/underground.json
 dd061b007e52cd0d3dbb2e268b51db17fbb6d022 data/tide/loot_table/gameplay/fishing/crates.json
 9657b4ad257c6446b116c10fc7b19ede3a38b817 data/tide/loot_table/gameplay/fishing/crates/block.json
-d8ea141f5afeecc59900177ebe8d26f346e47158 data/tide/loot_table/gameplay/fishing/special.json
+930cd8d0044cedd0448b23f0cbc7ad62eb48abc0 data/tide/loot_table/gameplay/fishing/special.json
+995fae0dc0a1a4364c520fc85d701a61ea18cc33 data/tide/loot_table/gameplay/fishing/special/biome_fish.json
+4613bd6dd27ee40a62998f27be71f2212ec7e7e9 data/tide/loot_table/gameplay/fishing/special/desert_well.json
+1feffab8c82479262ffab1f28a42d559240d4704 data/tide/loot_table/gameplay/fishing/special/ocean_monument.json
+f5bc3c991ee1b570c5e66bc2a746c6921766115b data/tide/loot_table/gameplay/fishing/special/trial_chamber.json
