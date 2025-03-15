@@ -7,6 +7,7 @@ import com.li64.tide.data.loot.MoonPhasePredicate;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import com.li64.tide.data.loot.BlockNearbyPredicate;
+import com.li64.tide.data.loot.*;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 import java.util.HashMap;
@@ -22,6 +23,8 @@ public class TideLootConditions {
             "is_night", new LootItemConditionType(IsNightPredicate.CODEC));
     public static final LootItemConditionType BLOCK_NEARBY = register(
             "block_nearby", new LootItemConditionType(BlockNearbyPredicate.CODEC));
+    public static final LootItemConditionType LOOT_CRATE_BLOCK = register(
+            "loot_crate_block", new LootItemConditionType(LootCrateBlockPredicate.CODEC));
 
     public static LootItemConditionType register(String key, LootItemConditionType type) {
         LOOT_CONDITIONS.put(key, type);

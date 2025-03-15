@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.ExtraCodecs;
+import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -14,6 +15,8 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Set;
 
 public record BlockNearbyPredicate(TagKey<Block> blocks, int distance) implements LootItemCondition {
     public static final MapCodec<BlockNearbyPredicate> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
@@ -36,5 +39,10 @@ public record BlockNearbyPredicate(TagKey<Block> blocks, int distance) implement
         if (pos == null) return false;
         AABB boundingBox = AABB.ofSize(pos, 1.0, 1.0, 1.0).inflate(distance());
         return context.getLevel().getBlockStates(boundingBox).anyMatch(state -> state.is(blocks));
+    }
+
+    @Override
+    public @NotNull Set<ContextKey<?>> getReferencedContextParams() {
+        return Set.of(LootContextParams.ORIGIN);
     }
 }
