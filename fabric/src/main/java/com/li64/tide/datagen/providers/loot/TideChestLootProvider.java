@@ -1,6 +1,8 @@
 package com.li64.tide.datagen.providers.loot;
 
 import com.li64.tide.data.TideLootTables;
+import com.li64.tide.data.loot.LootCrateBlockPredicate;
+import com.li64.tide.registries.TideBlocks;
 import com.li64.tide.registries.TideItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
@@ -96,6 +98,8 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                                     .when(LootItemRandomChanceCondition.randomChance(0.5f))
                                 .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(24))))
+                        .add(LootItem.lootTableItem(Items.BEEF).when(
+                                LootCrateBlockPredicate.matches(TideBlocks.SURFACE_LOOT_CRATE)))
                 )
         );
 
@@ -166,6 +170,8 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                                     .when(LootItemRandomChanceCondition.randomChance(0.5f))
                                 .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(20))))
+                        .add(LootItem.lootTableItem(Items.BEEF).when(
+                                LootCrateBlockPredicate.matches(TideBlocks.SURFACE_LOOT_CRATE)))
                 )
         );
 

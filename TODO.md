@@ -7,6 +7,7 @@
 - "Torn notes" instead of written books ✔️
 - Structure fish ✔️✔️🐟🐟🐟🐟
 - Lectern support for fishing journal ✔️
+- Add "loot_crate_block" predicate ✔️
 
 🎣 Fishing Rod Features 🎣
 - Amethyst rod chimes when a fish bites ✔️
