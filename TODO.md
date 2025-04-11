@@ -5,7 +5,7 @@
 - Update fishing rod textures ✔️
 - Update bait slot textures ✔️
 - "Torn notes" instead of written books ✔️
-- Structure fish ✔️✔️🐟🐟🐟🐟
+- Structure fish ✔️
 - Lectern support for fishing journal ✔️
 - Add "loot_crate_block" predicate ✔️
 
@@ -13,7 +13,6 @@
 - Amethyst rod chimes when a fish bites ✔️
 - Gold rod gives +1 luck ✔️
 - Diamond rod gives more XP ✔️
-- More fishing rods?
 
 ⚙️ Bug Fixes ⚙️
 - Amethyst bobber recipe typo ✔️
@@ -29,4 +28,8 @@
 - Stardew fishing fabric port
 - Hybrid Aquatic hooks
 - Add "Aether" habitat ✔️
-- Fabric seasons/serene seasons?
+
+= 📋 TODO for 1.6.1 📋 =
+- Fabric seasons/serene seasons
+- More fishing rods
+- Structure fish 🐟🐟🐟🐟
