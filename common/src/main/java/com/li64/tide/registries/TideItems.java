@@ -83,8 +83,8 @@ public class TideItems {
     public static final Item REINFORCED_LINE = register("reinforced_line", new FishingLineItem(new Item.Properties(), "item.tide.reinforced_line.desc"));
     public static final Item FORTUNE_LINE = register("fortune_line", new FishingLineItem(new Item.Properties(), "item.tide.fortune_line.desc"));
 
-    public static final Item FISHING_JOURNAL = register("fishing_journal",
-            new FishingJournalItem(new Item.Properties()));
+    public static final Item FISHING_JOURNAL = register("fishing_journal", new FishingJournalItem(new Item.Properties()));
+    public static final Item TORN_NOTE = register("torn_note", new TornNoteItem(new Item.Properties()));
 
     public static final Item ANGLER_WORKSHOP = register("angler_workshop",
             new BlockItem(TideBlocks.ANGLER_WORKSHOP, new Item.Properties()));

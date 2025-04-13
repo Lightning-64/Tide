@@ -111,6 +111,9 @@
    "item.tide.fishing_journal": "Fishing Journal",
    "item.tide.fishing_journal.desc": "By an unknown author",
 
+   "item.tide.torn_note": "Torn Note",
+   "item.tide.torn_note.desc": "Interact to examine",
+
    "item.tide.fish_pottery_shard": "Fish Pottery Shard",
    "item.tide.fish_bone": "Fish Bone",
    "item.tide.obsidian_fragment": "Obsidian Fragment",
@@ -368,14 +371,6 @@
    "advancements.tide.get_bait.description": "Craft bait, which can be held in your offhand while fishing for a bonus.",
    "advancements.tide.journal_completed.title": "Marine Master",
    "advancements.tide.journal_completed.description": "Finish the ENTIRE fishing journal by collecting every single fish in the sea.",
-
-   "note.tide.title": "Note",
-   "note.tide.author": "an unknown author",
-   "note.tide.midas_fish.contents": "Legend speaks of a fish coated in gold that can only be caught by people who are extremely lucky. Could this refer to items that are said to increase luck?",
-   "note.tide.aquathorn.contents": "Legend speaks of a fish covered in spikes, caught inside an ancient underwater temple. It is said to be an ancestor of those who guard it.",
-   "note.tide.windbass.contents": "Legend speaks of a fish that rests where travelers must face monsters, copper, and wind, whatever that means.",
-   "note.tide.voidseeker.contents": "Legend speaks of a fish that hops around between dimensions that humans cannot access. Despite this, apparently it has been spotted in the end dimension?",
-   "note.tide.shooting_starfish.contents": "Legend speaks of a fish that fell from the sky in years past. It is said to be swimming in the depths of the deepest oceans, only appearing when the moon shines its fullest light on the water.",
 
    "sounds.tide.journal_open": "Fishing Journal Opens",
    "sounds.tide.journal_close": "Fishing Journal Closes",
