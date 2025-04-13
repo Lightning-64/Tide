@@ -2,13 +2,10 @@ package com.li64.tide.compat.stardewfishing;
 
 import com.bonker.stardewfishing.StardewFishing;
 import com.bonker.stardewfishing.common.FishingHookLogic;
-import com.li64.tide.Tide;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
 
 import java.util.ArrayList;
 import java.util.List;
