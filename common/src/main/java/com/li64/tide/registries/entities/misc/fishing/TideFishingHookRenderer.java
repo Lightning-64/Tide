@@ -92,7 +92,7 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
         Vec2 stringOffset = stack.getItem() == TideItems.STONE_FISHING_ROD ? new Vec2(0.05f, -0.1f)
                 : (stack.getItem() == TideItems.IRON_FISHING_ROD ? new Vec2(0.05f, -0.02f) : new Vec2(0.0f, 0.0f));
 
-        if (this.entityRenderDispatcher.options.getCameraType().isFirstPerson() && player == Minecraft.getInstance().player) {
+        if (!Tide.PLATFORM.isModLoaded("firstperson") && this.entityRenderDispatcher.options.getCameraType().isFirstPerson() && player == Minecraft.getInstance().player) {
             double fovOption = this.entityRenderDispatcher.options.fov().get().doubleValue();
             double d4 = 960.0 / (fovOption);
             double fovScalar = (Minecraft.getInstance().gameRenderer.getFov(this.entityRenderDispatcher.camera, partialTick, true) / fovOption - 1.0) * 2.5 + 1.0;
