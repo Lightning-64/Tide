@@ -1,4 +1,7 @@
 {
+	"textures": {
+		"particle": "#1"
+	},
 	 "elements": [
 		 {
 			 "name": "base",
