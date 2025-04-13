@@ -25,11 +25,11 @@ public class TideItems {
     public static List<ResourceKey<Item>> COOKABLE_FISH_LIST = new ArrayList<>();
 
     public static final Item STONE_FISHING_ROD = register("stone_fishing_rod",
-            new TideFishingRodItem(32, new Item.Properties()));
+            new TideFishingRodItem(48, new Item.Properties()));
     public static final Item IRON_FISHING_ROD = register("iron_fishing_rod",
             new TideFishingRodItem(64, new Item.Properties()));
     public static final Item GOLDEN_FISHING_ROD = register("golden_fishing_rod",
-            new TideFishingRodItem(32, new Item.Properties()));
+            new TideFishingRodItem(36, new Item.Properties()));
     public static final Item CRYSTAL_FISHING_ROD = register("crystal_fishing_rod",
             new TideFishingRodItem(80, new Item.Properties()));
     public static final Item DIAMOND_FISHING_ROD = register("diamond_fishing_rod",

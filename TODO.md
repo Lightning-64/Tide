@@ -17,7 +17,8 @@
 ⚙️ Bug Fixes ⚙️
 - Amethyst bobber recipe typo ✔️
 - Fish entities not spawning ✔️
-- Fishing rod repairs when spamming right click
+- Reinforced line's bonus is applied to regular line ✔️
+- Fishing rod repairs when spamming right click ✔️
 - Fishing line connects to other players' bobbers
 - Crates don't give "treasure" enchanted books
 
