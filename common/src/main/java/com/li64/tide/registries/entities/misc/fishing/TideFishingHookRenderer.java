@@ -128,13 +128,15 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook, Tid
         f5 /= f6;
 
         Color color = Color.decode(colorHex);
-        
+
         ClientLevel level = Minecraft.getInstance().level;
         if (level == null) return;
 
+        BlockPos samplePos = ownerPos.above();
+
         float skyDarken = (1 - level.getSkyDarken(partialTick)) * 15;
-        float blockBrightness = level.getBrightness(LightLayer.BLOCK, ownerPos);
-        float skyBrightness = level.getBrightness(LightLayer.SKY, ownerPos) - skyDarken + 1;
+        float blockBrightness = level.getBrightness(LightLayer.BLOCK, samplePos);
+        float skyBrightness = level.getBrightness(LightLayer.SKY, samplePos) - skyDarken + 1;
 
         float colorBrightness = Tide.CONFIG.general.defaultLineColor ? 0.0f : Mth.clamp(
                 Math.max(blockBrightness, skyBrightness) / 15f,
