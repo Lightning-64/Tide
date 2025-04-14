@@ -110,6 +110,12 @@ public class ForgeMainPlatform implements TideMainPlatform {
     }
 
     @Override
+    public double getBiteTimeMultiplier() {
+        if (isModLoaded("stardew_fishing")) return StardewFishingCompat.getBiteTimeMultiplier();
+        return TideMainPlatform.super.getBiteTimeMultiplier();
+    }
+
+    @Override
     public Entity fishingRealConvertEntity(Entity itemEntity, Player player) {
         return FishingRealCompat.convertItemEntity(itemEntity, player);
     }

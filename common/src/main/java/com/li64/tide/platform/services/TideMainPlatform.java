@@ -1,10 +1,7 @@
 package com.li64.tide.platform.services;
 
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
-import com.li64.tide.registries.items.TideFishingRodItem;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.CriterionTrigger;
-import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -69,4 +66,6 @@ public interface TideMainPlatform {
     default boolean isFabric() {
         return false;
     }
+
+    default double getBiteTimeMultiplier() { return 1.0; }
 }

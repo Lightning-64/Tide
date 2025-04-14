@@ -1,5 +1,6 @@
 package com.li64.tide.compat.stardewfishing;
 
+import com.bonker.stardewfishing.SFConfig;
 import com.bonker.stardewfishing.StardewFishing;
 import com.bonker.stardewfishing.common.FishingHookLogic;
 import com.bonker.stardewfishing.common.init.SFSoundEvents;
@@ -26,5 +27,9 @@ public class StardewFishingCompat {
 
     public static Optional<ArrayList<ItemStack>> getRewards(HookAccessor hook) {
         return FishingHookLogic.getStoredRewards(hook);
+    }
+
+    public static double getBiteTimeMultiplier() {
+        return SFConfig.getBiteTimeMultiplier();
     }
 }

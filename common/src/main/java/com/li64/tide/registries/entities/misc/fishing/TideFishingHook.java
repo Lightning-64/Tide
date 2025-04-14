@@ -497,7 +497,7 @@ public class TideFishingHook extends Projectile {
         } else {
             this.timeUntilLured = Mth.nextInt(this.random, 200, 600);
             this.timeUntilLured -= (int) (1200.0 / (1.0 + Math.exp(-0.3 * this.lureSpeed)) - 600.0);
-            this.timeUntilLured = Math.max(this.timeUntilLured, 10);
+            this.timeUntilLured = Math.max((int) (this.timeUntilLured * Tide.PLATFORM.getBiteTimeMultiplier()), 10);
         }
     }
 
