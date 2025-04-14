@@ -85,7 +85,7 @@ public class TideFishingHook extends Projectile {
     private final int lureSpeed;
     private boolean minigameActive = false;
     protected ItemStack rod;
-    protected ItemStack hookedItem;
+    protected List<ItemStack> hookedItems;
     protected CatchType catchType = CatchType.NOTHING;
     private int particleTimer = 0;
 
@@ -134,7 +134,7 @@ public class TideFishingHook extends Projectile {
     }
 
     public void invalidateCatch() {
-        hookedItem = null;
+        hookedItems = null;
         catchType = CatchType.NOTHING;
         this.getEntityData().set(DATA_CATCH_TYPE, catchType.ordinal());
     }
@@ -577,47 +577,48 @@ public class TideFishingHook extends Projectile {
                 i = this.getHookedIn() instanceof ItemEntity ? 3 : 5;
 
             } else if (nibble > 0) {
-                List<ItemStack> itemList = new ArrayList<>();
+                if (!hasHookedItem()) catchType = CatchType.NOTHING;
 
                 switch (catchType) {
                     case FISH, ITEM:
-                        if (hasHookedItem()) itemList.add(hookedItem);
-                        else return 0;
-
                         // This needs to be awarded even if the event is canceled
                         if (fluid.is(TideTags.Fluids.LAVA_FISHING)) TideCriteriaTriggers.FISHED_IN_LAVA.trigger((ServerPlayer) player);
 
-                        boolean canceled = Tide.PLATFORM.forgeItemFishedEvent(List.copyOf(itemList), this.onGround() ? 2 : 1, player.fishing);
+                        boolean canceled = Tide.PLATFORM.forgeItemFishedEvent(List.copyOf(hookedItems), this.onGround() ? 2 : 1, player.fishing);
 
                         if (canceled) {
                             this.discard();
                             return 1;
                         }
 
-                        ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), hookedItem);
+                        for (ItemStack hookedItem : hookedItems) {
+                            if (hookedItem.isEmpty()) continue;
 
-                        double d0 = player.getX() - this.getX();
-                        double d1 = player.getY() - this.getY();
-                        double d2 = player.getZ() - this.getZ();
+                            Entity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), hookedItem);
 
-                        itemEntity.setDeltaMovement(d0 * 0.1D, d1 * 0.1D + Math.sqrt(Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2)) * 0.08D, d2 * 0.1D);
-                        this.level().addFreshEntity(itemEntity);
-                        player.level().addFreshEntity(new ExperienceOrb(player.level(), player.getX(), player.getY() + 0.5D, player.getZ() + 0.5D, this.random.nextInt(6) + 1));
-                        if (rod.is(TideItems.DIAMOND_FISHING_ROD)) {
-                            player.level().addFreshEntity(new ExperienceOrb(player.level(), player.getX(), player.getY() + 0.5D, player.getZ() + 0.5D, this.random.nextInt(4) + 1));
+                            double d0 = player.getX() - this.getX();
+                            double d1 = player.getY() - this.getY();
+                            double d2 = player.getZ() - this.getZ();
+
+                            itemEntity.setDeltaMovement(d0 * 0.1D, d1 * 0.1D + Math.sqrt(Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2)) * 0.08D, d2 * 0.1D);
+
+                            this.level().addFreshEntity(itemEntity);
+                            player.level().addFreshEntity(new ExperienceOrb(player.level(), player.getX(), player.getY() + 0.5D, player.getZ() + 0.5D, this.random.nextInt(6) + 1));
+                            if (rod.is(TideItems.DIAMOND_FISHING_ROD)) {
+                                player.level().addFreshEntity(new ExperienceOrb(player.level(), player.getX(), player.getY() + 0.5D, player.getZ() + 0.5D, this.random.nextInt(4) + 1));
+                            }
+
+                            if (hookedItem.is(ItemTags.FISHES)) player.awardStat(Stats.FISH_CAUGHT, 1);
+
+                            CriteriaTriggers.FISHING_ROD_HOOKED.trigger((ServerPlayer) player, stack, player.fishing, hookedItems);
                         }
-
-                        if (hookedItem.is(ItemTags.FISHES)) {
-                            player.awardStat(Stats.FISH_CAUGHT, 1);
-                        }
-
-                        CriteriaTriggers.FISHING_ROD_HOOKED.trigger((ServerPlayer) player, stack, player.fishing, itemList);
-
-                        Tide.LOG.info("Caught fish: {}", hookedItem.getItem().getDescriptionId());
                         break;
 
                     case CRATE:
-                        BlockState lootCrate = getCrateBlock(hookedItem);
+
+                        BlockState lootCrate;
+
+                        lootCrate = getCrateBlock(hookedItems.getFirst());
 
                         LootParams.Builder lootParamsBuilder = new LootParams.Builder((ServerLevel) this.level())
                                 .withParameter(LootContextParams.ORIGIN, this.position())
@@ -675,7 +676,7 @@ public class TideFishingHook extends Projectile {
 
     public void selectCatch(Player player, ItemStack rod) {
         catchType = CatchType.NOTHING;
-        hookedItem = null;
+        hookedItems = null;
 
         LootParams.Builder lootParamsBuilder = new LootParams.Builder((ServerLevel) this.level())
                 .withParameter(LootContextParams.ORIGIN, this.position())
@@ -691,34 +692,35 @@ public class TideFishingHook extends Projectile {
                 .withLuck((float) luck + player.getLuck())
                 .create(LootContextParamSets.FISHING);
 
-        ItemStack selection = select(lootKey, params).orElse(Items.SALMON.getDefaultInstance());
+        List<ItemStack> selectionList = select(lootKey, params).orElse(List.of(Items.SALMON.getDefaultInstance()));
 
         // Primitive compat with unusual end
-        if (Tide.PLATFORM.isModLoaded("unusualend") && getBiome().is(ResourceLocation.parse("unusualend:warped_reef")))
-            selection = BuiltInRegistries.ITEM.get(ResourceLocation.parse("unusualend:raw_bluk")).orElseThrow().value().getDefaultInstance();
+        if (Tide.PLATFORM.isModLoaded("unusualend") && getBiome().is(ResourceLocation.parse("unusualend:warped_reef"))) {
+            if (random.nextFloat() > 0.5f) selectionList = List.of(BuiltInRegistries.ITEM.get(ResourceLocation.parse("unusualend:raw_bluk")).orElseThrow().value().getDefaultInstance());
+        }
 
         // Magnetic bait override
         if (usingMagneticBait() && random.nextInt(0, 4) == 0) {
             // select from crate
             lootKey = TideLootTables.Fishing.Crates.BLOCK;
-            selection = select(lootKey, params).orElse(TideItems.SURFACE_LOOT_CRATE.getDefaultInstance());
-        } else if (TideUtils.shouldGrabTideLootTable(selection, fluid)) {
+            selectionList = select(lootKey, params).orElse(List.of(TideItems.SURFACE_LOOT_CRATE.getDefaultInstance()));
+        } else if (TideUtils.shouldGrabTideLootTable(selectionList, fluid)) {
             // check special fish loot table
             lootKey = TideLootTables.Fishing.SPECIAL;
-            selection = select(lootKey, params).orElse(Items.BARRIER.getDefaultInstance());
+            selectionList = select(lootKey, params).orElse(List.of());
 
             // if no special fish is selected, use regular tide loot table
-            if (selection.is(Items.BARRIER)) {
+            if (selectionList.isEmpty() || selectionList.stream().allMatch(ItemStack::isEmpty)) {
                 lootKey = TideUtils.getTideLootTable(this.getX(), this.getY(), this.getZ(), fluid, level());
-                selection = select(lootKey, params).orElse(Items.SALMON.getDefaultInstance());
+                selectionList = select(lootKey, params).orElse(List.of(Items.SALMON.getDefaultInstance()));
             }
         }
 
         Tide.LOG.info("Loot table used: {}", lootKey.location());
-        hookedItem = selection;
+        hookedItems = selectionList;
 
-        catchType = (hookedItem.is(ItemTags.FISHES) || TideUtils.isJournalFish(hookedItem)) ? CatchType.FISH : CatchType.ITEM;
-        if (selection.is(TideTags.Items.CRATES)) catchType = CatchType.CRATE;
+        catchType = hookedItems.stream().anyMatch(item -> item.is(ItemTags.FISHES) || TideUtils.isJournalFish(item)) ? CatchType.FISH : CatchType.ITEM;
+        if (hookedItems.stream().anyMatch(item -> item.is(TideTags.Items.CRATES))) catchType = CatchType.CRATE;
 
         if (BaitUtils.isHoldingBait(rod)) {
             if (!player.isCreative()) {
@@ -732,21 +734,12 @@ public class TideFishingHook extends Projectile {
         getEntityData().set(DATA_CATCH_TYPE, catchType.ordinal());
     }
 
-    private Optional<ItemStack> select(ResourceKey<LootTable> lootKey, LootParams params) {
+    private Optional<List<ItemStack>> select(ResourceKey<LootTable> lootKey, LootParams params) {
         MinecraftServer server = level().getServer();
         if (server == null) return Optional.empty();
         LootTable table = server.reloadableRegistries().getLootTable(lootKey);
-        return selectFromCatchList(table.getRandomItems(params));
-    }
-
-    private Optional<ItemStack> selectFromCatchList(List<ItemStack> list) {
-        if (list == null || list.isEmpty()) return Optional.empty();
-
-        try {
-            return Optional.ofNullable(list.get(new Random().nextInt(0, list.size())));
-        } catch (Exception e) {
-            return Optional.ofNullable(list.getFirst());
-        }
+        List<ItemStack> items = table.getRandomItems(params);
+        return items.isEmpty() ? Optional.empty() : Optional.of(items);
     }
 
     public BlockState getCrateBlock(ItemStack crate) {
@@ -859,11 +852,11 @@ public class TideFishingHook extends Projectile {
     }
 
     public boolean hasHookedItem() {
-        return hookedItem != null && !hookedItem.is(Items.AIR);
+        return hookedItems != null && !hookedItems.isEmpty();
     }
 
-    public Item getHookedItem() {
-        return hookedItem.getItem();
+    public List<ItemStack> getHookedItems() {
+        return hookedItems;
     }
 
     public void setMinigameActive(boolean state) {

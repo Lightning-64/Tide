@@ -9,6 +9,7 @@ import com.li64.tide.data.TideTags;
 import com.li64.tide.data.loot.DepthLayer;
 import com.li64.tide.data.player.TidePlayerData;
 import com.li64.tide.network.messages.ShowToastMsg;
+import com.li64.tide.registries.items.StrengthFish;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -36,9 +37,10 @@ public class TideUtils {
         return dimension != Level.OVERWORLD && dimension != Level.NETHER && dimension != Level.END;
     }
 
-    public static boolean shouldGrabTideLootTable(ItemStack item, FluidState fluid) {
-        if (item.is(TideTags.Items.CRATES)) return false;
-        if (item.is(TideTags.Items.VANILLA_FISH) || new Random().nextInt(0, 4) == 0) return true;
+    public static boolean shouldGrabTideLootTable(List<ItemStack> items, FluidState fluid) {
+        if (items.stream().anyMatch(item -> item.is(TideTags.Items.CRATES))) return false;
+        if (items.stream().anyMatch(item -> item.is(TideTags.Items.VANILLA_FISH))
+                || new Random().nextInt(0, 4) == 0) return true;
         return fluid.is(TideTags.Fluids.LAVA_FISHING);
     }
 
@@ -234,5 +236,21 @@ public class TideUtils {
     public static Item itemFromLocation(ResourceLocation location) {
         return BuiltInRegistries.ITEM.get(location).orElse(BuiltInRegistries.ITEM.get(
                 BuiltInRegistries.ITEM.getKey(Items.AIR)).orElseThrow()).value();
+    }
+
+    public static float getHighestStrength(List<ItemStack> hookedItems) {
+        float bestStrength = 0.0f;
+
+        for (ItemStack hookedItem : hookedItems) {
+            float strength = 0.0f;
+            Item fish = hookedItem.getItem();
+
+            if (fish instanceof StrengthFish strengthFish) strength = strengthFish.getStrength();
+            if (BuiltInRegistries.ITEM.getKey(fish).getNamespace().contains("unusualend")) strength = 4.5f;
+
+            if (strength >= bestStrength) bestStrength = strength;
+        }
+
+        return bestStrength;
     }
 }
