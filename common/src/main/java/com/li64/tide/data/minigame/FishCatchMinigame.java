@@ -5,7 +5,7 @@ import com.li64.tide.network.messages.MinigameClientMsg;
 import com.li64.tide.registries.TideItems;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
-import com.li64.tide.registries.items.StrengthFish;
+import com.li64.tide.util.TideUtils;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -51,11 +51,9 @@ public class FishCatchMinigame {
         this.hook = Objects.requireNonNull(HookAccessor.getHook(player));
 
         hook.setMinigameActive(true);
+        float strength = TideUtils.getHighestStrength(hook.getHookedItems());
 
-        float strength = 0f;
-        if (hook.getHookedItem() instanceof StrengthFish strengthFish)
-            strength = strengthFish.getStrength();
-
+        // Apply iron fishing hook bonus
         if (hook.getHook().is(TideItems.IRON_FISHING_HOOK)) strength *= 0.89f;
 
         // Start client minigame gui
