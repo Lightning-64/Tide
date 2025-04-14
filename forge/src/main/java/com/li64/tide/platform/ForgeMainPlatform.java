@@ -117,4 +117,10 @@ public class ForgeMainPlatform implements TideMainPlatform {
     public Optional<ArrayList<ItemStack>> stardewGetRewards(HookAccessor hook) {
         return StardewFishingCompat.getRewards(hook);
     }
+
+    @Override
+    public double getBiteTimeMultiplier() {
+        if (isModLoaded("stardew_fishing")) return StardewFishingCompat.getBiteTimeMultiplier();
+        return TideMainPlatform.super.getBiteTimeMultiplier();
+    }
 }
