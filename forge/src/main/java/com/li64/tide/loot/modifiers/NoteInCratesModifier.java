@@ -17,10 +17,6 @@ public class NoteInCratesModifier extends LootModifier {
         super(new LootItemCondition[0]);
     }
 
-    public NoteInCratesModifier(LootItemCondition[] conditionsIn) {
-        super(conditionsIn);
-    }
-
     @Override
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         if (generatedLoot.isEmpty()) return generatedLoot;

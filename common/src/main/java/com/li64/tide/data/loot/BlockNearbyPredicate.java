@@ -46,7 +46,7 @@ public record BlockNearbyPredicate(TagKey<Block> blocks, int distance) implement
 
     public static class Serializer implements net.minecraft.world.level.storage.loot.Serializer<BlockNearbyPredicate> {
         public void serialize(JsonObject jsonObject, BlockNearbyPredicate predicate, @NotNull JsonSerializationContext context) {
-            jsonObject.addProperty("tag", predicate.blocks().location().toString());
+            jsonObject.addProperty("blocks", predicate.blocks().location().toString());
             jsonObject.addProperty("distance", predicate.distance());
         }
 
