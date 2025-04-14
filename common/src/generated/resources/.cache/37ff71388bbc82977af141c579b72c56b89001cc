@@ -1,8 +1,8 @@
-// 1.21	2025-03-14T20:33:20.7542436	Tide/Tide Item Tags
+// 1.21	2025-04-22T19:28:37.1134295	Tide/Tide Item Tags
 8a8658d1b53118cf2b53f97e14473278a8346df8 data\tide\tags\item\bait_plants.json
 8c25c651704adf741db14043290d34726101ff76 data\tide\tags\item\cookable_fish.json
-8f5b93a9547f792db798f2523aace39576d6338b data\minecraft\tags\item\cat_food.json
 95079c5d13283d2cf759470fe1281ee7c00cd222 data\minecraft\tags\item\arrows.json
+8f5b93a9547f792db798f2523aace39576d6338b data\minecraft\tags\item\cat_food.json
 95616995e01a8fa30e92078d12836bf712d367bd data\minecraft\tags\item\enchantable\fishing.json
 d30f1010d935f3311e393a6e5dfbf53e43ee6996 data\tide\tags\item\crates.json
 3be239c5af643db8e05c8f429a8262526757ba4a data\stardew_fishing\tags\item\starts_minigame.json
