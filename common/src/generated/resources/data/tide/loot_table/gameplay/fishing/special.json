@@ -63,18 +63,9 @@
           "type": "minecraft:loot_table",
           "conditions": [
             {
-              "condition": "minecraft:all_of",
-              "terms": [
-                {
-                  "blocks": "tide:desert_well_fish",
-                  "condition": "tide:block_nearby",
-                  "distance": 3
-                },
-                {
-                  "condition": "tide:check_biome_tag",
-                  "tag": "minecraft:has_structure/desert_pyramid"
-                }
-              ]
+              "blocks": "tide:desert_well_fish",
+              "condition": "tide:block_nearby",
+              "distance": 3
             }
           ],
           "value": "tide:gameplay/fishing/special/desert_well"

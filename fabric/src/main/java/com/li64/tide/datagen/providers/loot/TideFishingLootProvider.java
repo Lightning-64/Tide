@@ -12,7 +12,6 @@ import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
@@ -107,8 +106,7 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
 
                         // Desert well
                         .add(NestedLootTable.lootTableReference(TideLootTables.Fishing.Special.DESERT_WELL).when(
-                                BlockNearbyPredicate.withinDistance(TideTags.Blocks.DESERT_WELL_FISH, 3)
-                                        .and(BiomeTagPredicate.checkTag(BiomeTags.HAS_DESERT_PYRAMID))))
+                                BlockNearbyPredicate.withinDistance(TideTags.Blocks.DESERT_WELL_FISH, 3)))
 
                         // Legendary fish
                         .add(LootItem.lootTableItem(TideItems.MIDAS_FISH).setWeight(100).when(
