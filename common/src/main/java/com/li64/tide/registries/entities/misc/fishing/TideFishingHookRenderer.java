@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
@@ -136,10 +137,11 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
         f5 /= f6;
 
         Color color = Color.decode(colorHex);
+        BlockPos samplePos = player.blockPosition().above();
 
         float skyDarken = (1 - ((ClientLevel) player.level()).getSkyDarken(partialTick)) * 15;
-        float blockBrightness = player.level().getBrightness(LightLayer.BLOCK, player.blockPosition());
-        float skyBrightness = player.level().getBrightness(LightLayer.SKY, player.blockPosition()) - skyDarken + 1;
+        float blockBrightness = player.level().getBrightness(LightLayer.BLOCK, samplePos);
+        float skyBrightness = player.level().getBrightness(LightLayer.SKY, samplePos) - skyDarken + 1;
 
         float colorBrightness = Tide.CONFIG.general.defaultLineColor ? 0.0f : Mth.clamp(
                 Math.max(blockBrightness, skyBrightness) / 15f,
