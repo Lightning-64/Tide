@@ -595,13 +595,15 @@ public class TideFishingHook extends Projectile {
                             return 1;
                         }
 
-                        ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), hookedItem);
+                        Entity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), hookedItem);
 
                         double d0 = player.getX() - this.getX();
                         double d1 = player.getY() - this.getY();
                         double d2 = player.getZ() - this.getZ();
 
                         itemEntity.setDeltaMovement(d0 * 0.1D, d1 * 0.1D + Math.sqrt(Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2)) * 0.08D, d2 * 0.1D);
+                        if (Tide.PLATFORM.isModLoaded("fishingreal")) itemEntity = Tide.PLATFORM.fishingRealConvertEntity(itemEntity, player);
+
                         this.level().addFreshEntity(itemEntity);
                         player.level().addFreshEntity(new ExperienceOrb(player.level(), player.getX(), player.getY() + 0.5D, player.getZ() + 0.5D, this.random.nextInt(6) + 1));
                         if (rod.is(TideItems.DIAMOND_FISHING_ROD)) {

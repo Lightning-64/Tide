@@ -25,7 +25,7 @@
 🚀 Compatibility 🚀
 - Fintastic
 - Fix fishing rods with first-person model
-- Stardew fishing fabric port
+- Fix fishing real compat ✔️
 - Hybrid Aquatic hooks
 - Add "Aether" habitat ✔️
 

@@ -1,6 +1,7 @@
 package com.li64.tide.platform;
 
 import com.li64.tide.TideNeoForge;
+import com.li64.tide.compat.fishingreal.FishingRealCompat;
 import com.li64.tide.platform.services.TideMainPlatform;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.CriterionTrigger;
@@ -9,7 +10,9 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
@@ -102,5 +105,10 @@ public class NeoForgeMainPlatform implements TideMainPlatform {
         ItemFishedEvent event = new ItemFishedEvent(itemList, i, fishing);
         NeoForge.EVENT_BUS.post(event);
         return event.isCanceled();
+    }
+
+    @Override
+    public Entity fishingRealConvertEntity(Entity itemEntity, Player player) {
+        return FishingRealCompat.convertItemEntity(itemEntity, player);
     }
 }
