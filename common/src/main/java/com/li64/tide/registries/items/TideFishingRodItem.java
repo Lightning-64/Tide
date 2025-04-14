@@ -167,7 +167,7 @@ public class TideFishingRodItem extends FishingRodItem {
                                     SoundSource.NEUTRAL, 1.2F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
 
                             if (!Tide.PLATFORM.stardewStart((ServerPlayer) player, (HookAccessor) player.fishing,
-                                    player.getItemInHand(hand), List.of(hook.getHookedItem().getDefaultInstance()))) {
+                                    player.getItemInHand(hand), hook.getHookedItems())) {
                                 retrieveHook(player.getItemInHand(hand), player, level);
                             }
                         }
