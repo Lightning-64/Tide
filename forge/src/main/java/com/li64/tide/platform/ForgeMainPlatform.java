@@ -1,6 +1,7 @@
 package com.li64.tide.platform;
 
 import com.li64.tide.TideForge;
+import com.li64.tide.compat.fishingreal.FishingRealCompat;
 import com.li64.tide.compat.stardewfishing.StardewFishingCompat;
 import com.li64.tide.platform.services.TideMainPlatform;
 import net.minecraft.advancements.CriterionTrigger;
@@ -9,7 +10,9 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -104,5 +107,10 @@ public class ForgeMainPlatform implements TideMainPlatform {
     @Override
     public Optional<ArrayList<ItemStack>> stardewGetRewards(HookAccessor hook) {
         return StardewFishingCompat.getRewards(hook);
+    }
+
+    @Override
+    public Entity fishingRealConvertEntity(Entity itemEntity, Player player) {
+        return FishingRealCompat.convertItemEntity(itemEntity, player);
     }
 }
