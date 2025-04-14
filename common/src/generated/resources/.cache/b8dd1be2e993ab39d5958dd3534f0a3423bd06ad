@@ -12,7 +12,7 @@ dd44a61ce8693e1a4e7456e7e88b36bc9548b881 data/tide/tags/worldgen/biome/dripstone
 f57a77c025311702a1ad1bb92baf65649a2a9999 data/tide/tags/worldgen/biome/has_end_oasis.json
 afd9da16b8e57511d3b12c69ccd4555d71ebb29f data/tide/tags/worldgen/biome/has_structure/fishing_boat.json
 10fdd9f46d9653a2d7c72a4991727503e8ea64d8 data/tide/tags/worldgen/biome/is_cold.json
-4129a0be72fe8157144f62db1ff03232da7a3fb1 data/tide/tags/worldgen/biome/is_saltwater.json
+d0c8d0b0e80cbcfb14e637a9955f5ff616af7495 data/tide/tags/worldgen/biome/is_saltwater.json
 6cb8fda9758cb5101287d8d9588b32d70087d717 data/tide/tags/worldgen/biome/is_warm.json
 c9ddf09ae1da1b8f55e971d4c439cf2a1a411765 data/tide/tags/worldgen/biome/jungle.json
 0f241c94b10e4b16b4304f66ad949bb089955b1e data/tide/tags/worldgen/biome/lush_caves.json

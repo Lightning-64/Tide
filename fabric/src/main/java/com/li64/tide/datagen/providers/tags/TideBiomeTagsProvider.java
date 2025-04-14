@@ -54,6 +54,7 @@ public class TideBiomeTagsProvider extends FabricTagProvider<Biome> {
         getOrCreateTagBuilder(TideTags.Climate.IS_SALTWATER)
                 .forceAddTag(ConventionalBiomeTags.IS_OCEAN)
                 .forceAddTag(ConventionalBiomeTags.IS_BEACH)
+                .add(Biomes.STONY_SHORE)
                 .add(Biomes.MUSHROOM_FIELDS);
 
         getOrCreateTagBuilder(TideTags.Biomes.BADLANDS)
