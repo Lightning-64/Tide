@@ -1,24 +1,13 @@
 package com.li64.tide.platform.services;
 
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
-import com.mojang.serialization.MapCodec;
-import net.minecraft.advancements.CriterionTrigger;
-import net.minecraft.advancements.critereon.EntitySubPredicate;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 import java.util.ArrayList;
 import java.util.List;

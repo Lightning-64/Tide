@@ -48,6 +48,7 @@ public class TideForge {
         event.register(ForgeRegistries.Keys.ENTITY_TYPES, helper -> TideEntityTypes.init());
         event.register(ForgeRegistries.Keys.MENU_TYPES, helper -> TideMenuTypes.init());
         event.register(ForgeRegistries.Keys.SOUND_EVENTS, helper -> TideSoundEvents.init());
+        event.register(ForgeRegistries.Keys.FEATURES, helper -> TideFeatures.init());
         event.register(Registries.TRIGGER_TYPE, helper -> TideCriteriaTriggers.init());
         event.register(Registries.DATA_COMPONENT_TYPE, helper -> TideDataComponents.init());
         event.register(Registries.ENTITY_SUB_PREDICATE_TYPE, helper -> TideEntitySubPredicates.init());
