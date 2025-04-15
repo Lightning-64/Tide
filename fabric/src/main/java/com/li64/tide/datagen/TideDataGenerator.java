@@ -7,9 +7,14 @@ import com.li64.tide.datagen.providers.loot.TideEntityLootProvider;
 import com.li64.tide.datagen.providers.loot.TideFishingLootProvider;
 import com.li64.tide.datagen.providers.recipes.TideRecipeProvider;
 import com.li64.tide.datagen.providers.tags.*;
+import com.li64.tide.datagen.providers.worldgen.TideConfiguredFeatures;
+import com.li64.tide.datagen.providers.worldgen.TideDynamicRegistryProvider;
+import com.li64.tide.datagen.providers.worldgen.TidePlacedFeatures;
 import com.li64.tide.registries.TideItems;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
 
 public class TideDataGenerator implements DataGeneratorEntrypoint {
     @Override
@@ -30,5 +35,13 @@ public class TideDataGenerator implements DataGeneratorEntrypoint {
 
         pack.addProvider(TideAdvancementProvider::new);
         pack.addProvider(TideRecipeProvider::new);
+
+        pack.addProvider(TideDynamicRegistryProvider::new);
+    }
+
+    @Override
+    public void buildRegistry(RegistrySetBuilder builder) {
+        builder.add(Registries.CONFIGURED_FEATURE, TideConfiguredFeatures::bootstrap);
+        builder.add(Registries.PLACED_FEATURE, TidePlacedFeatures::bootstrap);
     }
 }

@@ -6,6 +6,7 @@ import com.li64.tide.data.TideCriteriaTriggers;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.TideTags;
 import com.li64.tide.registries.TideEntitySubPredicates;
+import com.li64.tide.datagen.providers.worldgen.TidePlacedFeatures;
 import com.li64.tide.events.FabricEventHandler;
 import com.li64.tide.network.TideMessages;
 import com.li64.tide.registries.*;
@@ -59,6 +60,7 @@ public class TideFabric implements ModInitializer {
         TideEntitySubPredicates.init();
         TideLootConditions.init();
         TideCriteriaTriggers.init();
+        TideFeatures.init();
 
         Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, Tide.resource(RodUpgradingRecipe.Type.ID),
                 RodUpgradingRecipe.Serializer.INSTANCE);
@@ -68,7 +70,7 @@ public class TideFabric implements ModInitializer {
         BiomeModifications.addFeature(
                 BiomeSelectors.tag(TideTags.Biomes.HAS_END_OASIS),
                 GenerationStep.Decoration.LAKES,
-                ResourceKey.create(Registries.PLACED_FEATURE, Tide.resource("end_oasis")));
+                ResourceKey.create(Registries.PLACED_FEATURE, TidePlacedFeatures.END_OASIS.location()));
 
         BiomeModifications.addSpawn(
                 BiomeSelectors.tag(BiomeTags.IS_OVERWORLD)

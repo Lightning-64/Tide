@@ -19,6 +19,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 import java.util.ArrayList;
@@ -63,6 +64,8 @@ public interface TideMainPlatform {
     void registerMenuType(String key, MenuType<?> menuType);
 
     void registerSoundEvent(String key, SoundEvent soundEvent);
+
+    void registerFeature(String key, Feature<?> feature);
 
     default Optional<ArrayList<ItemStack>> stardewGetRewards(HookAccessor hook) { return Optional.empty(); }
 

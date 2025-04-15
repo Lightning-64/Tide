@@ -24,6 +24,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -47,6 +48,7 @@ public class TideForge {
     public static final DeferredRegister<LootItemConditionType> LOOT_CONDITION_TYPES = DeferredRegister.create(Registries.LOOT_CONDITION_TYPE, Tide.MOD_ID);
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.MENU_TYPES, Tide.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Tide.MOD_ID);
+    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, Tide.MOD_ID);
 
     public TideForge() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -67,6 +69,7 @@ public class TideForge {
         LOOT_CONDITION_TYPES.register(eventBus);
         MENU_TYPES.register(eventBus);
         SOUND_EVENTS.register(eventBus);
+        FEATURES.register(eventBus);
 
         TideLootModifiers.register(eventBus);
         TideRecipeSerializers.register(eventBus);
@@ -90,6 +93,7 @@ public class TideForge {
         event.register(Registries.DATA_COMPONENT_TYPE, helper -> TideDataComponents.init());
         event.register(Registries.ENTITY_SUB_PREDICATE_TYPE, helper -> TideEntitySubPredicates.init());
         event.register(Registries.LOOT_CONDITION_TYPE, helper -> TideLootConditions.init());
+        event.register(ForgeRegistries.Keys.FEATURES, helper -> TideFeatures.init());
 
         event.register(Registries.CREATIVE_MODE_TAB, helper -> Registry.register(
                 BuiltInRegistries.CREATIVE_MODE_TAB, Tide.MOD_ID,
