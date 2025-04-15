@@ -68,7 +68,6 @@ public class TideTags {
         public static final TagKey<Biome> CAN_CATCH_STARFISH = TagKey.create(
                 Registries.BIOME, Tide.resource("can_catch_starfish"));
 
-        public static ArrayList<TagKey<Biome>> fishingBiomes;
         public static final TagKey<Biome> BADLANDS = biomeFishTag("badlands");
         public static final TagKey<Biome> BIRCH = biomeFishTag("birch");
         public static final TagKey<Biome> CHERRY = biomeFishTag("cherry");
@@ -87,10 +86,7 @@ public class TideTags {
         public static final TagKey<Biome> DRIPSTONE = biomeFishTag("dripstone");
 
         public static TagKey<Biome> biomeFishTag(String path) {
-            if (fishingBiomes == null) fishingBiomes = new ArrayList<>();
-            TagKey<Biome> tag = TagKey.create(Registries.BIOME, Tide.resource( path));
-            fishingBiomes.add(tag);
-            return tag;
+            return TagKey.create(Registries.BIOME, Tide.resource(path));
         }
     }
 }

@@ -2,12 +2,8 @@
   "feature": "tide:end_oasis",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 1
-    },
-    {
       "type": "minecraft:rarity_filter",
-      "chance": 72
+      "chance": 70
     },
     {
       "type": "minecraft:in_square"
@@ -15,6 +11,9 @@
     {
       "type": "minecraft:heightmap",
       "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "minecraft:biome"
     }
   ]
 }
