@@ -77,16 +77,6 @@ public class FabricEventHandler {
                         .build()
                 );
             }
-
-            if (key.location().toString().contains("crates/overworld/water_ocean")
-                    || key.location().toString().contains("crates/overworld/water_river")) {
-
-                tableBuilder.pool(new LootPool.Builder().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(TideItems.TORN_NOTE)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-                        .build()
-                );
-            }
         });
     }
 }

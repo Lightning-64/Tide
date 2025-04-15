@@ -49,6 +49,11 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                 )
         );
 
+        LootPool.Builder tornNotePool = LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(TideItems.TORN_NOTE)
+                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
+                .when(LootItemRandomChanceCondition.randomChance(0.8f));
+
         output.accept(
                 TideLootTables.Crates.OVERWORLD_WATER_RIVER,
                 LootTable.lootTable().withPool(LootPool.lootPool()
@@ -74,7 +79,7 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                                     .when(LootItemRandomChanceCondition.randomChance(0.5f))
                                 .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(15))))
-                )
+                ).withPool(tornNotePool)
         );
 
         output.accept(
@@ -96,7 +101,7 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                                     .when(LootItemRandomChanceCondition.randomChance(0.5f))
                                 .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(24))))
-                )
+                ).withPool(tornNotePool)
         );
 
         output.accept(
