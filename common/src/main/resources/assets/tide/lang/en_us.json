@@ -44,6 +44,9 @@
    "text.autoconfig.tide.option.worldgen.disableFishingBoat": "Disable Fishing Boats",
    "text.autoconfig.tide.option.worldgen.disableFishingBoat.@Tooltip": "Turn this on to disable the generation of fishing boat structures",
 
+   "text.autoconfig.tide.option.worldgen.disableEndOases": "Disable End Oases",
+   "text.autoconfig.tide.option.worldgen.disableEndOases.@Tooltip": "Turn this on to disable the generation of end oasis features",
+
    "text.autoconfig.tide.option.minigame.doMinigame": "Do Minigame",
    "text.autoconfig.tide.option.minigame.doMinigame.@Tooltip": "Turn this setting off to disable the fishing mingame.",
 
