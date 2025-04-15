@@ -20,6 +20,7 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 public class FabricMainPlatform implements TideMainPlatform {
@@ -86,6 +87,11 @@ public class FabricMainPlatform implements TideMainPlatform {
     @Override
     public void registerSoundEvent(String key, SoundEvent soundEvent) {
         Registry.register(BuiltInRegistries.SOUND_EVENT, Tide.resource(key), soundEvent);
+    }
+
+    @Override
+    public void registerFeature(String key, Feature<?> feature) {
+        Registry.register(BuiltInRegistries.FEATURE, Tide.resource(key), feature);
     }
 
     @Override
