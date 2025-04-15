@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ChunkGenerator.class)
 public class ChunkGenMixin {
     @Inject(method = "tryGenerateStructure", at = @At("HEAD"), cancellable = true)
-    public void disableStructures$AttemptStructureDisable(StructureSet.StructureSelectionEntry entry, StructureManager structureManager, RegistryAccess registries, RandomState $$3, StructureTemplateManager $$4, long $$5, ChunkAccess $$6, ChunkPos $$7, SectionPos $$8, CallbackInfoReturnable<Boolean> cir) {
+    public void tryGenerateStructureOverride(StructureSet.StructureSelectionEntry entry, StructureManager structureManager, RegistryAccess registries, RandomState $$3, StructureTemplateManager $$4, long $$5, ChunkAccess $$6, ChunkPos $$7, SectionPos $$8, CallbackInfoReturnable<Boolean> cir) {
         ResourceLocation structure = registries.registryOrThrow(Registries.STRUCTURE).getKey(entry.structure().value());
         if (structure == null) return;
         if (!structure.getNamespace().equals(Tide.MOD_ID)) return;
@@ -31,7 +31,7 @@ public class ChunkGenMixin {
     }
 
     @Inject(method = "findNearestMapStructure", at = @At("HEAD"), cancellable = true)
-    public void disableStructures$FindNoDisabledStructuresInsteadOfLooking(ServerLevel level, HolderSet<Structure> structureHolder, BlockPos $$2, int $$3, boolean $$4, CallbackInfoReturnable<Pair<BlockPos, Holder<Structure>>> cir) {
+    public void findNearestMapStructureOverride(ServerLevel level, HolderSet<Structure> structureHolder, BlockPos $$2, int $$3, boolean $$4, CallbackInfoReturnable<Pair<BlockPos, Holder<Structure>>> cir) {
         structureHolder.stream().forEach(configuredStructureFeatureHolder -> {
             ResourceLocation structure = level.registryAccess().registryOrThrow(Registries.STRUCTURE).getKey(configuredStructureFeatureHolder.value());
             if (structure == null) return;

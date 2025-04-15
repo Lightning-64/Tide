@@ -76,5 +76,8 @@ public final class TideConfig implements ConfigData {
     public static class Worldgen {
         @ConfigEntry.Gui.Tooltip
         public boolean disableFishingBoat = false;
+
+        @ConfigEntry.Gui.Tooltip
+        public boolean disableEndOases = false;
     }
 }
