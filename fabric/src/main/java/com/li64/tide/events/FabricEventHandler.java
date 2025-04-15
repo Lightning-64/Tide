@@ -83,42 +83,6 @@ public class FabricEventHandler {
                         .build()
                 );
             }
-
-            if (id.toString().contains("crates/overworld/water_ocean")
-                    || id.toString().contains("crates/overworld/water_river")) {
-
-                List<CompoundTag> tags = new ArrayList<>();
-                tags.add(new CompoundTag());
-                tags.add(new CompoundTag());
-                tags.add(new CompoundTag());
-                tags.add(new CompoundTag());
-
-                ListTag pages1 = new ListTag();
-                pages1.add(StringTag.valueOf(Component.Serializer.toJson(Component.translatable("note.tide.midas_fish.contents"))));
-
-                ListTag pages2 = new ListTag();
-                pages2.add(StringTag.valueOf(Component.Serializer.toJson(Component.translatable("note.tide.voidseeker.contents"))));
-
-                ListTag pages3 = new ListTag();
-                pages3.add(StringTag.valueOf(Component.Serializer.toJson(Component.translatable("note.tide.shooting_starfish.contents"))));
-
-                ListTag pages4 = new ListTag();
-                pages4.add(StringTag.valueOf(Component.Serializer.toJson(Component.translatable("note.tide.aquathorn.contents"))));
-
-                tags.get(0).put("pages", pages1);
-                tags.get(1).put("pages", pages2);
-                tags.get(2).put("pages", pages3);
-                tags.get(3).put("pages", pages4);
-
-                tags.forEach(tag -> tag.putString("title", Component.translatable("note.tide.title").getString()));
-                tags.forEach(tag -> tag.putString("author", Component.translatable("note.tide.author").getString()));
-
-                tableBuilder.pool(new LootPool.Builder().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(TideItems.TORN_NOTE)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-                        .build()
-                );
-            }
         });
     }
 }
