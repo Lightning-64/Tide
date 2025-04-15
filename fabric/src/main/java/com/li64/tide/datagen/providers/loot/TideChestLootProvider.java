@@ -1,8 +1,6 @@
 package com.li64.tide.datagen.providers.loot;
 
 import com.li64.tide.data.TideLootTables;
-import com.li64.tide.data.loot.LootCrateBlockPredicate;
-import com.li64.tide.registries.TideBlocks;
 import com.li64.tide.registries.TideItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
@@ -51,6 +49,11 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                 )
         );
 
+        LootPool.Builder tornNotePool = LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(TideItems.TORN_NOTE)
+                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
+                .when(LootItemRandomChanceCondition.randomChance(0.8f));
+
         output.accept(
                 TideLootTables.Crates.OVERWORLD_WATER_RIVER,
                 LootTable.lootTable().withPool(LootPool.lootPool()
@@ -76,7 +79,7 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                                     .when(LootItemRandomChanceCondition.randomChance(0.5f))
                                 .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(15))))
-                )
+                ).withPool(tornNotePool)
         );
 
         output.accept(
@@ -98,7 +101,7 @@ public class TideChestLootProvider extends SimpleFabricLootTableProvider {
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                                     .when(LootItemRandomChanceCondition.randomChance(0.5f))
                                 .apply(EnchantWithLevelsFunction.enchantWithLevels(registries, ConstantValue.exactly(24))))
-                )
+                ).withPool(tornNotePool)
         );
 
         output.accept(

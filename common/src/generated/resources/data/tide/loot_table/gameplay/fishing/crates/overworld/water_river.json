@@ -126,6 +126,29 @@
         "max": 12.0,
         "min": 7.0
       }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.8,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "tide:torn_note"
+        }
+      ],
+      "rolls": 1.0
     }
   ]
 }

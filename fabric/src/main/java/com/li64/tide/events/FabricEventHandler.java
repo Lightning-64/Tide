@@ -11,22 +11,14 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.network.Filterable;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.WrittenBookContent;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-
-import java.util.List;
 
 public class FabricEventHandler {
     public static void init() {
@@ -83,16 +75,6 @@ public class FabricEventHandler {
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4))))
                         .add(LootItem.lootTableItem(TideItems.MAGNETIC_BAIT).setWeight(5)
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(6))))
-                        .build()
-                );
-            }
-
-            if (key.location().toString().contains("crates/overworld/water_ocean")
-                    || key.location().toString().contains("crates/overworld/water_river")) {
-
-                tableBuilder.pool(new LootPool.Builder().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(TideItems.TORN_NOTE)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
                         .build()
                 );
             }
