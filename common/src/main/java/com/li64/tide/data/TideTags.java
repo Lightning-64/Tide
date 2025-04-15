@@ -9,8 +9,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
-import java.util.ArrayList;
-
 @SuppressWarnings("unused")
 public class TideTags {
     public static class Items {
@@ -68,7 +66,6 @@ public class TideTags {
         public static final TagKey<Biome> CAN_CATCH_STARFISH = TagKey.create(
                 Registries.BIOME, Tide.resource("can_catch_starfish"));
 
-        public static ArrayList<TagKey<Biome>> fishingBiomes;
         public static final TagKey<Biome> MUSHROOM = biomeFishTag("mushroom");
         public static final TagKey<Biome> DEEP_DARK = biomeFishTag("deep_dark");
         public static final TagKey<Biome> LUSH_CAVES = biomeFishTag("lush_caves");
@@ -87,10 +84,7 @@ public class TideTags {
         public static final TagKey<Biome> FOREST = biomeFishTag("forest");
 
         public static TagKey<Biome> biomeFishTag(String path) {
-            if (fishingBiomes == null) fishingBiomes = new ArrayList<>();
-            TagKey<Biome> tag = TagKey.create(Registries.BIOME, Tide.resource( path));
-            fishingBiomes.add(tag);
-            return tag;
+            return TagKey.create(Registries.BIOME, Tide.resource(path));
         }
     }
 }
