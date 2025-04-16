@@ -1,6 +1,7 @@
 package com.li64.tide.registries.items;
 
 import com.li64.tide.Tide;
+import com.li64.tide.data.rods.AccessoryData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -35,7 +36,11 @@ public class FishingHookItem extends Item {
     }
 
     public static ResourceLocation getTexture(ItemStack stack) {
-        return Tide.resource("textures/entity/fishing_hook/" + BuiltInRegistries.ITEM
-                .getKey(stack.getItem()).getPath() + ".png");
+        AccessoryData data = AccessoryData.get(stack);
+        if (data == null || data.texture().isEmpty()) {
+            return Tide.resource("textures/entity/fishing_hook/" + BuiltInRegistries.ITEM
+                    .getKey(stack.getItem()).getPath() + ".png");
+        }
+        return new ResourceLocation(data.texture().get());
     }
 }

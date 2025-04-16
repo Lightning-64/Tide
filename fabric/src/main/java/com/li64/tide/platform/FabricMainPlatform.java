@@ -1,8 +1,10 @@
 package com.li64.tide.platform;
 
 import com.li64.tide.Tide;
+import com.li64.tide.compat.hybrid_aquatic.HybridAquaticCompat;
 import com.li64.tide.data.TidePlayer;
 import com.li64.tide.platform.services.TideMainPlatform;
+import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.CriterionTrigger;
@@ -13,6 +15,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -97,5 +100,10 @@ public class FabricMainPlatform implements TideMainPlatform {
     @Override
     public boolean isFabric() {
         return true;
+    }
+
+    @Override
+    public Entity hybridAquaticConvertEntity(ItemEntity itemEntity, Player player, TideFishingHook hook) {
+        return HybridAquaticCompat.convertEntity(itemEntity, player, hook);
     }
 }

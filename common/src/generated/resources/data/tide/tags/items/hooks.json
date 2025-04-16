@@ -3,6 +3,26 @@
   "values": [
     "tide:fishing_hook",
     "tide:iron_fishing_hook",
-    "tide:lavaproof_fishing_hook"
+    "tide:lavaproof_fishing_hook",
+    {
+      "id": "hybrid-aquatic:barbed_hook",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:glowing_hook",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:magnetic_hook",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:creepermagnet_hook",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:ominous_hook",
+      "required": false
+    }
   ]
 }

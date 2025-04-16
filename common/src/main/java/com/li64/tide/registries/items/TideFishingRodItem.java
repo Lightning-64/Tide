@@ -254,6 +254,16 @@ public class TideFishingRodItem extends FishingRodItem {
 
                 if (rod.is(TideItems.GOLDEN_FISHING_ROD)) luck += 1;
 
+                // Hybrid aquatic compat
+                if (Tide.PLATFORM.isModLoaded("hybrid-aquatic")) {
+                    if (CustomRodManager.getHook(rod).getItem().toString().matches("barbed_hook") && level.isDay())
+                        speed += 1;
+                    if (CustomRodManager.getHook(rod).getItem().toString().matches("glowing_hook") && level.isNight())
+                        speed += 1;
+                    if (CustomRodManager.getHook(rod).getItem().toString().matches("magnetic_hook"))
+                        luck += 1;
+                }
+
                 level.addFreshEntity(new TideFishingHook(TideEntityTypes.FISHING_BOBBER,
                         player, level, luck, speed, charge, rod));
             }

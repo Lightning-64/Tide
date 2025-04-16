@@ -30,6 +30,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -165,6 +166,18 @@ public class TideFishingHook extends Projectile {
 
     public boolean usingMagneticBait() {
         return BaitUtils.getPrimaryBait(rod).is(TideItems.MAGNETIC_BAIT);
+    }
+
+    public void clearHookItem() {
+        ItemStack mainHandItem = getPlayerOwner().getMainHandItem();
+        ItemStack offhandItem = getPlayerOwner().getOffhandItem();
+        if (mainHandItem.getItem() instanceof TideFishingRodItem) {
+            CustomRodManager.setHook(mainHandItem, null);
+            getPlayerOwner().setItemInHand(InteractionHand.MAIN_HAND, mainHandItem);
+        } else if (offhandItem.getItem() instanceof TideFishingRodItem) {
+            CustomRodManager.setHook(offhandItem, null);
+            getPlayerOwner().setItemInHand(InteractionHand.OFF_HAND, offhandItem);
+        }
     }
 
     public enum CatchType {
@@ -497,6 +510,11 @@ public class TideFishingHook extends Projectile {
         } else {
             this.timeUntilLured = Mth.nextInt(this.random, 200, 600);
             this.timeUntilLured -= (int) (1200.0 / (1.0 + Math.exp(-0.3 * this.lureSpeed)) - 600.0);
+
+            // Hybrid aquatic compat
+            if (getHook().getItem().toString().matches("barbed_hook") && level().isDay()) timeUntilLured -= 75;
+            else if (getHook().getItem().toString().matches("glowing_hook") && level().isNight()) timeUntilLured -= 75;
+
             this.timeUntilLured = Math.max((int) (this.timeUntilLured * Tide.PLATFORM.getBiteTimeMultiplier()), 10);
         }
     }
@@ -580,16 +598,18 @@ public class TideFishingHook extends Projectile {
                         for (ItemStack hookedItem : hookedItems) {
                             if (hookedItem.isEmpty()) continue;
 
-                            Entity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), hookedItem);
+                            Entity pulledEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), hookedItem);
 
                             double d0 = player.getX() - this.getX();
                             double d1 = player.getY() - this.getY();
                             double d2 = player.getZ() - this.getZ();
 
-                            itemEntity.setDeltaMovement(d0 * 0.1D, d1 * 0.1D + Math.sqrt(Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2)) * 0.08D, d2 * 0.1D);
-                            if (Tide.PLATFORM.isModLoaded("fishingreal")) itemEntity = Tide.PLATFORM.fishingRealConvertEntity(itemEntity, player);
+                            pulledEntity.setDeltaMovement(d0 * 0.1D, d1 * 0.1D + Math.sqrt(Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2)) * 0.08D, d2 * 0.1D);
+                            if (Tide.PLATFORM.isModLoaded("fishingreal")) pulledEntity = Tide.PLATFORM.fishingRealConvertEntity(pulledEntity, player);
+                            if (Tide.PLATFORM.isModLoaded("hybrid-aquatic") && pulledEntity instanceof ItemEntity itemEntity)
+                                pulledEntity = Tide.PLATFORM.hybridAquaticConvertEntity(itemEntity, player, this);
 
-                            this.level().addFreshEntity(itemEntity);
+                            this.level().addFreshEntity(pulledEntity);
                             player.level().addFreshEntity(new ExperienceOrb(player.level(), player.getX(), player.getY() + 0.5D, player.getZ() + 0.5D, this.random.nextInt(6) + 1));
                             if (rod.is(TideItems.DIAMOND_FISHING_ROD)) {
                                 player.level().addFreshEntity(new ExperienceOrb(player.level(), player.getX(), player.getY() + 0.5D, player.getZ() + 0.5D, this.random.nextInt(4) + 1));
@@ -825,6 +845,10 @@ public class TideFishingHook extends Projectile {
     public TideFishingRodItem getRodItem() {
         if (rod.getItem() instanceof TideFishingRodItem rodItem) return rodItem;
         return null;
+    }
+
+    public ItemStack getRod() {
+        return rod;
     }
 
     public ItemStack getBobber() {

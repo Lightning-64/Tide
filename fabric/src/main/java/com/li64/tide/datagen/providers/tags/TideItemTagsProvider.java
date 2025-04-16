@@ -81,7 +81,12 @@ public class TideItemTagsProvider extends FabricTagProvider<Item> {
         getOrCreateTagBuilder(TideTags.Items.HOOKS)
                 .add(TideItems.FISHING_HOOK)
                 .add(TideItems.IRON_FISHING_HOOK)
-                .add(TideItems.LAVAPROOF_FISHING_HOOK);
+                .add(TideItems.LAVAPROOF_FISHING_HOOK)
+                .addOptional(new ResourceLocation("hybrid-aquatic", "barbed_hook"))
+                .addOptional(new ResourceLocation("hybrid-aquatic", "glowing_hook"))
+                .addOptional(new ResourceLocation("hybrid-aquatic", "magnetic_hook"))
+                .addOptional(new ResourceLocation("hybrid-aquatic", "creepermagnet_hook"))
+                .addOptional(new ResourceLocation("hybrid-aquatic", "ominous_hook"));
 
         getOrCreateTagBuilder(TideTags.Items.BAIT_PLANTS)
                 .forceAddTag(conventionTag("crops"))

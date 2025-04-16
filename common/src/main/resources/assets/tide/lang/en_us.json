@@ -338,6 +338,12 @@
    "accessory.item.tide.iron_fishing_hook": "Iron Hook",
    "accessory.item.tide.lavaproof_fishing_hook": "Lavaproof Hook",
 
+   "accessory.item.hybrid-aquatic.barbed_hook": "Barbed Hook",
+   "accessory.item.hybrid-aquatic.glowing_hook": "Glowing Hook",
+   "accessory.item.hybrid-aquatic.magnetic_hook": "Magnetic Hook",
+   "accessory.item.hybrid-aquatic.creepermagnet_hook": "CreeperMagnet Hook",
+   "accessory.item.hybrid-aquatic.ominous_hook": "Ominous Hook",
+
    "accessory.item.tide.fishing_line": "Normal Line",
    "accessory.item.tide.braided_line": "Braided Line",
    "accessory.item.tide.reinforced_line": "Reinforced Line",

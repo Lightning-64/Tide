@@ -1,12 +1,14 @@
 package com.li64.tide.platform.services;
 
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
+import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.flag.FeatureFlagSet;
@@ -65,6 +67,8 @@ public interface TideMainPlatform {
     default boolean stardewStart(ServerPlayer player, HookAccessor hook, ItemStack item, List<ItemStack> items) { return false; }
 
     default Entity fishingRealConvertEntity(Entity itemEntity, Player player) { return itemEntity; }
+
+    default Entity hybridAquaticConvertEntity(ItemEntity itemEntity, Player player, TideFishingHook hook) { return itemEntity; }
 
     default boolean isFabric() {
         return false;
