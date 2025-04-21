@@ -194,10 +194,8 @@ public class FishingJournalScreen extends Screen {
 
             int titleX = (this.width - font.width(title)) / 2;
             int titleY = 30;
-            if (page == 0) titleY = 70;
             int contentX = (this.width - 300) / 2;
             int contentY = (this.height) - 90;
-            if (page == 0) contentY = (this.height) - 125;
 
             graphics.drawString(font, title.getString(), titleX, titleY, 16777215);
             for (int i = 0; i < formattedContent.size(); i++) {

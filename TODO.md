@@ -19,17 +19,19 @@
 - Fish entities not spawning ✔️
 - Reinforced line's bonus is applied to regular line ✔️
 - Fishing rod repairs when spamming right click ✔️
-- Fishing line connects to other players' bobbers
-- End oasis feature crashes worlds sometimes
+- Fishing line connects to other players' bobbers ✔️
+- End oasis feature crashes worlds sometimes ✔️
+- Fix page 1 journal formatting ✔️
 
 🚀 Compatibility 🚀
-- Fintastic
-- Fix fishing rods with first-person model
-- Stardew fishing fabric port
-- Hybrid Aquatic hooks
+- Fix fishing rods with first-person model ✔️
+- Fix fishing real compat ✔️
+- Hybrid Aquatic hooks ✔️
 - Add "Aether" habitat ✔️
 
 = 📋 TODO for 1.6.1 📋 =
+- Fish weight system
+- Fintastic compat
 - Fabric seasons/serene seasons
 - More fishing rods
 - Structure fish 🐟🐟🐟🐟
