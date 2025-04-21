@@ -255,6 +255,15 @@ public class JournalLayout {
             addProfile("hybrid-aquatic:surgeonfish_sohal", "saltwater", "saltwater", "warm");
             addProfile("hybrid-aquatic:unicornfish", "saltwater", "saltwater", "warm");
             addProfile("hybrid-aquatic:yellow_tang", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:john_dory", "saltwater", "saltwater", "normal");
+            addProfile("hybrid-aquatic:neon_tetra", "freshwater", "jungle", "warm");
+            addProfile("hybrid-aquatic:needlefish", "saltwater", "saltwater", "normal");
+            addProfile("hybrid-aquatic:parrotfish", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:seahorse", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:flying_fish", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:mahi", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:oarfish", "saltwater", "saltwater", "normal");
+            addProfile("hybrid-aquatic:coelacanth", "saltwater", "saltwater", "normal");
         }
 
         if (Tide.PLATFORM.isModLoaded("unusualend")) {

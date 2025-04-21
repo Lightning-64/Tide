@@ -21,6 +21,7 @@
 - Fishing rod repairs when spamming right click ✔️
 - Fishing line connects to other players' bobbers ✔️
 - End oasis feature crashes worlds sometimes ✔️
+- Fix page 1 journal formatting ✔️
 
 🚀 Compatibility 🚀
 - Fix fishing rods with first-person model ✔️
@@ -29,6 +30,7 @@
 - Add "Aether" habitat ✔️
 
 = 📋 TODO for 1.6.1 📋 =
+- Fish weight system
 - Fintastic compat
 - Fabric seasons/serene seasons
 - More fishing rods
