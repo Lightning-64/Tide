@@ -5,8 +5,8 @@ import java.util.Random;
 
 public record TornNoteData(String id, boolean unlocked) {
     public static List<String> INSTANCES = List.of(
-            "empty", "desert_well", "lucky",
-            "stars_over_ocean", "the_end"
+            "empty", "lucky", "the_end",
+            "stars_over_ocean"
     );
     public static TornNoteData EMPTY = new TornNoteData(INSTANCES.get(0));
 
