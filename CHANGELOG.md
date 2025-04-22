@@ -1,4 +1,52 @@
-## Version 1.5.0 - 1/17/2024
+## Version 1.6.0 - ?/??/2025
+
+### 🎣 New features 🎣
+
+---
+**Fishing Rod Improvements**
+- Updated fishing rod textures (created by codly)
+- Updated bait slot textures to match the 1.21.4 port
+- Improved fishing line rendering to more closely align with the item model
+- Some fishing rods will now have special features:
+  - Amethyst fishing rod chimes when a fish bites
+  - Golden fishing rod gives +1 luck
+  - Diamond fishing rod gives extra XP
+  - Netherite fishing rod can fish in lava without a special hook
+---
+**Torn Notes**
+- Torn Note items can be found in overworld surface crates
+- Torn Notes can be right-clicked to show a small hint drawing of legendary fish locations
+- Written books can no longer be found in from overworld surface crates
+---
+**Datapack Features**
+- A `loot_crate_block` loot predicate has been added, allowing users to put items in specific crate types
+- A `profile.info.location.aether` profile location translation key has been added
+---
+**Miscellaneous**
+- Structure-specific fish have been moved to their own journal page (will be added to later)
+- Fish entities no longer show as "???" if they aren't unlocked in the journal
+- The fishing journal can now be placed in lecterns
+---
+
+### 🚀 Compatibility Features 🚀
+- Improved fishing rod rendering while using the First-Person Model mod
+- Fixed Fishing Real compat for forge
+- Added support for Hybrid Aquatic's hook items
+- Added some missing Hybrid Aquatic fish to the journal
+---
+
+### ⚙️ Bug fixes ⚙️
+- Fixed a bug where fish entities would block others from spawning
+- Fixed a typo in amethyst fishing bobber recipe JSON
+- Fixed a bug where a fishing rod can repair itself when spamming right click
+- Fixed a rendering bug where fishing lines occasionally connect to other players' bobbers
+- Fixed a bug where the reinforced line's bonus is applied to regular fishing line
+- Fixed a world crash with the end oasis feature
+- Fixed a text formatting bug in the fishing journal
+
+---
+
+## Version 1.5.0 - 1/17/2025
 
 ### 🎣 New features 🎣
 
