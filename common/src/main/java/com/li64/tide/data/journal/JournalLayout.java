@@ -230,7 +230,9 @@ public class JournalLayout {
             addProfile("hybrid-aquatic:carp", "freshwater", "freshwater", "any");
             addProfile("hybrid-aquatic:koi", "freshwater", "freshwater", "any");
             addProfile("hybrid-aquatic:danio", "freshwater", "freshwater", "warm");
+            addProfile("hybrid-aquatic:damselfish", "saltwater", "saltwater", "warm");
             addProfile("hybrid-aquatic:discus", "freshwater", "freshwater", "warm");
+            addProfile("hybrid-aquatic:dragonfish", "underground", "underground", "normal");
             addProfile("hybrid-aquatic:golden_dorado", "freshwater", "freshwater", "warm");
             addProfile("hybrid-aquatic:goldfish", "freshwater", "cherry", "any");
             addProfile("hybrid-aquatic:gourami", "freshwater", "freshwater", "warm");
