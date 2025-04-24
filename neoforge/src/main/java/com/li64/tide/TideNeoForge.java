@@ -21,6 +21,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -43,6 +44,7 @@ public class TideNeoForge {
     public static final DeferredRegister<LootItemConditionType> LOOT_CONDITION_TYPES = DeferredRegister.create(Registries.LOOT_CONDITION_TYPE, Tide.MOD_ID);
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(BuiltInRegistries.MENU, Tide.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, Tide.MOD_ID);
+    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(BuiltInRegistries.FEATURE, Tide.MOD_ID);
 
     public static final PayloadRegistrar REGISTRAR = new PayloadRegistrar("1");
     public static ModContainer CONTAINER;
@@ -63,6 +65,7 @@ public class TideNeoForge {
         LOOT_CONDITION_TYPES.register(eventBus);
         MENU_TYPES.register(eventBus);
         SOUND_EVENTS.register(eventBus);
+        FEATURES.register(eventBus);
 
         TideLootModifiers.register(eventBus);
         TideRecipeSerializers.register(eventBus);
@@ -82,6 +85,7 @@ public class TideNeoForge {
         event.register(Registries.DATA_COMPONENT_TYPE, helper -> TideDataComponents.init());
         event.register(Registries.ENTITY_SUB_PREDICATE_TYPE, helper -> TideEntitySubPredicates.init());
         event.register(Registries.LOOT_CONDITION_TYPE, helper -> TideLootConditions.init());
+        event.register(Registries.FEATURE, helper -> TideFeatures.init());
 
         event.register(Registries.CREATIVE_MODE_TAB, helper -> Registry.register(
                 BuiltInRegistries.CREATIVE_MODE_TAB, Tide.MOD_ID,

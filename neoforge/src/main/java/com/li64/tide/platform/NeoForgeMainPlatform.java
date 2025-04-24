@@ -22,6 +22,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
@@ -88,6 +89,11 @@ public class NeoForgeMainPlatform implements TideMainPlatform {
     @Override
     public void registerSoundEvent(String key, SoundEvent soundEvent) {
         TideNeoForge.SOUND_EVENTS.register(key, () -> soundEvent);
+    }
+
+    @Override
+    public void registerFeature(String key, Feature<?> feature) {
+        TideNeoForge.FEATURES.register(key, () -> feature);
     }
 
     @Override
