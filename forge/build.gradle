@@ -4,7 +4,7 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
 }
 base {
-    archivesName = "${mod_name}-forge-${minecraft_version}"
+    archivesName = "${mod_id}-forge-${minecraft_version}"
 }
 
 mixin {
@@ -35,7 +35,7 @@ minecraft {
         client {
             workingDirectory file('runs/client')
             ideaModule "${rootProject.name}.${project.name}.main"
-            taskName 'Client'
+            taskName 'runClient'
             mods {
                 modClientRun {
                     source sourceSets.main
@@ -46,7 +46,7 @@ minecraft {
         server {
             workingDirectory file('runs/server')
             ideaModule "${rootProject.name}.${project.name}.main"
-            taskName 'Server'
+            taskName 'runServer'
             mods {
                 modServerRun {
                     source sourceSets.main
@@ -58,7 +58,7 @@ minecraft {
             workingDirectory file('runs/data')
             ideaModule "${rootProject.name}.${project.name}.main"
             args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-            taskName 'Data'
+            taskName 'runData'
             mods {
                 modDataRun {
                     source sourceSets.main
