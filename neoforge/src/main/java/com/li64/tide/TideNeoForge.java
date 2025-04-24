@@ -40,6 +40,7 @@ public class TideNeoForge {
         event.register(Registries.ENTITY_TYPE, helper -> TideEntityTypes.init());
         event.register(Registries.MENU, helper -> TideMenuTypes.init());
         event.register(Registries.SOUND_EVENT, helper -> TideSoundEvents.init());
+        event.register(Registries.FEATURE, helper -> TideFeatures.init());
         event.register(Registries.TRIGGER_TYPE, helper -> TideCriteriaTriggers.init());
         event.register(Registries.DATA_COMPONENT_TYPE, helper -> TideDataComponents.init());
         event.register(Registries.ENTITY_SUB_PREDICATE_TYPE, helper -> TideEntitySubPredicates.init());
