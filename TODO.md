@@ -30,6 +30,7 @@
 - Add "Aether" habitat ✔️
 
 = 📋 TODO for 1.6.1 📋 =
+- Fix non-loot crate blocks not being populated
 - Fish weight system
 - Fintastic compat
 - Fabric seasons/serene seasons
