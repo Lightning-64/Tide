@@ -144,8 +144,8 @@ public class TideForgeEvents {
         public static void itemTooltipEvent(ItemTooltipEvent event) {
             ItemStack stack = event.getItemStack();
             if (BaitUtils.isBait(stack)) event.getToolTip().addAll(BaitUtils.getDescriptionLines(stack));
-            if (stack.is(TideTags.Items.CUSTOMIZABLE_RODS) && event.getEntity() != null) event.getToolTip().addAll(
-                    TideFishingRodItem.getDescriptionLines(stack, event.getEntity().registryAccess()));
+            if (stack.is(TideTags.Items.CUSTOMIZABLE_RODS) && event.getEntity() != null)
+                event.getToolTip().addAll(TideFishingRodItem.getDescriptionLines(stack, event.getEntity().registryAccess()));
         }
 
         @SubscribeEvent
