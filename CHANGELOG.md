@@ -1,4 +1,4 @@
-## Version 1.6.0 - ?/??/2025
+## Version 1.6.0 - 5/9/2025
 
 ### 🎣 New features 🎣
 
@@ -12,20 +12,24 @@
   - Golden fishing rod gives +1 luck
   - Diamond fishing rod gives extra XP
   - Netherite fishing rod can fish in lava without a special hook
+
 ---
 **Torn Notes**
 - Torn Note items can be found in overworld surface crates
 - Torn Notes can be right-clicked to show a small hint drawing of legendary fish locations
 - Written books can no longer be found in from overworld surface crates
+
 ---
 **Datapack Features**
 - A `loot_crate_block` loot predicate has been added, allowing users to put items in specific crate types
 - A `profile.info.location.aether` profile location translation key has been added
+
 ---
 **Miscellaneous**
 - Structure-specific fish have been moved to their own journal page (will be added to later)
 - Fish entities no longer show as "???" if they aren't unlocked in the journal
 - The fishing journal can now be placed in lecterns
+
 ---
 
 ### 🚀 Compatibility Features 🚀
@@ -33,6 +37,7 @@
 - Fixed Fishing Real compat for forge
 - Added support for Hybrid Aquatic's hook items
 - Added some missing Hybrid Aquatic fish to the journal
+
 ---
 
 ### ⚙️ Bug fixes ⚙️
