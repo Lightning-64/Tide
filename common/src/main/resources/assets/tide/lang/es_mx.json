@@ -1,6 +1,10 @@
 {
   "text.tide.rod_tooltip.bait_desc": "Ranuras de cebo (clic derecho para llenar)",
   "text.tide.rod_tooltip.accessories_prefix": "Accesorios:",
+  "text.tide.rod_tooltip.crystal_bonus": "Reproduce un sonido cuando un pez muerde",
+  "text.tide.rod_tooltip.gold_bonus": "Bono de suerte",
+  "text.tide.rod_tooltip.diamond_bonus": "Bono de XP",
+  "text.tide.rod_tooltip.netherite_bonus": "Permite pescar en lava",
 
   "text.tide.bait_tooltip.unknown_effects": "Se puede usar como cebo",
   "text.tide.bait_tooltip.prefix": "Cuando se usa como cebo:",
@@ -37,11 +41,11 @@
   "text.autoconfig.tide.option.general.defaultLineColor": "Usar Color de Línea Predeterminado",
   "text.autoconfig.tide.option.general.defaultLineColor.@Tooltip": "Activa esta opción para usar el color negro predeterminado de la cuerda de pesca.",
 
-  "text.autoconfig.tide.option.general.hideUnknownFishNames": "Ocultar Nombres de Peces Desconocidos",
-  "text.autoconfig.tide.option.general.hideUnknownFishNames.@Tooltip": "Si está activado, los nombres de los peces desconocidos se mostrarán como '???' hasta que se desbloqueen en el diario de pesca.",
-
   "text.autoconfig.tide.option.worldgen.disableFishingBoat": "Desactivar Barcos de Pesca",
   "text.autoconfig.tide.option.worldgen.disableFishingBoat.@Tooltip": "Activa esta opción para deshabilitar la generación de estructuras de barcos de pesca",
+
+  "text.autoconfig.tide.option.worldgen.disableEndOases": "Desactivar Oasis del End",
+  "text.autoconfig.tide.option.worldgen.disableEndOases.@Tooltip": "Activa esta opción para deshabilitar la generación de características de oasis en el End",
 
   "text.autoconfig.tide.option.minigame.doMinigame": "Hacer Minijuego",
   "text.autoconfig.tide.option.minigame.doMinigame.@Tooltip": "Desactiva esta opción para deshabilitar el minijuego de pesca.",
@@ -109,6 +113,14 @@
 
   "item.tide.fishing_journal": "Diario de Pesca",
   "item.tide.fishing_journal.desc": "Por un autor desconocido",
+
+  "item.tide.torn_note": "Nota Rasgada",
+  "item.tide.torn_note.variant.unknown": "???",
+  "item.tide.torn_note.variant.empty": "Vacía",
+  "item.tide.torn_note.variant.lucky": "Muy Afortunada",
+  "item.tide.torn_note.variant.stars_over_ocean": "Estrellas Sobre el Océano",
+  "item.tide.torn_note.variant.the_end": "El End",
+  "item.tide.torn_note.variant.desert_well": "Pozo del Desierto",
 
   "item.tide.fish_pottery_shard": "Fragmento de Cerámica de Pez",
   "item.tide.fish_bone": "Hueso de Pez",
@@ -326,6 +338,12 @@
   "accessory.item.tide.iron_fishing_hook": "Anzuelo de Hierro",
   "accessory.item.tide.lavaproof_fishing_hook": "Anzuelo Resistente a Lava",
 
+  "accessory.item.hybrid-aquatic.barbed_hook": "Anzuelo con Púas",
+  "accessory.item.hybrid-aquatic.glowing_hook": "Anzuelo Brillante",
+  "accessory.item.hybrid-aquatic.magnetic_hook": "Anzuelo Magnético",
+  "accessory.item.hybrid-aquatic.creepermagnet_hook": "Anzuelo de Creeper",
+  "accessory.item.hybrid-aquatic.ominous_hook": "Anzuelo Ominoso",
+
   "accessory.item.tide.fishing_line": "Línea Normal",
   "accessory.item.tide.braided_line": "Línea Trenzada",
   "accessory.item.tide.reinforced_line": "Línea Reforzada",
@@ -368,14 +386,6 @@
   "advancements.tide.journal_completed.title": "Maestro Marino",
   "advancements.tide.journal_completed.description": "Completa TODO el diario de pesca coleccionando cada pez en el mar.",
 
-  "note.tide.title": "Nota",
-  "note.tide.author": "un autor desconocido",
-  "note.tide.midas_fish.contents": "La leyenda habla de un pez cubierto de oro que solo puede ser atrapado por personas extremadamente afortunadas. ¿Podría esto referirse a objetos que aumentan la suerte?",
-  "note.tide.aquathorn.contents": "La leyenda habla de un pez cubierto de espinas, atrapado dentro de un antiguo templo submarino. Se dice que es un ancestro de quienes lo guardan.",
-  "note.tide.windbass.contents": "La leyenda habla de un pez que descansa donde los viajeros deben enfrentar monstruos, cobre y viento, lo que sea que eso signifique.",
-  "note.tide.voidseeker.contents": "La leyenda habla de un pez que salta entre dimensiones que los humanos no pueden acceder. A pesar de esto, aparentemente ha sido visto en la dimensión del End.",
-  "note.tide.shooting_starfish.contents": "La leyenda habla de un pez que cayó del cielo hace años. Se dice que nada en las profundidades de los océanos más profundos, apareciendo solo cuando la luna llena ilumina el agua.",
-
   "sounds.tide.journal_open": "Diario de Pesca Abierto",
   "sounds.tide.journal_close": "Diario de Pesca Cerrado",
   "sounds.tide.page_flip": "Página Pasada",
@@ -400,6 +410,9 @@
 
   "journal.title.biome": "Peces de Bioma",
   "journal.content.biome": "Dicen que la mayoría de los biomas del overworld tienen sus propios peces únicos, y depende de ti descubrir si eso es cierto. ¡Pescar cerca de la tierra podría ayudar!",
+
+  "journal.title.structure": "Peces de Estructuras",
+  "journal.content.structure": "Estos peces prefieren un techo sobre sus cabezas, habitando en las aguas de estructuras y monumentos esparcidos por el mundo.",
 
   "journal.title.lava": "Peces de Lava",
   "journal.content.lava": "Estos peces ardientes pueden ser atrapados en piscinas de lava en el overworld usando un anzuelo especial.",
@@ -532,8 +545,11 @@
   "profile.info.location.taiga": "Taigas",
   "profile.info.location.everbright": "Everbright",
   "profile.info.location.everdawn": "Everdawn",
+  "profile.info.location.aether": "El Aether",
   "profile.info.location.shipwrecks": "Naufragios",
   "profile.info.location.structures": "Algunas estructuras",
+  "profile.info.location.trial_chamber": "Cámaras de prueba",
+  "profile.info.location.monument": "Monumentos oceánicos",
 
   "profile.info.climate.any": "Cualquiera",
   "profile.info.climate.normal": "Promedio",
