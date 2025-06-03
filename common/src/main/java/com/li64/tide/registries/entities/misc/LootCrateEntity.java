@@ -17,6 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
+import net.minecraft.world.Container;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
@@ -27,6 +28,7 @@ import net.minecraft.world.item.context.DirectionalPlaceContext;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
@@ -141,20 +143,21 @@ public class LootCrateEntity extends Entity {
                                     ((ServerLevel)this.level()).getChunkSource().chunkMap.broadcast(this, new ClientboundBlockUpdatePacket(blockpos, this.level().getBlockState(blockpos)));
                                     this.discard();
 
-                                    if (this.level().getBlockEntity(blockpos) instanceof LootCrateBlockEntity entity) {
+                                    BlockEntity blockEntity = this.level().getBlockEntity(blockpos);
+                                    if (blockEntity instanceof Container container) {
                                         if (this.blockData != null) {
-                                            CompoundTag compoundtag = entity.saveWithoutMetadata();
+                                            CompoundTag compoundtag = blockEntity.saveWithoutMetadata();
                                             for (String s : this.blockData.getAllKeys()) {
                                                 compoundtag.put(s, this.blockData.get(s).copy());
                                             }
                                             try {
-                                                entity.load(compoundtag);
+                                                blockEntity.load(compoundtag);
                                             } catch (Exception exception) {
                                                 Tide.LOG.error("Failed to load block entity from loot crate", exception);
                                             }
                                         }
-                                        setCrateLoot(entity);
-                                        entity.setChanged();
+                                        setCrateLoot(container);
+                                        container.setChanged();
                                     }
                                 } else if (this.dropItem && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
                                     this.discard();
@@ -306,10 +309,10 @@ public class LootCrateEntity extends Entity {
         }
     }
 
-    public void setCrateLoot(LootCrateBlockEntity block) {
+    public void setCrateLoot(Container container) {
         if (this.lootTable != null && level().getServer() != null) {
             LootTable loottable = level().getServer().getLootData().getLootTable(this.lootTable);
-            loottable.fill(block, lootParams, random.nextLong());
+            loottable.fill(container, lootParams, random.nextLong());
         }
     }
 }
