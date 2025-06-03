@@ -1,5 +1,6 @@
 package com.li64.tide.data.rods;
 
+import com.google.common.collect.ImmutableList;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.registries.TideItems;
 import net.minecraft.core.HolderLookup;
@@ -7,6 +8,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.List;
 import java.util.Optional;
 
 public class CustomRodManager {
@@ -68,5 +70,13 @@ public class CustomRodManager {
         if (data == null || data.isEmpty()) return defaultItem;
         Optional<ItemStack> accessory = ItemStack.parse(registryAccess, data);
         return accessory.orElse(defaultItem);
+    }
+
+    public static List<ItemStack> getAccessoryList(ItemStack stack, HolderLookup.Provider registryAccess) {
+        ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();
+        if (hasBobber(stack, registryAccess)) builder.add(getBobber(stack, registryAccess));
+        if (hasHook(stack, registryAccess)) builder.add(getHook(stack, registryAccess));
+        if (hasLine(stack, registryAccess)) builder.add(getLine(stack, registryAccess));
+        return builder.build();
     }
 }
