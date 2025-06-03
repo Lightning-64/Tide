@@ -1,8 +1,11 @@
 package com.li64.tide.data.rods;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.nbt.CompoundTag;
 import com.li64.tide.registries.TideItems;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
 
 public class CustomRodManager {
     private static final ItemStack DEFAULT_BOBBER = TideItems.RED_FISHING_BOBBER.getDefaultInstance();
@@ -90,5 +93,13 @@ public class CustomRodManager {
         if (accessoryTag.isEmpty()) return defaultInstance;
         ItemStack accessory = ItemStack.of(accessoryTag);
         return accessory.isEmpty() ? defaultInstance : accessory;
+    }
+
+    public static List<ItemStack> getAccessoryList(ItemStack stack) {
+        ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();
+        if (hasBobber(stack)) builder.add(getBobber(stack));
+        if (hasHook(stack)) builder.add(getHook(stack));
+        if (hasLine(stack)) builder.add(getLine(stack));
+        return builder.build();
     }
 }

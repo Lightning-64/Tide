@@ -8,6 +8,7 @@
       "ChunkGenMixin",
       "HookPredicateMixin",
       "ItemsMixin",
+      "ItemStackMixin",
       "LecternBlockMixin",
       "LootContextParamSetsMixin",
       "PlacedFeatureMixin"
