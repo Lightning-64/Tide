@@ -348,7 +348,7 @@ public class TideFishingLootProvider extends SimpleFabricLootTableProvider {
                         .add(LootItem.lootTableItem(TideItems.SOULSCALER).setWeight(20).setQuality(1))
                         .add(LootItem.lootTableItem(TideItems.WITHERFIN).setWeight(10).setQuality(2))
                         .add(LootItem.lootTableItem(TideItems.BLAZING_SWORDFISH).setWeight(4).setQuality(3))
-                        .add(LootItem.lootTableItem(Items.NETHERITE_SCRAP).setWeight(2).setQuality(3))
+                        .add(LootItem.lootTableItem(Items.NETHERITE_SCRAP).setWeight(1).setQuality(3))
                 )
         );
 

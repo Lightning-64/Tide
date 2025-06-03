@@ -20,6 +20,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.world.Container;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
@@ -41,10 +42,8 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import com.li64.tide.Tide;
 import com.li64.tide.registries.TideEntityTypes;
 import com.li64.tide.registries.TideBlocks;
-import com.li64.tide.registries.blocks.entities.LootCrateBlockEntity;
 
 import java.util.function.Predicate;
 
@@ -183,16 +182,10 @@ public class LootCrateEntity extends Entity {
                                             .broadcast(this, new ClientboundBlockUpdatePacket(blockpos, this.level().getBlockState(blockpos)));
                                     this.discard();
 
-                                    Tide.LOG.debug("Blockdata == null: {}", blockData == null);
-                                    Tide.LOG.debug("HasBlockEntity: {}", blockState.hasBlockEntity());
                                     if (this.blockState.hasBlockEntity()) {
-                                        Tide.LOG.debug("Loading block entity");
                                         BlockEntity blockEntity = this.level().getBlockEntity(blockpos);
                                         if (blockEntity != null) {
-                                            if (blockEntity instanceof LootCrateBlockEntity lootCrateBlockEntity) {
-                                                Tide.LOG.debug("Adding crate loot to entity");
-                                                addCrateLoot(lootCrateBlockEntity);
-                                            }
+                                            if (blockEntity instanceof Container container) addCrateLoot(container);
                                         }
                                     }
                                 } else if (this.dropItem && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
@@ -367,10 +360,10 @@ public class LootCrateEntity extends Entity {
         }
     }
 
-    public void addCrateLoot(LootCrateBlockEntity block) {
+    public void addCrateLoot(Container container) {
         if (this.lootTable != null && level().getServer() != null) {
             LootTable lootTable = level().getServer().reloadableRegistries().getLootTable(this.lootTable);
-            lootTable.fill(block, lootParams, random.nextLong());
+            lootTable.fill(container, lootParams, random.nextLong());
         }
     }
 }
