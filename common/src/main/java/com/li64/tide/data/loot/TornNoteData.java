@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.util.Mth;
 
 import java.util.List;
 import java.util.Random;
@@ -27,7 +26,11 @@ public record TornNoteData(String id, boolean unlocked) {
 
     public TornNoteData(String id) { this(id, false); }
 
+    public TornNoteData(int id) {
+        this(INSTANCES.get(id));
+    }
+
     public static TornNoteData random() {
-        return new TornNoteData(INSTANCES.get(new Random().nextInt(1, INSTANCES.size())));
+        return new TornNoteData(new Random().nextInt(1, INSTANCES.size()));
     }
 }

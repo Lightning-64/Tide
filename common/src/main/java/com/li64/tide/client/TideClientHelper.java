@@ -3,7 +3,8 @@ package com.li64.tide.client;
 import com.li64.tide.Tide;
 import com.li64.tide.client.gui.TideToasts;
 import com.li64.tide.client.gui.screens.FishingJournalScreen;
-import com.li64.tide.config.TideConfig;
+import com.li64.tide.client.gui.screens.TornNoteScreen;
+import com.li64.tide.data.loot.TornNoteData;
 import com.li64.tide.util.TideUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -25,5 +26,9 @@ public class TideClientHelper {
     public static void showToast(Component title, Component description, ItemStack display) {
         if (Tide.CONFIG.general.showToasts)
             TideToasts.display(new TideToasts.NewPageToast(title, description, display));
+    }
+
+    public static void openNoteScreen(String id) {
+        Minecraft.getInstance().setScreen(new TornNoteScreen(new TornNoteData(id)));
     }
 }

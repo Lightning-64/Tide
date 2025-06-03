@@ -1,7 +1,6 @@
 package com.li64.tide.registries;
 
 import com.li64.tide.Tide;
-import com.li64.tide.data.loot.TornNoteData;
 import com.li64.tide.registries.blocks.JellyTorchBlockItem;
 import com.li64.tide.registries.items.*;
 import net.minecraft.core.Direction;
@@ -86,7 +85,7 @@ public class TideItems {
     public static final Item FORTUNE_LINE = register("fortune_line", new FishingLineItem(new Item.Properties(), "item.tide.fortune_line.desc"));
 
     public static final Item FISHING_JOURNAL = register("fishing_journal", new FishingJournalItem(new Item.Properties()));
-    public static final Item TORN_NOTE = register("torn_note", new TornNoteItem(new Item.Properties()));
+    public static final Item TORN_NOTE = register("torn_note", new TornNoteItem(new Item.Properties().stacksTo(1)));
 
     public static final Item ANGLER_WORKSHOP = register("angler_workshop",
             new BlockItem(TideBlocks.ANGLER_WORKSHOP, new Item.Properties()));

@@ -7,5 +7,5 @@
 
 ⚙️ Bug Fixes ⚙️
 - Fix fishing real crash
-- Fix torn note resets
+- Fix torn note resets ✔️
 - Safer accessor casting ✔️

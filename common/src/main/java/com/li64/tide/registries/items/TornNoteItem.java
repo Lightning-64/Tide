@@ -3,9 +3,11 @@ package com.li64.tide.registries.items;
 import com.li64.tide.Tide;
 import com.li64.tide.data.TideDataComponents;
 import com.li64.tide.data.loot.TornNoteData;
+import com.li64.tide.network.messages.ViewNoteMsg;
 import com.li64.tide.registries.TideItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -40,13 +42,16 @@ public class TornNoteItem extends Item {
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level level, @NotNull Player player, @NotNull InteractionHand hand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand hand) {
         ItemStack note = player.getItemInHand(hand);
-        if (level.isClientSide()) {
+        if (player instanceof ServerPlayer serverPlayer) {
             finalizeData(note);
-            note.set(TideDataComponents.TORN_NOTE_VARIANT, new TornNoteData(getData(note).id(), true));
+            String id = getData(note).id();
+            note.set(TideDataComponents.TORN_NOTE_VARIANT, new TornNoteData(id, true));
+            int slot = player.getInventory().findSlotMatchingItem(note);
+            player.getInventory().setItem(slot, note);
+            Tide.NETWORK.sendToPlayer(new ViewNoteMsg(id), serverPlayer);
         }
-        player.openItemGui(note, hand);
         return InteractionResultHolder.sidedSuccess(note, level.isClientSide());
     }
 
