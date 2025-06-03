@@ -36,9 +36,8 @@ public class HookAccessor extends FishingHook {
     }
 
     public static TideFishingHook getHook(Player player) {
-        if (player.fishing == null) return null;
-        HookAccessor placeholder = ((HookAccessor)player.fishing);
-        return placeholder.hook;
+        if (player.fishing instanceof HookAccessor accessor) return accessor.hook;
+        return null;
     }
 
     @Override
