@@ -95,7 +95,7 @@ public class TideItems {
     public static final Item FORTUNE_LINE = register("fortune_line", properties -> new FishingLineItem(properties, "item.tide.fortune_line.desc"));
 
     public static final Item FISHING_JOURNAL = register("fishing_journal", FishingJournalItem::new);
-    public static final Item TORN_NOTE = register("torn_note", TornNoteItem::new);
+    public static final Item TORN_NOTE = register("torn_note", TornNoteItem::new, new Item.Properties().stacksTo(1));
 
     public static final Item ANGLER_WORKSHOP = register("angler_workshop", properties ->
             new BlockItem(TideBlocks.ANGLER_WORKSHOP, properties), new Item.Properties().useBlockDescriptionPrefix());

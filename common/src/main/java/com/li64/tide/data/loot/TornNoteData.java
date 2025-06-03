@@ -26,7 +26,11 @@ public record TornNoteData(String id, boolean unlocked) {
 
     public TornNoteData(String id) { this(id, false); }
 
+    public TornNoteData(int id) {
+        this(INSTANCES.get(id));
+    }
+
     public static TornNoteData random() {
-        return new TornNoteData(INSTANCES.get(new Random().nextInt(1, INSTANCES.size())));
+        return new TornNoteData(new Random().nextInt(1, INSTANCES.size()));
     }
 }
