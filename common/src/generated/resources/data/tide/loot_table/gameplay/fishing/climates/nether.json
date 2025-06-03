@@ -47,8 +47,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:netherite_scrap",
-          "quality": 3,
-          "weight": 2
+          "quality": 3
         }
       ],
       "rolls": 1.0

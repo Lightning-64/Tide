@@ -8,6 +8,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.FallingBlockEntity;
@@ -17,12 +18,12 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
-import com.li64.tide.registries.blocks.entities.LootCrateBlockEntity;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -113,8 +114,9 @@ public class LootCrateEntity extends FallingBlockEntity {
                                 } else {
                                     ((ServerLevel) this.level()).getChunkSource().chunkMap.broadcast(this, new ClientboundBlockUpdatePacket(blockpos, this.level().getBlockState(blockpos)));
                                     this.discard();
-                                    if (level().getBlockEntity(blockpos) instanceof LootCrateBlockEntity lootCrate) {
-                                        this.addCrateLoot(lootCrate);
+                                    BlockEntity blockEntity = this.level().getBlockEntity(blockpos);
+                                    if (blockEntity != null) {
+                                        if (blockEntity instanceof Container container) addCrateLoot(container);
                                     }
                                 }
                             } else {
@@ -141,10 +143,10 @@ public class LootCrateEntity extends FallingBlockEntity {
         }
     }
 
-    public void addCrateLoot(LootCrateBlockEntity block) {
+    public void addCrateLoot(Container container) {
         if (level() instanceof ServerLevel serverLevel) {
             LootTable lootTable = serverLevel.getServer().reloadableRegistries().getLootTable(CRATE_LOOT_TABLE);
-            lootTable.fill(block, lootParams, random.nextLong());
+            lootTable.fill(container, lootParams, random.nextLong());
         }
     }
 }
