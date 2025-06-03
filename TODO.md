@@ -7,6 +7,7 @@
 
 ⚙️ Bug Fixes ⚙️
 - Fix fishing real crash
+- Safer accessor casting ✔️
 
 🚀 Compatibility 🚀
 - Fix "Fisher of Man" from Spellbound Enchantments
