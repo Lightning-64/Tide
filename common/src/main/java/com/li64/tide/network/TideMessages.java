@@ -6,6 +6,7 @@ import com.li64.tide.platform.services.TideNetworkPlatform;
 public class TideMessages {
     public static void init(TideNetworkPlatform network) {
         network.registerClientBoundPacket(OpenJournalMsg.class, OpenJournalMsg.ID, OpenJournalMsg::encode, OpenJournalMsg::new, OpenJournalMsg::handle);
+        network.registerClientBoundPacket(ViewNoteMsg.class, ViewNoteMsg.ID, ViewNoteMsg::encode, ViewNoteMsg::new, ViewNoteMsg::handle);
         network.registerClientBoundPacket(MinigameClientMsg.class, MinigameClientMsg.ID, MinigameClientMsg::encode, MinigameClientMsg::new, MinigameClientMsg::handle);
         network.registerClientBoundPacket(SyncDataMsg.class, SyncDataMsg.ID, SyncDataMsg::encode, SyncDataMsg::new, SyncDataMsg::handle);
         network.registerClientBoundPacket(ShowToastMsg.class, ShowToastMsg.ID, ShowToastMsg::encode, ShowToastMsg::new, ShowToastMsg::handle);
