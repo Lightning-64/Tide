@@ -26,6 +26,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SlotAccess;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
@@ -309,5 +310,22 @@ public class TideFishingRodItem extends FishingRodItem {
 
     public @NotNull UseAnim getUseAnimation(@NotNull ItemStack stack) {
         return UseAnim.BOW;
+    }
+
+    public void onItemBroken(ItemStack stack, ServerPlayer player) {
+        List<ItemStack> accessories = CustomRodManager.getAccessoryList(stack, player.registryAccess());
+        accessories.forEach(accessory -> giveOrDrop(accessory, player));
+    }
+
+    private void giveOrDrop(ItemStack stack, Player player) {
+        if (stack == null || stack.isEmpty()) return;
+//        if (player.addItem(stack)) {
+//            player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
+//                    SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.2F,
+//                    ((player.getRandom().nextFloat() - player.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F);
+//        } else {
+        ItemEntity item = player.drop(stack, false);
+        if (item != null) item.setNoPickUpDelay();
+//        }
     }
 }

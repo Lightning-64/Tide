@@ -1,6 +1,5 @@
 package com.li64.tide.events;
 
-
 import com.li64.tide.Tide;
 import com.li64.tide.data.commands.JournalCommand;
 import com.li64.tide.data.TidePlayer;
