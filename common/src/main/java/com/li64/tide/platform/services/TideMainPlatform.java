@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,7 @@ public interface TideMainPlatform {
 
     default boolean stardewStart(ServerPlayer player, HookAccessor hook, ItemStack item, List<ItemStack> items) { return false; }
 
-    default Entity fishingRealConvertEntity(Entity itemEntity, Player player) { return itemEntity; }
+    default Entity fishingRealConvertItemStack(ItemStack stack, Player player, Vec3 pos) { return null; }
 
     default Entity hybridAquaticConvertEntity(ItemEntity itemEntity, Player player, TideFishingHook hook) { return itemEntity; }
 

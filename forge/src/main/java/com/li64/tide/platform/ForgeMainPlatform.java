@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.event.entity.player.ItemFishedEvent;
@@ -122,7 +123,7 @@ public class ForgeMainPlatform implements TideMainPlatform {
     }
 
     @Override
-    public Entity fishingRealConvertEntity(Entity itemEntity, Player player) {
-        return FishingRealCompat.convertItemEntity(itemEntity, player);
+    public Entity fishingRealConvertItemStack(ItemStack stack, Player player, Vec3 pos) {
+        return FishingRealCompat.convertItemStack(stack, player, pos);
     }
 }
