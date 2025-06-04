@@ -5,6 +5,7 @@
    "compatibilityLevel": "JAVA_17",
    "refmap": "${mod_id}.refmap.json",
    "mixins": [
+      "ItemStackMixin",
       "LootTableMixin"
    ],
    "injectors": {

@@ -4,7 +4,6 @@
 - Any container block entity can now be used as a crate through datapacks/mods
 - Fishing rod accessories will drop when a rod breaks
 - Some miscellaneous loot balancing adjustments
----
 
 ### ⚙️ Bug fixes ⚙️
 - Fixed a bug where fishing with the latest version of Fishing Real results in a crash
