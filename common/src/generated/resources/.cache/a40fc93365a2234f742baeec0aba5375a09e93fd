@@ -144,6 +144,7 @@ fa79952fde68f0243ceed0d32daba02114c7926f assets/tide/items/stone_fishing_rod.jso
 1cb6232c8bd7190b940ae74aa929ca8788408adc assets/tide/items/stonefish.json
 ffa3fc4a6b6c2f8b80d855f9fadbf4762db0298e assets/tide/items/sunspike_goby.json
 08d23aa5fd98559bb4b2c5239fdb2e651d61acac assets/tide/items/surface_loot_crate.json
+65f92bad3b8f2a025e88c742bb2dc34da61600f8 assets/tide/items/torn_note.json
 2d890c06bed9ae7fe54c0e7d9d6978a691a6bc2f assets/tide/items/trout.json
 fc7ae9e71eba76866eb3ab332c595c883d27a2ab assets/tide/items/trout_bucket.json
 4abdf6ffd00415b69256196088b0ae9068421588 assets/tide/items/trout_spawn_egg.json
@@ -266,6 +267,7 @@ e1b6c116a92f0c3d1933bcc14fba40dd7bc27e7d assets/tide/models/item/stone_fishing_r
 f71281c2b13623681de6080b9aa717f0253ad54a assets/tide/models/item/stone_fishing_rod_cast.json
 dd1f3949a8ca609f0f2d1a0dbd8e172d685e22e9 assets/tide/models/item/stonefish.json
 45eeb58a6ae2fdc852f711f3d48796ac88487cfc assets/tide/models/item/sunspike_goby.json
+0e93fe97a89ed13b78747e623fb569bdd55142da assets/tide/models/item/torn_note.json
 bf27ce1b3439c32fad882992383fea99e1a44b4e assets/tide/models/item/trout.json
 980eb5d5f248ff25a4f97ef117676d912f0ea5db assets/tide/models/item/trout_bucket.json
 7eff54ed077fc45d4dc20fb841d5f7e807866641 assets/tide/models/item/tuna.json
