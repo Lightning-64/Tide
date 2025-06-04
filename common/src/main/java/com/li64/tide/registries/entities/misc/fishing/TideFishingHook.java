@@ -627,10 +627,6 @@ public class TideFishingHook extends Projectile {
                                 .withParameter(LootContextParams.BLOCK_STATE, lootCrate)
                                 .withParameter(LootContextParams.THIS_ENTITY, this);
 
-                        // Only forge and neoforge can use this parameter here
-                        if (!Tide.PLATFORM.isFabric()) lootParamsBuilder = lootParamsBuilder
-                                .withParameter(LootContextParams.ATTACKING_ENTITY, Objects.requireNonNull(this.getOwner()));
-
                         LootParams params = lootParamsBuilder
                                 .withLuck((float)luck + player.getLuck())
                                 .create(LootContextParamSets.FISHING);
@@ -683,10 +679,6 @@ public class TideFishingHook extends Projectile {
                 .withParameter(LootContextParams.ORIGIN, this.position())
                 .withParameter(LootContextParams.TOOL, rod)
                 .withParameter(LootContextParams.THIS_ENTITY, this);
-
-        // Only forge and neoforge can use this parameter here
-        if (!Tide.PLATFORM.isFabric()) lootParamsBuilder = lootParamsBuilder
-                .withParameter(LootContextParams.ATTACKING_ENTITY, Objects.requireNonNull(this.getOwner()));
 
         ResourceKey<LootTable> lootKey = BuiltInLootTables.FISHING;
         LootParams params = lootParamsBuilder
