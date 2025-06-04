@@ -1,3 +1,18 @@
+## Version 1.6.1 - 6/3/2025
+
+### 🎣 New features 🎣
+- Any container block entity can now be used as a crate through datapacks/mods
+- Fishing rod accessories will drop when a rod breaks
+- Some miscellaneous loot balancing adjustments
+---
+
+### ⚙️ Bug fixes ⚙️
+- Fixed a bug where fishing with the latest version of Fishing Real results in a crash
+- Fixed a bug where torn notes were reset under certain conditions
+- Fixed a few crashes relating to the fishing hook entity
+
+---
+
 ## Version 1.6.0 - 5/9/2025
 
 ### 🎣 New features 🎣
