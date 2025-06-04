@@ -6,6 +6,8 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.predicates.DataComponentPredicates;
+import net.minecraft.core.component.predicates.EnchantmentsPredicate;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.EnchantmentTags;
@@ -71,13 +73,11 @@ public class TideEntityLootProvider extends SimpleFabricLootTableProvider {
         return AnyOfCondition.anyOf(LootItemEntityPropertyCondition.hasProperties(
                 LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity()
                         .flags(EntityFlagsPredicate.Builder.flags().setOnFire(true))),
-                LootItemEntityPropertyCondition.hasProperties(
-                        LootContext.EntityTarget.DIRECT_ATTACKER, EntityPredicate.Builder.entity()
-                                .equipment(EntityEquipmentPredicate.Builder.equipment()
-                                        .mainhand(ItemPredicate.Builder.item()
-                                                .withSubPredicate(ItemSubPredicates.ENCHANTMENTS,
-                                                        ItemEnchantmentsPredicate.enchantments(
-                                                                List.of(new EnchantmentPredicate(registryLookup.getOrThrow(EnchantmentTags.SMELTS_LOOT),
-                                                                        MinMaxBounds.Ints.ANY))))))));
+                LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.DIRECT_ATTACKER,
+                        EntityPredicate.Builder.entity().equipment(EntityEquipmentPredicate.Builder.equipment()
+                                .mainhand(ItemPredicate.Builder.item().withComponents(DataComponentMatchers.Builder.components()
+                                        .partial(DataComponentPredicates.ENCHANTMENTS, EnchantmentsPredicate.enchantments(
+                                                List.of(new EnchantmentPredicate(registryLookup.getOrThrow(EnchantmentTags.SMELTS_LOOT),
+                                                        MinMaxBounds.Ints.ANY)))).build())))));
     }
 }

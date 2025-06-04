@@ -117,7 +117,7 @@ public class TideFishingHook extends Projectile {
         double d0 = player.getX() - (double)f3 * 0.3D;
         double d1 = player.getEyeY();
         double d2 = player.getZ() - (double)f2 * 0.3D;
-        this.moveTo(d0, d1, d2, f1, f);
+        this.snapTo(d0, d1, d2, f1, f);
 
         Vec3 vec3 = new Vec3(-f3, Mth.clamp(-(f5 / f4), -5.0F, 5.0F), -f2);
         double d3 = vec3.length();

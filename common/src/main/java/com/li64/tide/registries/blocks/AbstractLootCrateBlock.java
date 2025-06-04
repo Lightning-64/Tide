@@ -42,18 +42,6 @@ public abstract class AbstractLootCrateBlock<E extends BlockEntity> extends Barr
         }
     }
 
-    public void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState replacer, boolean p_49080_) {
-        if (!state.is(replacer.getBlock())) {
-            BlockEntity blockentity = level.getBlockEntity(pos);
-            if (blockentity instanceof Container) {
-                Containers.dropContents(level, pos, (Container) blockentity);
-                level.updateNeighbourForOutputSignal(pos, this);
-            }
-
-            super.onRemove(state, level, pos, replacer, p_49080_);
-        }
-    }
-
     public void tick(@NotNull BlockState state, ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (blockentity instanceof LootCrateBlockEntity) {

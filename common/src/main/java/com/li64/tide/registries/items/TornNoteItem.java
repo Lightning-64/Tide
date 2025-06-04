@@ -14,10 +14,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class TornNoteItem extends Item {
     public TornNoteItem(Properties properties) {
@@ -55,13 +56,19 @@ public class TornNoteItem extends Item {
         return InteractionResult.SUCCESS;
     }
 
-    @Override
-    public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, @NotNull List<Component> components, @NotNull TooltipFlag flag) {
+    @Override @SuppressWarnings("deprecation")
+    public void appendHoverText(@NotNull ItemStack stack,
+                                @NotNull TooltipContext context,
+                                @NotNull TooltipDisplay tooltipDisplay,
+                                @NotNull Consumer<Component> tooltipAdder,
+                                @NotNull TooltipFlag flag) {
+
         TornNoteData data = getData(stack);
-        if (data.unlocked() || flag.isCreative()) components.add(Component.translatable(
+        if (data.unlocked() || flag.isCreative()) tooltipAdder.accept(Component.translatable(
                 "item.tide.torn_note.variant." + data.id()).withStyle(ChatFormatting.GRAY));
-        else components.add(Component.translatable(
+        else tooltipAdder.accept(Component.translatable(
                 "item.tide.torn_note.variant.unknown").withStyle(ChatFormatting.GRAY));
-        super.appendHoverText(stack, context, components, flag);
+
+        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
     }
 }

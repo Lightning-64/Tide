@@ -8,12 +8,14 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.ArrayList;
@@ -115,7 +117,8 @@ public class TideItems {
     public static final Item ALGAE = register("algae", properties ->
             new PlaceOnWaterBlockItem(TideBlocks.ALGAE, properties), new Item.Properties().useBlockDescriptionPrefix());
     public static final Item JELLY_TORCH = register("jelly_torch",  properties ->
-            new JellyTorchBlockItem(TideBlocks.JELLY_TORCH, TideBlocks.JELLY_WALL_TORCH, properties, Direction.DOWN), new Item.Properties().useBlockDescriptionPrefix());
+            new JellyTorchBlockItem(TideBlocks.JELLY_TORCH, TideBlocks.JELLY_WALL_TORCH, properties, Direction.DOWN), new Item.Properties()
+                .useBlockDescriptionPrefix().component(DataComponents.LORE, new ItemLore(List.of(Component.translatable("item.tide.jelly_torch.desc")))));
 
     public static final Item SPECTRAL_SCALE = register("spectral_scale", Item::new);
     public static final Item TWILIGHT_SCALE = register("twilight_scale", Item::new);
@@ -287,7 +290,7 @@ public class TideItems {
     public static final Item SOULSCALER = register("soulscaler", properties ->
             new TideFishItem(properties, 3.8f), new Item.Properties().food(TideFoods.RAW_FISH).fireResistant());
     public static final Item BLAZING_SWORDFISH = register("blazing_swordfish",
-            BlazingSwordfishItem::new, new Item.Properties().fireResistant());
+            BlazingSwordfishItem::new, new Item.Properties().fireResistant().sword(ToolMaterial.IRON, 3.0F, -2.4F));
 
     public static final Item AQUATHORN = register("aquathorn", properties ->
             new TideFishItem(properties, 4.5f), new Item.Properties().fireResistant().rarity(Rarity.EPIC));

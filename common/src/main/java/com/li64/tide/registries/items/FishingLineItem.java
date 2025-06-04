@@ -7,9 +7,11 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class FishingLineItem extends Item {
     private final String description;
@@ -23,12 +25,18 @@ public class FishingLineItem extends Item {
         this.description = description;
     }
 
-    @Override
-    public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, @NotNull List<Component> components, @NotNull TooltipFlag flag) {
-        super.appendHoverText(stack, context, components, flag);
+    @Override @SuppressWarnings("deprecation")
+    public void appendHoverText(@NotNull ItemStack stack,
+                                @NotNull TooltipContext context,
+                                @NotNull TooltipDisplay tooltipDisplay,
+                                @NotNull Consumer<Component> tooltipAdder,
+                                @NotNull TooltipFlag flag) {
+
+        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+
         if (description.isEmpty()) return;
         Style style = Component.empty().getStyle().withColor(ChatFormatting.GRAY).withItalic(true);
-        components.add(Component.translatable(description).setStyle(style));
+        tooltipAdder.accept(Component.translatable(description).setStyle(style));
     }
 
     public static String getColor(ItemStack stack) {

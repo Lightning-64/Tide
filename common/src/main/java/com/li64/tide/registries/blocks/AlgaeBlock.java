@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -27,12 +28,8 @@ public class AlgaeBlock extends BushBlock {
     }
 
     @Override
-    protected MapCodec<? extends BushBlock> codec() {
-        return CODEC;
-    }
-
-    public void entityInside(BlockState blockState, Level level, BlockPos pos, Entity entity) {
-        super.entityInside(blockState, level, pos, entity);
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
+        super.entityInside(state, level, pos, entity, effectApplier);
         if (level instanceof ServerLevel && entity instanceof Boat) {
             level.destroyBlock(new BlockPos(pos), true, entity);
         }

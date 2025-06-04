@@ -17,6 +17,8 @@ public class TidePlayerData {
     public static TidePlayerData CLIENT_DATA = new TidePlayerData();
     private static final String NBT_TAG = "TidePlayerData";
 
+    private final int[] emptyIntArray = new int[0];
+
     public static TidePlayerData getOrCreate(ServerPlayer player) {
         return getOrCreate(Tide.PLATFORM.getPlayerData(player));
     }
@@ -25,7 +27,7 @@ public class TidePlayerData {
         if (!tag.contains(NBT_TAG)) {
             tag.put(NBT_TAG, new CompoundTag());
         }
-        return new TidePlayerData(tag.getCompound(NBT_TAG));
+        return new TidePlayerData(tag.getCompoundOrEmpty(NBT_TAG));
     }
 
     public List<Integer> fishUnlocked = new ArrayList<>();
@@ -42,20 +44,20 @@ public class TidePlayerData {
     public TidePlayerData() {}
 
     public void deserializeNBT(CompoundTag tag) {
-        fishUnlocked = fromIntArray(tag.getIntArray("fish_unlocked"));
-        unreadProfiles = fromIntArray(tag.getIntArray("unread_pages"));
-        pagesUnlocked = fromIntArray(tag.getIntArray("pages_unlocked"));
-        pagesCompleted = fromIntArray(tag.getIntArray("pages_completed"));
-        gotJournal = tag.getBoolean("got_journal");
-        finishedJournal = tag.getBoolean("finished_journal");
+        fishUnlocked = fromIntArray(tag.getIntArray("fish_unlocked").orElse(emptyIntArray));
+        unreadProfiles = fromIntArray(tag.getIntArray("unread_pages").orElse(emptyIntArray));
+        pagesUnlocked = fromIntArray(tag.getIntArray("pages_unlocked").orElse(emptyIntArray));
+        pagesCompleted = fromIntArray(tag.getIntArray("pages_completed").orElse(emptyIntArray));
+        gotJournal = tag.getBoolean("got_journal").orElse(true);
+        finishedJournal = tag.getBoolean("finished_journal").orElse(false);
     }
 
     public CompoundTag serializeNBT() {
         CompoundTag tag = new CompoundTag();
-        tag.putIntArray("fish_unlocked", fishUnlocked);
-        tag.putIntArray("unread_pages", unreadProfiles);
-        tag.putIntArray("pages_unlocked", pagesUnlocked);
-        tag.putIntArray("pages_completed", pagesCompleted);
+        tag.putIntArray("fish_unlocked", toIntArray(fishUnlocked));
+        tag.putIntArray("unread_pages", toIntArray(unreadProfiles));
+        tag.putIntArray("pages_unlocked", toIntArray(pagesUnlocked));
+        tag.putIntArray("pages_completed", toIntArray(pagesCompleted));
         tag.putBoolean("got_journal", gotJournal);
         tag.putBoolean("finished_journal", finishedJournal);
         return tag;
@@ -67,6 +69,10 @@ public class TidePlayerData {
         if (player instanceof ServerPlayer serverPlayer) {
             Tide.NETWORK.sendToPlayer(new SyncDataMsg(this), serverPlayer);
         }
+    }
+
+    public static int[] toIntArray(List<Integer> list) {
+        return list.stream().mapToInt(n -> n).toArray();
     }
 
     public static ArrayList<Integer> fromIntArray(int[] array) {

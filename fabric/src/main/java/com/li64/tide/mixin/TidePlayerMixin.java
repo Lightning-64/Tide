@@ -17,7 +17,7 @@ public abstract class TidePlayerMixin implements TidePlayer {
     @Inject(method = "readAdditionalSaveData", at = @At("HEAD"))
     private void readAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
         if (!compound.contains(tide$dataKey)) compound.put(tide$dataKey, tide$playerData);
-        else tide$playerData = compound.getCompound(tide$dataKey);
+        else tide$playerData = compound.getCompoundOrEmpty(tide$dataKey);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("HEAD"))

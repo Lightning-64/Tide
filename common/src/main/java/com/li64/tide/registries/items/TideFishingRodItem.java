@@ -37,6 +37,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -93,7 +94,8 @@ public class TideFishingRodItem extends FishingRodItem {
 
     @Override
     public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
-        return !stack.has(DataComponents.HIDE_TOOLTIP) && !stack.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP)
+        TooltipDisplay display = stack.getOrDefault(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT);
+        return !display.shows(TideDataComponents.BAIT_CONTENTS)
                 ? Optional.ofNullable(stack.get(TideDataComponents.BAIT_CONTENTS)).map(FishingRodTooltip::new)
                 : Optional.empty();
     }

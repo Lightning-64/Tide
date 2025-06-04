@@ -38,7 +38,7 @@ public class AnglerWorkshopMenu extends ItemCombinerMenu {
         level.playLocalSound(player.blockPosition(), SoundEvents.FISHING_BOBBER_RETRIEVE, SoundSource.BLOCKS, 1.5F, this.level.random.nextFloat() * 0.1F + 0.9F, false);
         this.access.execute((level, pos) -> level.levelEvent(1044, pos, 0));
 
-        stack.onCraftedBy(player.level(), player, stack.getCount());
+        stack.onCraftedBy(player, stack.getCount());
         inputSlots.clearContent();
     }
 

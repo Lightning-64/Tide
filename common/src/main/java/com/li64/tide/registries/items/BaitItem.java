@@ -6,8 +6,11 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class BaitItem extends Item {
     private final int luckBonus;
@@ -29,10 +32,16 @@ public class BaitItem extends Item {
         return luckBonus;
     }
 
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> components, TooltipFlag flag) {
-        super.appendHoverText(stack, context, components, flag);
+    @Override @SuppressWarnings("deprecation")
+    public void appendHoverText(@NotNull ItemStack stack,
+                                @NotNull TooltipContext context,
+                                @NotNull TooltipDisplay tooltipDisplay,
+                                @NotNull Consumer<Component> tooltipAdder,
+                                @NotNull TooltipFlag flag) {
+
+        super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+
         Style style = Component.empty().getStyle().withColor(ChatFormatting.GRAY).withItalic(true);
-        components.add(Component.translatable(description).setStyle(style));
+        tooltipAdder.accept(Component.translatable(description).setStyle(style));
     }
 }
