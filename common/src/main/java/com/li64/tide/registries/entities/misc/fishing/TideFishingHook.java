@@ -27,6 +27,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -158,10 +159,6 @@ public class TideFishingHook extends Projectile {
 
     public boolean isOpenWaterFishing() {
         return this.openWater;
-    }
-
-    public boolean isLavaFishing() {
-        return lastTouchedFluid.is(TideTags.Fluids.LAVA_FISHING);
     }
 
     public boolean usingMagneticBait() {
@@ -846,6 +843,10 @@ public class TideFishingHook extends Projectile {
     public boolean canFishInLava() {
         if (getRodItem() == null) return false;
         return getRodItem().isLavaproof(rod);
+    }
+
+    public boolean isLavaFishing() {
+        return (fluid != null && fluid.is(FluidTags.LAVA)) || isInLava() || lastTouchedFluid.is(TideTags.Fluids.LAVA_FISHING);
     }
 
     public TideFishingRodItem getRodItem() {
