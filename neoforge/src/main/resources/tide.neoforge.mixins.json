@@ -4,6 +4,7 @@
    "package": "com.li64.tide.mixin",
    "compatibilityLevel": "JAVA_21",
    "mixins": [
+      "ItemStackMixin",
       "LootTableMixin"
    ],
    "client": [],
