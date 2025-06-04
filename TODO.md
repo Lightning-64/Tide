@@ -1,11 +1,11 @@
-= 📋 TODO for 1.6.1 📋 =
+= 📋 TODO for 1.7 📋 =
 
 🐟 Features 🐟
-- Add support for any block to be used as a crate ✔️
-- Drop accessories when a rod breaks ✔️
-- Minor rarity adjustments ✔️
+- Void fishing
+- Fish weights
+- Desert well fish
+- More "regular" fish
+- Spelunkery compat
 
 ⚙️ Bug Fixes ⚙️
-- Fix fishing real crash
-- Fix torn note resets ✔️
-- Safer accessor casting ✔️
+- TBD
