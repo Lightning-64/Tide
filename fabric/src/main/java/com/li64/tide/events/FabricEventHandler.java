@@ -1,6 +1,5 @@
 package com.li64.tide.events;
 
-
 import com.li64.tide.Tide;
 import com.li64.tide.data.commands.JournalCommand;
 import com.li64.tide.data.TidePlayer;
@@ -11,23 +10,14 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.network.Filterable;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.WrittenBookContent;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-
-import java.util.List;
 
 public class FabricEventHandler {
     public static void init() {
@@ -92,66 +82,9 @@ public class FabricEventHandler {
                     || key.location().toString().contains("crates/overworld/water_river")) {
 
                 tableBuilder.pool(new LootPool.Builder().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(Items.WRITTEN_BOOK)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-                                .apply(SetComponentsFunction.setComponent(
-                                    DataComponents.WRITTEN_BOOK_CONTENT,
-                                    new WrittenBookContent(
-                                        Filterable.passThrough(Component.translatable("note.tide.title").getString()),
-                                        Component.translatable("note.tide.author").getString(),
-                                        0,
-                                        List.of(Filterable.passThrough(Component.translatable("note.tide.midas_fish.contents"))),
-                                        true)
-                                ))
-                        ).add(LootItem.lootTableItem(Items.WRITTEN_BOOK)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-                                .apply(SetComponentsFunction.setComponent(
-                                            DataComponents.WRITTEN_BOOK_CONTENT,
-                                            new WrittenBookContent(
-                                                    Filterable.passThrough(Component.translatable("note.tide.title").getString()),
-                                                    Component.translatable("note.tide.author").getString(),
-                                                    0,
-                                                    List.of(Filterable.passThrough(Component.translatable("note.tide.voidseeker.contents"))),
-                                                    true
-                                            )
-                                ))
-                        ).add(LootItem.lootTableItem(Items.WRITTEN_BOOK)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-                                .apply(SetComponentsFunction.setComponent(
-                                        DataComponents.WRITTEN_BOOK_CONTENT,
-                                        new WrittenBookContent(
-                                                Filterable.passThrough(Component.translatable("note.tide.title").getString()),
-                                                Component.translatable("note.tide.author").getString(),
-                                                0,
-                                                List.of(Filterable.passThrough(Component.translatable("note.tide.shooting_starfish.contents"))),
-                                                true
-                                        )
-                                ))
-                        ).add(LootItem.lootTableItem(Items.WRITTEN_BOOK)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-                                .apply(SetComponentsFunction.setComponent(
-                                        DataComponents.WRITTEN_BOOK_CONTENT,
-                                        new WrittenBookContent(
-                                                Filterable.passThrough(Component.translatable("note.tide.title").getString()),
-                                                Component.translatable("note.tide.author").getString(),
-                                                0,
-                                                List.of(Filterable.passThrough(Component.translatable("note.tide.aquathorn.contents"))),
-                                                true
-                                        )
-                                ))
-                        ).add(LootItem.lootTableItem(Items.WRITTEN_BOOK)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-                                .apply(SetComponentsFunction.setComponent(
-                                        DataComponents.WRITTEN_BOOK_CONTENT,
-                                        new WrittenBookContent(
-                                                Filterable.passThrough(Component.translatable("note.tide.title").getString()),
-                                                Component.translatable("note.tide.author").getString(),
-                                                0,
-                                                List.of(Filterable.passThrough(Component.translatable("note.tide.windbass.contents"))),
-                                                true
-                                        )
-                                ))
-                        ).build()
+                        .add(LootItem.lootTableItem(TideItems.TORN_NOTE)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
+                        .build()
                 );
             }
         });

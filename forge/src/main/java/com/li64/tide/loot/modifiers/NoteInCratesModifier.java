@@ -1,5 +1,6 @@
 package com.li64.tide.loot.modifiers;
 
+import com.li64.tide.registries.TideItems;
 import com.mojang.serialization.MapCodec;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.component.DataComponents;
@@ -31,26 +32,7 @@ public class NoteInCratesModifier extends LootModifier {
         if (!(context.getQueriedLootTableId().toString().contains("crates/overworld/water_ocean")
             || context.getQueriedLootTableId().toString().contains("crates/overworld/water_river"))) return generatedLoot;
 
-        String contents = switch (new Random().nextInt(0, 5)) {
-            case 0 -> "note.tide.midas_fish.contents";
-            case 1 -> "note.tide.voidseeker.contents";
-            case 2 -> "note.tide.aquathorn.contents";
-            case 3 -> "note.tide.windbass.contents";
-            default -> "note.tide.shooting_starfish.contents";
-        };
-
-        ItemStack note = Items.WRITTEN_BOOK.getDefaultInstance();
-        note.set(DataComponents.WRITTEN_BOOK_CONTENT,
-            new WrittenBookContent(
-                Filterable.passThrough(Component.translatable("note.tide.title").getString()),
-                Component.translatable("note.tide.author").getString(),
-                0,
-                List.of(Filterable.passThrough(Component.translatable(contents))),
-                true
-            )
-        );
-        generatedLoot.add(note);
-
+        generatedLoot.add(new ItemStack(TideItems.TORN_NOTE));
         return generatedLoot;
     }
 

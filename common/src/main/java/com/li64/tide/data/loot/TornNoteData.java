@@ -6,6 +6,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 
 import java.util.List;
+import java.util.Random;
 
 public record TornNoteData(String id, boolean unlocked) {
     public static List<String> INSTANCES = List.of(
@@ -24,4 +25,8 @@ public record TornNoteData(String id, boolean unlocked) {
             (buf) -> new TornNoteData(buf.readUtf(), buf.readBoolean()));
 
     public TornNoteData(String id) { this(id, false); }
+
+    public static TornNoteData random() {
+        return new TornNoteData(INSTANCES.get(new Random().nextInt(1, INSTANCES.size())));
+    }
 }
