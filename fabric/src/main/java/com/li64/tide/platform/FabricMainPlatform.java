@@ -1,6 +1,7 @@
 package com.li64.tide.platform;
 
 import com.li64.tide.Tide;
+import com.li64.tide.compat.jobsaddon.JobsAddonCompat;
 import com.li64.tide.data.TidePlayer;
 import com.li64.tide.platform.services.TideMainPlatform;
 import com.mojang.serialization.MapCodec;
@@ -14,14 +15,18 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+
+import java.util.List;
 
 public class FabricMainPlatform implements TideMainPlatform {
     @Override
@@ -107,5 +112,10 @@ public class FabricMainPlatform implements TideMainPlatform {
     @Override
     public boolean isFabric() {
         return true;
+    }
+
+    @Override
+    public void jobsAddonDropXp(Player player, List<ItemStack> catches) {
+        if (isModLoaded("jobsaddon")) JobsAddonCompat.dropJobXp(player, catches);
     }
 }

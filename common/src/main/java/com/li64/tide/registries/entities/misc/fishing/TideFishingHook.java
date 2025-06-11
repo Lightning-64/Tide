@@ -615,13 +615,15 @@ public class TideFishingHook extends Projectile {
 
                             CriteriaTriggers.FISHING_ROD_HOOKED.trigger((ServerPlayer) player, stack, player.fishing, hookedItems);
                         }
+
+                        Tide.PLATFORM.jobsAddonDropXp(player, hookedItems);
                         break;
 
                     case CRATE:
 
                         BlockState lootCrate;
 
-                        lootCrate = getCrateBlock(hookedItems.get(0));
+                        lootCrate = getCrateBlock(hookedItems.getFirst());
 
                         LootParams.Builder lootParamsBuilder = new LootParams.Builder((ServerLevel) this.level())
                                 .withParameter(LootContextParams.ORIGIN, this.position())

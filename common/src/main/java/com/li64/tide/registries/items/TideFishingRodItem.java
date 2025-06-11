@@ -226,7 +226,6 @@ public class TideFishingRodItem extends FishingRodItem {
     @Override
     public void releaseUsing(@NotNull ItemStack rod, @NotNull Level level, @NotNull LivingEntity user, int charge) {
         if (user instanceof Player player) {
-
             int chargeDifference = this.getUseDuration(rod, user) - charge;
             int chargeDuration = getChargeDuration(rod, level.registryAccess());
 

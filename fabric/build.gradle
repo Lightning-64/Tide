@@ -42,6 +42,8 @@ dependencies {
     modApi("me.shedaniel.cloth:cloth-config-fabric:15.0.130") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+
+    modImplementation("curse.maven:jobsaddon-682362:6181394")
 }
 
 fabricApi {
