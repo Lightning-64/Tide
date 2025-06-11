@@ -2,6 +2,7 @@ package com.li64.tide.platform;
 
 import com.li64.tide.Tide;
 import com.li64.tide.compat.hybrid_aquatic.HybridAquaticCompat;
+import com.li64.tide.compat.jobsaddon.JobsAddonCompat;
 import com.li64.tide.data.TidePlayer;
 import com.li64.tide.platform.services.TideMainPlatform;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
@@ -21,10 +22,13 @@ import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+
+import java.util.List;
 
 public class FabricMainPlatform implements TideMainPlatform {
     @Override
@@ -105,5 +109,9 @@ public class FabricMainPlatform implements TideMainPlatform {
     @Override
     public Entity hybridAquaticConvertEntity(ItemEntity itemEntity, Player player, TideFishingHook hook) {
         return HybridAquaticCompat.convertEntity(itemEntity, player, hook);
+    }
+
+    public void jobsAddonDropXp(Player player, List<ItemStack> catches) {
+        if (isModLoaded("jobsaddon")) JobsAddonCompat.dropJobXp(player, catches);
     }
 }

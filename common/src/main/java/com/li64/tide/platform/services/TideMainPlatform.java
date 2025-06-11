@@ -76,4 +76,6 @@ public interface TideMainPlatform {
     }
 
     default double getBiteTimeMultiplier() { return 1.0; }
+
+    default void jobsAddonDropXp(Player player, List<ItemStack> catches) {}
 }
