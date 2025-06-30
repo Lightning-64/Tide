@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.common.NeoForge;
@@ -114,7 +115,7 @@ public class NeoForgeMainPlatform implements TideMainPlatform {
     }
 
     @Override
-    public Entity fishingRealConvertEntity(Entity itemEntity, Player player) {
-        return FishingRealCompat.convertItemEntity(itemEntity, player);
+    public Entity fishingRealConvertItemStack(ItemStack stack, Player player, Vec3 pos) {
+        return FishingRealCompat.convertItemStack(stack, player, pos);
     }
 }
