@@ -116,12 +116,14 @@ public class TideFishingRodItem extends FishingRodItem {
             if (slotStack.isEmpty() && !contents.isEmpty()) {
                 // place next stack
                 ItemStack removedStack = contents.removeStack();
-                if (removedStack != null) slot.safeInsert(removedStack);
-
-            } else if (slotStack.getItem().canFitInsideContainerItems() && BaitUtils.isBait(slotStack)) {
+                if (removedStack != null && !removedStack.isEmpty()) slot.safeInsert(removedStack);
+                else return false;
+            } else if (!slotStack.isEmpty()
+                    && slotStack.getItem().canFitInsideContainerItems()
+                    && BaitUtils.isBait(slotStack)) {
                 // insert stack
                 contents.tryTransfer(slot, player);
-            }
+            } else return false;
 
             setContents(stack, contents.toImmutable());
             return true;
@@ -134,14 +136,14 @@ public class TideFishingRodItem extends FishingRodItem {
             BaitContents.Mutable contents = new BaitContents.Mutable(getContents(stack));
 
             if (other.isEmpty()) {
-                // pull next stack
+                // try pull next stack
                 ItemStack itemstack = contents.removeStack();
-                if (itemstack != null) access.set(itemstack);
-
+                if (itemstack != null && !itemstack.isEmpty()) access.set(itemstack);
+                else return false;
             } else if (other.getItem().canFitInsideContainerItems() && BaitUtils.isBait(other)) {
                 // insert stack
                 contents.tryInsert(other);
-            }
+            } else return false;
 
             setContents(stack, contents.toImmutable());
             return true;
