@@ -1,3 +1,16 @@
+## Version 1.6.2 - 6/30/2025
+
+### 🚀 Compatibility Features 🚀
+- Compatibility with LevelZ and JobsAddon
+
+### ⚙️ Bug fixes ⚙️
+- Fixed a bug where the forge ItemStackedOnOther event wouldn't be called with fishing rod items
+- Fixed a bug where Fishing Real for NeoForge 1.21.1 results in a crash
+- Fixed a bug where the wrong crate type could be pulled from lava lakes
+- Fixed a crash with fishing rod tooltips
+
+---
+
 ## Version 1.6.1 - 6/3/2025
 
 ### 🎣 New features 🎣
