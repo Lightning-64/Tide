@@ -143,12 +143,7 @@ public class TideForgeEvents {
             if (stack.is(TideTags.Items.CUSTOMIZABLE_RODS) && event.getEntity() != null)
                 event.getToolTip().addAll(TideFishingRodItem.getDescriptionLines(stack, event.getEntity().registryAccess()));
         }
-
-        @SubscribeEvent
-        public static void onItemStackedOnOther(ItemStackedOnOtherEvent event) {
-            Tide.LOG.info("Item stacked on other: {}, {}, {}, {}", event.getCarriedItem(), event.getStackedOnItem(), event.getSlot(), event.getClickAction());
-        }
-
+        
         @SubscribeEvent
         public static void onPlayerCloned(PlayerEvent.Clone event) {
             if (event.getEntity().level().isClientSide()) return;
