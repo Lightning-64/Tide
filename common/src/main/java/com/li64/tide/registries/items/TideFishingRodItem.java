@@ -59,6 +59,7 @@ public class TideFishingRodItem extends FishingRodItem {
 
     public static List<Component> getDescriptionLines(ItemStack stack, HolderLookup.Provider registries) {
         ArrayList<Component> builder = new ArrayList<>();
+        if (registries == null) return List.of();
 
         ItemStack bobber = CustomRodManager.getBobber(stack, registries);
         ItemStack hook = CustomRodManager.getHook(stack, registries);
