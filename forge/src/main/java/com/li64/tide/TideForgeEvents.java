@@ -28,10 +28,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.*;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -145,6 +142,11 @@ public class TideForgeEvents {
             if (BaitUtils.isBait(stack)) event.getToolTip().addAll(BaitUtils.getDescriptionLines(stack));
             if (stack.is(TideTags.Items.CUSTOMIZABLE_RODS) && event.getEntity() != null)
                 event.getToolTip().addAll(TideFishingRodItem.getDescriptionLines(stack, event.getEntity().registryAccess()));
+        }
+
+        @SubscribeEvent
+        public static void onItemStackedOnOther(ItemStackedOnOtherEvent event) {
+            Tide.LOG.info("Item stacked on other: {}, {}, {}, {}", event.getCarriedItem(), event.getStackedOnItem(), event.getSlot(), event.getClickAction());
         }
 
         @SubscribeEvent
