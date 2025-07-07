@@ -43,6 +43,7 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
+    modImplementation("curse.maven:fishing-real-348834:6465669")
     modImplementation("curse.maven:jobsaddon-682362:6181394")
 }
 
