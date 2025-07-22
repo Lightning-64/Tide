@@ -11,6 +11,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 
 public class SailfishModel<T extends Sailfish> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Tide.resource("sailfish"), "main");
@@ -49,10 +50,11 @@ public class SailfishModel<T extends Sailfish> extends EntityModel<T> {
 		}
 
 		this.tail.yRot = -f * 0.45F * Mth.sin(0.6F * ageInTicks);
+		this.body.xRot = (float)(entity.getDeltaMovement().y() * -1.5f);
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer consumer, int packedLight, int packedOverlay, int color) {
+		body.render(poseStack, consumer, packedLight, packedOverlay, color);
 	}
 }

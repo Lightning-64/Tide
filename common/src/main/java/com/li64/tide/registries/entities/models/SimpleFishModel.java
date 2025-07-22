@@ -10,6 +10,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 
 public class SimpleFishModel<T extends AbstractTideFish> extends EntityModel<T> {
 	private final ModelPart body;
@@ -46,16 +47,15 @@ public class SimpleFishModel<T extends AbstractTideFish> extends EntityModel<T> 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		float f = 1.0F;
-		if (!entity.isInWater()) {
-			f = 1.5F;
-		}
+		if (!entity.isInWater()) f = 1.5F;
 
 		this.tail.yRot = -f * 0.45F * Mth.sin(0.6F * ageInTicks);
+		this.body.xRot = (float)(entity.getDeltaMovement().y() * -1.5f);
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer consumer, int packedLight, int packedOverlay, int color) {
+		body.render(poseStack, consumer, packedLight, packedOverlay, color);
 	}
 
 	public enum Variant {
