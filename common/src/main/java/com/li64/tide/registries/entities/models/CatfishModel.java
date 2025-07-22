@@ -2,7 +2,6 @@ package com.li64.tide.registries.entities.models;
 
 import com.li64.tide.Tide;
 import com.li64.tide.registries.entities.fish.Catfish;
-import com.li64.tide.registries.entities.fish.Guppy;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -11,6 +10,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 
 public class CatfishModel<T extends Catfish> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Tide.resource("catfish"), "main");
@@ -48,10 +48,11 @@ public class CatfishModel<T extends Catfish> extends EntityModel<T> {
 		}
 
 		this.tail.yRot = -f * 0.45F * Mth.sin(0.6F * ageInTicks);
+		this.body.xRot = (float)(entity.getDeltaMovement().y() * -1.5f);
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float r, float g, float b, float a) {
-		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, r, g, b, a);
+	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer consumer, int packedLight, int packedOverlay, float r, float g, float b, float a) {
+		body.render(poseStack, consumer, packedLight, packedOverlay, r, g, b, a);
 	}
 }

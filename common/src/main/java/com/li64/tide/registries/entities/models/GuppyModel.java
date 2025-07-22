@@ -10,6 +10,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 
 public class GuppyModel<T extends Guppy> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Tide.resource("guppy"), "main");
@@ -43,10 +44,11 @@ public class GuppyModel<T extends Guppy> extends EntityModel<T> {
 		}
 
 		this.tail.yRot = -f * 0.35F * Mth.sin(0.6F * ageInTicks);
+		this.body.xRot = (float)(entity.getDeltaMovement().y() * -1.5f);
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float r, float g, float b, float a) {
-		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, r, g, b, a);
+	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer consumer, int packedLight, int packedOverlay, float r, float g, float b, float a) {
+		body.render(poseStack, consumer, packedLight, packedOverlay, r, g, b, a);
 	}
 }
