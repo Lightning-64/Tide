@@ -75,8 +75,8 @@ dependencies {
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
     modImplementation("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
-    modImplementation("curse.maven:stardew-fishing-1066037:6364943")
-    modImplementation("curse.maven:fishing-real-348834:6475355")
+    modCompileOnly("curse.maven:stardew-fishing-1066037:6364943")
+    modCompileOnly("curse.maven:fishing-real-348834:6475355")
 
     // Forge's hack fix
     implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
