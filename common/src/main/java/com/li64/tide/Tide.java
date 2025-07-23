@@ -77,7 +77,6 @@ public class Tide {
 
     public static void init() {
         CONFIG = AutoConfig.register(TideConfig.class, Toml4jConfigSerializer::new).getConfig();
-        JOURNAL = new JournalLayout();
 
         TideMessages.init(NETWORK);
 
