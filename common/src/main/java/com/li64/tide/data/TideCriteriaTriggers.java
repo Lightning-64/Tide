@@ -26,6 +26,5 @@ public class TideCriteriaTriggers {
     }
 
     public static void init() {
-        Tide.LOG.info("Registering Tide Trigger Types");
     }
 }

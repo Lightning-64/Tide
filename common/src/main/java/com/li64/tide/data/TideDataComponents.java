@@ -46,6 +46,5 @@ public class TideDataComponents {
     }
 
     public static void init() {
-        Tide.LOG.info("Registering Tide Data Components");
     }
 }

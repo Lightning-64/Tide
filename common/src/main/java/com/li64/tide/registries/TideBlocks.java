@@ -42,6 +42,5 @@ public class TideBlocks {
     }
 
     public static void init() {
-        Tide.LOG.info("Registering Tide Blocks");
     }
 }

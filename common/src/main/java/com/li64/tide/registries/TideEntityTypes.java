@@ -123,6 +123,5 @@ public class TideEntityTypes {
     }
 
     public static void init() {
-        Tide.LOG.info("Registering Tide Entity Types");
     }
 }

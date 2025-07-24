@@ -362,7 +362,6 @@ public class TideItems {
     }
 
     public static void init() {
-        Tide.LOG.info("Registering Tide Items");
     }
 
     public static void assignTags() {
