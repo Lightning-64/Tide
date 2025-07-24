@@ -39,15 +39,11 @@ public class TideEventHandler {
         Tide.NETWORK.sendToPlayer(new UpdateDataMsg(), player);
 
         TidePlayerData playerData = TidePlayerData.getOrCreate(player);
-        playerData.syncTo(player);
-
-        if (!Tide.CONFIG.general.giveJournal) return;
-        if (!playerData.gotJournal) {
-            if (player.addItem(TideItems.FISHING_JOURNAL.getDefaultInstance())) {
+        if (Tide.CONFIG.general.giveJournal && !playerData.gotJournal) {
+            if (player.addItem(TideItems.FISHING_JOURNAL.getDefaultInstance()))
                 playerData.gotJournal = true;
-                playerData.syncTo(player);
-            }
         }
+        playerData.syncTo(player);
     }
 
     public static void updateFishingJournal(ServerPlayer player) {
