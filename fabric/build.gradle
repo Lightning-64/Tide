@@ -48,6 +48,7 @@ dependencies {
     }
     modCompileOnly("curse.maven:hybrid-aquatic-834427:6307560")
     modCompileOnly("curse.maven:jobsaddon-682362:5043002")
+    modCompileOnly("curse.maven:fishing-real-348834:6475356")
 }
 
 fabricApi {
