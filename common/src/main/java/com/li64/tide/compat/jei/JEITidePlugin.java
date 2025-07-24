@@ -11,13 +11,14 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 @JeiPlugin @SuppressWarnings("unused")
 public class JEITidePlugin implements IModPlugin {
     @Override
-    public ResourceLocation getPluginUid() {
+    public @NotNull ResourceLocation getPluginUid() {
         return Tide.resource("jei_plugin");
     }
 
