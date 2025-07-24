@@ -1,3 +1,18 @@
+## Version 1.6.3 - 7/24/2025
+
+### 🎣 New features 🎣
+- Fish entities will now tilt up and down when moving vertically
+
+### 🚀 Compatibility Features 🚀
+- Compatibility with Fishing Real for Fabric versions
+
+### ⚙️ Bug fixes ⚙️
+- Fixed a bug where setting the `giveJournal` config to false breaks the fishing journal layout on multiplayer servers
+- Fixed a bug where inventory slots would appear in the JEI rod upgrading GUI
+- Fixed a bug where an invalid texture caused log errors
+
+---
+
 ## Version 1.6.2 - 6/30/2025
 
 ### 🚀 Compatibility Features 🚀
