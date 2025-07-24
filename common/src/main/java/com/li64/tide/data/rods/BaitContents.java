@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaitContents implements TooltipComponent {
+public class BaitContents {
     public static final int MAX_STACKS = 3;
     public static final BaitContents EMPTY = new BaitContents();
     public static final Codec<BaitContents> CODEC;

@@ -3,7 +3,11 @@ package com.li64.tide.events;
 import com.li64.tide.Tide;
 import com.li64.tide.data.commands.JournalCommand;
 import com.li64.tide.data.TidePlayer;
+import com.li64.tide.data.rods.BaitContents;
+import com.li64.tide.data.rods.ClientFishingRodTooltip;
+import com.li64.tide.data.rods.FishingRodTooltip;
 import com.li64.tide.registries.TideItems;
+import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
@@ -23,6 +27,13 @@ public class FabricEventHandler {
     public static void init() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
                 new JournalCommand(dispatcher, registryAccess));
+
+        TooltipComponentCallback.EVENT.register((component) -> {
+            if (component instanceof FishingRodTooltip(BaitContents contents)) {
+                return new ClientFishingRodTooltip(contents);
+            }
+            return null;
+        });
 
         ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
             CompoundTag data = ((TidePlayer) oldPlayer).tide$getTidePlayerData();

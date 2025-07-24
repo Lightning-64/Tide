@@ -96,7 +96,7 @@ public class TideFishingRodItem extends FishingRodItem {
     @Override
     public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
         TooltipDisplay display = stack.getOrDefault(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT);
-        return !display.shows(TideDataComponents.BAIT_CONTENTS)
+        return display.shows(TideDataComponents.BAIT_CONTENTS)
                 ? Optional.ofNullable(stack.get(TideDataComponents.BAIT_CONTENTS)).map(FishingRodTooltip::new)
                 : Optional.empty();
     }
