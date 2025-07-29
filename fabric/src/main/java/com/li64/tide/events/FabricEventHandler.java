@@ -28,13 +28,6 @@ public class FabricEventHandler {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
                 new JournalCommand(dispatcher, registryAccess));
 
-        TooltipComponentCallback.EVENT.register((component) -> {
-            if (component instanceof FishingRodTooltip(BaitContents contents)) {
-                return new ClientFishingRodTooltip(contents);
-            }
-            return null;
-        });
-
         ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
             CompoundTag data = ((TidePlayer) oldPlayer).tide$getTidePlayerData();
             ((TidePlayer) newPlayer).tide$setTidePlayerData(data);
