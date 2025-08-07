@@ -1,13 +1,11 @@
 package com.li64.tide.platform;
 
 import com.li64.tide.TideForge;
-import com.li64.tide.compat.stardewfishing.StardewFishingCompat;
 import com.li64.tide.platform.services.TideMainPlatform;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.core.component.DataComponentType;
-import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -28,9 +26,7 @@ import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ForgeMainPlatform implements TideMainPlatform {
     @Override
@@ -112,21 +108,5 @@ public class ForgeMainPlatform implements TideMainPlatform {
         ItemFishedEvent event = new ItemFishedEvent(itemList, i, fishing);
         MinecraftForge.EVENT_BUS.post(event);
         return event.isCanceled();
-    }
-
-    @Override
-    public boolean stardewStart(ServerPlayer player, HookAccessor hook, ItemStack item, List<ItemStack> items) {
-        return StardewFishingCompat.start(player, hook, item, items);
-    }
-
-    @Override
-    public Optional<ArrayList<ItemStack>> stardewGetRewards(HookAccessor hook) {
-        return StardewFishingCompat.getRewards(hook);
-    }
-
-    @Override
-    public double getBiteTimeMultiplier() {
-        if (isModLoaded("stardew_fishing")) return StardewFishingCompat.getBiteTimeMultiplier();
-        return TideMainPlatform.super.getBiteTimeMultiplier();
     }
 }

@@ -2,7 +2,9 @@ package com.li64.tide.platform;
 
 import com.li64.tide.TideNeoForge;
 import com.li64.tide.compat.fishingreal.FishingRealCompat;
+import com.li64.tide.compat.stardewfishing.StardewFishingCompat;
 import com.li64.tide.platform.services.TideMainPlatform;
+import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.advancements.critereon.EntitySubPredicate;
@@ -30,7 +32,9 @@ import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class NeoForgeMainPlatform implements TideMainPlatform {
     @Override
@@ -117,5 +121,21 @@ public class NeoForgeMainPlatform implements TideMainPlatform {
     @Override
     public Entity fishingRealConvertItemStack(ItemStack stack, Player player, Vec3 pos) {
         return FishingRealCompat.convertItemStack(stack, player, pos);
+    }
+
+    @Override
+    public boolean stardewStart(ServerPlayer player, HookAccessor hook, ItemStack item, List<ItemStack> items) {
+        return StardewFishingCompat.start(player, hook, item, items);
+    }
+
+    @Override
+    public Optional<ArrayList<ItemStack>> stardewGetRewards(HookAccessor hook) {
+        return StardewFishingCompat.getRewards(hook);
+    }
+
+    @Override
+    public double getBiteTimeMultiplier() {
+        if (isModLoaded("stardew_fishing")) return StardewFishingCompat.getBiteTimeMultiplier();
+        return TideMainPlatform.super.getBiteTimeMultiplier();
     }
 }
