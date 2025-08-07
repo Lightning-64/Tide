@@ -381,11 +381,6 @@ public class TideFishingHook extends Projectile {
     }
 
     private void catchingFish(BlockPos pos) {
-        if (Tide.PLATFORM.isModLoaded("stardew_fishing")) {
-            Optional<ArrayList<ItemStack>> rewards = Tide.PLATFORM.stardewGetRewards((HookAccessor) getPlayerOwner().fishing);
-            if (rewards.isPresent() && !rewards.get().isEmpty()) return;
-        }
-
         ServerLevel level = (ServerLevel) this.level();
         int i = 1;
         BlockPos abovePos = pos.above();

@@ -68,7 +68,7 @@ public interface TideMainPlatform {
 
     void registerFeature(String key, Feature<?> feature);
 
-    default Optional<ArrayList<ItemStack>> stardewGetRewards(HookAccessor hook) { return Optional.empty(); }
+    default List<ItemStack> stardewGetRewards(HookAccessor hook) { return List.of(); }
 
     default boolean stardewStart(ServerPlayer player, HookAccessor hook, ItemStack item, List<ItemStack> items) { return false; }
 

@@ -64,7 +64,7 @@ dependencies {
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 
     compileOnly("curse.maven:fishing-real-348834:6465668")
-    implementation("curse.maven:stardew-fishing-1066037:6851626") // TODO make compileOnly
+    compileOnly("curse.maven:stardew-fishing-1066037:6851626")
 
     api("me.shedaniel.cloth:cloth-config-neoforge:15.0.130")
 }

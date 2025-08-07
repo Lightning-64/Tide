@@ -129,7 +129,7 @@ public class NeoForgeMainPlatform implements TideMainPlatform {
     }
 
     @Override
-    public Optional<ArrayList<ItemStack>> stardewGetRewards(HookAccessor hook) {
+    public List<ItemStack> stardewGetRewards(HookAccessor hook) {
         return StardewFishingCompat.getRewards(hook);
     }
 
