@@ -84,6 +84,13 @@ public class TideFishingHookRenderer extends EntityRenderer<TideFishingHook> imp
             stringVertex(f2, f3, f4, vertexConsumer, pose, fraction(k),
                     fraction(k + 1), player, FishingLineItem.getColor(hookEntity.getLine()), partialTick);
         }
+
+        // Iris's hacky fix for a bug where fishing lines connect
+        // https://github.com/IrisShaders/Iris/blob/multiloader-new/common/src/main/java/net/irisshaders/batchedentityrendering/mixin/MixinFishingHookRenderer.java
+        if (Tide.PLATFORM.isModLoaded("iris"))
+            vertexConsumer.vertex(0, 0, 0)
+                    .color(0, 0, 0, 255)
+                    .normal(0, 0, 0);
     }
 
     private Vec3 getPlayerHandPos(Player player, float anim, float partialTick) {
