@@ -1,3 +1,14 @@
+## Version 1.6.4 - 9/7/2025
+
+### 🎣 New features 🎣
+- Fish entities now have proper spawn egg textures in 1.21.5 (thanks to L2 for making them)
+
+### ⚙️ Bug fixes ⚙️
+- Fixed a bug where fishing lines will connect between players when Iris is installed
+- Fixed a crash when a fishing bobber is sent through a nether portal
+
+---
+
 ## Version 1.6.3 - 7/24/2025
 
 ### 🎣 New features 🎣
