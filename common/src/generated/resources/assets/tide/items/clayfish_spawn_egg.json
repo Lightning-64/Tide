@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -5460291
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -11444352
-      }
-    ]
+    "model": "tide:item/clayfish_spawn_egg"
   }
 }

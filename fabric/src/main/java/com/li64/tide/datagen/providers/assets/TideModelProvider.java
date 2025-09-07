@@ -113,22 +113,22 @@ public class TideModelProvider extends FabricModelProvider {
         generator.generateFlatItem(TideItems.BARRACUDA_BUCKET, ModelTemplates.FLAT_ITEM);
         generator.generateFlatItem(TideItems.SAILFISH_BUCKET, ModelTemplates.FLAT_ITEM);
 
-//        generator.generateSpawnEgg(TideItems.TROUT_SPAWN_EGG, 2580837, 7197881);
-//        generator.generateSpawnEgg(TideItems.BASS_SPAWN_EGG, 11250290, 4802877);
-//        generator.generateSpawnEgg(TideItems.YELLOW_PERCH_SPAWN_EGG, 5056290, 12489757);
-//        generator.generateSpawnEgg(TideItems.BLUEGILL_SPAWN_EGG, 3241569, 8747597);
-//        generator.generateSpawnEgg(TideItems.MINT_CARP_SPAWN_EGG, 9492648, 4095594);
-//        generator.generateSpawnEgg(TideItems.PIKE_SPAWN_EGG, 7889995, 16048549);
-//        generator.generateSpawnEgg(TideItems.GUPPY_SPAWN_EGG, 1207235, 15955968);
-//        generator.generateSpawnEgg(TideItems.CATFISH_SPAWN_EGG, 13402689, 5254425);
-//        generator.generateSpawnEgg(TideItems.CLAYFISH_SPAWN_EGG, 11316925, 5332864);
-//
-//        generator.generateSpawnEgg(TideItems.TUNA_SPAWN_EGG, 0xa8b5af, 0x303336);
-//        generator.generateSpawnEgg(TideItems.OCEAN_PERCH_SPAWN_EGG, 0xa46250, 0x51211a);
-//        generator.generateSpawnEgg(TideItems.MACKEREL_SPAWN_EGG, 0x8e9480, 0x003d4d);
-//        generator.generateSpawnEgg(TideItems.ANGELFISH_SPAWN_EGG, 0x2e5c6b, 0x0e1f2e);
-//        generator.generateSpawnEgg(TideItems.BARRACUDA_SPAWN_EGG, 0x5c5943, 0x16313d);
-//        generator.generateSpawnEgg(TideItems.SAILFISH_SPAWN_EGG, 0x698c8f, 0x466c82);
+        generator.generateFlatItem(TideItems.TROUT_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(TideItems.BASS_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(TideItems.YELLOW_PERCH_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(TideItems.BLUEGILL_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(TideItems.MINT_CARP_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(TideItems.PIKE_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(TideItems.GUPPY_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(TideItems.CATFISH_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(TideItems.CLAYFISH_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+
+        generator.generateFlatItem(TideItems.TUNA_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(TideItems.OCEAN_PERCH_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(TideItems.MACKEREL_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(TideItems.ANGELFISH_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(TideItems.BARRACUDA_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        generator.generateFlatItem(TideItems.SAILFISH_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
 
         TideItems.JOURNAL_FISH_LIST.forEach(key -> {
             Item item = BuiltInRegistries.ITEM.get(key).orElseThrow().value();

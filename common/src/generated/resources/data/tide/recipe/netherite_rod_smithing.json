@@ -3,7 +3,6 @@
   "addition": "#c:ingots/netherite",
   "base": "tide:diamond_fishing_rod",
   "result": {
-    "count": 1,
     "id": "tide:netherite_fishing_rod"
   },
   "template": "#c:strings"

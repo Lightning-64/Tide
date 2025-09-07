@@ -1,4 +1,4 @@
-// 1.21.4	-999999999-01-01T00:00:00	Tide/minecraft:fishing Loot Table
+// 1.21.5	-999999999-01-01T00:00:00	Tide/minecraft:fishing Loot Table
 679c062c481baffe929d997f71c815a3cf26440a data/tide/loot_table/gameplay/fishing/climates/depths.json
 e924877d495b95b8ea2f510624b734f6d8bc36c4 data/tide/loot_table/gameplay/fishing/climates/end_lava.json
 6d0584fef210f9263fa8290937d237ac0e944103 data/tide/loot_table/gameplay/fishing/climates/end_water.json
