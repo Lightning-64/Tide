@@ -338,7 +338,7 @@ public class TideFishingHook extends Projectile {
             this.reapplyPosition();
         }
 
-        if (!fluid.isEmpty()) lastTouchedFluid = fluid;
+        if (fluid != null && !fluid.isEmpty()) lastTouchedFluid = fluid;
     }
 
     private boolean shouldKeepFishing(Player player) {
