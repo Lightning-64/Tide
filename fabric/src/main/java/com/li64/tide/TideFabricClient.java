@@ -3,6 +3,9 @@ package com.li64.tide;
 import com.li64.tide.client.gui.TideMenuTypes;
 import com.li64.tide.client.gui.screens.AnglerWorkshopScreen;
 import com.li64.tide.data.TideTags;
+import com.li64.tide.data.rods.BaitContents;
+import com.li64.tide.data.rods.ClientFishingRodTooltip;
+import com.li64.tide.data.rods.FishingRodTooltip;
 import com.li64.tide.registries.*;
 import com.li64.tide.registries.items.TideFishingRodItem;
 import com.li64.tide.util.BaitUtils;
@@ -11,6 +14,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.Entity;
@@ -21,6 +25,13 @@ public class TideFabricClient implements ClientModInitializer {
         Tide.NETWORK.registerHandlers();
 
         MenuScreens.register(TideMenuTypes.ANGLER_WORKSHOP, AnglerWorkshopScreen::new);
+
+        TooltipComponentCallback.EVENT.register((component) -> {
+            if (component instanceof FishingRodTooltip(BaitContents contents)) {
+                return new ClientFishingRodTooltip(contents);
+            }
+            return null;
+        });
 
         ItemTooltipCallback.EVENT.register((stack, context, type, lines) -> {
             if (BaitUtils.isBait(stack)) lines.addAll(BaitUtils.getDescriptionLines(stack));

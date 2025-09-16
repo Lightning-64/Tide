@@ -24,9 +24,7 @@ public class TidePlayerData {
     }
 
     public static TidePlayerData getOrCreate(CompoundTag tag) {
-        if (!tag.contains(NBT_TAG)) {
-            tag.put(NBT_TAG, new CompoundTag());
-        }
+        if (!tag.contains(NBT_TAG)) tag.put(NBT_TAG, new CompoundTag());
         return new TidePlayerData(tag.getCompoundOrEmpty(NBT_TAG));
     }
 
@@ -48,7 +46,7 @@ public class TidePlayerData {
         unreadProfiles = fromIntArray(tag.getIntArray("unread_pages").orElse(emptyIntArray));
         pagesUnlocked = fromIntArray(tag.getIntArray("pages_unlocked").orElse(emptyIntArray));
         pagesCompleted = fromIntArray(tag.getIntArray("pages_completed").orElse(emptyIntArray));
-        gotJournal = tag.getBoolean("got_journal").orElse(true);
+        gotJournal = tag.getBoolean("got_journal").orElse(false);
         finishedJournal = tag.getBoolean("finished_journal").orElse(false);
     }
 

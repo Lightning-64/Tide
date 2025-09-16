@@ -46,7 +46,7 @@ public abstract class TideDataLoader<T> extends SimpleJsonResourceReloadListener
         }
 
         values = ImmutableList.copyOf(output);
-        Tide.LOG.info("Loaded {} {}", values.size(), getDataTypeMessage());
+        if (!values.isEmpty()) Tide.LOG.info("Loaded {} {}", values.size(), getDataTypeMessage());
     }
 
     protected void postInvalidEntryMessage(ResourceLocation entryKey) {

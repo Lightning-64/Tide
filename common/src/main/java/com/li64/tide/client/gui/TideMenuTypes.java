@@ -22,6 +22,5 @@ public class TideMenuTypes {
     }
 
     public static void init() {
-        Tide.LOG.info("Registering Tide Menu Types");
     }
 }

@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -5720657
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -13618378
-      }
-    ]
+    "model": "tide:item/tuna_spawn_egg"
   }
 }

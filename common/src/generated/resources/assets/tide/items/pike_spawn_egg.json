@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -8887221
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -728667
-      }
-    ]
+    "model": "tide:item/pike_spawn_egg"
   }
 }

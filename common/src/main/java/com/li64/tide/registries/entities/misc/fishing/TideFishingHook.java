@@ -703,7 +703,9 @@ public class TideFishingHook extends Projectile {
             selectionList = select(lootKey, params).orElse(List.of());
 
             // if no special fish is selected, use regular tide loot table
-            if (selectionList.isEmpty() || selectionList.stream().allMatch(ItemStack::isEmpty)) {
+            if (selectionList.isEmpty()
+                    || selectionList.stream().allMatch(ItemStack::isEmpty)
+                    || selectionList.stream().anyMatch(stack -> stack.is(Items.BARRIER))) {
                 lootKey = TideUtils.getTideLootTable(this.getX(), this.getY(), this.getZ(), fluid, level());
                 selectionList = select(lootKey, params).orElse(List.of(Items.SALMON.getDefaultInstance()));
             }

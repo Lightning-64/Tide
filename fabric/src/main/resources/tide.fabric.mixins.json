@@ -8,9 +8,7 @@
       "ItemStackMixin",
       "TidePlayerMixin"
    ],
-   "client": [
-      "ClientTooltipComponentMixin"
-   ],
+   "client": [],
    "server": [],
    "injectors": {
       "defaultRequire": 1

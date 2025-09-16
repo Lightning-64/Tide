@@ -35,20 +35,15 @@ public class TideEventHandler {
     }
 
     public static void onPlayerJoinWorld(ServerPlayer player) {
-        if (!Tide.CONFIG.general.giveJournal) return;
-
         Tide.NETWORK.sendToPlayer(new UpdateJournalMsg(), player);
         Tide.NETWORK.sendToPlayer(new UpdateDataMsg(), player);
 
         TidePlayerData playerData = TidePlayerData.getOrCreate(player);
-        playerData.syncTo(player);
-
-        if (!playerData.gotJournal) {
-            if (player.addItem(TideItems.FISHING_JOURNAL.getDefaultInstance())) {
+        if (Tide.CONFIG.general.giveJournal && !playerData.gotJournal) {
+            if (player.addItem(TideItems.FISHING_JOURNAL.getDefaultInstance()))
                 playerData.gotJournal = true;
-                playerData.syncTo(player);
-            }
         }
+        playerData.syncTo(player);
     }
 
     public static void updateFishingJournal(ServerPlayer player) {

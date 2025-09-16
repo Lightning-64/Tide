@@ -21,6 +21,5 @@ public class TideFeatures {
     }
 
     public static void init() {
-        Tide.LOG.info("Registering Tide Features");
     }
 }

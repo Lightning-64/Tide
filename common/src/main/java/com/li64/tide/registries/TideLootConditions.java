@@ -32,6 +32,5 @@ public class TideLootConditions {
     }
 
     public static void init() {
-        Tide.LOG.info("Registering Tide Loot Conditions");
     }
 }

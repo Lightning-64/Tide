@@ -32,6 +32,5 @@ public class TideBlockEntities {
     }
 
     public static void init() {
-        Tide.LOG.info("Registering Tide Block Entities");
     }
 }

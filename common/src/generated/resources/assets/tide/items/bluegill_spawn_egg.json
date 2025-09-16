@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -13535647
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -8029619
-      }
-    ]
+    "model": "tide:item/bluegill_spawn_egg"
   }
 }

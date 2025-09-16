@@ -21,6 +21,5 @@ public class TideSoundEvents {
     }
 
     public static void init() {
-        Tide.LOG.info("Registering Tide Sound Events");
     }
 }

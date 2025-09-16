@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": -10725053
-      },
-      {
-        "type": "minecraft:constant",
-        "value": -15322819
-      }
-    ]
+    "model": "tide:item/barracuda_spawn_egg"
   }
 }
