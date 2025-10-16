@@ -609,8 +609,9 @@ public class TideFishingHook extends Projectile {
                                     continue;
                                 }
                             }
-                            if (Tide.PLATFORM.isModLoaded("hybrid-aquatic") && pulledEntity instanceof ItemEntity itemEntity)
+                            if (Tide.PLATFORM.isModLoaded("hybrid_aquatic") && pulledEntity instanceof ItemEntity itemEntity) {
                                 pulledEntity = Tide.PLATFORM.hybridAquaticConvertEntity(itemEntity, player, this);
+                            }
 
                             this.level().addFreshEntity(pulledEntity);
                             player.level().addFreshEntity(new ExperienceOrb(player.level(), player.getX(), player.getY() + 0.5D, player.getZ() + 0.5D, this.random.nextInt(6) + 1));

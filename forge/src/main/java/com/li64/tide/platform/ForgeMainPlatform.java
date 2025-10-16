@@ -2,8 +2,10 @@ package com.li64.tide.platform;
 
 import com.li64.tide.TideForge;
 import com.li64.tide.compat.fishingreal.FishingRealCompat;
+import com.li64.tide.compat.hybrid_aquatic.HybridAquaticCompat;
 import com.li64.tide.compat.stardewfishing.StardewFishingCompat;
 import com.li64.tide.platform.services.TideMainPlatform;
+import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import net.minecraft.advancements.CriterionTrigger;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -12,6 +14,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.flag.FeatureFlagSet;
@@ -125,5 +128,10 @@ public class ForgeMainPlatform implements TideMainPlatform {
     @Override
     public Entity fishingRealConvertItemStack(ItemStack stack, Player player, Vec3 pos) {
         return FishingRealCompat.convertItemStack(stack, player, pos);
+    }
+
+    @Override
+    public Entity hybridAquaticConvertEntity(ItemEntity itemEntity, Player player, TideFishingHook hook) {
+        return HybridAquaticCompat.convertEntity(itemEntity, player, hook);
     }
 }
