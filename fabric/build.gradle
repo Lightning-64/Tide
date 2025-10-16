@@ -46,7 +46,7 @@ dependencies {
         exclude group: "net.fabricmc.fabric-api"
         exclude group: "net.fabricmc", module: "fabric-loader"
     }
-    modCompileOnly("curse.maven:hybrid-aquatic-834427:6307560")
+    modCompileOnly("curse.maven:hybrid-aquatic-834427:7085178")
     modCompileOnly("curse.maven:jobsaddon-682362:5043002")
     modCompileOnly("curse.maven:fishing-real-348834:6475356")
 }
