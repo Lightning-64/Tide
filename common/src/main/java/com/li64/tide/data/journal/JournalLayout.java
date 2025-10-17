@@ -221,13 +221,12 @@ public class JournalLayout {
             addProfile("finsandtails:sapphire_spindly_gem_crab", "saltwater", "saltwater", "warm");
         }
 
-        if (Tide.PLATFORM.isModLoaded("hybrid-aquatic")) {
+        if (Tide.PLATFORM.isModLoaded("hybrid-aquatic") || Tide.PLATFORM.isModLoaded("hybrid_aquatic")) {
             addProfile("hybrid-aquatic:anglerfish", "underground", "underground", "normal");
             addProfile("hybrid-aquatic:barreleye", "underground", "underground", "normal");
             addProfile("hybrid-aquatic:boxfish", "saltwater", "saltwater", "warm");
             addProfile("hybrid-aquatic:betta", "freshwater", "swamp", "any");
             addProfile("hybrid-aquatic:carp", "freshwater", "freshwater", "any");
-            addProfile("hybrid-aquatic:koi", "freshwater", "freshwater", "any");
             addProfile("hybrid-aquatic:danio", "freshwater", "freshwater", "warm");
             addProfile("hybrid-aquatic:damselfish", "saltwater", "saltwater", "warm");
             addProfile("hybrid-aquatic:discus", "freshwater", "freshwater", "warm");
@@ -250,9 +249,7 @@ public class JournalLayout {
             addProfile("hybrid-aquatic:sunfish", "saltwater", "saltwater", "normal");
             addProfile("hybrid-aquatic:blue_tang", "saltwater", "saltwater", "warm");
             addProfile("hybrid-aquatic:powder_blue_tang", "saltwater", "saltwater", "warm");
-            addProfile("hybrid-aquatic:surgeonfish_lined", "saltwater", "saltwater", "warm");
-            addProfile("hybrid-aquatic:surgeonfish_orangeshoulder", "saltwater", "saltwater", "warm");
-            addProfile("hybrid-aquatic:surgeonfish_sohal", "saltwater", "saltwater", "warm");
+            addProfile("hybrid-aquatic:surgeonfish", "saltwater", "saltwater", "warm");
             addProfile("hybrid-aquatic:unicornfish", "saltwater", "saltwater", "warm");
             addProfile("hybrid-aquatic:yellow_tang", "saltwater", "saltwater", "warm");
             addProfile("hybrid-aquatic:john_dory", "saltwater", "saltwater", "normal");
