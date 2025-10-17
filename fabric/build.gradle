@@ -23,6 +23,18 @@ repositories {
     }
     maven { url "https://maven.shedaniel.me/" }
     maven { url "https://maven.terraformersmc.com/releases/" }
+
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
 dependencies {
@@ -49,6 +61,8 @@ dependencies {
     modCompileOnly("curse.maven:hybrid-aquatic-834427:7085178")
     modCompileOnly("curse.maven:jobsaddon-682362:5043002")
     modCompileOnly("curse.maven:fishing-real-348834:6475356")
+
+    modImplementation("maven.modrinth:stardew-fishing-fabric:1.3.1")
 }
 
 fabricApi {

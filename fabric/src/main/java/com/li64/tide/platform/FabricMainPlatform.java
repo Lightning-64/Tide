@@ -4,8 +4,10 @@ import com.li64.tide.Tide;
 import com.li64.tide.compat.fishingreal.FishingRealCompat;
 import com.li64.tide.compat.hybrid_aquatic.HybridAquaticCompat;
 import com.li64.tide.compat.jobsaddon.JobsAddonCompat;
+import com.li64.tide.compat.stardewfishing.StardewFishingCompat;
 import com.li64.tide.data.TidePlayer;
 import com.li64.tide.platform.services.TideMainPlatform;
+import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -30,7 +32,9 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class FabricMainPlatform implements TideMainPlatform {
     @Override
@@ -106,6 +110,11 @@ public class FabricMainPlatform implements TideMainPlatform {
     @Override
     public boolean isFabric() {
         return true;
+    }
+
+    @Override
+    public boolean stardewStart(ServerPlayer player, HookAccessor hook, ItemStack item, List<ItemStack> items) {
+        return StardewFishingCompat.start(player, hook, item, items);
     }
 
     @Override
