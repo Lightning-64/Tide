@@ -1,3 +1,12 @@
+## Version 1.6.5 - 10/16/2025
+
+### 🚀 Compatibility Features 🚀
+- Compatibility with Stardew Fishing Fabric
+- Compatibility with Hybrid Aquatic for Forge
+
+### ⚙️ Bug fixes ⚙️
+- Fixed a crash when fishing with Hybrid Aquatic installed on fabric
+
 ## Version 1.6.4 - 9/7/2025
 
 ### 🎣 New features 🎣
